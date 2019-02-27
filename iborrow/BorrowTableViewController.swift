@@ -71,9 +71,6 @@ class BorrowTableViewController: UITableViewController {
         verifyVC.modalPresentationStyle = .overCurrentContext
         present(verifyVC, animated: true, completion: nil)
     }
-    
-    
-    
 }
 extension UITableView {
     
