@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 
 class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
-  var memes: [BorrowInfo]!
+  var borrow: [BorrowInfo]!
   
   // MARK: Outlets
   

@@ -100,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1800.8" y="491.60419790104953"/>
+            <point key="canvasLocation" x="1697" y="71"/>
         </scene>
         <!--Table-->
         <scene sceneID="8AK-w4-3QM">
@@ -155,42 +155,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="fSh-C3-9Q1" kind="show" identifier="toThird" id="EIw-m0-bQW"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uSN-Kq-cRW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="882" y="-250"/>
-        </scene>
-        <!--Borrow Detail View Controller-->
-        <scene sceneID="MqX-l0-N94">
-            <objects>
-                <viewController id="fSh-C3-9Q1" customClass="BorrowDetailViewController" customModule="iborrow" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UoG-sB-1Bf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bNI-Yo-NUT">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="bNI-Yo-NUT" firstAttribute="leading" secondItem="mhq-XN-lhR" secondAttribute="leading" id="6k2-pV-k3Y"/>
-                            <constraint firstItem="mhq-XN-lhR" firstAttribute="bottom" secondItem="bNI-Yo-NUT" secondAttribute="bottom" id="SGA-C8-Z9Y"/>
-                            <constraint firstItem="mhq-XN-lhR" firstAttribute="trailing" secondItem="bNI-Yo-NUT" secondAttribute="trailing" id="ch7-Bp-UfU"/>
-                            <constraint firstItem="bNI-Yo-NUT" firstAttribute="top" secondItem="mhq-XN-lhR" secondAttribute="top" id="xhp-Ws-rNF"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="mhq-XN-lhR"/>
-                    </view>
-                    <connections>
-                        <outlet property="imageNOw" destination="bNI-Yo-NUT" id="k1G-cE-vha"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="32m-Un-zWB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1738" y="-250"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="NZA-U0-Ml7">
@@ -208,7 +176,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DR5-qM-3OP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1274" y="71"/>
+            <point key="canvasLocation" x="-786" y="71"/>
         </scene>
         <!--Gallery-->
         <scene sceneID="Uzg-w3-RVP">
@@ -269,7 +237,6 @@
                     <connections>
                         <outlet property="flowLayout" destination="U6f-Ni-6gB" id="xxO-FC-eCj"/>
                         <outlet property="imageSite" destination="U6f-Ni-6gB" id="yCX-9F-cD4"/>
-                        <segue destination="fSh-C3-9Q1" kind="show" identifier="toFourth" id="fxq-hO-zs0"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dMR-7s-NBN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -282,7 +249,6 @@
         <image name="table_30x30" width="60" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fxq-hO-zs0"/>
-        <segue reference="aYj-sW-vK6"/>
+        <segue reference="7Yv-eZ-GD7"/>
     </inferredMetricsTieBreakers>
 </document>

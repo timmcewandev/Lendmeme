@@ -5,11 +5,15 @@
 //  Created by sudo on 1/9/18.
 //  Copyright © 2018 sudo. All rights reserved.
 //
-import Foundation
 import UIKit
+import MessageUI
 
 
-class BorrowTableViewController: UITableViewController {
+class BorrowTableViewController: UITableViewController, MFMessageComposeViewControllerDelegate {
+  func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+  }
+
+  
     
     var member: UIImage?
     var memedImages: [BorrowInfo]! {
@@ -54,13 +58,19 @@ class BorrowTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let memedImages = self.memedImages[indexPath.row]
         member = memedImages.memedImage
-        performSegue(withIdentifier: "toThird", sender: self)
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toThird" {
-            let destinationVC = segue.destination as! BorrowDetailViewController
-            destinationVC.imageRevieved = member
-        }
+      if memedImages.bottomString == "Number" && memedImages.topString == "Name" { return }
+      let composeVC = MFMessageComposeViewController()
+      composeVC.messageComposeDelegate = self
+      composeVC.recipients = ["\(memedImages.bottomString)"]
+      composeVC.body = "Hello \(memedImages.topString) I was wondering if you are done with my item? Is there a time you could return it?"
+      if MFMessageComposeViewController.canSendText() {
+        self.present(composeVC, animated: true, completion: nil)
+      } else {
+        print("Can't send messages.")
+      }
+
+      
+//        performSegue(withIdentifier: "toThird", sender: self)
     }
     func hideTabBar() {
         self.tabBarController!.tabBar.isHidden = false
@@ -83,4 +93,8 @@ extension UITableView {
     func hideExcessCells() {
         tableFooterView = UIView(frame: CGRect.zero)
     }
+  
+  
+  
+  
 }

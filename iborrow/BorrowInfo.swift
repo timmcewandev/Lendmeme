@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-
-
 struct BorrowInfo {
     var topString: String = ""
     var bottomString: String = ""
