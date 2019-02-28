@@ -12,9 +12,6 @@ import MessageUI
 class BorrowTableViewController: UITableViewController, MFMessageComposeViewControllerDelegate {
   func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
   }
-
-  
-    
     var member: UIImage?
     var memedImages: [BorrowInfo]! {
         let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
@@ -29,7 +26,6 @@ class BorrowTableViewController: UITableViewController, MFMessageComposeViewCont
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.tableView.reloadData()
-        hideTabBar()
         
     }
     
@@ -72,10 +68,7 @@ class BorrowTableViewController: UITableViewController, MFMessageComposeViewCont
       
 //        performSegue(withIdentifier: "toThird", sender: self)
     }
-    func hideTabBar() {
-        self.tabBarController!.tabBar.isHidden = false
-    }
-    
+
     @IBAction func plusBTN(_ sender: Any) {
         let verifyVC = self.storyboard?.instantiateViewController(withIdentifier: "MemeEditorViewController") as! BorrowEditorViewController
         verifyVC.modalPresentationStyle = .overCurrentContext

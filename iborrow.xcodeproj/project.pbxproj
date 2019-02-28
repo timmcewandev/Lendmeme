@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9B088C0B200DB28F00601CA9 /* BorrowInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B088C0A200DB28F00601CA9 /* BorrowInfo.swift */; };
-		9B2466FF2015952D00B0C776 /* GalleryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2466FE2015952D00B0C776 /* GalleryCollectionViewController.swift */; };
 		9B8A1E9D201ED71C00BC8437 /* BorrowDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8A1E9C201ED71C00BC8437 /* BorrowDetailViewController.swift */; };
 		9BDD35D31FD88B0D005ADBCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDD35D21FD88B0D005ADBCD /* AppDelegate.swift */; };
 		9BDD35D51FD88B0D005ADBCD /* BorrowEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDD35D41FD88B0D005ADBCD /* BorrowEditorViewController.swift */; };
@@ -20,7 +19,6 @@
 
 /* Begin PBXFileReference section */
 		9B088C0A200DB28F00601CA9 /* BorrowInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowInfo.swift; sourceTree = "<group>"; };
-		9B2466FE2015952D00B0C776 /* GalleryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewController.swift; sourceTree = "<group>"; };
 		9B8A1E9C201ED71C00BC8437 /* BorrowDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowDetailViewController.swift; sourceTree = "<group>"; };
 		9BDD35CF1FD88B0D005ADBCD /* iborrow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iborrow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BDD35D21FD88B0D005ADBCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +63,6 @@
 				9BDD35D21FD88B0D005ADBCD /* AppDelegate.swift */,
 				9B088C0A200DB28F00601CA9 /* BorrowInfo.swift */,
 				9B8A1E9C201ED71C00BC8437 /* BorrowDetailViewController.swift */,
-				9B2466FE2015952D00B0C776 /* GalleryCollectionViewController.swift */,
 				9BEF0BC12005356D0065B5A8 /* BorrowTableViewController.swift */,
 				9BDD35D41FD88B0D005ADBCD /* BorrowEditorViewController.swift */,
 				9BDD35D61FD88B0D005ADBCD /* Main.storyboard */,
@@ -150,7 +147,6 @@
 			files = (
 				9BDD35D51FD88B0D005ADBCD /* BorrowEditorViewController.swift in Sources */,
 				9B088C0B200DB28F00601CA9 /* BorrowInfo.swift in Sources */,
-				9B2466FF2015952D00B0C776 /* GalleryCollectionViewController.swift in Sources */,
 				9BEF0BC22005356D0065B5A8 /* BorrowTableViewController.swift in Sources */,
 				9BDD35D31FD88B0D005ADBCD /* AppDelegate.swift in Sources */,
 				9B8A1E9D201ED71C00BC8437 /* BorrowDetailViewController.swift in Sources */,
