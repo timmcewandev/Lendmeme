@@ -6,14 +6,14 @@
 //  Copyright © 2018 sudo. All rights reserved.
 //
 import UIKit
-import MessageUI
+
+import FittedSheets
 
 
-class BorrowTableViewController: UITableViewController, MFMessageComposeViewControllerDelegate {
-  func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-  }
+class BorrowTableViewController: UITableViewController {
+  
     var member: UIImage?
-    var memedImages: [BorrowInfo]! {
+    var borrowInformation: [BorrowInfo]! {
         let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
         return appDelegate.borrowInfo
     }
@@ -22,6 +22,9 @@ class BorrowTableViewController: UITableViewController, MFMessageComposeViewCont
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+      
+      
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -30,7 +33,7 @@ class BorrowTableViewController: UITableViewController, MFMessageComposeViewCont
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return memedImages.count
+        return borrowInformation.count
     }
     
     
@@ -38,9 +41,9 @@ class BorrowTableViewController: UITableViewController, MFMessageComposeViewCont
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         // Configure the cell...
-        let memeImages = self.memedImages[indexPath.row]
+        let memeImages = self.borrowInformation[indexPath.row]
         
-        cell.imageView?.image = memeImages.memedImage
+        cell.imageView?.image = memeImages.borrowImage
         let memeTopText = memeImages.topString
         let memeBottomText = memeImages.bottomString
         
@@ -52,22 +55,23 @@ class BorrowTableViewController: UITableViewController, MFMessageComposeViewCont
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let memedImages = self.memedImages[indexPath.row]
-        member = memedImages.memedImage
-      if memedImages.bottomString == "Number" && memedImages.topString == "Name" { return }
-      let composeVC = MFMessageComposeViewController()
-      composeVC.messageComposeDelegate = self
-      composeVC.recipients = ["\(memedImages.bottomString)"]
-      composeVC.body = "Hello \(memedImages.topString) I was wondering if you are done with my item? Is there a time you could return it?"
-      if MFMessageComposeViewController.canSendText() {
-        self.present(composeVC, animated: true, completion: nil)
-      } else {
-        print("Can't send messages.")
-      }
-
+        let memedImages = self.borrowInformation[indexPath.row]
+        member = memedImages.borrowImage
       
-//        performSegue(withIdentifier: "toThird", sender: self)
+      let controller = self.storyboard?.instantiateViewController(withIdentifier: "OptionTableViewController") as! OptionTableViewController
+      controller.memberImage = self.borrowInformation[indexPath.row].borrowImage
+      let sheet = SheetViewController(controller: controller, sizes: [.halfScreen])
+      sheet.setSizes([.fixed(150)])
+      sheet.adjustForBottomSafeArea = true
+      self.present(sheet, animated: false, completion: nil)
+
     }
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "toFirst" {
+      let vc = segue.destination as! OptionTableViewController
+      vc.memberImage = member
+    }
+  }
 
     @IBAction func plusBTN(_ sender: Any) {
         let verifyVC = self.storyboard?.instantiateViewController(withIdentifier: "MemeEditorViewController") as! BorrowEditorViewController

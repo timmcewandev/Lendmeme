@@ -113,8 +113,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
       return CGFloat(0)
     }
   }
-  
-  
+
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     self.view.endEditing(true)
     resetFrame()
@@ -132,7 +131,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
   func save() {
     toolbar.isHidden = true
     let memedImage = generateMemedImage()
-    let borrowInfo = BorrowInfo(topString: topTextOUT.text!, bottomString: bottomTextOUT.text!, originalImage: imageView.image!, memedImage: memedImage)
+    let borrowInfo = BorrowInfo(topString: topTextOUT.text!, bottomString: bottomTextOUT.text!, originalImage: imageView.image!, borrowImage: memedImage)
     let object = UIApplication.shared.delegate
     let appDelegate = object as! AppDelegate
     appDelegate.borrowInfo.append(borrowInfo)

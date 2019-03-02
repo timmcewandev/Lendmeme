@@ -13,7 +13,7 @@ struct BorrowInfo {
     var topString: String = ""
     var bottomString: String = ""
     var originalImage: UIImage
-    var memedImage: UIImage
+    var borrowImage: UIImage
 }
 
 
