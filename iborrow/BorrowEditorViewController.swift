@@ -7,17 +7,18 @@
 
 import UIKit
 import Foundation
+import RealmSwift
 
 class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
   var borrow: [BorrowInfo]!
   
   // MARK: Outlets
   
-  @IBOutlet weak var toolbar: UIToolbar!
-  @IBOutlet weak var shareOUT: UIBarButtonItem!
-  @IBOutlet weak var bottomTextOUT: UITextField!
-  @IBOutlet weak var topTextOUT: UITextField!
-  @IBOutlet weak var imageView: UIImageView!
+  @IBOutlet var toolbar: UIToolbar!
+  @IBOutlet var shareOUT: UIBarButtonItem!
+  @IBOutlet var bottomTextOUT: UITextField!
+  @IBOutlet var topTextOUT: UITextField!
+  @IBOutlet var imageView: UIImageView!
   
   let borrowTextAttributes: [String : Any] = [
     NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
@@ -134,6 +135,20 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     let borrowInfo = BorrowInfo(topString: topTextOUT.text!, bottomString: bottomTextOUT.text!, originalImage: imageView.image!, borrowImage: memedImage)
     let object = UIApplication.shared.delegate
     let appDelegate = object as! AppDelegate
+    print("This is the bottom string \(borrowInfo.bottomString)")
+    let data = Data()
+
+    data.topText = borrowInfo.topString
+    data.bottomText = borrowInfo.bottomString
+    data.image = UIImagePNGRepresentation(borrowInfo.borrowImage)! as NSData?
+    do {
+      let realm = try Realm()
+      try! realm.write {
+        realm.add(data)
+      }
+    } catch {
+      print("Error in initializing new realm \(error)")
+    }
     appDelegate.borrowInfo.append(borrowInfo)
     self.toolbar.isHidden = true
     dismiss(animated: true, completion: nil)

@@ -8,10 +8,11 @@
 import UIKit
 
 import FittedSheets
-
+import RealmSwift
 
 class BorrowTableViewController: UITableViewController {
-  
+    let realm = try! Realm()
+  let data = Data()
     var member: UIImage?
     var borrowInformation: [BorrowInfo]! {
         let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
@@ -31,7 +32,7 @@ class BorrowTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.borrowInformation.count
+        return self.realm.objects(Data.self).count
     }
     
     
@@ -39,11 +40,11 @@ class BorrowTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         // Configure the cell...
-        let memeImages = self.borrowInformation[indexPath.row]
-        
-        cell.imageView?.image = memeImages.borrowImage
-        let memeTopText = memeImages.topString
-        let memeBottomText = memeImages.bottomString
+        let memeImages = self.realm.objects(Data.self)[indexPath.row]
+
+
+        let memeTopText = memeImages.topText
+        let memeBottomText = memeImages.bottomText
         
         cell.textLabel?.text = "\(memeTopText)     \(memeBottomText)"
         

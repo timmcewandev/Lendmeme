@@ -19,6 +19,7 @@
 		9BDD35DA1FD88B0D005ADBCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BDD35D91FD88B0D005ADBCD /* Assets.xcassets */; };
 		9BDD35DD1FD88B0D005ADBCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BDD35DB1FD88B0D005ADBCD /* LaunchScreen.storyboard */; };
 		9BEF0BC22005356D0065B5A8 /* BorrowTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF0BC12005356D0065B5A8 /* BorrowTableViewController.swift */; };
+		9BEFB6E722532F90000FC6E0 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFB6E622532F90000FC6E0 /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		9BDD35DC1FD88B0D005ADBCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9BDD35DE1FD88B0D005ADBCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BEF0BC12005356D0065B5A8 /* BorrowTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowTableViewController.swift; sourceTree = "<group>"; };
+		9BEFB6E622532F90000FC6E0 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				9BDD35DE1FD88B0D005ADBCD /* Info.plist */,
 				9B95EACC2227B3D100E62843 /* GoogleService-Info.plist */,
 				9B518CA82229CDDC004B1050 /* ImageViewController.swift */,
+				9BEFB6E622532F90000FC6E0 /* Data.swift */,
 			);
 			path = iborrow;
 			sourceTree = "<group>";
@@ -207,10 +210,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iborrow/Pods-iborrow-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/FittedSheets/FittedSheets.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FittedSheets.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -231,6 +238,7 @@
 				9BDD35D31FD88B0D005ADBCD /* AppDelegate.swift in Sources */,
 				9B518CA72229B722004B1050 /* OptionTableViewController.swift in Sources */,
 				9B8A1E9D201ED71C00BC8437 /* BorrowDetailViewController.swift in Sources */,
+				9BEFB6E722532F90000FC6E0 /* Data.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
