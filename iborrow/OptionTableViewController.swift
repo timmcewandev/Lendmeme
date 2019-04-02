@@ -15,13 +15,13 @@ class OptionTableViewController: UITableViewController, MFMessageComposeViewCont
     controller.dismiss(animated: true, completion: nil)
   }
   var memberImage: UIImage?
+  var memberNumber: String?
   let options = ["View Image", "Send a text"]
   
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-      print("Hello World\(memberImage)")
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+  }
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     tableView.tableHeaderView?.backgroundColor = UIColor.white
     return "What would you like to do?"
@@ -32,25 +32,25 @@ class OptionTableViewController: UITableViewController, MFMessageComposeViewCont
       vc.myImages = memberImage
     }
   }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 2
-    }
   
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-      let enumValue = options[indexPath.row]
-        cell.textLabel?.text = enumValue
-        return cell
-    }
+  // MARK: - Table view data source
+  
+  override func numberOfSections(in tableView: UITableView) -> Int {
+    // #warning Incomplete implementation, return the number of sections
+    return 1
+  }
+  
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    // #warning Incomplete implementation, return the number of rows
+    return 2
+  }
+  
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = UITableViewCell()
+    let enumValue = options[indexPath.row]
+    cell.textLabel?.text = enumValue
+    return cell
+  }
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let indexPath = tableView.indexPathForSelectedRow
     let currentCell = tableView.cellForRow(at: indexPath!)
@@ -59,7 +59,8 @@ class OptionTableViewController: UITableViewController, MFMessageComposeViewCont
     case "Send a text":
       let composeVC = MFMessageComposeViewController()
       composeVC.messageComposeDelegate = self
-      composeVC.recipients = ["8019998331"]
+      guard let number = memberNumber else { return }
+      composeVC.recipients = ["\(number)"]
       composeVC.body = "Hello, I was wondering if you are done with my item? Is there a time you could return it?"
       if MFMessageComposeViewController.canSendText() {
         self.present(composeVC, animated: true, completion: nil)

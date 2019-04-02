@@ -22,18 +22,16 @@ class BorrowTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-      
-      
-
     }
+  
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.tableView.reloadData()
-        
+      print("\(String(describing: self.borrowInformation))")
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return borrowInformation.count
+        return self.borrowInformation.count
     }
     
     
@@ -60,6 +58,7 @@ class BorrowTableViewController: UITableViewController {
       
       let controller = self.storyboard?.instantiateViewController(withIdentifier: "OptionTableViewController") as! OptionTableViewController
       controller.memberImage = self.borrowInformation[indexPath.row].borrowImage
+      controller.memberNumber = self.borrowInformation[indexPath.row].bottomString
       let sheet = SheetViewController(controller: controller, sizes: [.halfScreen])
       sheet.setSizes([.fixed(150)])
       sheet.adjustForBottomSafeArea = true

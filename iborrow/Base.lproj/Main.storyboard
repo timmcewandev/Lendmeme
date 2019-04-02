@@ -122,7 +122,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JD0-6Q-EQe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="65" y="71"/>
+            <point key="canvasLocation" x="-94" y="71"/>
         </scene>
         <!--Option Table View Controller-->
         <scene sceneID="NiU-R5-hvt">
@@ -154,7 +154,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YQR-cY-6ls" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1884" y="843"/>
+            <point key="canvasLocation" x="844" y="786"/>
         </scene>
         <!--Image View Controller-->
         <scene sceneID="tA7-li-9lP">
@@ -164,7 +164,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="zpZ-vi-hUt">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zpZ-vi-hUt">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
@@ -183,7 +183,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q8b-bi-Ets" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2767.1999999999998" y="773.16341829085468"/>
+            <point key="canvasLocation" x="1697" y="786"/>
         </scene>
         <!--Sent Memes-->
         <scene sceneID="X16-i3-T2m">
@@ -226,7 +226,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchImage" width="1536" height="2048"/>
         <image name="table_30x30" width="60" height="60"/>
     </resources>
 </document>
