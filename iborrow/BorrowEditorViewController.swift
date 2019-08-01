@@ -135,7 +135,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     let borrowInfo = BorrowInfo(topString: topTextOUT.text!, bottomString: bottomTextOUT.text!, originalImage: imageView.image!, borrowImage: memedImage)
     let object = UIApplication.shared.delegate
     let appDelegate = object as! AppDelegate
-    print("This is the bottom string \(borrowInfo.bottomString)")
     let data = Data()
 
     data.topText = borrowInfo.topString
