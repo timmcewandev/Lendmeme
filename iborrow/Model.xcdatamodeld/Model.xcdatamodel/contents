@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G84" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ImageInfo" representedClassName="ImageInfo" syncable="YES" codeGenerationType="class">
+        <attribute name="bottomString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="topString" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Photo" inverseName="imageinfo" inverseEntity="Photo" syncable="YES"/>
+    </entity>
+    <entity name="Photo" representedClassName="Photo" syncable="YES" codeGenerationType="class">
+        <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <relationship name="imageinfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ImageInfo" inverseName="photos" inverseEntity="ImageInfo" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="ImageInfo" positionX="-8118.66015625" positionY="-4717.765625" width="128" height="103"/>
+        <element name="Photo" positionX="-8551.6875" positionY="-4699.98828125" width="128" height="73"/>
+    </elements>
+</model>

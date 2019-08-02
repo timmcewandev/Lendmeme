@@ -7,7 +7,6 @@
 
 import UIKit
 import Foundation
-import RealmSwift
 
 class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
   var borrow: [BorrowInfo]!
@@ -140,14 +139,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     data.topText = borrowInfo.topString
     data.bottomText = borrowInfo.bottomString
     data.image = UIImagePNGRepresentation(borrowInfo.borrowImage)! as NSData?
-    do {
-      let realm = try Realm()
-      try! realm.write {
-        realm.add(data)
-      }
-    } catch {
-      print("Error in initializing new realm \(error)")
-    }
+
     appDelegate.borrowInfo.append(borrowInfo)
     self.toolbar.isHidden = true
     dismiss(animated: true, completion: nil)

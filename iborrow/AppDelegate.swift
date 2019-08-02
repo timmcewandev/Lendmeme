@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,9 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var borrowInfo = [BorrowInfo]()
   
+    let dataController = DataController(modelName: "Model")
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-      
+        dataController.load()
+        
+        let navigationController = window?.rootViewController as! UINavigationController
+        let BorrowTableViewStarter = navigationController.topViewController as! BorrowTableViewController
+        BorrowTableViewStarter.dataController = dataController
         return true
     }
 

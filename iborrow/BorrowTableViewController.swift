@@ -8,11 +8,11 @@
 import UIKit
 
 import FittedSheets
-import RealmSwift
+import CoreData
 
 class BorrowTableViewController: UITableViewController {
-    let realm = try! Realm()
-  let data = Data()
+    var dataController:DataController!
+    var imageInfo: [Photo] = []
     var member: UIImage?
     var borrowInformation: [BorrowInfo]! {
         let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
@@ -23,6 +23,16 @@ class BorrowTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        if let result = try? dataController.viewContext.fetch(fetchRequest){
+            //                                    DestroysCoreDataMaintence(result)
+            imageInfo = result
+            for object in imageInfo {
+                print(object.creationDate)
+            }
+        }
     }
   
     override func viewWillAppear(_ animated: Bool) {
