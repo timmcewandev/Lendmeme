@@ -10,7 +10,7 @@ import Foundation
 
 class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
   var borrow: [BorrowInfo]!
-  
+    var dataController: DataController! = nil
   // MARK: Outlets
   
   @IBOutlet var toolbar: UIToolbar!
@@ -132,17 +132,23 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     toolbar.isHidden = true
     let memedImage = generateMemedImage()
     let borrowInfo = BorrowInfo(topString: topTextOUT.text!, bottomString: bottomTextOUT.text!, originalImage: imageView.image!, borrowImage: memedImage)
-    let object = UIApplication.shared.delegate
-    let appDelegate = object as! AppDelegate
-    let data = Data()
-
-    data.topText = borrowInfo.topString
-    data.bottomText = borrowInfo.bottomString
-    data.image = UIImagePNGRepresentation(borrowInfo.borrowImage)! as NSData?
-
-    appDelegate.borrowInfo.append(borrowInfo)
-    self.toolbar.isHidden = true
-    dismiss(animated: true, completion: nil)
+    let helloWorld = ImageInfo(context: dataController.viewContext)
+    helloWorld.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)
+    helloWorld.topInfo = borrowInfo.topString
+    helloWorld.bottomInfo = borrowInfo.bottomString
+    helloWorld.creationDate = Date()
+    try? dataController.viewContext.save()
+     self.toolbar.isHidden = true
+    navigationController?.popViewController(animated: true)//    let object = UIApplication.shared.delegate
+//    let appDelegate = object as! AppDelegate
+//    let data = Data()
+//
+//    data.topText = borrowInfo.topString
+//    data.bottomText = borrowInfo.bottomString
+//    data.image = UIImagePNGRepresentation(borrowInfo.borrowImage)! as NSData?
+//
+//    appDelegate.borrowInfo.append(borrowInfo)
+   
   }
   
   func configureShareOut(isEnabled: Bool){
