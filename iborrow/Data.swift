@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RealmSwift
 // Realm properties declared
 class Data: Object {
   @objc dynamic var topText:String = ""
