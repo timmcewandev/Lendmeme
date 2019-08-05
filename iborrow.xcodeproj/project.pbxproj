@@ -31,6 +31,7 @@
 		9B518CA62229B722004B1050 /* OptionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionTableViewController.swift; sourceTree = "<group>"; };
 		9B518CA82229CDDC004B1050 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		9B8A1E9C201ED71C00BC8437 /* BorrowDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowDetailViewController.swift; sourceTree = "<group>"; };
+		9B90F13122F7DC540035104E /* iborrow.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = iborrow.entitlements; sourceTree = "<group>"; };
 		9B95EACC2227B3D100E62843 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9BBD165F22F6ABFC00299384 /* BorrowTime.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BorrowTime.xcdatamodel; sourceTree = "<group>"; };
 		9BDD35CF1FD88B0D005ADBCD /* iborrow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iborrow.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +109,7 @@
 				9B95EACC2227B3D100E62843 /* GoogleService-Info.plist */,
 				9B518CA82229CDDC004B1050 /* ImageViewController.swift */,
 				9B39AA8922F40B3B007EF340 /* DataController.swift */,
+				9B90F13122F7DC540035104E /* iborrow.entitlements */,
 			);
 			path = iborrow;
 			sourceTree = "<group>";

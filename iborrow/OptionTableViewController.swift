@@ -14,7 +14,7 @@ class OptionTableViewController: UITableViewController, MFMessageComposeViewCont
   func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
     controller.dismiss(animated: true, completion: nil)
   }
-  var memberImage: UIImage?
+  var memberImage: Data?
   var memberNumber: String?
   let options = ["View Image", "Send a text"]
   
@@ -29,7 +29,7 @@ class OptionTableViewController: UITableViewController, MFMessageComposeViewCont
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "toSecond" {
       let vc = segue.destination as! ImageViewController
-      vc.myImages = memberImage
+        vc.myImages = UIImage(data: memberImage!)
     }
   }
   
@@ -69,7 +69,7 @@ class OptionTableViewController: UITableViewController, MFMessageComposeViewCont
       }
     case "View Image":
       let controller = self.storyboard?.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
-      controller.myImages = memberImage
+      controller.myImages = UIImage(data: memberImage!)
       let sheet = SheetViewController(controller: controller, sizes: [.fullScreen])
       sheet.adjustForBottomSafeArea = true
       

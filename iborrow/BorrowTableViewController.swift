@@ -11,64 +11,57 @@ import FittedSheets
 import CoreData
 
 class BorrowTableViewController: UITableViewController {
+    
     var dataController:DataController!
     var imageInfo: [ImageInfo] = []
     var member: UIImage?
-//    var borrowInformation: [BorrowInfo]! {
-//        let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
-//        return appDelegate.borrowInfo
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        if let result = try? dataController.viewContext.fetch(fetchRequest){
-            //                                    DestroysCoreDataMaintence(result)
-            imageInfo = result
-            for object in imageInfo {
-                print("\(object.imageData)")
-            }
-        }
     }
   
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        print("Now NO")
+        
         self.tableView.reloadData()
+        let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        if let result = try? dataController.viewContext.fetch(fetchRequest){
+            //                                                DestroysCoreDataMaintence(result)
+            imageInfo = result
+            for object in imageInfo {
+                print("\(object.imageData!)")
+            }
+        }
+
+self.tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return imageInfo.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
         // Configure the cell...
-//        let memeImages = self.realm.objects(Data.self)[indexPath.row]
-//
-//
-//        let memeTopText = memeImages.topText
-//        let memeBottomText = memeImages.bottomText
-//
-//        cell.textLabel?.text = "\(memeTopText)     \(memeBottomText)"
-        
-        
+        let memeImages = imageInfo[indexPath.row]
+        let memeTopText = memeImages.topInfo ?? "No name"
+        let memeBottomText = memeImages.bottomInfo ?? "No Number"
+        cell.imageView?.image = UIImage(data: memeImages.imageData!)
+        cell.textLabel?.text = "\(memeTopText)      \(memeBottomText)"
         return cell
-        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let memedImages = self.borrowInformation[indexPath.row]
-//        member = memedImages.borrowImage
-//
+
       let controller = self.storyboard?.instantiateViewController(withIdentifier: "OptionTableViewController") as! OptionTableViewController
-//      controller.memberImage = self.borrowInformation[indexPath.row].borrowImage
-//      controller.memberNumber = self.borrowInformation[indexPath.row].bottomString
+      controller.memberImage = self.imageInfo[indexPath.row].imageData
+      controller.memberNumber = self.imageInfo[indexPath.row].bottomInfo
       let sheet = SheetViewController(controller: controller, sizes: [.halfScreen])
       sheet.setSizes([.fixed(215)])
       sheet.adjustForBottomSafeArea = true
@@ -94,8 +87,4 @@ extension UITableView {
     func hideExcessCells() {
         tableFooterView = UIView(frame: CGRect.zero)
     }
-  
-  
-  
-  
 }

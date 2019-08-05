@@ -139,16 +139,9 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     helloWorld.creationDate = Date()
     try? dataController.viewContext.save()
      self.toolbar.isHidden = true
-    navigationController?.popViewController(animated: true)//    let object = UIApplication.shared.delegate
-//    let appDelegate = object as! AppDelegate
-//    let data = Data()
-//
-//    data.topText = borrowInfo.topString
-//    data.bottomText = borrowInfo.bottomString
-//    data.image = UIImagePNGRepresentation(borrowInfo.borrowImage)! as NSData?
-//
-//    appDelegate.borrowInfo.append(borrowInfo)
-   
+    
+    dataController.viewContext.refreshAllObjects()
+    navigationController?.popViewController(animated: true)
   }
   
   func configureShareOut(isEnabled: Bool){
