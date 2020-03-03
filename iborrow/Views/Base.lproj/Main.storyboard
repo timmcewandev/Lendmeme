@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wgD-jp-AVG">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wgD-jp-AVG">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,12 +22,11 @@
                                     <constraint firstAttribute="height" constant="47" id="TVS-Eb-lZ2"/>
                                     <constraint firstAttribute="width" constant="293" id="puE-eu-Kgr"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" keyboardType="alphabet"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wfM-K2-jvl">
-                                <rect key="frame" x="0.0" y="133" width="375" height="423"/>
+                                <rect key="frame" x="0.0" y="113" width="375" height="443"/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lua-XB-jXr">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
@@ -60,12 +57,11 @@
                                 </items>
                             </toolbar>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="wRM-Rx-5QT">
-                                <rect key="frame" x="41" y="78" width="293" height="47"/>
+                                <rect key="frame" x="41" y="58" width="293" height="47"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="47" id="Dqr-Gr-eLM"/>
                                     <constraint firstAttribute="width" constant="293" id="f5V-fX-9k8"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" keyboardType="alphabet"/>
                             </textField>
@@ -77,12 +73,13 @@
                             <constraint firstItem="wfM-K2-jvl" firstAttribute="top" secondItem="wRM-Rx-5QT" secondAttribute="bottom" constant="8" id="3jb-Fa-qTl"/>
                             <constraint firstItem="wfM-K2-jvl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6vF-HU-1mk"/>
                             <constraint firstItem="wfM-K2-jvl" firstAttribute="top" secondItem="wRM-Rx-5QT" secondAttribute="bottom" constant="8" id="7PI-H5-Ulu"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PMx-xr-uw1" secondAttribute="trailing" constant="41" id="CZ4-Ip-Beh"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="top" secondItem="PMx-xr-uw1" secondAttribute="bottom" constant="12" id="EbS-VE-byw"/>
                             <constraint firstItem="wRM-Rx-5QT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="14" id="MT1-vD-NRH"/>
                             <constraint firstItem="PMx-xr-uw1" firstAttribute="top" secondItem="wfM-K2-jvl" secondAttribute="bottom" constant="8" id="Mzi-mJ-k6e"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SkE-M1-M9z"/>
                             <constraint firstItem="wRM-Rx-5QT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TTw-1g-hnt"/>
-                            <constraint firstItem="PMx-xr-uw1" firstAttribute="leading" secondItem="wRM-Rx-5QT" secondAttribute="leading" id="V2v-8u-FbV"/>
+                            <constraint firstItem="PMx-xr-uw1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="41" id="gOA-ul-6Wf"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="top" secondItem="PMx-xr-uw1" secondAttribute="bottom" constant="12" id="qOU-ha-Axm"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="r1T-tF-x8D"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="s6H-j1-Mcl"/>
@@ -109,7 +106,7 @@
                     <tabBarItem key="tabBarItem" title="Table" image="table_30x30" id="MBy-Zj-Hhw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iQ2-h6-V24">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -134,7 +131,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="q6p-5a-6JW">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="q6p-5a-6JW" id="A8M-fb-FlC">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -195,7 +192,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="KB0-YQ-Qye">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KB0-YQ-Qye" id="W7t-oB-UT1">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>

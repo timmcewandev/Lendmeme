@@ -1,8 +1,5 @@
 
-//  MemeEditorViewController
-//
-//  Created by sudo on 12/6/17.
-//  Copyright © 2017 sudo. All rights reserved.
+//  Copyright © 2017 McEwanTech. All rights reserved.
 //
 
 import UIKit
@@ -57,8 +54,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
   }
   
   @IBAction func cancelBTN(_ sender: Any) {
-    dismiss(animated: true, completion: nil)
-    
+    self.navigationController?.popViewController(animated: true)
   }
   
   @IBAction func share(sender: AnyObject) {
@@ -132,11 +128,11 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     toolbar.isHidden = true
     let memedImage = generateMemedImage()
     let borrowInfo = BorrowInfo(topString: topTextOUT.text!, bottomString: bottomTextOUT.text!, originalImage: imageView.image!, borrowImage: memedImage)
-    let helloWorld = ImageInfo(context: dataController.viewContext)
-    helloWorld.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)
-    helloWorld.topInfo = borrowInfo.topString
-    helloWorld.bottomInfo = borrowInfo.bottomString
-    helloWorld.creationDate = Date()
+    let getImageInfo = ImageInfo(context: dataController.viewContext)
+    getImageInfo.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)
+    getImageInfo.topInfo = borrowInfo.topString
+    getImageInfo.bottomInfo = borrowInfo.bottomString
+    getImageInfo.creationDate = Date()
     try? dataController.viewContext.save()
      self.toolbar.isHidden = true
     
