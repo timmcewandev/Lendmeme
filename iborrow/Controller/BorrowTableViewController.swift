@@ -24,18 +24,13 @@ class BorrowTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        print("Now NO")
         
         self.tableView.reloadData()
         let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let result = try? dataController.viewContext.fetch(fetchRequest){
-            //                                                DestroysCoreDataMaintence(result)
             imageInfo = result
-            for object in imageInfo {
-                print("\(object.imageData!)")
-            }
         }
         
         self.tableView.reloadData()

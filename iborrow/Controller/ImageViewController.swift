@@ -1,9 +1,6 @@
 //
 //  ImageViewController.swift
-//  iborrow
-//
-//  Created by sudo on 3/1/19.
-//  Copyright © 2019 sudo. All rights reserved.
+//  Copyright © 2019 McEwanTech. All rights reserved.
 //
 
 import UIKit

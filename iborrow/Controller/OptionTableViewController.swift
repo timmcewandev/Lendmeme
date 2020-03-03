@@ -64,8 +64,6 @@ class OptionTableViewController: UITableViewController, MFMessageComposeViewCont
             composeVC.body = "Hello, I was wondering if you are done with my item? Is there a time you could return it?"
             if MFMessageComposeViewController.canSendText() {
                 self.present(composeVC, animated: true, completion: nil)
-            } else {
-                print("Can't send messages.")
             }
         case "View Image":
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
@@ -75,8 +73,7 @@ class OptionTableViewController: UITableViewController, MFMessageComposeViewCont
             
             self.present(sheet, animated: false, completion: nil)
             performSegue(withIdentifier: "toSecond", sender: self)
-        default:
-            print("Crap this failed")
+        default: return
         }
     }
 }

@@ -154,7 +154,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     func unsubscribeFromKeyboardNotifications() {
-        
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)    }
     // MARK: Objects
     @objc func keyboardWillShow(notification: NSNotification) {
