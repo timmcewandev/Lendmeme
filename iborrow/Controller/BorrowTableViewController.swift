@@ -21,7 +21,7 @@ class BorrowTableViewController: UITableViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
-  
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         print("Now NO")
@@ -37,8 +37,8 @@ class BorrowTableViewController: UITableViewController {
                 print("\(object.imageData!)")
             }
         }
-
-self.tableView.reloadData()
+        
+        self.tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,17 +58,17 @@ self.tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-      let controller = self.storyboard?.instantiateViewController(withIdentifier: "OptionTableViewController") as! OptionTableViewController
-      controller.memberImage = self.imageInfo[indexPath.row].imageData
-      controller.memberNumber = self.imageInfo[indexPath.row].bottomInfo
-      let sheet = SheetViewController(controller: controller, sizes: [.halfScreen])
-      sheet.setSizes([.fixed(215)])
-      sheet.adjustForBottomSafeArea = true
-      self.present(sheet, animated: false, completion: nil)
-
+        
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "OptionTableViewController") as! OptionTableViewController
+        controller.memberImage = self.imageInfo[indexPath.row].imageData
+        controller.memberNumber = self.imageInfo[indexPath.row].bottomInfo
+        let sheet = SheetViewController(controller: controller, sizes: [.halfScreen])
+        sheet.setSizes([.fixed(215)])
+        sheet.adjustForBottomSafeArea = true
+        self.present(sheet, animated: false, completion: nil)
+        
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toPhoto" {
             let destinationVC = segue.destination as! BorrowEditorViewController
