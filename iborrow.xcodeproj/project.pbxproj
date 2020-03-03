@@ -57,6 +57,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2282C184240E178100C41C34 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9B088C0A200DB28F00601CA9 /* BorrowInfo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2282C185240E17A400C41C34 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9B518CA62229B722004B1050 /* OptionTableViewController.swift */,
+				9B8A1E9C201ED71C00BC8437 /* BorrowDetailViewController.swift */,
+				9BEF0BC12005356D0065B5A8 /* BorrowTableViewController.swift */,
+				9BDD35D41FD88B0D005ADBCD /* BorrowEditorViewController.swift */,
+				9B518CA82229CDDC004B1050 /* ImageViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2282C186240E17CC00C41C34 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9BDD35D61FD88B0D005ADBCD /* Main.storyboard */,
+				9BDD35DB1FD88B0D005ADBCD /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2282C187240E17F700C41C34 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				9BDD35D91FD88B0D005ADBCD /* Assets.xcassets */,
+				9BDD35DE1FD88B0D005ADBCD /* Info.plist */,
+				9BBD165E22F6ABFC00299384 /* BorrowTime.xcdatamodeld */,
+				9B95EACC2227B3D100E62843 /* GoogleService-Info.plist */,
+				9B39AA8922F40B3B007EF340 /* DataController.swift */,
+				9B90F13122F7DC540035104E /* iborrow.entitlements */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
 		320D02C71229A07307D764D2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,20 +138,10 @@
 			isa = PBXGroup;
 			children = (
 				9BDD35D21FD88B0D005ADBCD /* AppDelegate.swift */,
-				9B088C0A200DB28F00601CA9 /* BorrowInfo.swift */,
-				9B8A1E9C201ED71C00BC8437 /* BorrowDetailViewController.swift */,
-				9BEF0BC12005356D0065B5A8 /* BorrowTableViewController.swift */,
-				9BDD35D41FD88B0D005ADBCD /* BorrowEditorViewController.swift */,
-				9BBD165E22F6ABFC00299384 /* BorrowTime.xcdatamodeld */,
-				9BDD35D61FD88B0D005ADBCD /* Main.storyboard */,
-				9B518CA62229B722004B1050 /* OptionTableViewController.swift */,
-				9BDD35D91FD88B0D005ADBCD /* Assets.xcassets */,
-				9BDD35DB1FD88B0D005ADBCD /* LaunchScreen.storyboard */,
-				9BDD35DE1FD88B0D005ADBCD /* Info.plist */,
-				9B95EACC2227B3D100E62843 /* GoogleService-Info.plist */,
-				9B518CA82229CDDC004B1050 /* ImageViewController.swift */,
-				9B39AA8922F40B3B007EF340 /* DataController.swift */,
-				9B90F13122F7DC540035104E /* iborrow.entitlements */,
+				2282C184240E178100C41C34 /* Model */,
+				2282C185240E17A400C41C34 /* Controller */,
+				2282C186240E17CC00C41C34 /* Views */,
+				2282C187240E17F700C41C34 /* Supporting files */,
 			);
 			path = iborrow;
 			sourceTree = "<group>";
