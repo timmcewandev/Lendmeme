@@ -6,15 +6,10 @@ import UIKit
 import Foundation
 
 class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+    
+    // MARK: - Variables
     var borrow: [BorrowInfo]!
     var dataController: DataController! = nil
-    // MARK: Outlets
-    
-    @IBOutlet var toolbar: UIToolbar!
-    @IBOutlet var shareOUT: UIBarButtonItem!
-    @IBOutlet var bottomTextOUT: UITextField!
-    @IBOutlet var topTextOUT: UITextField!
-    @IBOutlet var imageView: UIImageView!
     
     let borrowTextAttributes: [String : Any] = [
         NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
@@ -22,7 +17,16 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         NSAttributedStringKey.strokeWidth.rawValue : -4.0,
         NSAttributedStringKey.backgroundColor.rawValue: UIColor.clear
     ]
-    // MARK: Override
+    
+    // MARK: Outlets
+    @IBOutlet var toolbar: UIToolbar!
+    @IBOutlet var shareOUT: UIBarButtonItem!
+    @IBOutlet var bottomTextOUT: UITextField!
+    @IBOutlet var topTextOUT: UITextField!
+    @IBOutlet var imageView: UIImageView!
+    
+
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureShareOut(isEnabled: false)
@@ -44,7 +48,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     
-    // MARK: Action
+    // MARK: Interactions
     @IBAction func pickedPhoto(_ sender: Any) {
         pick(sourceType: .photoLibrary)
     }

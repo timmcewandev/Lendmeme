@@ -1,7 +1,4 @@
 //
-//  MemeTableViewController.swift
-//  meme 2.0
-//
 //  Created by sudo on 1/9/18.
 //  Copyright © 2018 sudo. All rights reserved.
 //
@@ -12,12 +9,19 @@ import CoreData
 
 class BorrowTableViewController: UITableViewController {
     
+    // MARK: - Variables
     var dataController:DataController!
-    var imageInfo: [ImageInfo] = []
     var member: UIImage?
+    var imageInfo: [ImageInfo] = [] {
+        didSet {
+//            print("The value of myProperty changed from \(oldValue) to \(imageInfo)")
+        }
+    }
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -25,14 +29,12 @@ class BorrowTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        self.tableView.reloadData()
         let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let result = try? dataController.viewContext.fetch(fetchRequest){
             imageInfo = result
         }
-        
         self.tableView.reloadData()
     }
     
@@ -71,15 +73,9 @@ class BorrowTableViewController: UITableViewController {
         }
     }
 }
-extension UITableView {
-    
-    func reloadOnMainThread() {
-        DispatchQueue.main.async {
-            self.reloadData()
-        }
-    }
-    
-    func hideExcessCells() {
-        tableFooterView = UIView(frame: CGRect.zero)
-    }
-}
+//extension UITableView {
+//    
+//    func hideExcessCells() {
+//        tableFooterView = UIView(frame: CGRect.zero)
+//    }
+//}
