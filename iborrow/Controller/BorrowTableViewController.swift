@@ -45,12 +45,10 @@ class BorrowTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        // Configure the cell...
         let memeImages = imageInfo[indexPath.row]
-        let memeTopText = memeImages.topInfo ?? "No name"
-        let memeBottomText = memeImages.bottomInfo ?? "No Number"
+        cell.imageView?.center = CGPoint(x: cell.contentView.bounds.size.width / 2, y: cell.contentView.bounds.size.height / 2)
         cell.imageView?.image = UIImage(data: memeImages.imageData!)
-        cell.textLabel?.text = "\(memeTopText)      \(memeBottomText)"
+
         return cell
     }
     
@@ -64,6 +62,21 @@ class BorrowTableViewController: UITableViewController {
         sheet.adjustForBottomSafeArea = true
         self.present(sheet, animated: false, completion: nil)
         
+    }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 300.00
+    }
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            imageInfo.remove(at: indexPath.row)
+            let commit = imageInfo[indexPath.row]
+            dataController.viewContext.delete(commit)            
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
