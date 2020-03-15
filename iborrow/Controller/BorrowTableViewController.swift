@@ -12,11 +12,7 @@ class BorrowTableViewController: UITableViewController {
     // MARK: - Variables
     var dataController:DataController!
     var member: UIImage?
-    var imageInfo: [ImageInfo] = [] {
-        didSet {
-//            print("The value of myProperty changed from \(oldValue) to \(imageInfo)")
-        }
-    }
+    var imageInfo: [ImageInfo] = []
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -46,7 +42,7 @@ class BorrowTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let memeImages = imageInfo[indexPath.row]
-        cell.imageView?.center = CGPoint(x: cell.contentView.bounds.size.width / 2, y: cell.contentView.bounds.size.height / 2)
+        cell.imageView?.contentMode = .center
         cell.imageView?.image = UIImage(data: memeImages.imageData!)
 
         return cell
@@ -70,14 +66,19 @@ class BorrowTableViewController: UITableViewController {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.delete {
-            imageInfo.remove(at: indexPath.row)
-            let commit = imageInfo[indexPath.row]
-            dataController.viewContext.delete(commit)            
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+     let action1 = UITableViewRowAction(style: .destructive, title: "Delete", handler: {
+         (action, indexPath) in
+         
+     })
+     action1.backgroundColor = UIColor.systemRed
+     let action2 = UITableViewRowAction(style: .default, title: "Mark item as returned", handler: {
+         (action, indexPath) in
+         print("Action2")
+     })
+        action2.backgroundColor = UIColor.systemGreen
+     return [action1, action2]
+     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toPhoto" {
