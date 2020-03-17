@@ -84,8 +84,21 @@ class BorrowTableViewController: UITableViewController {
         deleteItem.backgroundColor = UIColor.systemRed
         let markItemAsReturned = UITableViewRowAction(style: .default, title: "Mark item as returned", handler: {
             (_ , indexPath) in
+             let myphoto = self.imageInfo[indexPath.row]
+            for selectedImage in self.imageInfo {
+                if selectedImage == myphoto {
+                    let markImageAsReturned = selectedImage
+                    markImageAsReturned.hasBeenReturned = true
+                    try? self.dataController.viewContext.save()
+                    
+                    self.tableView.reloadData()
+                }
+            }
 
         })
+        if imageInfo[indexPath.row].hasBeenReturned == true {
+            return [deleteItem]
+        }
            markItemAsReturned.backgroundColor = UIColor.systemGreen
             return [deleteItem, markItemAsReturned]
 

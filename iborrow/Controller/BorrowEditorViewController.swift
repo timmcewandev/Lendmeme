@@ -129,16 +129,17 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     func save() {
         toolbar.isHidden = true
         let memedImage = generateMemedImage()
-        let borrowInfo = BorrowInfo(topString: topTextOUT.text!, bottomString: bottomTextOUT.text!, originalImage: imageView.image!, borrowImage: memedImage)
+        let borrowInfo = BorrowInfo(topString: topTextOUT.text!, bottomString: bottomTextOUT.text!, originalImage: imageView.image!, borrowImage: memedImage, hasBeenReturned: false)
         let getImageInfo = ImageInfo(context: dataController.viewContext)
         getImageInfo.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)
         getImageInfo.topInfo = borrowInfo.topString
         getImageInfo.bottomInfo = borrowInfo.bottomString
         getImageInfo.creationDate = Date()
+        getImageInfo.hasBeenReturned = false
         try? dataController.viewContext.save()
         self.toolbar.isHidden = true
         
-        dataController.viewContext.refreshAllObjects()
+//        dataController.viewContext.refreshAllObjects()
         navigationController?.popViewController(animated: true)
     }
     

@@ -10,7 +10,7 @@ struct BorrowInfo {
     var bottomString: String = ""
     var originalImage: UIImage
     var borrowImage: UIImage
-    var hasBeenReturned: Bool?
+    var hasBeenReturned = false
 }
 
 
