@@ -42,7 +42,7 @@ class BorrowTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let memeImages = imageInfo[indexPath.row]
-        cell.imageView?.contentMode = .center
+        cell.imageView?.contentMode = .left
         cell.imageView?.image = UIImage(data: memeImages.imageData!)
 
         return cell
@@ -67,18 +67,37 @@ class BorrowTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-     let action1 = UITableViewRowAction(style: .destructive, title: "Delete", handler: {
-         (action, indexPath) in
-         
-     })
-     action1.backgroundColor = UIColor.systemRed
-     let action2 = UITableViewRowAction(style: .default, title: "Mark item as returned", handler: {
-         (action, indexPath) in
-         print("Action2")
-     })
-        action2.backgroundColor = UIColor.systemGreen
-     return [action1, action2]
+        let deleteItem = UITableViewRowAction(style: .destructive, title: "Delete", handler: {
+            (action, indexPath) in
+             let myphoto = self.imageInfo[indexPath.row]
+            for selectedImage in self.imageInfo {
+                if selectedImage == myphoto {
+                    let selectedImage = selectedImage
+                    self.dataController.viewContext.delete(selectedImage)
+                    try? self.dataController.viewContext.save()
+                    self.imageInfo.remove(at: indexPath.row)
+                    self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                }
+            }
+            
+        })
+        deleteItem.backgroundColor = UIColor.systemRed
+        let markItemAsReturned = UITableViewRowAction(style: .default, title: "Mark item as returned", handler: {
+            (_ , indexPath) in
+
+        })
+           markItemAsReturned.backgroundColor = UIColor.systemGreen
+            return [deleteItem, markItemAsReturned]
+
+     
      }
+    
+    fileprivate func DestroysCoreDataMaintence(_ result: [ImageInfo]) {
+        for object in result {
+            dataController.viewContext.delete(object)
+        }
+
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toPhoto" {
@@ -87,9 +106,3 @@ class BorrowTableViewController: UITableViewController {
         }
     }
 }
-//extension UITableView {
-//    
-//    func hideExcessCells() {
-//        tableFooterView = UIView(frame: CGRect.zero)
-//    }
-//}
