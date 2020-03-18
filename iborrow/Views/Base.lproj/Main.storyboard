@@ -188,7 +188,7 @@
             </objects>
             <point key="canvasLocation" x="1697" y="786"/>
         </scene>
-        <!--Sent Memes-->
+        <!--Lent Item-->
         <scene sceneID="X16-i3-T2m">
             <objects>
                 <tableViewController id="W2j-BH-etb" customClass="BorrowTableViewController" customModule="iborrow" customModuleProvider="target" sceneMemberID="viewController">
@@ -197,18 +197,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="myCell" rowHeight="40" id="KB0-YQ-Qye" customClass="BorrowTableViewCell" customModule="iborrow" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="myCell" rowHeight="40" id="KB0-YQ-Qye" customClass="BorrowTableViewCell" customModule="iborrow" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KB0-YQ-Qye" id="W7t-oB-UT1">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ytp-M5-iYO">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
                                         </imageView>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAL-Km-O3L">
-                                            <rect key="frame" x="152" y="10" width="71.5" height="20"/>
+                                            <rect key="frame" x="132" y="10" width="71.5" height="20"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                             <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <nil key="highlightedColor"/>
@@ -236,7 +236,7 @@
                             <outlet property="delegate" destination="W2j-BH-etb" id="rV9-bC-ZNg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Sent Memes" id="nPJ-8i-Xg9">
+                    <navigationItem key="navigationItem" title="Lent Item" id="nPJ-8i-Xg9">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="j2l-nd-Mkh">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="show" identifier="toPhoto" id="DJZ-TF-UhI"/>

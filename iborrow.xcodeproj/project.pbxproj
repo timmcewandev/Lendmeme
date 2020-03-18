@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2257DE462422B908009FD6BC /* BorrowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2257DE452422B908009FD6BC /* BorrowTableViewCell.swift */; };
-		4F1A43B6F6F0846F3113F9BC /* Pods_iborrow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6402E7D0F3AEDB8640337B88 /* Pods_iborrow.framework */; };
 		9B088C0B200DB28F00601CA9 /* BorrowInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B088C0A200DB28F00601CA9 /* BorrowInfo.swift */; };
 		9B39AA8A22F40B3B007EF340 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B39AA8922F40B3B007EF340 /* DataController.swift */; };
 		9B518CA72229B722004B1050 /* OptionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B518CA62229B722004B1050 /* OptionTableViewController.swift */; };
@@ -21,12 +20,13 @@
 		9BDD35DA1FD88B0D005ADBCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BDD35D91FD88B0D005ADBCD /* Assets.xcassets */; };
 		9BDD35DD1FD88B0D005ADBCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BDD35DB1FD88B0D005ADBCD /* LaunchScreen.storyboard */; };
 		9BEF0BC22005356D0065B5A8 /* BorrowTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF0BC12005356D0065B5A8 /* BorrowTableViewController.swift */; };
+		C323C1E5EEC3CA8C91D5F781 /* Pods_iborrow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABED513F68989FC544F5D96 /* Pods_iborrow.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		112A2A5ADFEF630EC0A83895 /* Pods-iborrow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iborrow.debug.xcconfig"; path = "Target Support Files/Pods-iborrow/Pods-iborrow.debug.xcconfig"; sourceTree = "<group>"; };
+		1ABED513F68989FC544F5D96 /* Pods_iborrow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iborrow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2257DE452422B908009FD6BC /* BorrowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowTableViewCell.swift; sourceTree = "<group>"; };
-		6402E7D0F3AEDB8640337B88 /* Pods_iborrow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iborrow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		72AEAD2591CC40D109951D4A /* Pods-iborrow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iborrow.release.xcconfig"; path = "Target Support Files/Pods-iborrow/Pods-iborrow.release.xcconfig"; sourceTree = "<group>"; };
 		9B088C0A200DB28F00601CA9 /* BorrowInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowInfo.swift; sourceTree = "<group>"; };
 		9B39AA8922F40B3B007EF340 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		9B518CA62229B722004B1050 /* OptionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionTableViewController.swift; sourceTree = "<group>"; };
@@ -42,7 +42,7 @@
 		9BDD35DC1FD88B0D005ADBCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9BDD35DE1FD88B0D005ADBCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BEF0BC12005356D0065B5A8 /* BorrowTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowTableViewController.swift; sourceTree = "<group>"; };
-		E495047ED8292856E6225544 /* Pods-iborrow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iborrow.release.xcconfig"; path = "Target Support Files/Pods-iborrow/Pods-iborrow.release.xcconfig"; sourceTree = "<group>"; };
+		D5335A73C2440E3DBAABAC45 /* Pods-iborrow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iborrow.debug.xcconfig"; path = "Target Support Files/Pods-iborrow/Pods-iborrow.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F1A43B6F6F0846F3113F9BC /* Pods_iborrow.framework in Frameworks */,
+				C323C1E5EEC3CA8C91D5F781 /* Pods_iborrow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,18 +102,10 @@
 		320D02C71229A07307D764D2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				112A2A5ADFEF630EC0A83895 /* Pods-iborrow.debug.xcconfig */,
-				E495047ED8292856E6225544 /* Pods-iborrow.release.xcconfig */,
+				D5335A73C2440E3DBAABAC45 /* Pods-iborrow.debug.xcconfig */,
+				72AEAD2591CC40D109951D4A /* Pods-iborrow.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		5BAD6A5B11502CD115BB4605 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				6402E7D0F3AEDB8640337B88 /* Pods_iborrow.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		9BDD35C61FD88B0C005ADBCD = {
@@ -122,7 +114,7 @@
 				9BDD35D11FD88B0D005ADBCD /* iborrow */,
 				9BDD35D01FD88B0D005ADBCD /* Products */,
 				320D02C71229A07307D764D2 /* Pods */,
-				5BAD6A5B11502CD115BB4605 /* Frameworks */,
+				E363D740E936E2720EB6358B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -146,6 +138,14 @@
 			path = iborrow;
 			sourceTree = "<group>";
 		};
+		E363D740E936E2720EB6358B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1ABED513F68989FC544F5D96 /* Pods_iborrow.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -153,11 +153,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BDD35E11FD88B0D005ADBCD /* Build configuration list for PBXNativeTarget "iborrow" */;
 			buildPhases = (
-				E47836D901471458EA2E6D14 /* [CP] Check Pods Manifest.lock */,
+				BAFB62F85F90B93611444D79 /* [CP] Check Pods Manifest.lock */,
 				9BDD35CB1FD88B0C005ADBCD /* Sources */,
 				9BDD35CC1FD88B0C005ADBCD /* Frameworks */,
 				9BDD35CD1FD88B0C005ADBCD /* Resources */,
-				B9F1CA63904F1F9F5EFAF814 /* [CP] Embed Pods Frameworks */,
+				9B2C6CE7CB0B818CFDC7B000 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -222,7 +222,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B9F1CA63904F1F9F5EFAF814 /* [CP] Embed Pods Frameworks */ = {
+		9B2C6CE7CB0B818CFDC7B000 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -246,7 +246,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iborrow/Pods-iborrow-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E47836D901471458EA2E6D14 /* [CP] Check Pods Manifest.lock */ = {
+		BAFB62F85F90B93611444D79 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -418,7 +418,7 @@
 		};
 		9BDD35E21FD88B0D005ADBCD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 112A2A5ADFEF630EC0A83895 /* Pods-iborrow.debug.xcconfig */;
+			baseConfigurationReference = D5335A73C2440E3DBAABAC45 /* Pods-iborrow.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = iborrow/iborrow.entitlements;
@@ -436,7 +436,7 @@
 		};
 		9BDD35E31FD88B0D005ADBCD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E495047ED8292856E6225544 /* Pods-iborrow.release.xcconfig */;
+			baseConfigurationReference = 72AEAD2591CC40D109951D4A /* Pods-iborrow.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = iborrow/iborrow.entitlements;

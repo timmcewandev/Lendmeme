@@ -44,7 +44,12 @@ class BorrowTableViewController: UITableViewController {
         let memeImages = imageInfo[indexPath.row]
         cell.myImageView.contentMode = .left
         cell.myImageView.image = UIImage(data: memeImages.imageData!)
-
+//        cell.checkMarkFill.anim
+        cell.accessoryType = .none
+        if imageInfo[indexPath.row].hasBeenReturned == true {
+            cell.accessoryType = .checkmark
+        }
+        
         return cell
     }
     
@@ -92,6 +97,7 @@ class BorrowTableViewController: UITableViewController {
                     let markImageAsReturned = selectedImage
                     markImageAsReturned.hasBeenReturned = true
                     try? self?.dataController.viewContext.save()
+                    self?.tableView.cellForRow(at: indexPath)
                     self?.dataController.viewContext.refreshAllObjects()
                     self?.tableView.reloadData()
                 }

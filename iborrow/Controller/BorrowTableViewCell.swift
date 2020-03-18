@@ -10,6 +10,7 @@ import UIKit
 
 class BorrowTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var checkMarkFill: UIImageView!
     @IBOutlet var myImageView: UIImageView!
     @IBOutlet weak var myTextLabel: UILabel!
     
