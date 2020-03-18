@@ -139,7 +139,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         try? dataController.viewContext.save()
         self.toolbar.isHidden = true
         
-//        dataController.viewContext.refreshAllObjects()
+        dataController.viewContext.refreshAllObjects()
         navigationController?.popViewController(animated: true)
     }
     

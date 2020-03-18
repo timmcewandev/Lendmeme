@@ -17,7 +17,7 @@ class BorrowTableViewController: UITableViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.reloadInputViews()
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -40,10 +40,10 @@ class BorrowTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! BorrowTableViewCell
         let memeImages = imageInfo[indexPath.row]
-        cell.imageView?.contentMode = .left
-        cell.imageView?.image = UIImage(data: memeImages.imageData!)
+        cell.myImageView.contentMode = .left
+        cell.myImageView.image = UIImage(data: memeImages.imageData!)
 
         return cell
     }
@@ -60,38 +60,40 @@ class BorrowTableViewController: UITableViewController {
         
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300.00
+        return 150.0
     }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteItem = UITableViewRowAction(style: .destructive, title: "Delete", handler: {
-            (action, indexPath) in
-             let myphoto = self.imageInfo[indexPath.row]
-            for selectedImage in self.imageInfo {
+        let deleteItem = UITableViewRowAction(style: .destructive, title: "Delete", handler: { [weak self] (action, indexPath) in
+            let myphoto = self?.imageInfo[indexPath.row]
+            guard let selectedImage = self?.imageInfo else { return }
+            for selectedImage in selectedImage  {
                 if selectedImage == myphoto {
                     let selectedImage = selectedImage
-                    self.dataController.viewContext.delete(selectedImage)
-                    try? self.dataController.viewContext.save()
-                    self.imageInfo.remove(at: indexPath.row)
-                    self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                    self?.dataController.viewContext.delete(selectedImage)
+                    try? self?.dataController.viewContext.save()
+                    self?.imageInfo.remove(at: indexPath.row)
+                    self?.tableView.deleteRows(at: [indexPath], with: .bottom)
+                    self?.dataController.viewContext.refreshAllObjects()
+                    self?.tableView.reloadData()
                 }
             }
             
         })
         deleteItem.backgroundColor = UIColor.systemRed
-        let markItemAsReturned = UITableViewRowAction(style: .default, title: "Mark item as returned", handler: {
-            (_ , indexPath) in
-             let myphoto = self.imageInfo[indexPath.row]
-            for selectedImage in self.imageInfo {
+        let markItemAsReturned = UITableViewRowAction(style: .default, title: "Mark item as returned", handler: { [weak self] (_ , indexPath)  in
+            let myphoto = self?.imageInfo[indexPath.row]
+            guard let selectImage = self?.imageInfo else { return }
+            for selectedImage in selectImage {
                 if selectedImage == myphoto {
                     let markImageAsReturned = selectedImage
                     markImageAsReturned.hasBeenReturned = true
-                    try? self.dataController.viewContext.save()
-                    
-                    self.tableView.reloadData()
+                    try? self?.dataController.viewContext.save()
+                    self?.dataController.viewContext.refreshAllObjects()
+                    self?.tableView.reloadData()
                 }
             }
 
