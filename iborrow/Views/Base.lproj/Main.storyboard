@@ -43,7 +43,7 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="glI-lX-kRB"/>
-                                    <barButtonItem systemItem="action" id="mST-PZ-z3s">
+                                    <barButtonItem systemItem="save" id="mST-PZ-z3s">
                                         <connections>
                                             <action selector="shareWithSender:" destination="BYZ-38-t0r" id="oBC-0o-sCC"/>
                                         </connections>

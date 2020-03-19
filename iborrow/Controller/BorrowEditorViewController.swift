@@ -62,17 +62,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     @IBAction func share(sender: AnyObject) {
-        let memedImage = generateMemedImage()
-        let controller = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        controller.completionWithItemsHandler = {
-            (_,success,_,_) in
-            if success{
-                self.save()
-            } else {
-                self.configureShareOut(isEnabled: false)
-            }
-        }
-        self.present(controller, animated: true, completion: nil)
+        self.save()
     }
     
     // MARK: Functions
@@ -139,7 +129,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         try? dataController.viewContext.save()
         self.toolbar.isHidden = true
         
-//        dataController.viewContext.refreshAllObjects()
         navigationController?.popViewController(animated: true)
     }
     
