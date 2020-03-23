@@ -33,6 +33,19 @@ class OptionTableViewController: UITableViewController, MFMessageComposeViewCont
         }
     }
     
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        let header = view as! UITableViewHeaderFooterView
+        if #available(iOS 13.0, *) {
+            view.tintColor = UIColor.systemBackground
+            header.textLabel?.textColor = UIColor.label
+        } else {
+            view.tintColor = UIColor.white
+            header.textLabel?.textColor = UIColor.black
+        }
+        header.textLabel?.textAlignment = .center
+        
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {

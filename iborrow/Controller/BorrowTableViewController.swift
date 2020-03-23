@@ -30,10 +30,11 @@ class BorrowTableViewController: UITableViewController {
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let result = try? dataController.viewContext.fetch(fetchRequest){
             imageInfo = result
+            self.tableView.isHidden = false
         }
         self.tableView.reloadData()
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return imageInfo.count
     }
@@ -44,7 +45,6 @@ class BorrowTableViewController: UITableViewController {
         let memeImages = imageInfo[indexPath.row]
         cell.myImageView.contentMode = .left
         cell.myImageView.image = UIImage(data: memeImages.imageData!)
-//        cell.checkMarkFill.anim
         cell.accessoryType = .none
         if imageInfo[indexPath.row].hasBeenReturned == true {
             cell.accessoryType = .checkmark
@@ -83,6 +83,9 @@ class BorrowTableViewController: UITableViewController {
                     self?.imageInfo.remove(at: indexPath.row)
                     self?.tableView.deleteRows(at: [indexPath], with: .bottom)
                     self?.dataController.viewContext.refreshAllObjects()
+                    if self?.imageInfo.isEmpty == true {
+                        self?.tableView.isHidden = true
+                    }
                     self?.tableView.reloadData()
                 }
             }

@@ -8,7 +8,7 @@ import Foundation
 class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     // MARK: - Variables
-    var borrow: [BorrowInfo]!
+    let borrow: [BorrowInfo]! = nil
     var dataController: DataController! = nil
     
     let borrowTextAttributes: [String : Any] = [
@@ -19,11 +19,11 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     ]
     
     // MARK: Outlets
-    @IBOutlet var toolbar: UIToolbar!
-    @IBOutlet var shareOUT: UIBarButtonItem!
-    @IBOutlet var bottomTextOUT: UITextField!
-    @IBOutlet var topTextOUT: UITextField!
-    @IBOutlet var imageView: UIImageView!
+    @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet weak var shareOUT: UIBarButtonItem!
+    @IBOutlet weak var bottomTextOUT: UITextField!
+    @IBOutlet weak var topTextOUT: UITextField!
+    @IBOutlet weak var imageView: UIImageView!
     
 
     // MARK: Lifecycle
@@ -148,7 +148,9 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     func unsubscribeFromKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)    }
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+    }
+    
     // MARK: Objects
     @objc func keyboardWillShow(notification: NSNotification) {
         if bottomTextOUT.isFirstResponder {
