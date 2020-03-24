@@ -20,14 +20,14 @@
 		9BDD35DA1FD88B0D005ADBCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BDD35D91FD88B0D005ADBCD /* Assets.xcassets */; };
 		9BDD35DD1FD88B0D005ADBCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BDD35DB1FD88B0D005ADBCD /* LaunchScreen.storyboard */; };
 		9BEF0BC22005356D0065B5A8 /* BorrowTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF0BC12005356D0065B5A8 /* BorrowTableViewController.swift */; };
-		9EF605FD3D33A7E04C7BB2A1 /* Pods_iborrow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCC91A08966A25F24CCE207 /* Pods_iborrow.framework */; };
+		C218D08267215ABB34478486 /* Pods_iborrow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CFD776656F4E468F57E61F0 /* Pods_iborrow.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1620DCB4E412BBC915E49E87 /* Pods-iborrow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iborrow.release.xcconfig"; path = "Target Support Files/Pods-iborrow/Pods-iborrow.release.xcconfig"; sourceTree = "<group>"; };
+		1CFD776656F4E468F57E61F0 /* Pods_iborrow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iborrow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2257DE452422B908009FD6BC /* BorrowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowTableViewCell.swift; sourceTree = "<group>"; };
 		22BF0BB324230EED00B2F0D5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		406B7DC736F372FADC85E63A /* Pods-iborrow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iborrow.debug.xcconfig"; path = "Target Support Files/Pods-iborrow/Pods-iborrow.debug.xcconfig"; sourceTree = "<group>"; };
+		4914146057A0207DF05A2E6A /* Pods-iborrow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iborrow.debug.xcconfig"; path = "Target Support Files/Pods-iborrow/Pods-iborrow.debug.xcconfig"; sourceTree = "<group>"; };
 		9B088C0A200DB28F00601CA9 /* BorrowInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowInfo.swift; sourceTree = "<group>"; };
 		9B39AA8922F40B3B007EF340 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		9B518CA62229B722004B1050 /* OptionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionTableViewController.swift; sourceTree = "<group>"; };
@@ -42,7 +42,7 @@
 		9BDD35DC1FD88B0D005ADBCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9BDD35DE1FD88B0D005ADBCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BEF0BC12005356D0065B5A8 /* BorrowTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowTableViewController.swift; sourceTree = "<group>"; };
-		EFCC91A08966A25F24CCE207 /* Pods_iborrow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iborrow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E03E594E8B712D12B8C9970A /* Pods-iborrow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iborrow.release.xcconfig"; path = "Target Support Files/Pods-iborrow/Pods-iborrow.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,21 +50,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9EF605FD3D33A7E04C7BB2A1 /* Pods_iborrow.framework in Frameworks */,
+				C218D08267215ABB34478486 /* Pods_iborrow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1895583367DF1EA8C4E52C73 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				EFCC91A08966A25F24CCE207 /* Pods_iborrow.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		2282C184240E178100C41C34 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,8 +102,8 @@
 		320D02C71229A07307D764D2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				406B7DC736F372FADC85E63A /* Pods-iborrow.debug.xcconfig */,
-				1620DCB4E412BBC915E49E87 /* Pods-iborrow.release.xcconfig */,
+				4914146057A0207DF05A2E6A /* Pods-iborrow.debug.xcconfig */,
+				E03E594E8B712D12B8C9970A /* Pods-iborrow.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -122,7 +114,7 @@
 				9BDD35D11FD88B0D005ADBCD /* iborrow */,
 				9BDD35D01FD88B0D005ADBCD /* Products */,
 				320D02C71229A07307D764D2 /* Pods */,
-				1895583367DF1EA8C4E52C73 /* Frameworks */,
+				BFC5568802CA2366E011E072 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -146,6 +138,14 @@
 			path = iborrow;
 			sourceTree = "<group>";
 		};
+		BFC5568802CA2366E011E072 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1CFD776656F4E468F57E61F0 /* Pods_iborrow.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -153,12 +153,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BDD35E11FD88B0D005ADBCD /* Build configuration list for PBXNativeTarget "iborrow" */;
 			buildPhases = (
-				E4B78A0FFBA90BA817D6F524 /* [CP] Check Pods Manifest.lock */,
+				3D0766A27F9305DEE7A0D3C4 /* [CP] Check Pods Manifest.lock */,
 				9BDD35CB1FD88B0C005ADBCD /* Sources */,
 				9BDD35CC1FD88B0C005ADBCD /* Frameworks */,
 				9BDD35CD1FD88B0C005ADBCD /* Resources */,
 				225CFA9324230C240068CB4E /* ShellScript */,
-				C64B5C4781F0274148A5BE28 /* [CP] Embed Pods Frameworks */,
+				B66FCE6588D553E6C8D7FD64 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -240,7 +240,29 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
-		C64B5C4781F0274148A5BE28 /* [CP] Embed Pods Frameworks */ = {
+		3D0766A27F9305DEE7A0D3C4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iborrow-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B66FCE6588D553E6C8D7FD64 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -268,28 +290,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iborrow/Pods-iborrow-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E4B78A0FFBA90BA817D6F524 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-iborrow-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -442,7 +442,7 @@
 		};
 		9BDD35E21FD88B0D005ADBCD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 406B7DC736F372FADC85E63A /* Pods-iborrow.debug.xcconfig */;
+			baseConfigurationReference = 4914146057A0207DF05A2E6A /* Pods-iborrow.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = iborrow/iborrow.entitlements;
@@ -462,7 +462,7 @@
 		};
 		9BDD35E31FD88B0D005ADBCD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1620DCB4E412BBC915E49E87 /* Pods-iborrow.release.xcconfig */;
+			baseConfigurationReference = E03E594E8B712D12B8C9970A /* Pods-iborrow.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = iborrow/iborrow.entitlements;

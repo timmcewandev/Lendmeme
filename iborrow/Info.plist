@@ -22,6 +22,10 @@
 	<string>1</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
+	<key>CFBundleDisplayName</key>
+	<string></string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-6335247657896931~8259042789</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>

@@ -6,6 +6,7 @@ import UIKit
 
 import FittedSheets
 import CoreData
+import GoogleMobileAds
 
 class BorrowTableViewController: UITableViewController {
     
@@ -13,6 +14,7 @@ class BorrowTableViewController: UITableViewController {
     var dataController:DataController!
     var member: UIImage?
     var imageInfo: [ImageInfo] = []
+    var bannerView: GADBannerView!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -20,7 +22,34 @@ class BorrowTableViewController: UITableViewController {
         self.reloadInputViews()
         tableView.delegate = self
         tableView.dataSource = self
-    }
+          bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+
+          addBannerViewToView(bannerView)
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        }
+
+        func addBannerViewToView(_ bannerView: GADBannerView) {
+          bannerView.translatesAutoresizingMaskIntoConstraints = false
+          view.addSubview(bannerView)
+          view.addConstraints(
+            [NSLayoutConstraint(item: bannerView,
+                                attribute: .bottom,
+                                relatedBy: .equal,
+                                toItem: bottomLayoutGuide,
+                                attribute: .top,
+                                multiplier: 1,
+                                constant: 0),
+             NSLayoutConstraint(item: bannerView,
+                                attribute: .centerX,
+                                relatedBy: .equal,
+                                toItem: view,
+                                attribute: .centerX,
+                                multiplier: 1,
+                                constant: 0)
+            ])
+         }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
