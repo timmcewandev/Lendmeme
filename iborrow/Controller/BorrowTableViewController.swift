@@ -22,18 +22,18 @@ class BorrowTableViewController: UITableViewController {
         self.reloadInputViews()
         tableView.delegate = self
         tableView.dataSource = self
-          bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-
-          addBannerViewToView(bannerView)
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        
+        addBannerViewToView(bannerView)
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
-        }
-
-        func addBannerViewToView(_ bannerView: GADBannerView) {
-          bannerView.translatesAutoresizingMaskIntoConstraints = false
-          view.addSubview(bannerView)
-          view.addConstraints(
+    }
+    
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        view.addConstraints(
             [NSLayoutConstraint(item: bannerView,
                                 attribute: .bottom,
                                 relatedBy: .equal,
@@ -48,8 +48,8 @@ class BorrowTableViewController: UITableViewController {
                                 attribute: .centerX,
                                 multiplier: 1,
                                 constant: 0)
-            ])
-         }
+        ])
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -63,7 +63,7 @@ class BorrowTableViewController: UITableViewController {
         }
         self.tableView.reloadData()
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return imageInfo.count
     }
@@ -134,22 +134,20 @@ class BorrowTableViewController: UITableViewController {
                     self?.tableView.reloadData()
                 }
             }
-
+            
         })
         if imageInfo[indexPath.row].hasBeenReturned == true {
             return [deleteItem]
         }
-           markItemAsReturned.backgroundColor = UIColor.systemGreen
-            return [deleteItem, markItemAsReturned]
-
-     
-     }
+        markItemAsReturned.backgroundColor = UIColor.systemGreen
+        return [deleteItem, markItemAsReturned]
+    }
     
     fileprivate func DestroysCoreDataMaintence(_ result: [ImageInfo]) {
         for object in result {
             dataController.viewContext.delete(object)
         }
-
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -10,7 +10,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     // MARK: - Variables
     let borrow: [BorrowInfo]! = nil
     var dataController: DataController! = nil
-    
+
     let borrowTextAttributes: [String : Any] = [
         NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
         NSAttributedStringKey.foregroundColor.rawValue : UIColor.white,
@@ -25,7 +25,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var topTextOUT: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     
-
+    
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,9 +33,13 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         prepareTextField(textField: topTextOUT)
         prepareTextField(textField: bottomTextOUT)
         self.tabBarController?.tabBar.isHidden = true
+        bottomTextOUT.inputAccessoryView = accessoryView()
+        bottomTextOUT.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
+        view.addSubview(bottomTextOUT)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
         self.toolbar.isHidden = false
@@ -137,7 +141,14 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     func prepareTextField(textField: UITextField) {
+        if #available(iOS 13.0, *) {
+            textField.tintColor = .systemBackground
+        } else {
+            textField.tintColor = .white
+        }
+        
         textField.defaultTextAttributes = borrowTextAttributes
+        textField.textAlignment = .center
         textField.delegate = self
     }
     
@@ -156,6 +167,31 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         if bottomTextOUT.isFirstResponder {
             view.frame.origin.y = -keyboardHeight(notification: notification)
         }
+        
+        
+    }
+    func accessoryView() -> UIView {
+        
+        let view = UIView()
+        view.backgroundColor = .gray
+        
+        let doneButton = UIButton()
+        doneButton.frame = CGRect(x: self.view.frame.width - 80, y: 7, width: 60, height: 30)
+        doneButton.setTitle("done", for: .normal)
+        if #available(iOS 13.0, *) {
+            doneButton.tintColor = .label
+        } else {
+            doneButton.tintColor = .white
+        }
+        doneButton.addTarget(self, action: #selector(BorrowEditorViewController.doneAction), for: .touchUpInside)
+        view.addSubview(doneButton)
+        
+        return view
+        
+    }
+    
+    @objc func doneAction() {
+        bottomTextOUT.resignFirstResponder()
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
