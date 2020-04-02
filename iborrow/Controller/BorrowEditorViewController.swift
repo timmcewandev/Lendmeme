@@ -13,9 +13,8 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
 
     let borrowTextAttributes: [String : Any] = [
         NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
-        NSAttributedStringKey.foregroundColor.rawValue : UIColor.white,
-        NSAttributedStringKey.strokeWidth.rawValue : -4.0,
-        NSAttributedStringKey.backgroundColor.rawValue: UIColor.clear
+        NSAttributedStringKey.strokeWidth.rawValue : -3.0,
+        NSAttributedStringKey.foregroundColor.rawValue: UIColor.white
     ]
     
     // MARK: Outlets
@@ -30,18 +29,17 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         configureShareOut(isEnabled: false)
-        prepareTextField(textField: topTextOUT)
-        prepareTextField(textField: bottomTextOUT)
+        prepareTextField(textField: topTextOUT, name: "Name")
+        prepareTextField(textField: bottomTextOUT, name: "Phone#")
         self.tabBarController?.tabBar.isHidden = true
         bottomTextOUT.inputAccessoryView = accessoryView()
         bottomTextOUT.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
         view.addSubview(bottomTextOUT)
+        subscribeToKeyboardNotifications()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         super.viewWillAppear(animated)
-        subscribeToKeyboardNotifications()
         self.toolbar.isHidden = false
     }
     
@@ -140,13 +138,14 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         shareOUT.isEnabled = isEnabled
     }
     
-    func prepareTextField(textField: UITextField) {
-        if #available(iOS 13.0, *) {
-            textField.tintColor = .systemBackground
-        } else {
-            textField.tintColor = .white
-        }
-        
+    func prepareTextField(textField: UITextField, name: String) {
+        textField.attributedPlaceholder = NSAttributedString(
+            string: name,
+            attributes:
+            [NSAttributedStringKey.foregroundColor: UIColor.white,
+             NSAttributedStringKey.strokeWidth : -3.0,
+             NSAttributedStringKey.strokeColor: UIColor.black
+            ])
         textField.defaultTextAttributes = borrowTextAttributes
         textField.textAlignment = .center
         textField.delegate = self

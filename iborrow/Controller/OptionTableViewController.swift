@@ -11,9 +11,7 @@ import MessageUI
 import FittedSheets
 
 class OptionTableViewController: UITableViewController, MFMessageComposeViewControllerDelegate {
-    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-        controller.dismiss(animated: true, completion: nil)
-    }
+    
     var memberImage: Data?
     var memberNumber: String?
     let options = ["View Image", "Send a text"]
@@ -82,10 +80,12 @@ class OptionTableViewController: UITableViewController, MFMessageComposeViewCont
             controller.myImages = UIImage(data: memberImage!)
             let sheet = SheetViewController(controller: controller, sizes: [.fullScreen])
             sheet.adjustForBottomSafeArea = true
-            
             self.present(sheet, animated: false, completion: nil)
-            performSegue(withIdentifier: "toSecond", sender: self)
         default: return
         }
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
