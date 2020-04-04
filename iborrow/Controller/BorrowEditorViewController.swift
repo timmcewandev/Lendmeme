@@ -29,8 +29,8 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         configureShareOut(isEnabled: false)
-        prepareTextField(textField: topTextOUT, name: "Name")
-        prepareTextField(textField: bottomTextOUT, name: "Phone#")
+        prepareTextField(textField: topTextOUT, name: "Enter name")
+        prepareTextField(textField: bottomTextOUT, name: "Enter Phone#")
         self.tabBarController?.tabBar.isHidden = true
         bottomTextOUT.inputAccessoryView = accessoryView()
         bottomTextOUT.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
@@ -111,6 +111,12 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     func generateMemedImage() -> UIImage {
+        if topTextOUT.text == "" {
+            topTextOUT.placeholder = ""
+        }
+        if bottomTextOUT.text == "" {
+            bottomTextOUT.placeholder = ""
+        }
         UIGraphicsBeginImageContext(view.frame.size)
         view.drawHierarchy(in: view.frame, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
@@ -174,16 +180,16 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         let view = UIView()
         view.backgroundColor = .gray
         
-        let doneButton = UIButton()
-        doneButton.frame = CGRect(x: self.view.frame.width - 80, y: 7, width: 60, height: 30)
-        doneButton.setTitle("done", for: .normal)
+        let returnButton = UIButton()
+        returnButton.frame = CGRect(x: self.view.frame.width - 80, y: 7, width: 60, height: 30)
+        returnButton.setTitle("Return", for: .normal)
         if #available(iOS 13.0, *) {
-            doneButton.tintColor = .label
+            returnButton.tintColor = .label
         } else {
-            doneButton.tintColor = .white
+            returnButton.tintColor = .white
         }
-        doneButton.addTarget(self, action: #selector(BorrowEditorViewController.doneAction), for: .touchUpInside)
-        view.addSubview(doneButton)
+        returnButton.addTarget(self, action: #selector(BorrowEditorViewController.doneAction), for: .touchUpInside)
+        view.addSubview(returnButton)
         
         return view
         

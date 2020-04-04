@@ -211,15 +211,28 @@
                                             <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBx-wS-xlC">
+                                            <rect key="frame" x="16" y="10" width="54" height="20"/>
+                                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                            <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="ytp-M5-iYO" firstAttribute="centerY" secondItem="W7t-oB-UT1" secondAttribute="centerY" id="71b-ao-xT6"/>
                                         <constraint firstItem="ytp-M5-iYO" firstAttribute="top" secondItem="W7t-oB-UT1" secondAttribute="topMargin" constant="-11" id="8VH-mo-v3d"/>
                                         <constraint firstItem="ytp-M5-iYO" firstAttribute="leading" secondItem="W7t-oB-UT1" secondAttribute="leadingMargin" constant="-16" id="KSa-fl-HWz"/>
+                                        <constraint firstItem="rBx-wS-xlC" firstAttribute="leading" secondItem="W7t-oB-UT1" secondAttribute="leadingMargin" id="LS6-Vg-bJG"/>
+                                        <constraint firstItem="rBx-wS-xlC" firstAttribute="centerY" secondItem="ytp-M5-iYO" secondAttribute="centerY" id="fNL-z2-akZ"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rBx-wS-xlC" secondAttribute="trailing" constant="20" symbolic="YES" id="fT8-Uq-abA"/>
+                                        <constraint firstItem="rBx-wS-xlC" firstAttribute="top" secondItem="W7t-oB-UT1" secondAttribute="topMargin" constant="-1" id="tnt-ca-Nat"/>
                                         <constraint firstItem="ytp-M5-iYO" firstAttribute="centerX" secondItem="W7t-oB-UT1" secondAttribute="centerX" id="uqY-NK-pXD"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="myDateLabel" destination="rBx-wS-xlC" id="JFU-nq-PmJ"/>
                                     <outlet property="myImageView" destination="ytp-M5-iYO" id="cXs-gd-kVd"/>
                                 </connections>
                             </tableViewCell>

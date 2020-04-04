@@ -72,15 +72,21 @@ class BorrowTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! BorrowTableViewCell
         let memeImages = imageInfo[indexPath.row]
+        
+        let date : Date = memeImages.creationDate!
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        let todaysDate = dateFormatter.string(from: date)
+        cell.myDateLabel.text = todaysDate
         cell.myImageView.contentMode = .left
         cell.myImageView.image = UIImage(data: memeImages.imageData!)
         cell.accessoryType = .none
         if imageInfo[indexPath.row].hasBeenReturned == true {
             cell.accessoryType = .checkmark
         }
-        
         return cell
     }
+    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         

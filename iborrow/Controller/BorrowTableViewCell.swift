@@ -10,6 +10,7 @@ import UIKit
 
 class BorrowTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var myDateLabel: UILabel!
     @IBOutlet var myImageView: UIImageView!
     
     override func awakeFromNib() {

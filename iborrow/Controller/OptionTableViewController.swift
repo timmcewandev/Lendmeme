@@ -15,11 +15,18 @@ class OptionTableViewController: UITableViewController, MFMessageComposeViewCont
     var memberImage: Data?
     var memberNumber: String?
     var firstName: String?
-    let options = ["View Image", "Send a text"]
+    var options = ["View Image","Send a text message"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if memberNumber == "" {
+            options = ["View Image"]
+        }
     }
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         tableView.tableHeaderView?.backgroundColor = UIColor.white
@@ -67,7 +74,7 @@ class OptionTableViewController: UITableViewController, MFMessageComposeViewCont
         let currentCell = tableView.cellForRow(at: indexPath!)
         
         switch currentCell?.textLabel?.text {
-        case "Send a text":
+        case "Send a text message":
             let composeVC = MFMessageComposeViewController()
             composeVC.messageComposeDelegate = self
             guard let number = memberNumber else { return }

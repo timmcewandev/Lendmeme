@@ -6,8 +6,8 @@ import Foundation
 import UIKit
 
 struct BorrowInfo {
-    var topString: String = ""
-    var bottomString: String = ""
+    var topString: String?
+    var bottomString: String?
     var originalImage: UIImage
     var borrowImage: UIImage
     var hasBeenReturned = false
