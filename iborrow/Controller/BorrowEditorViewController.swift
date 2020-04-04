@@ -30,7 +30,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         super.viewDidLoad()
         configureShareOut(isEnabled: false)
         prepareTextField(textField: topTextOUT, name: "Enter name")
-        prepareTextField(textField: bottomTextOUT, name: "Enter Phone#")
+        prepareTextField(textField: bottomTextOUT, name: "Enter phone#")
         self.tabBarController?.tabBar.isHidden = true
         bottomTextOUT.inputAccessoryView = accessoryView()
         bottomTextOUT.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
