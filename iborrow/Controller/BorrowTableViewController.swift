@@ -87,6 +87,7 @@ class BorrowTableViewController: UITableViewController {
         let controller = self.storyboard?.instantiateViewController(withIdentifier: "OptionTableViewController") as! OptionTableViewController
         controller.memberImage = self.imageInfo[indexPath.row].imageData
         controller.memberNumber = self.imageInfo[indexPath.row].bottomInfo
+        controller.firstName = self.imageInfo[indexPath.row].topInfo
         let sheet = SheetViewController(controller: controller, sizes: [.halfScreen])
         sheet.setSizes([.fixed(215)])
         sheet.adjustForBottomSafeArea = true

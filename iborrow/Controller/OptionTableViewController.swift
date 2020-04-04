@@ -14,6 +14,7 @@ class OptionTableViewController: UITableViewController, MFMessageComposeViewCont
     
     var memberImage: Data?
     var memberNumber: String?
+    var firstName: String?
     let options = ["View Image", "Send a text"]
     
     override func viewDidLoad() {
@@ -70,8 +71,15 @@ class OptionTableViewController: UITableViewController, MFMessageComposeViewCont
             let composeVC = MFMessageComposeViewController()
             composeVC.messageComposeDelegate = self
             guard let number = memberNumber else { return }
+            guard let image = memberImage else { return }
+            if let first = firstName {
+                composeVC.body = "Hello \(first) 👋, I was wondering if you are done with this item? Is there a time you could return it? Thanks 👏"
+            } else {
+                composeVC.body = "Hello 👋, I was wondering if you are done with this item? Is there a time you could return it? Thanks 👏"
+            }
             composeVC.recipients = ["\(number)"]
-            composeVC.body = "Hello, I was wondering if you are done with my item? Is there a time you could return it?"
+
+            composeVC.addAttachmentData(image, typeIdentifier: "public.data", filename: "lendmeme.png")
             if MFMessageComposeViewController.canSendText() {
                 self.present(composeVC, animated: true, completion: nil)
             }

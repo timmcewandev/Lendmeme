@@ -35,11 +35,11 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         bottomTextOUT.inputAccessoryView = accessoryView()
         bottomTextOUT.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
         view.addSubview(bottomTextOUT)
-        subscribeToKeyboardNotifications()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        subscribeToKeyboardNotifications()
         self.toolbar.isHidden = false
     }
     
