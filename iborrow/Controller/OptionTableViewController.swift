@@ -98,6 +98,7 @@ class OptionTableViewController: UITableViewController, MFMessageComposeViewCont
             self.present(sheet, animated: false, completion: nil)
         default: return
         }
+        self.tableView.deselectRow(at: indexPath!, animated: true)
     }
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {

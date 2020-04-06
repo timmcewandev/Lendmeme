@@ -4,6 +4,7 @@
 
 import UIKit
 import Foundation
+import CoreData
 
 class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
@@ -23,6 +24,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var bottomTextOUT: UITextField!
     @IBOutlet weak var topTextOUT: UITextField!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var cancelOut: UIBarButtonItem!
     
     
     // MARK: Lifecycle
@@ -40,7 +42,15 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
-        self.toolbar.isHidden = false
+        let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        if let result = try? dataController.viewContext.fetch(fetchRequest){
+            if result.count == 0 {
+                self.navigationController?.isNavigationBarHidden = true
+                configureCancelOut(isEnabled: false)
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -60,6 +70,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     @IBAction func cancelBTN(_ sender: Any) {
+        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -71,7 +82,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     func pick(sourceType: UIImagePickerControllerSourceType){
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        configureShareOut(isEnabled: true)
         present(imagePicker, animated: true, completion: nil)
     }
     func camera() {
@@ -127,6 +137,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     func save() {
         toolbar.isHidden = true
         let memedImage = generateMemedImage()
+//        self.navigationController?.navigationBar.isHidden = false
         let borrowInfo = BorrowInfo(topString: topTextOUT.text!, bottomString: bottomTextOUT.text!, originalImage: imageView.image!, borrowImage: memedImage, hasBeenReturned: false)
         let getImageInfo = ImageInfo(context: dataController.viewContext)
         getImageInfo.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)
@@ -138,6 +149,9 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         self.toolbar.isHidden = true
         
         navigationController?.popViewController(animated: true)
+    }
+    func configureCancelOut(isEnabled: Bool){
+        cancelOut.isEnabled = isEnabled
     }
     
     func configureShareOut(isEnabled: Bool){

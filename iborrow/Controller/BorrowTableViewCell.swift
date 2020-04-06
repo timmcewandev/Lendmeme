@@ -16,6 +16,10 @@ class BorrowTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        myDateLabel.layer.cornerRadius = 8.0
+        myDateLabel.clipsToBounds = true
+        myDateLabel.layer.borderWidth = 0.5
+        myDateLabel.layer.borderColor = UIColor.black.cgColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

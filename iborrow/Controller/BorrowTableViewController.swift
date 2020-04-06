@@ -61,6 +61,12 @@ class BorrowTableViewController: UITableViewController {
             imageInfo = result
             self.tableView.isHidden = false
         }
+        
+        if imageInfo.count == 0 {
+            performSegue(withIdentifier: "starter", sender: self)
+        }
+        self.navigationController?.isNavigationBarHidden = false
+
         self.tableView.reloadData()
     }
     
@@ -81,8 +87,9 @@ class BorrowTableViewController: UITableViewController {
         cell.myImageView.contentMode = .left
         cell.myImageView.image = UIImage(data: memeImages.imageData!)
         cell.accessoryType = .none
+        cell.myDateLabel.backgroundColor = .systemPink
         if imageInfo[indexPath.row].hasBeenReturned == true {
-            cell.accessoryType = .checkmark
+            cell.myDateLabel.backgroundColor = .systemGreen
         }
         return cell
     }
@@ -120,7 +127,9 @@ class BorrowTableViewController: UITableViewController {
                     self?.tableView.deleteRows(at: [indexPath], with: .bottom)
                     self?.dataController.viewContext.refreshAllObjects()
                     if self?.imageInfo.isEmpty == true {
-                        self?.tableView.isHidden = true
+                        self?.performSegue(withIdentifier: "starter", sender: self)
+//                        performSegue(withIdentifier: "starter", sender: self)
+//                        self?.tableView.isHidden = true
                     }
                     self?.tableView.reloadData()
                 }
@@ -129,6 +138,7 @@ class BorrowTableViewController: UITableViewController {
         })
         deleteItem.backgroundColor = UIColor.systemRed
         let markItemAsReturned = UITableViewRowAction(style: .default, title: "Mark item as returned", handler: { [weak self] (_ , indexPath)  in
+            let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! BorrowTableViewCell
             let myphoto = self?.imageInfo[indexPath.row]
             guard let selectImage = self?.imageInfo else { return }
             for selectedImage in selectImage {
@@ -138,6 +148,7 @@ class BorrowTableViewController: UITableViewController {
                     try? self?.dataController.viewContext.save()
                     self?.tableView.cellForRow(at: indexPath)
                     self?.dataController.viewContext.refreshAllObjects()
+                    cell.myDateLabel.backgroundColor = .systemGreen
                     self?.tableView.reloadData()
                 }
             }
@@ -161,6 +172,10 @@ class BorrowTableViewController: UITableViewController {
         if segue.identifier == "toPhoto" {
             let destinationVC = segue.destination as! BorrowEditorViewController
             destinationVC.dataController = self.dataController
+        }
+        if segue.identifier == "starter" {
+            let destinvationVC = segue.destination as! BorrowEditorViewController
+            destinvationVC.dataController = self.dataController
         }
     }
 }
