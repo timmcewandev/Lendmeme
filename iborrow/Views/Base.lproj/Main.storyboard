@@ -214,8 +214,11 @@
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBx-wS-xlC">
-                                            <rect key="frame" x="5" y="15" width="80" height="10"/>
+                                            <rect key="frame" x="5" y="15" width="80" height="21"/>
                                             <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="cUu-cG-Msj"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -228,7 +231,7 @@
                                         <constraint firstItem="ytp-M5-iYO" firstAttribute="top" secondItem="W7t-oB-UT1" secondAttribute="topMargin" constant="-11" id="8VH-mo-v3d"/>
                                         <constraint firstItem="rBx-wS-xlC" firstAttribute="top" secondItem="W7t-oB-UT1" secondAttribute="top" constant="15" id="CnY-jG-5I6"/>
                                         <constraint firstItem="ytp-M5-iYO" firstAttribute="leading" secondItem="W7t-oB-UT1" secondAttribute="leadingMargin" constant="-16" id="KSa-fl-HWz"/>
-                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="rBx-wS-xlC" secondAttribute="bottom" constant="15" id="bog-fc-Zwo"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="rBx-wS-xlC" secondAttribute="bottom" constant="4" id="bog-fc-Zwo"/>
                                         <constraint firstItem="rBx-wS-xlC" firstAttribute="leading" secondItem="W7t-oB-UT1" secondAttribute="leading" constant="5" id="dKQ-in-24V"/>
                                         <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="rBx-wS-xlC" secondAttribute="trailing" constant="250" id="fT8-Uq-abA"/>
                                         <constraint firstItem="ytp-M5-iYO" firstAttribute="centerX" secondItem="W7t-oB-UT1" secondAttribute="centerX" id="uqY-NK-pXD"/>

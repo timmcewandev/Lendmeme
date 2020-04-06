@@ -89,6 +89,7 @@ class BorrowTableViewController: UITableViewController {
         cell.accessoryType = .none
         cell.myDateLabel.backgroundColor = .systemPink
         if imageInfo[indexPath.row].hasBeenReturned == true {
+            cell.myDateLabel.text = "RETURNED 👍"
             cell.myDateLabel.backgroundColor = .systemGreen
         }
         return cell
@@ -128,8 +129,6 @@ class BorrowTableViewController: UITableViewController {
                     self?.dataController.viewContext.refreshAllObjects()
                     if self?.imageInfo.isEmpty == true {
                         self?.performSegue(withIdentifier: "starter", sender: self)
-//                        performSegue(withIdentifier: "starter", sender: self)
-//                        self?.tableView.isHidden = true
                     }
                     self?.tableView.reloadData()
                 }

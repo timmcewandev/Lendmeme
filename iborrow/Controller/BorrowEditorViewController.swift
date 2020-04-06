@@ -137,7 +137,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     func save() {
         toolbar.isHidden = true
         let memedImage = generateMemedImage()
-//        self.navigationController?.navigationBar.isHidden = false
         let borrowInfo = BorrowInfo(topString: topTextOUT.text!, bottomString: bottomTextOUT.text!, originalImage: imageView.image!, borrowImage: memedImage, hasBeenReturned: false)
         let getImageInfo = ImageInfo(context: dataController.viewContext)
         getImageInfo.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)
