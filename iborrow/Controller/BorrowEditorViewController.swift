@@ -5,10 +5,12 @@
 import UIKit
 import Foundation
 import CoreData
+import Contacts
 
 class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     // MARK: - Variables
+    let contact = CNMutableContact()
     let borrow: [BorrowInfo]! = nil
     var dataController: DataController! = nil
 
@@ -116,6 +118,29 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
+         let nameMe = self.topTextOUT.text
+        let makeItProper = (nameMe?.lowercased().capitalized)!
+        let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
+        let store = CNContactStore()
+        do {
+            let predicate = CNContact.predicateForContacts(matchingName: makeItProper)
+            let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch)
+            if !contacts.isEmpty == true {
+                if !contacts[0].phoneNumbers.isEmpty == true {
+                    let phoneNumberFound = contacts[0].phoneNumbers[0].value.stringValue
+                    let alert = UIAlertController(title: "We found a number for \(contacts[0].givenName) \(contacts[0].familyName)", message: "Would you like to use it?", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Sure", style: .default, handler: {[weak self] _ in
+                        let phoneNumber = phoneNumberFound.replacingOccurrences(of: "+1", with: "")
+                        self?.bottomTextOUT.text = phoneNumber
+                        
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        } catch {
+            print("Failed to fetch contact, error: \(error)")
+        }
         resetFrame()
         return false
     }
