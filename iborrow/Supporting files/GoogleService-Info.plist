@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>542977480114-fdbngllvvam29ssv9e7r8rkfo07nrgud.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.542977480114-fdbngllvvam29ssv9e7r8rkfo07nrgud</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBWDpRCwrOxL3-4P7UPAQZLABHHpPoApLA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>542977480114</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mcewantech.www</string>
+	<key>PROJECT_ID</key>
+	<string>lendmeme-bd099</string>
+	<key>STORAGE_BUCKET</key>
+	<string>lendmeme-bd099.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:542977480114:ios:87a6f420ede2c19ef700ab</string>
+	<key>DATABASE_URL</key>
+	<string>https://lendmeme-bd099.firebaseio.com</string>
+</dict>
+</plist>
