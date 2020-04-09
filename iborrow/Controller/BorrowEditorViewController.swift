@@ -13,6 +13,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     let contact = CNMutableContact()
     let borrow: [BorrowInfo]! = nil
     var dataController: DataController! = nil
+    var nameOfBorrower: String?
 
     let borrowTextAttributes: [String : Any] = [
         NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
@@ -119,11 +120,12 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
          let nameMe = self.topTextOUT.text
-        let makeItProper = (nameMe?.lowercased().capitalized)!
+        let nameProperCapitalization = (nameMe?.lowercased().capitalized)!
         let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
         let store = CNContactStore()
+        nameOfBorrower = nameProperCapitalization
         do {
-            let predicate = CNContact.predicateForContacts(matchingName: makeItProper)
+            let predicate = CNContact.predicateForContacts(matchingName: nameProperCapitalization)
             let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch)
             if !contacts.isEmpty == true {
                 if !contacts[0].phoneNumbers.isEmpty == true {
@@ -165,7 +167,12 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         let borrowInfo = BorrowInfo(topString: topTextOUT.text!, bottomString: bottomTextOUT.text!, originalImage: imageView.image!, borrowImage: memedImage, hasBeenReturned: false)
         let getImageInfo = ImageInfo(context: dataController.viewContext)
         getImageInfo.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)
-        getImageInfo.topInfo = borrowInfo.topString
+        if let topName = nameOfBorrower {
+            getImageInfo.topInfo = topName
+        } else {
+           getImageInfo.topInfo = borrowInfo.topString
+        }
+        
         getImageInfo.bottomInfo = borrowInfo.bottomString
         getImageInfo.creationDate = Date()
         getImageInfo.hasBeenReturned = false

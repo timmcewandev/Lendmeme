@@ -128,7 +128,7 @@ class BorrowTableViewController: UITableViewController {
                     self?.tableView.deleteRows(at: [indexPath], with: .bottom)
                     self?.dataController.viewContext.refreshAllObjects()
                     if self?.imageInfo.isEmpty == true {
-                        self?.performSegue(withIdentifier: "starter", sender: self)
+                        self?.performSegue(withIdentifier: "toPhoto", sender: self)
                     }
                     self?.tableView.reloadData()
                 }
