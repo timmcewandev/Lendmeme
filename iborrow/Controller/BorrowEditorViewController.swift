@@ -130,7 +130,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
             if !contacts.isEmpty == true {
                 if !contacts[0].phoneNumbers.isEmpty == true {
                     let phoneNumberFound = contacts[0].phoneNumbers[0].value.stringValue
-                    let alert = UIAlertController(title: "We found a number for \(contacts[0].givenName) \(contacts[0].familyName)", message: "Would you like to use it?", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "We found a phone number for \(contacts[0].givenName) \(contacts[0].familyName)", message: "Would you like to use it?", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
                     alert.addAction(UIAlertAction(title: "Sure", style: .default, handler: {[weak self] _ in
                         let phoneNumber = phoneNumberFound.replacingOccurrences(of: "+1", with: "")
