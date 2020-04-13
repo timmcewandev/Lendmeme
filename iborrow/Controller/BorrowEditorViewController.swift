@@ -26,6 +26,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var shareOUT: UIBarButtonItem!
     @IBOutlet weak var bottomTextOUT: UITextField!
     @IBOutlet weak var topTextOUT: UITextField!
+    @IBOutlet weak var titleTextOUT: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cancelOut: UIBarButtonItem!
     
@@ -34,8 +35,9 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         configureShareOut(isEnabled: false)
-        prepareTextField(textField: topTextOUT, name: "Enter name")
-        prepareTextField(textField: bottomTextOUT, name: "Enter phone#")
+        prepareTextField(textField: topTextOUT, name: " Borrowers name")
+        prepareTextField(textField: bottomTextOUT, name: "Phone number")
+        prepareTextField(textField: titleTextOUT, name: "Item title")
         self.tabBarController?.tabBar.isHidden = true
         bottomTextOUT.inputAccessoryView = accessoryView()
         bottomTextOUT.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
@@ -154,6 +156,9 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         if bottomTextOUT.text == "" {
             bottomTextOUT.placeholder = ""
         }
+        if titleTextOUT.text == "" {
+            titleTextOUT.placeholder = ""
+        }
         UIGraphicsBeginImageContext(view.frame.size)
         view.drawHierarchy(in: view.frame, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
@@ -164,7 +169,8 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     func save() {
         toolbar.isHidden = true
         let memedImage = generateMemedImage()
-        let borrowInfo = BorrowInfo(topString: topTextOUT.text!, bottomString: bottomTextOUT.text!, originalImage: imageView.image!, borrowImage: memedImage, hasBeenReturned: false)
+        let borrowInfo = BorrowInfo(topString: topTextOUT.text!, bottomString: bottomTextOUT.text!, titleString: titleTextOUT.text!, originalImage: imageView.image!, borrowImage: memedImage, hasBeenReturned: false)
+
         let getImageInfo = ImageInfo(context: dataController.viewContext)
         getImageInfo.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)
         if let topName = nameOfBorrower {
@@ -172,7 +178,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         } else {
            getImageInfo.topInfo = borrowInfo.topString
         }
-        
+        getImageInfo.titleinfo = borrowInfo.titleString
         getImageInfo.bottomInfo = borrowInfo.bottomString
         getImageInfo.creationDate = Date()
         getImageInfo.hasBeenReturned = false

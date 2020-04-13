@@ -65,22 +65,35 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" keyboardType="numberPad" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                             </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="cho-jd-ylO">
+                                <rect key="frame" x="41" y="209" width="293" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="ghK-jd-0Yv"/>
+                                    <constraint firstAttribute="width" constant="293" id="vhN-OM-urf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" keyboardType="alphabet"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="PMx-xr-uw1" firstAttribute="top" secondItem="wfM-K2-jvl" secondAttribute="bottom" constant="-198" id="2vQ-bd-55N"/>
                             <constraint firstItem="wfM-K2-jvl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3S7-XR-42L"/>
+                            <constraint firstItem="cho-jd-ylO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="41" id="3dk-2v-Qs1"/>
                             <constraint firstItem="wfM-K2-jvl" firstAttribute="top" secondItem="wRM-Rx-5QT" secondAttribute="bottom" constant="-181" id="3jb-Fa-qTl"/>
                             <constraint firstItem="wfM-K2-jvl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6vF-HU-1mk"/>
                             <constraint firstItem="wfM-K2-jvl" firstAttribute="top" secondItem="wRM-Rx-5QT" secondAttribute="bottom" constant="-181" id="7PI-H5-Ulu"/>
                             <constraint firstItem="wRM-Rx-5QT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="25" id="7uh-Bk-ajK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wRM-Rx-5QT" secondAttribute="trailing" constant="25" id="8Ok-ru-NIG"/>
+                            <constraint firstItem="cho-jd-ylO" firstAttribute="centerX" secondItem="wfM-K2-jvl" secondAttribute="centerX" id="BwJ-X6-RX2"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PMx-xr-uw1" secondAttribute="trailing" constant="41" id="CZ4-Ip-Beh"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="top" secondItem="PMx-xr-uw1" secondAttribute="bottom" constant="90" id="EbS-VE-byw"/>
                             <constraint firstItem="wRM-Rx-5QT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="90" id="MT1-vD-NRH"/>
                             <constraint firstItem="PMx-xr-uw1" firstAttribute="top" secondItem="wfM-K2-jvl" secondAttribute="bottom" constant="-198" id="Mzi-mJ-k6e"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cho-jd-ylO" secondAttribute="trailing" constant="41" id="Rkt-ub-KeM"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SkE-M1-M9z"/>
                             <constraint firstItem="wRM-Rx-5QT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TTw-1g-hnt"/>
+                            <constraint firstItem="cho-jd-ylO" firstAttribute="top" secondItem="wRM-Rx-5QT" secondAttribute="bottom" constant="28" id="cux-8p-FXT"/>
                             <constraint firstItem="PMx-xr-uw1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="41" id="gOA-ul-6Wf"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="top" secondItem="PMx-xr-uw1" secondAttribute="bottom" constant="90" id="qOU-ha-Axm"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="r1T-tF-x8D"/>
@@ -95,6 +108,7 @@
                         <outlet property="cancelOut" destination="IYC-5o-RPP" id="czF-Dv-4iJ"/>
                         <outlet property="imageView" destination="wfM-K2-jvl" id="5EF-7V-CfE"/>
                         <outlet property="shareOUT" destination="mST-PZ-z3s" id="DVi-X2-6YO"/>
+                        <outlet property="titleTextOUT" destination="cho-jd-ylO" id="Mef-KU-zgg"/>
                         <outlet property="toolbar" destination="Lua-XB-jXr" id="ffk-ar-eHe"/>
                         <outlet property="topTextOUT" destination="wRM-Rx-5QT" id="oQw-WX-yQx"/>
                     </connections>

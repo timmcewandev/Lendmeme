@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ImageInfo" representedClassName="ImageInfo" syncable="YES" codeGenerationType="class">
         <attribute name="bottomInfo" optional="YES" attributeType="String"/>
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="hasBeenReturned" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="titleinfo" optional="YES" attributeType="String"/>
         <attribute name="topInfo" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="ImageInfo" positionX="-54" positionY="-9" width="128" height="118"/>
+        <element name="ImageInfo" positionX="-54" positionY="-9" width="128" height="133"/>
     </elements>
 </model>
