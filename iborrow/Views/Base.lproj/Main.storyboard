@@ -257,7 +257,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="S2G-nb-b94" kind="show" identifier="toFirst" id="Pk7-8E-h37"/>
-                        <segue destination="BYZ-38-t0r" kind="push" identifier="starter" animates="NO" id="pb9-1S-BII"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="starter" animates="NO" id="pb9-1S-BII"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uSN-Kq-cRW" userLabel="First Responder" sceneMemberID="firstResponder"/>
