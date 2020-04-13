@@ -6,6 +6,7 @@ import UIKit
 import Foundation
 import CoreData
 import Contacts
+import AVFoundation
 
 class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
@@ -71,7 +72,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     @IBAction func addCamera(_ sender: Any) {
-        camera()
+        checkCameraPermissions()
     }
     
     @IBAction func cancelBTN(_ sender: Any) {
@@ -122,6 +123,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         if textField == topTextOUT {
+            let status = CNContactStore.authorizationStatus(for: .contacts)
              let nameMe = self.topTextOUT.text
             let nameProperCapitalization = (nameMe?.lowercased().capitalized)!
             let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
@@ -134,12 +136,12 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
                     if !contacts[0].phoneNumbers.isEmpty == true {
                         let phoneNumberFound = contacts[0].phoneNumbers[0].value.stringValue
                         let alert = UIAlertController(title: "We found a phone number for \(contacts[0].givenName) \(contacts[0].familyName)", message: "Would you like to use it?", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
                         alert.addAction(UIAlertAction(title: "Sure", style: .default, handler: {[weak self] _ in
                             let phoneNumber = phoneNumberFound.replacingOccurrences(of: "+1", with: "")
                             self?.bottomTextOUT.text = phoneNumber
                             
                         }))
+                        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
@@ -190,6 +192,30 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         
         navigationController?.popViewController(animated: true)
     }
+    
+    func checkCameraPermissions() {
+        let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+        switch authStatus {
+        case .authorized:
+            camera()
+        case .denied:
+            alertPromptToAllowCameraAccessViaSetting()
+        default:
+            camera()
+        }
+    }
+
+    func alertPromptToAllowCameraAccessViaSetting() {
+        let alert = UIAlertController(title: "", message: "Flip the switch on camera. So you can take pictures of items. 😀", preferredStyle: UIAlertControllerStyle.alert)
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default))
+        alert.addAction(UIAlertAction(title: "Settings", style: .cancel) { (alert) -> Void in
+            UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
+        })
+        present(alert, animated: true)
+    }
+    
+    
     func configureCancelOut(isEnabled: Bool){
         cancelOut.isEnabled = isEnabled
     }
