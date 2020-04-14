@@ -66,7 +66,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" keyboardType="numberPad" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="cho-jd-ylO">
-                                <rect key="frame" x="41" y="209" width="293" height="47"/>
+                                <rect key="frame" x="41" y="79" width="293" height="47"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="47" id="ghK-jd-0Yv"/>
                                     <constraint firstAttribute="width" constant="293" id="vhN-OM-urf"/>
@@ -93,7 +93,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cho-jd-ylO" secondAttribute="trailing" constant="41" id="Rkt-ub-KeM"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SkE-M1-M9z"/>
                             <constraint firstItem="wRM-Rx-5QT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TTw-1g-hnt"/>
-                            <constraint firstItem="cho-jd-ylO" firstAttribute="top" secondItem="wRM-Rx-5QT" secondAttribute="bottom" constant="28" id="cux-8p-FXT"/>
+                            <constraint firstItem="cho-jd-ylO" firstAttribute="top" secondItem="wRM-Rx-5QT" secondAttribute="bottom" constant="-102" id="cux-8p-FXT"/>
                             <constraint firstItem="PMx-xr-uw1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="41" id="gOA-ul-6Wf"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="top" secondItem="PMx-xr-uw1" secondAttribute="bottom" constant="90" id="qOU-ha-Axm"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="r1T-tF-x8D"/>
@@ -207,6 +207,21 @@
             </objects>
             <point key="canvasLocation" x="1696.8" y="785.75712143928047"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="1Lf-4s-VzY">
+            <objects>
+                <viewController id="eqI-HM-1qv" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GdM-t9-GID">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="qog-ck-Taf"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kG1-xa-b0F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="662" y="-610"/>
+        </scene>
         <!--Borrow Table View Controller-->
         <scene sceneID="X16-i3-T2m">
             <objects>
@@ -263,7 +278,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="nPJ-8i-Xg9">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="j2l-nd-Mkh">
+                        <barButtonItem key="rightBarButtonItem" title="➕ add new borrower" style="plain" id="j2l-nd-Mkh">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="show" identifier="toPhoto" id="DJZ-TF-UhI"/>
                             </connections>
