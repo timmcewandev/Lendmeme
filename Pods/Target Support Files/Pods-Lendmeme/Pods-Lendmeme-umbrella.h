@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_iborrowVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_iborrowVersionString[];
+FOUNDATION_EXPORT double Pods_LendmemeVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_LendmemeVersionString[];
 
