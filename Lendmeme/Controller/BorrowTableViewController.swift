@@ -8,20 +8,46 @@ import FittedSheets
 import CoreData
 //import GoogleMobileAds
 
-class BorrowTableViewController: UITableViewController {
+class BorrowTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: - Variables
     var dataController:DataController!
     var member: UIImage?
     var imageInfo: [ImageInfo] = []
+    var filteredData: [ImageInfo] = []
 //    var bannerView: GADBannerView!
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    // This method updates filteredData based on the text in the Search Box
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        for i in filteredData {
+            if searchText.lowercased() == i.titleinfo?.lowercased() {
+                imageInfo = [i]
+            } else if searchText == "" {
+                imageInfo = filteredData
+            }
+        }
+        tableView.reloadData()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        imageInfo = filteredData
+        tableView.reloadData()
+        searchBar.resignFirstResponder()
+    }
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reloadInputViews()
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
 //        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
         
 //        addBannerViewToView(bannerView)
@@ -59,6 +85,7 @@ class BorrowTableViewController: UITableViewController {
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let result = try? dataController.viewContext.fetch(fetchRequest){
             imageInfo = result
+            filteredData = imageInfo
             self.tableView.isHidden = false
         }
         

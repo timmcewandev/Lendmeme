@@ -47,15 +47,6 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="wRM-Rx-5QT">
-                                <rect key="frame" x="41" y="134" width="293" height="47"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="47" id="Dqr-Gr-eLM"/>
-                                    <constraint firstAttribute="width" constant="293" id="f5V-fX-9k8"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" keyboardType="alphabet"/>
-                            </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone#" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="PMx-xr-uw1">
                                 <rect key="frame" x="41" y="469" width="293" height="64"/>
                                 <constraints>
@@ -74,26 +65,35 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" keyboardType="alphabet"/>
                             </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="wRM-Rx-5QT">
+                                <rect key="frame" x="41" y="150" width="293" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="Dqr-Gr-eLM"/>
+                                    <constraint firstAttribute="width" constant="293" id="f5V-fX-9k8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" keyboardType="alphabet"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="PMx-xr-uw1" firstAttribute="top" secondItem="wfM-K2-jvl" secondAttribute="bottom" constant="-198" id="2vQ-bd-55N"/>
                             <constraint firstItem="wfM-K2-jvl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3S7-XR-42L"/>
                             <constraint firstItem="cho-jd-ylO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="41" id="3dk-2v-Qs1"/>
-                            <constraint firstItem="wfM-K2-jvl" firstAttribute="top" secondItem="wRM-Rx-5QT" secondAttribute="bottom" constant="-181" id="3jb-Fa-qTl"/>
+                            <constraint firstItem="wfM-K2-jvl" firstAttribute="top" secondItem="wRM-Rx-5QT" secondAttribute="bottom" constant="-197" id="3jb-Fa-qTl"/>
                             <constraint firstItem="wfM-K2-jvl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6vF-HU-1mk"/>
-                            <constraint firstItem="wfM-K2-jvl" firstAttribute="top" secondItem="wRM-Rx-5QT" secondAttribute="bottom" constant="-181" id="7PI-H5-Ulu"/>
+                            <constraint firstItem="wfM-K2-jvl" firstAttribute="top" secondItem="wRM-Rx-5QT" secondAttribute="bottom" constant="-197" id="7PI-H5-Ulu"/>
                             <constraint firstItem="wRM-Rx-5QT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="25" id="7uh-Bk-ajK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wRM-Rx-5QT" secondAttribute="trailing" constant="25" id="8Ok-ru-NIG"/>
                             <constraint firstItem="cho-jd-ylO" firstAttribute="centerX" secondItem="wfM-K2-jvl" secondAttribute="centerX" id="BwJ-X6-RX2"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PMx-xr-uw1" secondAttribute="trailing" constant="41" id="CZ4-Ip-Beh"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="top" secondItem="PMx-xr-uw1" secondAttribute="bottom" constant="90" id="EbS-VE-byw"/>
-                            <constraint firstItem="wRM-Rx-5QT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="90" id="MT1-vD-NRH"/>
+                            <constraint firstItem="wRM-Rx-5QT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="106" id="MT1-vD-NRH"/>
                             <constraint firstItem="PMx-xr-uw1" firstAttribute="top" secondItem="wfM-K2-jvl" secondAttribute="bottom" constant="-198" id="Mzi-mJ-k6e"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cho-jd-ylO" secondAttribute="trailing" constant="41" id="Rkt-ub-KeM"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SkE-M1-M9z"/>
                             <constraint firstItem="wRM-Rx-5QT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TTw-1g-hnt"/>
-                            <constraint firstItem="cho-jd-ylO" firstAttribute="top" secondItem="wRM-Rx-5QT" secondAttribute="bottom" constant="-119" id="cux-8p-FXT"/>
+                            <constraint firstItem="cho-jd-ylO" firstAttribute="top" secondItem="wRM-Rx-5QT" secondAttribute="bottom" constant="-135" id="cux-8p-FXT"/>
                             <constraint firstItem="PMx-xr-uw1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="41" id="gOA-ul-6Wf"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="top" secondItem="PMx-xr-uw1" secondAttribute="bottom" constant="90" id="qOU-ha-Axm"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="r1T-tF-x8D"/>
@@ -230,9 +230,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="C1q-Th-2rs">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="myCell" rowHeight="40" id="KB0-YQ-Qye" customClass="BorrowTableViewCell" customModule="Lendmeme" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KB0-YQ-Qye" id="W7t-oB-UT1">
                                     <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
@@ -285,6 +290,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="C1q-Th-2rs" id="ag6-YC-HQe"/>
                         <segue destination="S2G-nb-b94" kind="show" identifier="toFirst" id="Pk7-8E-h37"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="starter" animates="NO" id="pb9-1S-BII"/>
                     </connections>
