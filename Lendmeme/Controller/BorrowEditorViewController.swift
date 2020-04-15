@@ -7,15 +7,17 @@ import Foundation
 import CoreData
 import Contacts
 import AVFoundation
+import BubbleTransition
 
-class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIViewControllerTransitioningDelegate {
     
     // MARK: - Variables
     let contact = CNMutableContact()
     let borrow: [BorrowInfo]! = nil
     var dataController: DataController! = nil
     var nameOfBorrower: String?
-
+    let transition = BubbleTransition()
+    
     let borrowTextAttributes: [String : Any] = [
         NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
         NSAttributedStringKey.strokeWidth.rawValue : -3.0,
@@ -31,6 +33,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cancelOut: UIBarButtonItem!
     @IBOutlet weak var insertImageContainer: UIStackView!
+    @IBOutlet weak var cameraButton: UIButton!
     
     
     // MARK: Lifecycle
@@ -103,10 +106,31 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
             let myPickerController = UIImagePickerController()
             myPickerController.delegate = self
             myPickerController.sourceType = .camera
+            myPickerController.transitioningDelegate = self
+            myPickerController.modalPresentationCapturesStatusBarAppearance = true
+            myPickerController.modalPresentationStyle = .custom
             present(myPickerController, animated: true, completion: nil)
         }
         
     }
+    
+    // MARK: UIViewControllerTransitioningDelegate for Bubble
+    
+    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .present
+        transition.startingPoint = cameraButton.center
+        transition.bubbleColor = UIColor.black
+        return transition
+    }
+    
+    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .dismiss
+        transition.startingPoint = cameraButton.center
+        transition.bubbleColor = UIColor.black
+        return transition
+    }
+    
+    // MARK: - End of Bubble Animation
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
@@ -131,10 +155,10 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
-
+        
         if textField == topTextOUT {
             let status = CNContactStore.authorizationStatus(for: .contacts)
-             let nameMe = self.topTextOUT.text
+            let nameMe = self.topTextOUT.text
             let nameProperCapitalization = (nameMe?.lowercased().capitalized)!
             let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
             let store = CNContactStore()
@@ -158,7 +182,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
-
+                
             } catch {
                 print("Failed to fetch contact, error: \(error)")
             }
@@ -198,13 +222,13 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         toolbar.isHidden = true
         let memedImage = generateMemedImage()
         let borrowInfo = BorrowInfo(topString: topTextOUT.text!, bottomString: bottomTextOUT.text!, titleString: titleTextOUT.text!, originalImage: imageView.image!, borrowImage: memedImage, hasBeenReturned: false)
-
+        
         let getImageInfo = ImageInfo(context: dataController.viewContext)
         getImageInfo.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)
         if let topName = nameOfBorrower {
             getImageInfo.topInfo = topName
         } else {
-           getImageInfo.topInfo = borrowInfo.topString
+            getImageInfo.topInfo = borrowInfo.topString
         }
         getImageInfo.titleinfo = borrowInfo.titleString
         getImageInfo.bottomInfo = borrowInfo.bottomString
@@ -227,10 +251,10 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
             camera()
         }
     }
-
+    
     func alertPromptToAllowCameraAccessViaSetting() {
         let alert = UIAlertController(title: "", message: "Flip the switch on camera. So you can take pictures of items. 😀", preferredStyle: UIAlertControllerStyle.alert)
-
+        
         alert.addAction(UIAlertAction(title: "Cancel", style: .default))
         alert.addAction(UIAlertAction(title: "Settings", style: .cancel) { (alert) -> Void in
             UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
@@ -254,7 +278,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
             [NSAttributedStringKey.foregroundColor: UIColor.white,
              NSAttributedStringKey.strokeWidth : -3.0,
              NSAttributedStringKey.strokeColor: UIColor.black
-            ])
+        ])
         textField.defaultTextAttributes = borrowTextAttributes
         textField.textAlignment = .center
         textField.delegate = self
@@ -311,7 +335,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     func formattedNumber(number: String) -> String {
         let cleanPhoneNumber = number.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
         let mask = "(XXX) XXX-XXXX"
-
+        
         var result = ""
         var index = cleanPhoneNumber.startIndex
         for ch in mask where index < cleanPhoneNumber.endIndex {

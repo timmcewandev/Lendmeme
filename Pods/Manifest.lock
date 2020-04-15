@@ -1,4 +1,5 @@
 PODS:
+  - BubbleTransition (3.2.0)
   - Firebase/Analytics (6.20.0):
     - Firebase/Core
   - Firebase/Core (6.20.0):
@@ -118,6 +119,7 @@ PODS:
   - Protobuf (3.11.4)
 
 DEPENDENCIES:
+  - BubbleTransition (~> 3.2.0)
   - Firebase/Analytics
   - Firebase/Crashlytics
   - Firebase/Performance
@@ -126,6 +128,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - BubbleTransition
     - Firebase
     - FirebaseABTesting
     - FirebaseAnalytics
@@ -151,6 +154,7 @@ SPEC REPOS:
     - Protobuf
 
 SPEC CHECKSUMS:
+  BubbleTransition: 2f112cc19772d9ab199bc850de92f5eb34744bce
   Firebase: fe7f74012742ab403451dd283e6909b8f1fb348a
   FirebaseABTesting: 821a3a3e4a145987e80fee3657c4de1cb9adf693
   FirebaseAnalytics: 572e467f3d977825266e8ccd52674aa3e6f47eac
@@ -175,6 +179,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
 
-PODFILE CHECKSUM: 0ea5e913cef0a90c4f19cfc9ca34066e18fcbe8f
+PODFILE CHECKSUM: 40fcb1f39272c73a1d87eaf0dc51af3486349f7f
 
 COCOAPODS: 1.9.0

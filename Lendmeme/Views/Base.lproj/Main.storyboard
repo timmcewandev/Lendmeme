@@ -66,15 +66,15 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="alphabet" returnKeyType="next"/>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cEL-3L-VHw">
-                                <rect key="frame" x="105" y="298" width="165.5" height="71.5"/>
+                                <rect key="frame" x="106.5" y="300" width="162" height="67"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insert Image Here 🌃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9a-2m-lYN">
-                                        <rect key="frame" x="0.0" y="0.0" width="165.5" height="23.5"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="162" height="19"/>
+                                        <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="FeO-I2-KPi">
-                                        <rect key="frame" x="40" y="23.5" width="85" height="48"/>
+                                        <rect key="frame" x="38.5" y="19" width="85" height="48"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KyE-NW-OHe">
                                                 <rect key="frame" x="0.0" y="0.0" width="35" height="48"/>
@@ -135,6 +135,7 @@
                     <navigationItem key="navigationItem" id="UdA-bB-R1T"/>
                     <connections>
                         <outlet property="bottomTextOUT" destination="PMx-xr-uw1" id="za2-Do-dxn"/>
+                        <outlet property="cameraButton" destination="GYI-Os-X7S" id="RbF-FM-Ic0"/>
                         <outlet property="cancelOut" destination="IYC-5o-RPP" id="czF-Dv-4iJ"/>
                         <outlet property="imageView" destination="wfM-K2-jvl" id="5EF-7V-CfE"/>
                         <outlet property="insertImageContainer" destination="cEL-3L-VHw" id="pQD-Y3-Lu8"/>

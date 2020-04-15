@@ -9,6 +9,7 @@ pod 'Firebase/Analytics'
 pod 'Firebase/Crashlytics'
 pod 'Firebase/Performance'
 pod 'Google-Mobile-Ads-SDK'
-  # Pods for iborrow
+pod 'BubbleTransition', '~> 3.2.0'
+  # Pods for Lendmeme
 
 end
