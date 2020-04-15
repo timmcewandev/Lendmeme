@@ -21,7 +21,7 @@ class BorrowTableViewController: UITableViewController, UISearchBarDelegate {
     // This method updates filteredData based on the text in the Search Box
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         for i in filteredData {
-            if searchText.lowercased() == i.titleinfo?.lowercased() {
+            if searchText.lowercased() == i.titleinfo?.lowercased() && i.titleinfo?.isEmpty == false {
                 imageInfo = [i]
             } else if searchText == "" {
                 imageInfo = filteredData
