@@ -15,18 +15,23 @@ class BorrowTableViewController: UITableViewController, UISearchBarDelegate {
     var member: UIImage?
     var imageInfo: [ImageInfo] = []
     var filteredData: [ImageInfo] = []
-//    var bannerView: GADBannerView!
+    //    var bannerView: GADBannerView!
     
     @IBOutlet weak var searchBar: UISearchBar!
     // This method updates filteredData based on the text in the Search Box
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        var newData: [ImageInfo] = []
         for i in filteredData {
             if searchText.lowercased() == i.titleinfo?.lowercased() && i.titleinfo?.isEmpty == false {
-                imageInfo = [i]
-            } else if searchText == "" {
-                imageInfo = filteredData
+                newData.append(i)
             }
         }
+        if newData.isEmpty == true || searchText == "" {
+            imageInfo = filteredData
+        } else {
+            imageInfo = newData
+        }
+        
         tableView.reloadData()
     }
     
@@ -37,9 +42,10 @@ class BorrowTableViewController: UITableViewController, UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
         searchBar.text = ""
+        searchBar.resignFirstResponder()
         imageInfo = filteredData
         tableView.reloadData()
-        searchBar.resignFirstResponder()
+        
     }
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -48,34 +54,34 @@ class BorrowTableViewController: UITableViewController, UISearchBarDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
-//        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        //        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
         
-//        addBannerViewToView(bannerView)
-//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-//        bannerView.rootViewController = self
-//        bannerView.load(GADRequest())
+        //        addBannerViewToView(bannerView)
+        //        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        //        bannerView.rootViewController = self
+        //        bannerView.load(GADRequest())
     }
     
-//    func addBannerViewToView(_ bannerView: GADBannerView) {
-//        bannerView.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(bannerView)
-//        view.addConstraints(
-//            [NSLayoutConstraint(item: bannerView,
-//                                attribute: .bottom,
-//                                relatedBy: .equal,
-//                                toItem: bottomLayoutGuide,
-//                                attribute: .top,
-//                                multiplier: 1,
-//                                constant: 0),
-//             NSLayoutConstraint(item: bannerView,
-//                                attribute: .centerX,
-//                                relatedBy: .equal,
-//                                toItem: view,
-//                                attribute: .centerX,
-//                                multiplier: 1,
-//                                constant: 0)
-//        ])
-//    }
+    //    func addBannerViewToView(_ bannerView: GADBannerView) {
+    //        bannerView.translatesAutoresizingMaskIntoConstraints = false
+    //        view.addSubview(bannerView)
+    //        view.addConstraints(
+    //            [NSLayoutConstraint(item: bannerView,
+    //                                attribute: .bottom,
+    //                                relatedBy: .equal,
+    //                                toItem: bottomLayoutGuide,
+    //                                attribute: .top,
+    //                                multiplier: 1,
+    //                                constant: 0),
+    //             NSLayoutConstraint(item: bannerView,
+    //                                attribute: .centerX,
+    //                                relatedBy: .equal,
+    //                                toItem: view,
+    //                                attribute: .centerX,
+    //                                multiplier: 1,
+    //                                constant: 0)
+    //        ])
+    //    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -93,11 +99,12 @@ class BorrowTableViewController: UITableViewController, UISearchBarDelegate {
             performSegue(withIdentifier: "starter", sender: self)
         }
         self.navigationController?.isNavigationBarHidden = false
-
+        
         self.tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("Image counter = \(imageInfo.count)")
         return imageInfo.count
     }
     

@@ -58,6 +58,13 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
                 configureCancelOut(isEnabled: false)
             }
         }
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
+        view.addGestureRecognizer(tapGesture)
+    }
+    @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        topTextOUT.resignFirstResponder()
+        titleTextOUT.resignFirstResponder()
+        bottomTextOUT.resignFirstResponder()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -124,6 +131,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
+
         if textField == topTextOUT {
             let status = CNContactStore.authorizationStatus(for: .contacts)
              let nameMe = self.topTextOUT.text
@@ -141,19 +149,32 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
                         alert.addAction(UIAlertAction(title: "Sure", style: .default, handler: {[weak self] _ in
                             let phoneNumber = phoneNumberFound.replacingOccurrences(of: "+1", with: "")
                             self?.bottomTextOUT.text = phoneNumber
+                            self?.checkIfNextTextFieldIsEmpty(focusedTextField: (self?.topTextOUT)!, toNextTextField: (self?.titleTextOUT)!)
                             
                         }))
-                        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+                        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { [weak self] _ in
+                            self?.checkIfNextTextFieldIsEmpty(focusedTextField: (self?.topTextOUT)!, toNextTextField: (self?.titleTextOUT)!)
+                        }))
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
+
             } catch {
                 print("Failed to fetch contact, error: \(error)")
             }
         }
-
+        checkIfNextTextFieldIsEmpty(focusedTextField: titleTextOUT, toNextTextField: topTextOUT)
+        checkIfNextTextFieldIsEmpty(focusedTextField: topTextOUT, toNextTextField: titleTextOUT)
+        
         resetFrame()
         return false
+    }
+    
+    func checkIfNextTextFieldIsEmpty (focusedTextField: UITextField, toNextTextField: UITextField) {
+        if focusedTextField.returnKeyType == .next && toNextTextField.text?.isEmpty == true {
+            focusedTextField.resignFirstResponder()
+            toNextTextField.becomeFirstResponder()
+        }
     }
     
     func generateMemedImage() -> UIImage {
