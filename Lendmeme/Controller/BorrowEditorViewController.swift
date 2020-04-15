@@ -30,13 +30,14 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var titleTextOUT: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cancelOut: UIBarButtonItem!
+    @IBOutlet weak var insertImageContainer: UIStackView!
     
     
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureShareOut(isEnabled: false)
-        prepareTextField(textField: topTextOUT, name: " Borrowers name")
+        prepareTextField(textField: topTextOUT, name: "Borrower name")
         prepareTextField(textField: bottomTextOUT, name: "Phone number")
         prepareTextField(textField: titleTextOUT, name: "Item title")
         self.tabBarController?.tabBar.isHidden = true
@@ -104,6 +105,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.contentMode = .scaleAspectFit
             imageView.image = pickedImage
+            insertImageContainer.isHidden = true
             self.configureShareOut(isEnabled: true)
         }
         dismiss(animated: true, completion: nil)

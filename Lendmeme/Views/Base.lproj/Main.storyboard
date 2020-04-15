@@ -16,17 +16,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wfM-K2-jvl">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wfM-K2-jvl">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lua-XB-jXr">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem title="Album" id="guk-xA-ioQ">
-                                        <connections>
-                                            <action selector="pickedPhoto:" destination="BYZ-38-t0r" id="Jy0-4l-p2g"/>
-                                        </connections>
-                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="eGV-wh-qg0"/>
                                     <barButtonItem systemItem="cancel" id="IYC-5o-RPP">
                                         <connections>
@@ -40,11 +36,6 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="XqM-zr-Ydw"/>
-                                    <barButtonItem systemItem="camera" id="fpO-n3-hJY">
-                                        <connections>
-                                            <action selector="addCamera:" destination="BYZ-38-t0r" id="tsz-rb-POs"/>
-                                        </connections>
-                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone#" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="PMx-xr-uw1">
@@ -74,6 +65,43 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" keyboardType="alphabet"/>
                             </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cEL-3L-VHw">
+                                <rect key="frame" x="118" y="298" width="139" height="71.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insert Image Here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9a-2m-lYN">
+                                        <rect key="frame" x="0.0" y="0.0" width="139" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="FeO-I2-KPi">
+                                        <rect key="frame" x="27" y="23.5" width="85" height="48"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KyE-NW-OHe">
+                                                <rect key="frame" x="0.0" y="0.0" width="35" height="48"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                                <state key="normal" image="photo" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="regular"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="pickedPhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hf8-aF-dbx"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GYI-Os-X7S">
+                                                <rect key="frame" x="50" y="0.0" width="35" height="48"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                                <state key="normal" image="camera" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="regular"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="addCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vXR-KU-gra"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -89,12 +117,14 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PMx-xr-uw1" secondAttribute="trailing" constant="41" id="CZ4-Ip-Beh"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="top" secondItem="PMx-xr-uw1" secondAttribute="bottom" constant="90" id="EbS-VE-byw"/>
                             <constraint firstItem="wRM-Rx-5QT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="106" id="MT1-vD-NRH"/>
+                            <constraint firstItem="cEL-3L-VHw" firstAttribute="centerY" secondItem="wfM-K2-jvl" secondAttribute="centerY" id="Mbb-Rq-Bwg"/>
                             <constraint firstItem="PMx-xr-uw1" firstAttribute="top" secondItem="wfM-K2-jvl" secondAttribute="bottom" constant="-198" id="Mzi-mJ-k6e"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cho-jd-ylO" secondAttribute="trailing" constant="41" id="Rkt-ub-KeM"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SkE-M1-M9z"/>
                             <constraint firstItem="wRM-Rx-5QT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TTw-1g-hnt"/>
                             <constraint firstItem="cho-jd-ylO" firstAttribute="top" secondItem="wRM-Rx-5QT" secondAttribute="bottom" constant="-135" id="cux-8p-FXT"/>
                             <constraint firstItem="PMx-xr-uw1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="41" id="gOA-ul-6Wf"/>
+                            <constraint firstItem="cEL-3L-VHw" firstAttribute="centerX" secondItem="wfM-K2-jvl" secondAttribute="centerX" id="hKG-hL-Sqw"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="top" secondItem="PMx-xr-uw1" secondAttribute="bottom" constant="90" id="qOU-ha-Axm"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="r1T-tF-x8D"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="s6H-j1-Mcl"/>
@@ -107,6 +137,7 @@
                         <outlet property="bottomTextOUT" destination="PMx-xr-uw1" id="za2-Do-dxn"/>
                         <outlet property="cancelOut" destination="IYC-5o-RPP" id="czF-Dv-4iJ"/>
                         <outlet property="imageView" destination="wfM-K2-jvl" id="5EF-7V-CfE"/>
+                        <outlet property="insertImageContainer" destination="cEL-3L-VHw" id="pQD-Y3-Lu8"/>
                         <outlet property="shareOUT" destination="mST-PZ-z3s" id="DVi-X2-6YO"/>
                         <outlet property="titleTextOUT" destination="cho-jd-ylO" id="Mef-KU-zgg"/>
                         <outlet property="toolbar" destination="Lua-XB-jXr" id="ffk-ar-eHe"/>
@@ -304,6 +335,8 @@
         <segue reference="pb9-1S-BII"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="camera" catalog="system" width="128" height="96"/>
+        <image name="photo" catalog="system" width="128" height="93"/>
         <image name="tabBarItem:MBy-Zj-Hhw:image" width="30" height="30">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
