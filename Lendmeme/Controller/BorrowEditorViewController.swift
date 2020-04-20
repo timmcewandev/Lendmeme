@@ -40,9 +40,9 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         configureShareOut(isEnabled: false)
-        prepareTextField(textField: topTextOUT, name: "Borrower name")
-        prepareTextField(textField: bottomTextOUT, name: "Phone number")
-        prepareTextField(textField: titleTextOUT, name: "Item title")
+        prepareTextField(textField: topTextOUT, name: "Add persons name")
+        prepareTextField(textField: bottomTextOUT, name: "Add phone")
+        prepareTextField(textField: titleTextOUT, name: "Add title")
         self.tabBarController?.tabBar.isHidden = true
         bottomTextOUT.inputAccessoryView = accessoryView()
         bottomTextOUT.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
@@ -94,6 +94,12 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     @IBAction func share(sender: AnyObject) {
         self.save()
     }
+    
+    @IBAction func OnboardingPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "onboarding", sender: self)
+        
+    }
+    
     
     // MARK: Functions
     func pick(sourceType: UIImagePickerControllerSourceType){
@@ -211,6 +217,10 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         if titleTextOUT.text == "" {
             titleTextOUT.placeholder = ""
         }
+//        titleTextOUT.borderStyle = .none
+//        topTextOUT.borderStyle = .none
+//        bottomTextOUT.borderStyle = .none
+        
         UIGraphicsBeginImageContext(view.frame.size)
         view.drawHierarchy(in: view.frame, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!

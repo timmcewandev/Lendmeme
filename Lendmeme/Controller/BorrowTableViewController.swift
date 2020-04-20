@@ -136,6 +136,7 @@ class BorrowTableViewController: UITableViewController, UISearchBarDelegate {
         controller.memberImage = self.imageInfo[indexPath.row].imageData
         controller.memberNumber = self.imageInfo[indexPath.row].bottomInfo
         controller.firstName = self.imageInfo[indexPath.row].topInfo
+        controller.titleItem = self.imageInfo[indexPath.row].titleinfo
         let sheet = SheetViewController(controller: controller, sizes: [.halfScreen])
         sheet.setSizes([.fixed(215)])
         sheet.adjustForBottomSafeArea = true

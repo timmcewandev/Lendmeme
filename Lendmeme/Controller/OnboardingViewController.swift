@@ -12,15 +12,21 @@ import AVKit
 import AVFoundation
 
 class OnboardingViewController: UIViewController {
-
+    var hasSeenOnboarding = false
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        playVideo()
+        if hasSeenOnboarding == true {
+            self.dismiss(animated: true) {
+                self.hasSeenOnboarding = false
+            }
+        } else {
+           playVideo()
+        }
+        
     }
 
     private func playVideo() {
-        guard let path = Bundle.main.path(forResource: "video", ofType:"m4v") else {
-            debugPrint("video.m4v not found")
+        guard let path = Bundle.main.path(forResource: "LendmemeDirectional", ofType:".mov") else {
             return
         }
         let player = AVPlayer(url: URL(fileURLWithPath: path))
@@ -28,6 +34,7 @@ class OnboardingViewController: UIViewController {
         playerController.player = player
         present(playerController, animated: true) {
             player.play()
+            self.hasSeenOnboarding = true
         }
     }
 }

@@ -15,6 +15,7 @@ class OptionTableViewController: UITableViewController, MFMessageComposeViewCont
     var memberImage: Data?
     var memberNumber: String?
     var firstName: String?
+    var titleItem: String?
     var options = ["View Image","Send a text message"]
     
     override func viewDidLoad() {
@@ -79,8 +80,8 @@ class OptionTableViewController: UITableViewController, MFMessageComposeViewCont
             composeVC.messageComposeDelegate = self
             guard let number = memberNumber else { return }
             guard let image = memberImage else { return }
-            if let first = firstName {
-                composeVC.body = "Hello \(first) 👋, I was wondering if you are done with this item? Is there a time you could return it? Thanks 👏"
+            if let first = firstName, let title = titleItem {
+                composeVC.body = "Hello \(first) 👋, I was wondering if you are done with the \(title)? Is there a time you could return it? Thanks 👏"
             } else {
                 composeVC.body = "Hello 👋, I was wondering if you are done with this item? Is there a time you could return it? Thanks 👏"
             }

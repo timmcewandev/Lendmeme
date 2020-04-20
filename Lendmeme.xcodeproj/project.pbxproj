@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C9CCFA015E2DB2BB876C6F1 /* Pods_Lendmeme.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FFBA5C4B1F6641B98CC7E91 /* Pods_Lendmeme.framework */; };
+		22525C922448D37200F41F09 /* LendmemeDirectional.mov in Resources */ = {isa = PBXBuildFile; fileRef = 22525C912448D37200F41F09 /* LendmemeDirectional.mov */; };
 		2257DE462422B908009FD6BC /* BorrowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2257DE452422B908009FD6BC /* BorrowTableViewCell.swift */; };
 		22588106243E8C33002A2E37 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22588105243E8C33002A2E37 /* GoogleService-Info.plist */; };
 		22647B972444F48A00342D74 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22647B962444F48A00342D74 /* OnboardingViewController.swift */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		14DFB47482A19BF524419586 /* Pods-Lendmeme.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lendmeme.release.xcconfig"; path = "Target Support Files/Pods-Lendmeme/Pods-Lendmeme.release.xcconfig"; sourceTree = "<group>"; };
 		1B8761B9DA191EB58377A18B /* Pods-iborrow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iborrow.debug.xcconfig"; path = "Target Support Files/Pods-iborrow/Pods-iborrow.debug.xcconfig"; sourceTree = "<group>"; };
+		22525C912448D37200F41F09 /* LendmemeDirectional.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = LendmemeDirectional.mov; sourceTree = "<group>"; };
 		2257DE452422B908009FD6BC /* BorrowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowTableViewCell.swift; sourceTree = "<group>"; };
 		22588105243E8C33002A2E37 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		22647B962444F48A00342D74 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				9BBD165E22F6ABFC00299384 /* BorrowTime.xcdatamodeld */,
 				9B39AA8922F40B3B007EF340 /* DataController.swift */,
 				9B90F13122F7DC540035104E /* Lendmeme.entitlements */,
+				22525C912448D37200F41F09 /* LendmemeDirectional.mov */,
 			);
 			path = "Supporting files";
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22525C922448D37200F41F09 /* LendmemeDirectional.mov in Resources */,
 				9BDD35DD1FD88B0D005ADBCD /* LaunchScreen.storyboard in Resources */,
 				9BDD35DA1FD88B0D005ADBCD /* Assets.xcassets in Resources */,
 				22588106243E8C33002A2E37 /* GoogleService-Info.plist in Resources */,
@@ -458,7 +462,7 @@
 				CODE_SIGN_ENTITLEMENTS = Lendmeme/Lendmeme.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = A9UMG393DW;
 				INFOPLIST_FILE = Lendmeme/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
@@ -480,7 +484,7 @@
 				CODE_SIGN_ENTITLEMENTS = Lendmeme/Lendmeme.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = A9UMG393DW;
 				INFOPLIST_FILE = Lendmeme/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
