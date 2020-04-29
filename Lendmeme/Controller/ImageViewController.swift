@@ -24,4 +24,12 @@ class ImageViewController: UIViewController, UITableViewDataSource, UITableViewD
         imageControl.image = myImages
         self.imageControl.contentScaleFactor = 3
     }
+    
+    @IBAction func datePickerAction(_ sender: Any) {
+        let dateformatter = DateFormatter()
+        dateformatter.dateStyle = DateFormatter.Style.short
+        let strDate = dateformatter.string(from: datePicker.date)
+        print("\(strDate)")
+    }
+    
 }
