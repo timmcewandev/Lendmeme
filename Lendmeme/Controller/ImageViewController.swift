@@ -7,6 +7,7 @@ import UIKit
 
 class ImageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
     @IBOutlet weak var imageControl: UIImageView!
+    @IBOutlet weak var datePicker: UIDatePicker!
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 0
     }
@@ -21,5 +22,6 @@ class ImageViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         imageControl.image = myImages
+        self.imageControl.contentScaleFactor = 3
     }
 }

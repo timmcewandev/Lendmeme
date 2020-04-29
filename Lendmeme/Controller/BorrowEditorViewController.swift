@@ -8,6 +8,7 @@ import CoreData
 import Contacts
 import AVFoundation
 import BubbleTransition
+import FittedSheets
 
 class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIViewControllerTransitioningDelegate {
     
@@ -34,6 +35,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var cancelOut: UIBarButtonItem!
     @IBOutlet weak var insertImageContainer: UIStackView!
     @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var remindMe: UISwitch!
     
     
     // MARK: Lifecycle
@@ -99,6 +101,20 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         performSegue(withIdentifier: "onboarding", sender: self)
         
     }
+    
+    @IBAction func remindMeAction(_ sender: UISwitch) {
+        if sender.isOn == true {
+            let controller = self.storyboard?.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
+            let sheet = SheetViewController(controller: controller, sizes: [.halfScreen])
+            sheet.setSizes([.fixed(215)])
+            sheet.adjustForBottomSafeArea = true
+            self.present(sheet, animated: false, completion: {
+                controller.imageControl.isHidden = true
+            })
+        }
+
+    }
+    
     
     
     // MARK: Functions
@@ -217,9 +233,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         if titleTextOUT.text == "" {
             titleTextOUT.placeholder = ""
         }
-//        titleTextOUT.borderStyle = .none
-//        topTextOUT.borderStyle = .none
-//        bottomTextOUT.borderStyle = .none
         
         UIGraphicsBeginImageContext(view.frame.size)
         view.drawHierarchy(in: view.frame, afterScreenUpdates: true)

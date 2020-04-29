@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wfM-K2-jvl">
-                                <rect key="frame" x="0.0" y="21" width="375" height="642"/>
+                                <rect key="frame" x="0.0" y="-2.5" width="375" height="665.5"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lua-XB-jXr">
@@ -57,12 +57,12 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" keyboardType="numberPad" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="wRM-Rx-5QT">
-                                <rect key="frame" x="41" y="150" width="293" height="68"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
+                                <rect key="frame" x="41" y="150" width="293" height="44.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="alphabet" returnKeyType="next"/>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cEL-3L-VHw">
-                                <rect key="frame" x="120" y="308.5" width="135.5" height="67"/>
+                                <rect key="frame" x="120" y="272" width="135.5" height="117"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insert Image Here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9a-2m-lYN">
                                         <rect key="frame" x="0.0" y="0.0" width="135.5" height="19"/>
@@ -95,12 +95,23 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remind me" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q87-XC-3VI">
+                                        <rect key="frame" x="24" y="67" width="87.5" height="19"/>
+                                        <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JIV-Rj-rkH">
+                                        <rect key="frame" x="43" y="86" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="remindMeAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="HXY-Ar-dtX"/>
+                                        </connections>
+                                    </switch>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="cho-jd-ylO">
-                                <rect key="frame" x="41" y="74" width="293" height="68"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
+                                <rect key="frame" x="41" y="97" width="293" height="44.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="alphabet" returnKeyType="next"/>
                             </textField>
                         </subviews>
@@ -123,7 +134,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cho-jd-ylO" secondAttribute="trailing" constant="41" id="Rkt-ub-KeM"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SkE-M1-M9z"/>
                             <constraint firstItem="wRM-Rx-5QT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TTw-1g-hnt"/>
-                            <constraint firstItem="cho-jd-ylO" firstAttribute="top" secondItem="wRM-Rx-5QT" secondAttribute="bottom" constant="-144" id="cux-8p-FXT"/>
+                            <constraint firstItem="cho-jd-ylO" firstAttribute="top" secondItem="wRM-Rx-5QT" secondAttribute="bottom" constant="-97.5" id="cux-8p-FXT"/>
                             <constraint firstItem="PMx-xr-uw1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="41" id="gOA-ul-6Wf"/>
                             <constraint firstItem="cEL-3L-VHw" firstAttribute="centerX" secondItem="wfM-K2-jvl" secondAttribute="centerX" id="hKG-hL-Sqw"/>
                             <constraint firstItem="Lua-XB-jXr" firstAttribute="top" secondItem="PMx-xr-uw1" secondAttribute="bottom" constant="90" id="qOU-ha-Axm"/>
@@ -140,6 +151,7 @@
                         <outlet property="cancelOut" destination="IYC-5o-RPP" id="czF-Dv-4iJ"/>
                         <outlet property="imageView" destination="wfM-K2-jvl" id="5EF-7V-CfE"/>
                         <outlet property="insertImageContainer" destination="cEL-3L-VHw" id="pQD-Y3-Lu8"/>
+                        <outlet property="remindMe" destination="JIV-Rj-rkH" id="bzb-za-b9c"/>
                         <outlet property="shareOUT" destination="mST-PZ-z3s" id="DVi-X2-6YO"/>
                         <outlet property="titleTextOUT" destination="cho-jd-ylO" id="Mef-KU-zgg"/>
                         <outlet property="toolbar" destination="Lua-XB-jXr" id="ffk-ar-eHe"/>
@@ -219,11 +231,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                             </imageView>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="yKC-hT-w8f">
+                                <rect key="frame" x="0.0" y="451" width="375" height="216"/>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="yKC-hT-w8f" firstAttribute="bottom" secondItem="2CS-hw-CdB" secondAttribute="bottom" id="6yh-UD-MXl"/>
+                            <constraint firstItem="yKC-hT-w8f" firstAttribute="trailing" secondItem="2CS-hw-CdB" secondAttribute="trailing" id="HTd-rL-KtN"/>
                             <constraint firstItem="zpZ-vi-hUt" firstAttribute="top" secondItem="2CS-hw-CdB" secondAttribute="top" id="ZKS-Q4-ORW"/>
                             <constraint firstItem="zpZ-vi-hUt" firstAttribute="leading" secondItem="2CS-hw-CdB" secondAttribute="leading" id="b07-bQ-HpG"/>
+                            <constraint firstItem="yKC-hT-w8f" firstAttribute="leading" secondItem="2CS-hw-CdB" secondAttribute="leading" id="gUo-nL-T8p"/>
                             <constraint firstItem="zpZ-vi-hUt" firstAttribute="leading" secondItem="2CS-hw-CdB" secondAttribute="leading" id="kSl-6g-NrL"/>
                             <constraint firstItem="zpZ-vi-hUt" firstAttribute="bottom" secondItem="2CS-hw-CdB" secondAttribute="bottom" id="l7I-8C-ZRI"/>
                             <constraint firstItem="zpZ-vi-hUt" firstAttribute="trailing" secondItem="2CS-hw-CdB" secondAttribute="trailing" id="njx-Di-p6x"/>
@@ -234,6 +252,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="datePicker" destination="yKC-hT-w8f" id="GSA-Kc-fdT"/>
                         <outlet property="imageControl" destination="zpZ-vi-hUt" id="owO-cx-AJ2"/>
                     </connections>
                 </viewController>

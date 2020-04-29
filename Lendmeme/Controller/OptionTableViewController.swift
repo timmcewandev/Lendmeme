@@ -93,15 +93,17 @@ class OptionTableViewController: UITableViewController, MFMessageComposeViewCont
             }
         case "View Image":
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
+           
             controller.myImages = UIImage(data: memberImage!)
             let sheet = SheetViewController(controller: controller, sizes: [.fullScreen])
-            sheet.adjustForBottomSafeArea = true
-            self.present(sheet, animated: false, completion: nil)
+            self.present(sheet, animated: false, completion: {
+                controller.datePicker.isHidden = true
+            })
         default: return
         }
         self.tableView.deselectRow(at: indexPath!, animated: true)
     }
-    
+
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         controller.dismiss(animated: true, completion: nil)
     }
