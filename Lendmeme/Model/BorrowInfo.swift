@@ -12,6 +12,7 @@ struct BorrowInfo {
     var originalImage: UIImage
     var borrowImage: UIImage
     var hasBeenReturned = false
+    var selectedDate: String?
 }
 
 

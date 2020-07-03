@@ -15,9 +15,10 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     // MARK: - Variables
     let contact = CNMutableContact()
     let borrow: [BorrowInfo]! = nil
-    var dataController: DataController! = nil
+    var dataController: DataController!
     var nameOfBorrower: String?
     let transition = BubbleTransition()
+    var selectedDate: String?
     
     let borrowTextAttributes: [String : Any] = [
         NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
@@ -36,6 +37,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var insertImageContainer: UIStackView!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var remindMe: UISwitch!
+    @IBOutlet weak var dateSelected: UILabel!
     
     
     // MARK: Lifecycle
@@ -64,7 +66,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
             }
         }
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
-        view.addGestureRecognizer(tapGesture)
+            view.addGestureRecognizer(tapGesture)
     }
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
         topTextOUT.resignFirstResponder()
@@ -97,25 +99,22 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         self.save()
     }
     
-    @IBAction func OnboardingPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "onboarding", sender: self)
-        
-    }
-    
     @IBAction func remindMeAction(_ sender: UISwitch) {
         if sender.isOn == true {
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
-            let sheet = SheetViewController(controller: controller, sizes: [.halfScreen])
-            sheet.setSizes([.fixed(215)])
-            sheet.adjustForBottomSafeArea = true
-            self.present(sheet, animated: false, completion: {
-                controller.imageControl.isHidden = true
-            })
+
+            self.present(controller, animated: true, completion: nil)
         }
 
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toSelection" {
+            if let destVC = segue.destination as? UINavigationController,
+                let targetController = destVC.topViewController as? ImageViewController {
+            }
+        }
+    }
     
     // MARK: Functions
     func pick(sourceType: UIImagePickerControllerSourceType){
@@ -225,19 +224,22 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     
     func generateMemedImage() -> UIImage {
         if topTextOUT.text == "" {
-            topTextOUT.placeholder = ""
+            topTextOUT.isHidden = true
         }
         if bottomTextOUT.text == "" {
-            bottomTextOUT.placeholder = ""
+            bottomTextOUT.isHidden = true
         }
         if titleTextOUT.text == "" {
-            titleTextOUT.placeholder = ""
+            titleTextOUT.isHidden = true
         }
         
         UIGraphicsBeginImageContext(view.frame.size)
         view.drawHierarchy(in: view.frame, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
+        topTextOUT.isHidden = false
+        bottomTextOUT.isHidden = false
+        titleTextOUT.isHidden = false
         return memedImage
     }
     

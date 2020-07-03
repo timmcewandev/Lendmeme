@@ -6,10 +6,14 @@ import UIKit
 
 import FittedSheets
 import CoreData
+import MessageUI
 //import GoogleMobileAds
 
-class BorrowTableViewController: UITableViewController, UISearchBarDelegate {
+class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessageComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
+    
+    
+    @IBOutlet weak var tableView: UITableView!
     // MARK: - Variables
     var dataController:DataController!
     var member: UIImage?
@@ -21,11 +25,7 @@ class BorrowTableViewController: UITableViewController, UISearchBarDelegate {
     // This method updates filteredData based on the text in the Search Box
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         var newData: [ImageInfo] = []
-        for i in filteredData {
-            if searchText.lowercased() == i.titleinfo?.lowercased() && i.titleinfo?.isEmpty == false {
-                newData.append(i)
-            }
-        }
+        newData = searchText.isEmpty ? filteredData : filteredData.filter { $0.titleinfo!.lowercased().contains(searchText.lowercased()) }
         if newData.isEmpty == true || searchText == "" {
             imageInfo = filteredData
         } else {
@@ -42,18 +42,17 @@ class BorrowTableViewController: UITableViewController, UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
         searchBar.text = ""
-        searchBar.resignFirstResponder()
         imageInfo = filteredData
-        tableView.reloadData()
+        searchBar.resignFirstResponder()
         
+        tableView.reloadData()
     }
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reloadInputViews()
-        tableView.delegate = self
-        tableView.dataSource = self
         searchBar.delegate = self
+        
         //        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
         
         //        addBannerViewToView(bannerView)
@@ -92,24 +91,21 @@ class BorrowTableViewController: UITableViewController, UISearchBarDelegate {
         if let result = try? dataController.viewContext.fetch(fetchRequest){
             imageInfo = result
             filteredData = imageInfo
-            self.tableView.isHidden = false
+            tableView.isHidden = false
         }
         
         if imageInfo.count == 0 {
             performSegue(withIdentifier: "starter", sender: self)
         }
         self.navigationController?.isNavigationBarHidden = false
-        
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Image counter = \(imageInfo.count)")
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return imageInfo.count
     }
     
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! BorrowTableViewCell
         let memeImages = imageInfo[indexPath.row]
         
@@ -127,30 +123,48 @@ class BorrowTableViewController: UITableViewController, UISearchBarDelegate {
             cell.myDateLabel.backgroundColor = .systemGreen
         }
         return cell
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: "OptionTableViewController") as! OptionTableViewController
-        controller.memberImage = self.imageInfo[indexPath.row].imageData
-        controller.memberNumber = self.imageInfo[indexPath.row].bottomInfo
-        controller.firstName = self.imageInfo[indexPath.row].topInfo
-        controller.titleItem = self.imageInfo[indexPath.row].titleinfo
-        let sheet = SheetViewController(controller: controller, sizes: [.halfScreen])
-        sheet.setSizes([.fixed(215)])
-        sheet.adjustForBottomSafeArea = true
-        self.present(sheet, animated: false, completion: nil)
         
     }
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let alert = UIAlertController(title: nil, message: nil , preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "View image 🌁", style: .default, handler: { _ in
+            let controller = self.storyboard?.instantiateViewController(withIdentifier: "PVController") as! PVController
+            controller.myImages = UIImage(data: self.imageInfo[indexPath.row].imageData!)
+            let sheet = SheetViewController(controller: controller, sizes: [.fullScreen])
+            self.present(sheet, animated: false, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Send Text message", comment: "Default action"), style: .default, handler: { _ in
+            let composeVC = MFMessageComposeViewController()
+            composeVC.messageComposeDelegate = self
+            guard let number = self.imageInfo[indexPath.row].bottomInfo else {return}
+            guard let image = self.imageInfo[indexPath.row].imageData else {return}
+            if let first = self.imageInfo[indexPath.row].topInfo, let title = self.imageInfo[indexPath.row].titleinfo {
+                composeVC.body = "Hello \(first) 👋, I was wondering if you are done with the \(title)? Is there a time you could return it? Thanks 👏"
+            } else {
+                composeVC.body = "Hello 👋, I was wondering if you are done with this item? Is there a time you could return it? Thanks 👏"
+            }
+            composeVC.recipients = ["\(number)"]
+            
+            composeVC.addAttachmentData(image, typeIdentifier: "public.data", filename: "lendmeme.png")
+            if MFMessageComposeViewController.canSendText() {
+                self.present(composeVC, animated: true, completion: nil)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Default action"), style: .cancel, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 190.0
     }
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteItem = UITableViewRowAction(style: .destructive, title: "Delete", handler: { [weak self] (action, indexPath) in
             let myphoto = self?.imageInfo[indexPath.row]
             guard let selectedImage = self?.imageInfo else { return }
@@ -160,12 +174,12 @@ class BorrowTableViewController: UITableViewController, UISearchBarDelegate {
                     self?.dataController.viewContext.delete(selectedImage)
                     try? self?.dataController.viewContext.save()
                     self?.imageInfo.remove(at: indexPath.row)
-                    self?.tableView.deleteRows(at: [indexPath], with: .bottom)
+                    tableView.deleteRows(at: [indexPath], with: .bottom)
                     self?.dataController.viewContext.refreshAllObjects()
                     if self?.imageInfo.isEmpty == true {
                         self?.performSegue(withIdentifier: "toPhoto", sender: self)
                     }
-                    self?.tableView.reloadData()
+                    tableView.reloadData()
                 }
             }
             
@@ -180,10 +194,10 @@ class BorrowTableViewController: UITableViewController, UISearchBarDelegate {
                     let markImageAsReturned = selectedImage
                     markImageAsReturned.hasBeenReturned = true
                     try? self?.dataController.viewContext.save()
-                    self?.tableView.cellForRow(at: indexPath)
+                    tableView.cellForRow(at: indexPath)
                     self?.dataController.viewContext.refreshAllObjects()
                     cell.myDateLabel.backgroundColor = .systemGreen
-                    self?.tableView.reloadData()
+                    tableView.reloadData()
                 }
             }
             
@@ -201,15 +215,23 @@ class BorrowTableViewController: UITableViewController, UISearchBarDelegate {
         }
         
     }
-    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        controller.dismiss(animated: true, completion: nil)
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toPhoto" {
-            let destinationVC = segue.destination as! BorrowEditorViewController
-            destinationVC.dataController = self.dataController
-        }
         if segue.identifier == "starter" {
             let destinvationVC = segue.destination as! BorrowEditorViewController
             destinvationVC.dataController = self.dataController
         }
+        if segue.identifier == "toPhoto" {
+            let destinationVC = segue.destination as! BorrowEditorViewController
+            destinationVC.dataController = self.dataController
+        }
+
     }
+    
+//    override func viewDidLayoutSubviews() {
+//       // Enable scrolling based on content height
+//       tableView.isScrollEnabled = tableView.contentSize.height > tableView.frame.size.height
+//    }
 }

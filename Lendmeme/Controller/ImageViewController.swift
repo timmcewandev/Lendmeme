@@ -6,8 +6,11 @@
 import UIKit
 
 class ImageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
-    @IBOutlet weak var imageControl: UIImageView!
+
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var selectedDateLabel: UILabel!
+    @IBOutlet weak var submit: UIButton!
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 0
     }
@@ -18,18 +21,15 @@ class ImageViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     var myImages: UIImage?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        imageControl.image = myImages
-        self.imageControl.contentScaleFactor = 3
-    }
-    
     @IBAction func datePickerAction(_ sender: Any) {
         let dateformatter = DateFormatter()
-        dateformatter.dateStyle = DateFormatter.Style.short
+        dateformatter.dateStyle = DateFormatter.Style.medium
         let strDate = dateformatter.string(from: datePicker.date)
-        print("\(strDate)")
+        selectedDateLabel.text = strDate
     }
     
+    @IBAction func submitAction(_ sender: UIButton) {
+        
+    }
+
 }
