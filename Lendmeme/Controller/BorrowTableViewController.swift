@@ -7,7 +7,7 @@ import UIKit
 import FittedSheets
 import CoreData
 import MessageUI
-//import GoogleMobileAds
+import GoogleMobileAds
 
 class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessageComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -19,7 +19,7 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
     var member: UIImage?
     var imageInfo: [ImageInfo] = []
     var filteredData: [ImageInfo] = []
-    //    var bannerView: GADBannerView!
+        var bannerView: GADBannerView!
     
     @IBOutlet weak var searchBar: UISearchBar!
     // This method updates filteredData based on the text in the Search Box
@@ -53,34 +53,34 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
         self.reloadInputViews()
         searchBar.delegate = self
         
-        //        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+                bannerView = GADBannerView(adSize: kGADAdSizeBanner)
         
-        //        addBannerViewToView(bannerView)
-        //        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        //        bannerView.rootViewController = self
-        //        bannerView.load(GADRequest())
+                addBannerViewToView(bannerView)
+                bannerView.adUnitID = "ca-app-pub-4331198040656284~8009663483"
+                bannerView.rootViewController = self
+                bannerView.load(GADRequest())
     }
     
-    //    func addBannerViewToView(_ bannerView: GADBannerView) {
-    //        bannerView.translatesAutoresizingMaskIntoConstraints = false
-    //        view.addSubview(bannerView)
-    //        view.addConstraints(
-    //            [NSLayoutConstraint(item: bannerView,
-    //                                attribute: .bottom,
-    //                                relatedBy: .equal,
-    //                                toItem: bottomLayoutGuide,
-    //                                attribute: .top,
-    //                                multiplier: 1,
-    //                                constant: 0),
-    //             NSLayoutConstraint(item: bannerView,
-    //                                attribute: .centerX,
-    //                                relatedBy: .equal,
-    //                                toItem: view,
-    //                                attribute: .centerX,
-    //                                multiplier: 1,
-    //                                constant: 0)
-    //        ])
-    //    }
+        func addBannerViewToView(_ bannerView: GADBannerView) {
+            bannerView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(bannerView)
+            view.addConstraints(
+                [NSLayoutConstraint(item: bannerView,
+                                    attribute: .bottom,
+                                    relatedBy: .equal,
+                                    toItem: bottomLayoutGuide,
+                                    attribute: .top,
+                                    multiplier: 1,
+                                    constant: 0),
+                 NSLayoutConstraint(item: bannerView,
+                                    attribute: .centerX,
+                                    relatedBy: .equal,
+                                    toItem: view,
+                                    attribute: .centerX,
+                                    multiplier: 1,
+                                    constant: 0)
+            ])
+        }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -127,7 +127,7 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
     }
     
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        searchBar.resignFirstResponder()
         let alert = UIAlertController(title: nil, message: nil , preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "View image 🌁", style: .default, handler: { _ in
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "PVController") as! PVController
@@ -135,23 +135,26 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
             let sheet = SheetViewController(controller: controller, sizes: [.fullScreen])
             self.present(sheet, animated: false, completion: nil)
         }))
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Send Text message", comment: "Default action"), style: .default, handler: { _ in
-            let composeVC = MFMessageComposeViewController()
-            composeVC.messageComposeDelegate = self
-            guard let number = self.imageInfo[indexPath.row].bottomInfo else {return}
-            guard let image = self.imageInfo[indexPath.row].imageData else {return}
-            if let first = self.imageInfo[indexPath.row].topInfo, let title = self.imageInfo[indexPath.row].titleinfo {
-                composeVC.body = "Hello \(first) 👋, I was wondering if you are done with the \(title)? Is there a time you could return it? Thanks 👏"
-            } else {
-                composeVC.body = "Hello 👋, I was wondering if you are done with this item? Is there a time you could return it? Thanks 👏"
-            }
-            composeVC.recipients = ["\(number)"]
-            
-            composeVC.addAttachmentData(image, typeIdentifier: "public.data", filename: "lendmeme.png")
-            if MFMessageComposeViewController.canSendText() {
-                self.present(composeVC, animated: true, completion: nil)
-            }
-        }))
+        if imageInfo[indexPath.row].bottomInfo != "" {
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Send Text message", comment: "Default action"), style: .default, handler: { _ in
+                let composeVC = MFMessageComposeViewController()
+                composeVC.messageComposeDelegate = self
+                guard let number = self.imageInfo[indexPath.row].bottomInfo else {return}
+                guard let image = self.imageInfo[indexPath.row].imageData else {return}
+                if let first = self.imageInfo[indexPath.row].topInfo, let title = self.imageInfo[indexPath.row].titleinfo {
+                    composeVC.body = "Hello \(first) 👋, I was wondering if you are done with the \(title)? Is there a time you could return it? Thanks 👏"
+                } else {
+                    composeVC.body = "Hello 👋, I was wondering if you are done with this item? Is there a time you could return it? Thanks 👏"
+                }
+                composeVC.recipients = ["\(number)"]
+                
+                composeVC.addAttachmentData(image, typeIdentifier: "public.data", filename: "lendmeme.png")
+                if MFMessageComposeViewController.canSendText() {
+                    self.present(composeVC, animated: true, completion: nil)
+                }
+            }))
+        }
+        
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Default action"), style: .cancel, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))

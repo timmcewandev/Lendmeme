@@ -9,6 +9,7 @@ import Contacts
 import AVFoundation
 import BubbleTransition
 import FittedSheets
+import GoogleMobileAds
 
 class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIViewControllerTransitioningDelegate {
     
@@ -51,6 +52,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         bottomTextOUT.inputAccessoryView = accessoryView()
         bottomTextOUT.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
         view.addSubview(bottomTextOUT)
+            
     }
     
     override func viewWillAppear(_ animated: Bool) {

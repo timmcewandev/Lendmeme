@@ -29,7 +29,6 @@ class ImageViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     @IBAction func submitAction(_ sender: UIButton) {
-        
     }
 
 }
