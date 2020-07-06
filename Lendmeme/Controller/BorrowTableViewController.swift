@@ -11,8 +11,6 @@ import GoogleMobileAds
 
 class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessageComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
-    
-    
     @IBOutlet weak var tableView: UITableView!
     // MARK: - Variables
     var dataController:DataController!
@@ -56,7 +54,7 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
                 bannerView = GADBannerView(adSize: kGADAdSizeBanner)
         
                 addBannerViewToView(bannerView)
-                bannerView.adUnitID = "ca-app-pub-4331198040656284~8009663483"
+                bannerView.adUnitID = "ca-app-pub-6335247657896931~8259042789"
                 bannerView.rootViewController = self
                 bannerView.load(GADRequest())
     }
