@@ -45,14 +45,14 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         configureShareOut(isEnabled: false)
-        prepareTextField(textField: topTextOUT, name: "Add persons name")
-        prepareTextField(textField: bottomTextOUT, name: "Add phone")
-        prepareTextField(textField: titleTextOUT, name: "Add title")
+        prepareTextField(textField: topTextOUT, name: "add persons name")
+        prepareTextField(textField: bottomTextOUT, name: "add phone")
+        prepareTextField(textField: titleTextOUT, name: "add title")
         self.tabBarController?.tabBar.isHidden = true
         bottomTextOUT.inputAccessoryView = accessoryView()
         bottomTextOUT.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
         view.addSubview(bottomTextOUT)
-            
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,7 +68,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
             }
         }
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
-            view.addGestureRecognizer(tapGesture)
+        view.addGestureRecognizer(tapGesture)
     }
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
         topTextOUT.resignFirstResponder()
@@ -104,10 +104,10 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     @IBAction func remindMeAction(_ sender: UISwitch) {
         if sender.isOn == true {
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
-
+            
             self.present(controller, animated: true, completion: nil)
         }
-
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -194,6 +194,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
                         let phoneNumberFound = contacts[0].phoneNumbers[0].value.stringValue
                         let alert = UIAlertController(title: "We found a phone number for \(contacts[0].givenName) \(contacts[0].familyName)", message: "Would you like to use it?", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Sure", style: .default, handler: {[weak self] _ in
+                            self?.topTextOUT.text = contacts[0].givenName + " " + contacts[0].familyName
                             let phoneNumber = phoneNumberFound.replacingOccurrences(of: "+1", with: "")
                             self?.bottomTextOUT.text = phoneNumber
                             self?.checkIfNextTextFieldIsEmpty(focusedTextField: (self?.topTextOUT)!, toNextTextField: (self?.titleTextOUT)!)
@@ -224,30 +225,38 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         }
     }
     
-    func generateMemedImage() -> UIImage {
+    func takeScreenshot() -> UIImage? {
         if topTextOUT.text == "" {
             topTextOUT.isHidden = true
         }
+        
         if bottomTextOUT.text == "" {
             bottomTextOUT.isHidden = true
         }
+        
         if titleTextOUT.text == "" {
             titleTextOUT.isHidden = true
         }
         
-        UIGraphicsBeginImageContext(view.frame.size)
-        view.drawHierarchy(in: view.frame, afterScreenUpdates: true)
-        let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        self.navigationController?.isNavigationBarHidden = true
+        var screenshotImage :UIImage?
+        let layer = UIApplication.shared.keyWindow!.layer
+        let scale = UIScreen.main.scale.binade
+        UIGraphicsBeginImageContextWithOptions(view.frame.size, false, scale)
+        guard let context = UIGraphicsGetCurrentContext() else {return nil}
+        layer.render(in:context)
+        screenshotImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        
         topTextOUT.isHidden = false
         bottomTextOUT.isHidden = false
         titleTextOUT.isHidden = false
-        return memedImage
+        return screenshotImage
     }
     
     func save() {
         toolbar.isHidden = true
-        let memedImage = generateMemedImage()
+        guard let memedImage = takeScreenshot() else { return }
         let borrowInfo = BorrowInfo(topString: topTextOUT.text!, bottomString: bottomTextOUT.text!, titleString: titleTextOUT.text!, originalImage: imageView.image!, borrowImage: memedImage, hasBeenReturned: false)
         
         let getImageInfo = ImageInfo(context: dataController.viewContext)
@@ -383,6 +392,8 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     @objc func keyboardWillHide(notification: NSNotification) {
         resetFrame()
     }
+    
+
     
 }
 

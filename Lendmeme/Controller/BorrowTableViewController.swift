@@ -205,8 +205,26 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
             }
             
         })
+        let markItemAsNotReturned = UITableViewRowAction(style: .default, title: "Mark item as not returned", handler: { [weak self] (_ , indexPath)  in
+            let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! BorrowTableViewCell
+            let myphoto = self?.imageInfo[indexPath.row]
+            guard let selectImage = self?.imageInfo else { return }
+            for selectedImage in selectImage {
+                if selectedImage == myphoto {
+                    let markImageAsReturned = selectedImage
+                    markImageAsReturned.hasBeenReturned = false
+                    try? self?.dataController.viewContext.save()
+                    tableView.cellForRow(at: indexPath)
+                    self?.dataController.viewContext.refreshAllObjects()
+//                    cell.myDateLabel.backgroundColor = .systemTeal
+                    tableView.reloadData()
+                }
+            }
+            
+        })
         if imageInfo[indexPath.row].hasBeenReturned == true {
-            return [deleteItem]
+            markItemAsNotReturned.backgroundColor = .systemTeal
+            return [deleteItem, markItemAsNotReturned]
         }
         markItemAsReturned.backgroundColor = UIColor.systemGreen
         return [deleteItem, markItemAsReturned]
