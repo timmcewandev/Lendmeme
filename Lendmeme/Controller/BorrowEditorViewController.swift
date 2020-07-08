@@ -20,7 +20,8 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     var nameOfBorrower: String?
     let transition = BubbleTransition()
     var selectedDate: String?
-    
+    var interstitial: GADInterstitial!
+    var imageInfo: [ImageInfo] = []
     let borrowTextAttributes: [String : Any] = [
         NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
         NSAttributedStringKey.strokeWidth.rawValue : -3.0,
@@ -28,6 +29,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     ]
     
     // MARK: Outlets
+    @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var shareOUT: UIBarButtonItem!
     @IBOutlet weak var bottomTextOUT: UITextField!
@@ -38,7 +40,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var insertImageContainer: UIStackView!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var remindMe: UISwitch!
-    @IBOutlet weak var dateSelected: UILabel!
     
     
     // MARK: Lifecycle
@@ -52,7 +53,14 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         bottomTextOUT.inputAccessoryView = accessoryView()
         bottomTextOUT.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
         view.addSubview(bottomTextOUT)
+        bannerView.adUnitID = "ca-app-pub-6335247657896931/5485024801"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        bannerView.delegate = self
         
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-6335247657896931/9991246021")
+        let request = GADRequest()
+        interstitial.load(request)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,6 +74,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
                 self.navigationController?.isNavigationBarHidden = true
                 configureCancelOut(isEnabled: false)
             }
+            imageInfo = result
         }
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
         view.addGestureRecognizer(tapGesture)
@@ -98,6 +107,15 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     @IBAction func share(sender: AnyObject) {
+        if imageInfo.count > 1 {
+            let firstNum = arc4random() % 5
+            let secondNum = arc4random() % 5
+            if firstNum == secondNum {
+                if (interstitial.isReady) {
+                    interstitial.present(fromRootViewController: self)
+                }
+            }
+        }
         self.save()
     }
     
@@ -113,7 +131,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toSelection" {
             if let destVC = segue.destination as? UINavigationController,
-                let targetController = destVC.topViewController as? ImageViewController {
+                let _ = destVC.topViewController as? ImageViewController {
             }
         }
     }
@@ -180,7 +198,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         self.view.endEditing(true)
         
         if textField == topTextOUT {
-            let status = CNContactStore.authorizationStatus(for: .contacts)
+            _ = CNContactStore.authorizationStatus(for: .contacts)
             let nameMe = self.topTextOUT.text
             let nameProperCapitalization = (nameMe?.lowercased().capitalized)!
             let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
@@ -393,8 +411,18 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         resetFrame()
     }
     
-
     
+    
+}
+
+extension BorrowEditorViewController: GADBannerViewDelegate {
+    private func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("Recieved ad")
+    }
+    
+    public func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print(error)
+    }
 }
 
 

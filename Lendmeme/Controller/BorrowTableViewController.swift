@@ -12,12 +12,12 @@ import GoogleMobileAds
 class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessageComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var bannerView: GADBannerView!
     // MARK: - Variables
     var dataController:DataController!
     var member: UIImage?
     var imageInfo: [ImageInfo] = []
     var filteredData: [ImageInfo] = []
-        var bannerView: GADBannerView!
     
     @IBOutlet weak var searchBar: UISearchBar!
     // This method updates filteredData based on the text in the Search Box
@@ -50,35 +50,12 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
         super.viewDidLoad()
         self.reloadInputViews()
         searchBar.delegate = self
-        
-                bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        
-                addBannerViewToView(bannerView)
-                bannerView.adUnitID = "ca-app-pub-6335247657896931~8259042789"
-                bannerView.rootViewController = self
-                bannerView.load(GADRequest())
+        bannerView.adUnitID = "ca-app-pub-6335247657896931/7400741709"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        bannerView.delegate = self
     }
     
-        func addBannerViewToView(_ bannerView: GADBannerView) {
-            bannerView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(bannerView)
-            view.addConstraints(
-                [NSLayoutConstraint(item: bannerView,
-                                    attribute: .bottom,
-                                    relatedBy: .equal,
-                                    toItem: bottomLayoutGuide,
-                                    attribute: .top,
-                                    multiplier: 1,
-                                    constant: 0),
-                 NSLayoutConstraint(item: bannerView,
-                                    attribute: .centerX,
-                                    relatedBy: .equal,
-                                    toItem: view,
-                                    attribute: .centerX,
-                                    multiplier: 1,
-                                    constant: 0)
-            ])
-        }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -214,7 +191,6 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
                     try? self?.dataController.viewContext.save()
                     tableView.cellForRow(at: indexPath)
                     self?.dataController.viewContext.refreshAllObjects()
-//                    cell.myDateLabel.backgroundColor = .systemTeal
                     tableView.reloadData()
                 }
             }
@@ -253,4 +229,14 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
 //       // Enable scrolling based on content height
 //       tableView.isScrollEnabled = tableView.contentSize.height > tableView.frame.size.height
 //    }
+}
+
+extension BorrowTableViewController: GADBannerViewDelegate {
+    private func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("Recieved ad")
+    }
+    
+    public func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print(error)
+    }
 }

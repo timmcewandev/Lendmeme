@@ -137,8 +137,17 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="UdA-bB-R1T"/>
+                    <navigationItem key="navigationItem" id="UdA-bB-R1T">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="h4n-8G-RfO">
+                            <view key="customView" contentMode="scaleToFill" misplaced="YES" id="V8g-Cx-rVD" customClass="GADBannerView">
+                                <rect key="frame" x="50" y="0.0" width="309" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="bannerView" destination="V8g-Cx-rVD" id="aFO-sq-8h0"/>
                         <outlet property="bottomTextOUT" destination="PMx-xr-uw1" id="za2-Do-dxn"/>
                         <outlet property="cameraButton" destination="GYI-Os-X7S" id="RbF-FM-Ic0"/>
                         <outlet property="cancelOut" destination="IYC-5o-RPP" id="czF-Dv-4iJ"/>
@@ -341,11 +350,11 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBx-wS-xlC">
-                                                    <rect key="frame" x="15" y="15" width="37.5" height="21"/>
+                                                    <rect key="frame" x="15" y="15" width="110" height="21"/>
                                                     <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="35" id="cUu-cG-Msj"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="yM5-Kn-DfK"/>
+                                                        <constraint firstAttribute="width" constant="110" id="65p-zo-wa9"/>
+                                                        <constraint firstAttribute="height" constant="30" id="XhF-as-rWo"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -362,7 +371,7 @@
                                                 <constraint firstItem="rBx-wS-xlC" firstAttribute="top" secondItem="W7t-oB-UT1" secondAttribute="top" constant="15" id="CnY-jG-5I6"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="rBx-wS-xlC" secondAttribute="bottom" constant="4" id="bog-fc-Zwo"/>
                                                 <constraint firstItem="rBx-wS-xlC" firstAttribute="leading" secondItem="W7t-oB-UT1" secondAttribute="leading" constant="15" id="dKQ-in-24V"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rBx-wS-xlC" secondAttribute="trailing" constant="20" symbolic="YES" id="fT8-Uq-abA"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rBx-wS-xlC" secondAttribute="trailing" constant="100" id="fT8-Uq-abA"/>
                                                 <constraint firstAttribute="bottom" secondItem="ytp-M5-iYO" secondAttribute="bottom" id="fru-Sw-krc"/>
                                                 <constraint firstItem="ytp-M5-iYO" firstAttribute="centerX" secondItem="W7t-oB-UT1" secondAttribute="centerX" id="uqY-NK-pXD"/>
                                             </constraints>
@@ -383,10 +392,18 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OOM-qB-LPc" customClass="GADBannerView">
+                                <rect key="frame" x="27" y="617" width="320" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="OOM-qB-LPc" firstAttribute="bottom" secondItem="x9A-SQ-b9v" secondAttribute="bottom" id="NKJ-1k-p2H"/>
                             <constraint firstItem="oZc-Dh-cn1" firstAttribute="leading" secondItem="x9A-SQ-b9v" secondAttribute="leading" id="NS9-cL-hgv"/>
+                            <constraint firstItem="x9A-SQ-b9v" firstAttribute="trailing" secondItem="OOM-qB-LPc" secondAttribute="trailing" constant="28" id="Obi-A8-zQl"/>
+                            <constraint firstItem="OOM-qB-LPc" firstAttribute="leading" secondItem="x9A-SQ-b9v" secondAttribute="leading" constant="27" id="Z3K-HG-TfT"/>
+                            <constraint firstItem="OOM-qB-LPc" firstAttribute="top" secondItem="rxw-xU-awN" secondAttribute="top" constant="617" id="bfZ-YM-nJp"/>
                             <constraint firstItem="oZc-Dh-cn1" firstAttribute="trailing" secondItem="x9A-SQ-b9v" secondAttribute="trailing" id="d1v-hV-q3K"/>
                             <constraint firstItem="oZc-Dh-cn1" firstAttribute="bottom" secondItem="x9A-SQ-b9v" secondAttribute="bottom" id="syx-Jo-eus"/>
                             <constraint firstItem="oZc-Dh-cn1" firstAttribute="top" secondItem="C1q-Th-2rs" secondAttribute="bottom" id="tXo-yw-4S9"/>
@@ -394,13 +411,15 @@
                         <viewLayoutGuide key="safeArea" id="x9A-SQ-b9v"/>
                     </view>
                     <navigationItem key="navigationItem" id="xXf-Ly-zqP">
-                        <barButtonItem key="rightBarButtonItem" title="➕ add new borrower" style="plain" id="j2l-nd-Mkh">
+                        <nil key="title"/>
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" style="plain" id="j2l-nd-Mkh">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="show" identifier="toPhoto" id="Gzl-8H-eHQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bannerView" destination="OOM-qB-LPc" id="P5e-pc-wBW"/>
                         <outlet property="searchBar" destination="C1q-Th-2rs" id="UOF-Tx-XMp"/>
                         <outlet property="tableView" destination="oZc-Dh-cn1" id="78g-ty-FEs"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="starter" animates="NO" id="aK9-Dv-IeC"/>
@@ -412,11 +431,12 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="aK9-Dv-IeC"/>
+        <segue reference="Gzl-8H-eHQ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera" catalog="system" width="128" height="96"/>
         <image name="photo" catalog="system" width="128" height="93"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="tabBarItem:MBy-Zj-Hhw:image" width="30" height="30">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
