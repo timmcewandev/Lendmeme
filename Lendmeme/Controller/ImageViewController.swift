@@ -41,7 +41,7 @@ class ImageViewController: UIViewController, UITableViewDataSource, UITableViewD
             let strDate = dateformatter.string(from: self.datePicker.date)
             let alert = UIAlertController(title: "Selected Date", message: "\(strDate)", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: "Select date", style: .default, handler: { (UIAlertAction) in
+            alert.addAction(UIAlertAction(title: "Remind me", style: .default, handler: { (UIAlertAction) in
                 let selectedDate = sender.date
                 let delegate = UIApplication.shared.delegate as? AppDelegate
                 delegate?.scheduleNotification(at: selectedDate, name: self.receivedItem[0].titleinfo?.lowercased() ?? "item")

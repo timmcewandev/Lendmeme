@@ -76,11 +76,11 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
         tableView.reloadData()
     }
     
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return imageInfo.count
     }
     
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! BorrowTableViewCell
         let memeImages = imageInfo[indexPath.row]
         
@@ -101,14 +101,43 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
         
     }
     
-     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchBar.resignFirstResponder()
         let alert = UIAlertController(title: nil, message: nil , preferredStyle: .actionSheet)
+        let selectedImage = self.imageInfo[indexPath.row]
+        let markImageAsReturned = selectedImage
+        
+        if markImageAsReturned.hasBeenReturned == false {
+            alert.addAction(UIAlertAction(title: "Mark as returned", style: .default, handler: { _ in
+                let selectedImage = self.imageInfo[indexPath.row]
+                let markImageAsReturned = selectedImage
+                markImageAsReturned.hasBeenReturned = true
+                try? self.dataController.viewContext.save()
+                tableView.cellForRow(at: indexPath)
+                self.dataController.viewContext.refreshAllObjects()
+                tableView.reloadData()
+            }))
+        } else {
+            alert.addAction(UIAlertAction(title: "Mark as not returned", style: .default, handler: { _ in
+                let selectedImage = self.imageInfo[indexPath.row]
+                let markImageAsReturned = selectedImage
+                markImageAsReturned.hasBeenReturned = false
+                try? self.dataController.viewContext.save()
+                tableView.cellForRow(at: indexPath)
+                self.dataController.viewContext.refreshAllObjects()
+                
+                
+                tableView.reloadData()
+            }))
+        }
+        
+        
+        
         alert.addAction(UIAlertAction(title: "Remind me", style: .default, handler: { _ in
             let myphoto = [self.imageInfo[indexPath.row]]
             self.remindMe = myphoto
             self.performSegue(withIdentifier: "toSell", sender: self)
-
+            
         }))
         
         if imageInfo[indexPath.row].bottomInfo != "" {
@@ -137,21 +166,35 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
             let sheet = SheetViewController(controller: controller, sizes: [.fullScreen])
             self.present(sheet, animated: false, completion: nil)
         }))
-
-
+        
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+            let selectedImage = self.imageInfo[indexPath.row]
+            
+            self.dataController.viewContext.delete(selectedImage)
+            try? self.dataController.viewContext.save()
+            self.imageInfo.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .bottom)
+            self.dataController.viewContext.refreshAllObjects()
+            if self.imageInfo.count == 0 {
+                self.performSegue(withIdentifier: "starter", sender: self)
+            }
+            self.tableView.reloadData()
+        }))
+        
+        
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Default action"), style: .cancel, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))
         self.present(alert, animated: true, completion: nil)
     }
-     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 190.0
     }
-     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteItem = UITableViewRowAction(style: .destructive, title: "Delete", handler: { [weak self] (action, indexPath) in
             let myphoto = self?.imageInfo[indexPath.row]
             guard let selectedImage = self?.imageInfo else { return }
@@ -233,17 +276,12 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
         }
         if segue.identifier == "toSell" {
             let destinationVC = segue.destination as! ImageViewController
-//            destinationVC.dataController = self.dataController
+            //            destinationVC.dataController = self.dataController
             destinationVC.receivedItem = remindMe
         }
-
-
+        
+        
     }
-    
-//    override func viewDidLayoutSubviews() {
-//       // Enable scrolling based on content height
-//       tableView.isScrollEnabled = tableView.contentSize.height > tableView.frame.size.height
-//    }
 }
 
 extension BorrowTableViewController: GADBannerViewDelegate {
