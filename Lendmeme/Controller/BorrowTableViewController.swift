@@ -104,12 +104,13 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchBar.resignFirstResponder()
         let alert = UIAlertController(title: nil, message: nil , preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "View image 🌁", style: .default, handler: { _ in
-            let controller = self.storyboard?.instantiateViewController(withIdentifier: "PVController") as! PVController
-            controller.myImages = UIImage(data: self.imageInfo[indexPath.row].imageData!)
-            let sheet = SheetViewController(controller: controller, sizes: [.fullScreen])
-            self.present(sheet, animated: false, completion: nil)
+        alert.addAction(UIAlertAction(title: "Remind me", style: .default, handler: { _ in
+            let myphoto = [self.imageInfo[indexPath.row]]
+            self.remindMe = myphoto
+            self.performSegue(withIdentifier: "toSell", sender: self)
+
         }))
+        
         if imageInfo[indexPath.row].bottomInfo != "" {
             alert.addAction(UIAlertAction(title: NSLocalizedString("Send Text message", comment: "Default action"), style: .default, handler: { _ in
                 let composeVC = MFMessageComposeViewController()
@@ -130,16 +131,14 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
             }))
 
         }
-        alert.addAction(UIAlertAction(title: "Remind Me", style: .default, handler: { _ in
-            let myphoto = [self.imageInfo[indexPath.row]]
-            self.remindMe = myphoto
-//            let controller = self.storyboard?.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
-//            controller.receivedItem = item
-//            self.present(controller, animated: true, completion: nil)
-            self.performSegue(withIdentifier: "toSell", sender: self)
-
+        alert.addAction(UIAlertAction(title: "View image 🌁", style: .default, handler: { _ in
+            let controller = self.storyboard?.instantiateViewController(withIdentifier: "PVController") as! PVController
+            controller.myImages = UIImage(data: self.imageInfo[indexPath.row].imageData!)
+            let sheet = SheetViewController(controller: controller, sizes: [.fullScreen])
+            self.present(sheet, animated: false, completion: nil)
         }))
-        
+
+
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Default action"), style: .cancel, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))

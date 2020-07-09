@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let content = UNMutableNotificationContent()
         content.title = "🙌 Just a reminder"
-        content.body = "Your \(name) has been out there for a while. Remind them that you want it back. Send a message is easy if you recorded it."
+        content.body = "Your \(name) has been out there for a while. Remind them that you want it back."
         content.sound = UNNotificationSound.default()
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)

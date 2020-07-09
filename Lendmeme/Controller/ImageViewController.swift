@@ -32,29 +32,19 @@ class ImageViewController: UIViewController, UITableViewDataSource, UITableViewD
         let cell = UITableViewCell()
         return cell
     }
-    var myImages: UIImage?
-    
-    //    @IBAction func datePickerAction(_ sender: Any) {
-    //        let dateformatter = DateFormatter()
-    //        dateformatter.dateStyle = DateFormatter.Style.medium
-    //        let strDate = dateformatter.string(from: datePicker.date)
-    //        selectedDateLabel.text = strDate
-    //        guard let confirmDate = dateformatter.gregorianStartDate else { return }
-    //        selectedDate = confirmDate
-    //
-    //    }
     
     @IBAction func datePickerDidSelectDate(_ sender: UIDatePicker) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { 
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
             let dateformatter = DateFormatter()
-            dateformatter.dateStyle = DateFormatter.Style.long
+            dateformatter.dateStyle = DateFormatter.Style.medium
+            dateformatter.timeStyle = DateFormatter.Style.short
             let strDate = dateformatter.string(from: self.datePicker.date)
-            let alert = UIAlertController(title: "Alert", message: "This has been \(strDate)", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Choose different Date", style: .cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: "This date is perfect", style: .default, handler: { (UIAlertAction) in
+            let alert = UIAlertController(title: "Selected Date", message: "\(strDate)", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Select date", style: .default, handler: { (UIAlertAction) in
                 let selectedDate = sender.date
                 let delegate = UIApplication.shared.delegate as? AppDelegate
-                delegate?.scheduleNotification(at: selectedDate, name: self.receivedItem[0].titleinfo ?? "item")
+                delegate?.scheduleNotification(at: selectedDate, name: self.receivedItem[0].titleinfo?.lowercased() ?? "item")
                 self.dismiss(animated: true, completion: {
                     print("Hello world it is completed")
                 })
@@ -64,11 +54,4 @@ class ImageViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
     }
-    @IBAction func submitAction(_ sender: UIButton) {
-        
-        
-    }
-    
-    
-    
 }
