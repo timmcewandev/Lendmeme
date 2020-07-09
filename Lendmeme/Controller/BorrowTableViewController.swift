@@ -18,7 +18,7 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
     var member: UIImage?
     var imageInfo: [ImageInfo] = []
     var filteredData: [ImageInfo] = []
-    
+    var remindMe: [ImageInfo] = []
     @IBOutlet weak var searchBar: UISearchBar!
     // This method updates filteredData based on the text in the Search Box
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -128,7 +128,17 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
                     self.present(composeVC, animated: true, completion: nil)
                 }
             }))
+
         }
+        alert.addAction(UIAlertAction(title: "Remind Me", style: .default, handler: { _ in
+            let myphoto = [self.imageInfo[indexPath.row]]
+            self.remindMe = myphoto
+//            let controller = self.storyboard?.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
+//            controller.receivedItem = item
+//            self.present(controller, animated: true, completion: nil)
+            self.performSegue(withIdentifier: "toSell", sender: self)
+
+        }))
         
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Default action"), style: .cancel, handler: { _ in
             NSLog("The \"OK\" alert occured.")
@@ -222,6 +232,12 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
             let destinationVC = segue.destination as! BorrowEditorViewController
             destinationVC.dataController = self.dataController
         }
+        if segue.identifier == "toSell" {
+            let destinationVC = segue.destination as! ImageViewController
+//            destinationVC.dataController = self.dataController
+            destinationVC.receivedItem = remindMe
+        }
+
 
     }
     

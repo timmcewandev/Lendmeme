@@ -10,10 +10,11 @@ import UIKit
 import CoreData
 import Firebase
 import GoogleMobileAds
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+    
     var window: UIWindow?
 //    var borrowInfo = [BorrowInfo]()
   
@@ -26,7 +27,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = window?.rootViewController as! UINavigationController
         let BorrowTableViewStarter = navigationController.topViewController as! BorrowTableViewController
         BorrowTableViewStarter.dataController = dataController
+        
+        // MARK: - Notifications
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (accepted, error) in
+            if !accepted {
+                print("Notifications access denied")
+            }
+        }
+//        let action = UNNotificationAction(identifier: "myCategory", title: "Remind me later", options: [])
+//        let category = UNNotificationCategory(identifier: "myCategory", actions: [action], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: "", options: [])
+//        UNUserNotificationCenter.current().setNotificationCategories([category])
+        
+        
         return true
+    }
+    
+    func scheduleNotification(at date: Date, name: String) {
+        
+         let center = UNUserNotificationCenter.current()
+        let calendar = Calendar(identifier: .gregorian)
+        let components = calendar.dateComponents(in: .current, from: date)
+        let newComponents = DateComponents(calendar: calendar, timeZone: .current, month: components.month, day: components.day, hour: components.hour, minute: components.minute)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: newComponents, repeats: true)
+        
+        let content = UNMutableNotificationContent()
+        content.title = "🙌 Just a reminder"
+        content.body = "Your \(name) has been out there for a while. Remind them that you want it back. Send a message is easy if you recorded it."
+        content.sound = UNNotificationSound.default()
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().delegate = self
+        center.add(request) {(error) in
+            if let error = error {
+                print("Uh oh! We had an error: \(error)")
+            }
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -55,6 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func saveViewContext() {
         try? dataController.viewContext.save()
     }
+
 
 }
 

@@ -31,7 +31,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
+	<string>We need permission for when you take a picture to use it in the app. </string>
 	<key>NSContactsUsageDescription</key>
 	<string>We would like to help you by populating the phone number</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

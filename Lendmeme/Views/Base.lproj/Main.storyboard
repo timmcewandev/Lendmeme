@@ -54,7 +54,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="alphabet" returnKeyType="next"/>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cEL-3L-VHw">
-                                <rect key="frame" x="96" y="305.5" width="183.5" height="73.5"/>
+                                <rect key="frame" x="96" y="280.5" width="183.5" height="123.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insert Image Here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9a-2m-lYN">
                                         <rect key="frame" x="0.0" y="0.0" width="183.5" height="25.5"/>
@@ -87,14 +87,14 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remind me" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q87-XC-3VI">
-                                        <rect key="frame" x="48" y="73.5" width="87.5" height="0.0"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remind me" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q87-XC-3VI">
+                                        <rect key="frame" x="48" y="73.5" width="87.5" height="19"/>
                                         <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="17"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JIV-Rj-rkH">
-                                        <rect key="frame" x="67" y="73.5" width="51" height="0.0"/>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JIV-Rj-rkH">
+                                        <rect key="frame" x="67" y="92.5" width="51" height="31"/>
                                         <connections>
                                             <action selector="remindMeAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="HXY-Ar-dtX"/>
                                         </connections>
@@ -139,7 +139,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="UdA-bB-R1T">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="h4n-8G-RfO">
-                            <view key="customView" contentMode="scaleToFill" misplaced="YES" id="V8g-Cx-rVD" customClass="GADBannerView">
+                            <view key="customView" contentMode="scaleToFill" id="V8g-Cx-rVD" customClass="GADBannerView">
                                 <rect key="frame" x="50" y="0.0" width="309" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -158,12 +158,11 @@
                         <outlet property="titleTextOUT" destination="cho-jd-ylO" id="Mef-KU-zgg"/>
                         <outlet property="toolbar" destination="Lua-XB-jXr" id="ffk-ar-eHe"/>
                         <outlet property="topTextOUT" destination="wRM-Rx-5QT" id="oQw-WX-yQx"/>
-                        <segue destination="rhe-qd-6gO" kind="showDetail" identifier="toSelection" id="G1q-bZ-CZY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="730" y="88"/>
+            <point key="canvasLocation" x="1076" y="-364"/>
         </scene>
         <!--Controller-->
         <scene sceneID="712-oz-40N">
@@ -224,7 +223,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JD0-6Q-EQe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-758" y="88"/>
+            <point key="canvasLocation" x="-1782" y="-109"/>
         </scene>
         <!--Back-->
         <scene sceneID="NiU-R5-hvt">
@@ -268,12 +267,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="yKC-hT-w8f">
-                                <rect key="frame" x="27.5" y="234" width="320" height="333"/>
-                                <connections>
-                                    <action selector="datePickerAction:" destination="rhe-qd-6gO" eventType="valueChanged" id="O6J-EO-iCR"/>
-                                </connections>
-                            </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8n1-A8-REf">
                                 <rect key="frame" x="7" y="186" width="361" height="40"/>
                                 <constraints>
@@ -294,6 +287,12 @@
                                     <action selector="submitAction:" destination="rhe-qd-6gO" eventType="touchUpInside" id="Pdw-Gr-lKh"/>
                                 </connections>
                             </button>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" translatesAutoresizingMaskIntoConstraints="NO" id="yKC-hT-w8f">
+                                <rect key="frame" x="27.5" y="234" width="320" height="333"/>
+                                <connections>
+                                    <action selector="datePickerDidSelectDate:" destination="rhe-qd-6gO" eventType="valueChanged" id="OlJ-fk-cg0"/>
+                                </connections>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -314,14 +313,13 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="datePicker" destination="yKC-hT-w8f" id="GSA-Kc-fdT"/>
-                        <outlet property="imageControl" destination="zpZ-vi-hUt" id="owO-cx-AJ2"/>
                         <outlet property="selectedDateLabel" destination="8n1-A8-REf" id="chA-6v-LY7"/>
                         <outlet property="submit" destination="VhD-a0-zgC" id="hDb-PS-eKz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q8b-bi-Ets" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1447" y="88"/>
+            <point key="canvasLocation" x="-92" y="615"/>
         </scene>
         <!--Borrow Table View Controller-->
         <scene sceneID="LIF-v8-nY9">
@@ -423,15 +421,16 @@
                         <outlet property="searchBar" destination="C1q-Th-2rs" id="UOF-Tx-XMp"/>
                         <outlet property="tableView" destination="oZc-Dh-cn1" id="78g-ty-FEs"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="starter" animates="NO" id="aK9-Dv-IeC"/>
+                        <segue destination="rhe-qd-6gO" kind="showDetail" identifier="toSell" id="6cg-LY-G6S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="51H-Ux-MkF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="21.600000000000001" y="87.706146926536732"/>
+            <point key="canvasLocation" x="-92" y="-109"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Gzl-8H-eHQ"/>
+        <segue reference="aK9-Dv-IeC"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera" catalog="system" width="128" height="96"/>

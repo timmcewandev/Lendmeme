@@ -122,7 +122,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     @IBAction func remindMeAction(_ sender: UISwitch) {
         if sender.isOn == true {
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
-            
             self.present(controller, animated: true, completion: nil)
         }
         
@@ -271,7 +270,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         titleTextOUT.isHidden = false
         return screenshotImage
     }
-    
+
     func save() {
         toolbar.isHidden = true
         guard let memedImage = takeScreenshot() else { return }
