@@ -272,6 +272,14 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
 
     func save() {
+        
+        if topTextOUT.text == "" || titleTextOUT.text == "" || bottomTextOUT.text == "" {
+            let alert = UIAlertController(title: "", message: "Missing content in textfield", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default))
+            present(alert, animated: true)
+           
+            return
+        }
         toolbar.isHidden = true
         guard let memedImage = takeScreenshot() else { return }
         let borrowInfo = BorrowInfo(topString: topTextOUT.text!, bottomString: bottomTextOUT.text!, titleString: titleTextOUT.text!, originalImage: imageView.image!, borrowImage: memedImage, hasBeenReturned: false)

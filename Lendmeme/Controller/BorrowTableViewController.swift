@@ -117,7 +117,7 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
                 composeVC.messageComposeDelegate = self
                 guard let number = self.imageInfo[indexPath.row].bottomInfo else {return}
                 guard let image = self.imageInfo[indexPath.row].imageData else {return}
-                if let first = self.imageInfo[indexPath.row].topInfo, let title = self.imageInfo[indexPath.row].titleinfo {
+                if let first = self.imageInfo[indexPath.row].topInfo, let title = self.imageInfo[indexPath.row].titleinfo?.lowercased() {
                     composeVC.body = "Hello \(first) 👋, I was wondering if you are done with the \(title)? Is there a time you could return it? Thanks 👏"
                 } else {
                     composeVC.body = "Hello 👋, I was wondering if you are done with this item? Is there a time you could return it? Thanks 👏"
