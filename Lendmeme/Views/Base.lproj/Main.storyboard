@@ -54,7 +54,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="alphabet" returnKeyType="next"/>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cEL-3L-VHw">
-                                <rect key="frame" x="96" y="280.5" width="183.5" height="123.5"/>
+                                <rect key="frame" x="96" y="305.5" width="183.5" height="73.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insert Image Here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9a-2m-lYN">
                                         <rect key="frame" x="0.0" y="0.0" width="183.5" height="25.5"/>
@@ -87,14 +87,14 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remind me" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q87-XC-3VI">
-                                        <rect key="frame" x="48" y="73.5" width="87.5" height="19"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remind me" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q87-XC-3VI">
+                                        <rect key="frame" x="48" y="73.5" width="87.5" height="0.0"/>
                                         <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="17"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JIV-Rj-rkH">
-                                        <rect key="frame" x="67" y="92.5" width="51" height="31"/>
+                                    <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JIV-Rj-rkH">
+                                        <rect key="frame" x="67" y="73.5" width="51" height="0.0"/>
                                         <connections>
                                             <action selector="remindMeAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="HXY-Ar-dtX"/>
                                         </connections>
@@ -315,17 +315,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" id="C1q-Th-2rs">
-                                <rect key="frame" x="0.0" y="84" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OOM-qB-LPc" customClass="GADBannerView">
                                 <rect key="frame" x="27" y="617" width="321" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="183" estimatedRowHeight="130" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oZc-Dh-cn1">
-                                <rect key="frame" x="0.0" y="128" width="375" height="539"/>
+                                <rect key="frame" x="0.0" y="110" width="375" height="557"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="myCell" rowHeight="183" id="KB0-YQ-Qye" customClass="BorrowTableViewCell" customModule="Lendmeme" customModuleProvider="target">
@@ -354,56 +349,56 @@
                                                     <rect key="frame" x="207" y="0.0" width="129" height="181.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Borrowed Item:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BmH-OP-5g1">
-                                                            <rect key="frame" x="0.0" y="0.0" width="129" height="26"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="129" height="36.5"/>
                                                             <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Borrowed Item" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdM-Gf-BpT">
-                                                            <rect key="frame" x="8.5" y="26" width="112" height="26"/>
+                                                            <rect key="frame" x="8.5" y="36.5" width="112" height="36"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Borrower:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rx-3G-L52">
-                                                            <rect key="frame" x="0.0" y="52" width="129" height="26"/>
+                                                            <rect key="frame" x="0.0" y="72.5" width="129" height="36.5"/>
                                                             <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Borrowed Item" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vdk-b2-UWE">
-                                                            <rect key="frame" x="8.5" y="78" width="112" height="25.5"/>
+                                                            <rect key="frame" x="8.5" y="109" width="112" height="36"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reminder Date:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNV-C2-AAF">
-                                                            <rect key="frame" x="0.0" y="103.5" width="129" height="26"/>
+                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reminder Date:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNV-C2-AAF">
+                                                            <rect key="frame" x="0.0" y="145" width="129" height="0.0"/>
                                                             <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Borrowed Item" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7h-2j-0fX">
-                                                            <rect key="frame" x="8.5" y="129.5" width="112" height="26"/>
+                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Borrowed Item" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7h-2j-0fX">
+                                                            <rect key="frame" x="8.5" y="145" width="112" height="0.0"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="rws-28-Q5r">
-                                                            <rect key="frame" x="0.0" y="155.5" width="129" height="26"/>
+                                                            <rect key="frame" x="0.0" y="145" width="129" height="36.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Borrowed Date:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWU-zU-pvt" userLabel="date Status">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="96.5" height="26"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="96.5" height="36.5"/>
                                                                     <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBx-wS-xlC">
-                                                                    <rect key="frame" x="96.5" y="0.0" width="32.5" height="26"/>
+                                                                    <rect key="frame" x="96.5" y="0.0" width="32.5" height="36.5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="44" id="xOF-hH-VWO"/>
                                                                     </constraints>
@@ -455,6 +450,11 @@
                                     <outlet property="delegate" destination="mPV-sN-QLf" id="H6E-F5-aF3"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" id="C1q-Th-2rs">
+                                <rect key="frame" x="0.0" y="66" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -471,6 +471,18 @@
                     </view>
                     <navigationItem key="navigationItem" id="xXf-Ly-zqP">
                         <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="yQY-1n-QQ2">
+                            <rect key="frame" x="15.5" y="6" width="305" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="All"/>
+                                <segment title="Returned"/>
+                                <segment title="Not Returned"/>
+                            </segments>
+                            <connections>
+                                <action selector="segmentControl:" destination="mPV-sN-QLf" eventType="valueChanged" id="FcU-xl-RWc"/>
+                            </connections>
+                        </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" style="plain" id="j2l-nd-Mkh">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="show" identifier="toPhoto" id="Gzl-8H-eHQ"/>
@@ -480,6 +492,7 @@
                     <connections>
                         <outlet property="bannerView" destination="OOM-qB-LPc" id="P5e-pc-wBW"/>
                         <outlet property="searchBar" destination="C1q-Th-2rs" id="UOF-Tx-XMp"/>
+                        <outlet property="segmentOut" destination="yQY-1n-QQ2" id="Bdp-2A-nJQ"/>
                         <outlet property="tableView" destination="oZc-Dh-cn1" id="78g-ty-FEs"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="starter" animates="NO" id="aK9-Dv-IeC"/>
                         <segue destination="rhe-qd-6gO" kind="showDetail" identifier="toSell" id="6cg-LY-G6S"/>

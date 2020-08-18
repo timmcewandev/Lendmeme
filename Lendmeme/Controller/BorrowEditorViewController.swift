@@ -282,15 +282,16 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         }
         toolbar.isHidden = true
         guard let memedImage = takeScreenshot() else { return }
-        let borrowInfo = BorrowInfo(topString: topTextOUT.text!, bottomString: bottomTextOUT.text!, titleString: titleTextOUT.text!, originalImage: imageView.image!, borrowImage: memedImage, hasBeenReturned: false)
+        let borrowInfo = BorrowInfo(topString: self.topTextOUT.text ?? "None", bottomString: bottomTextOUT.text!, titleString: titleTextOUT.text!, originalImage: imageView.image!, borrowImage: memedImage, hasBeenReturned: false)
         
         let getImageInfo = ImageInfo(context: dataController.viewContext)
         getImageInfo.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)
-        if let topName = nameOfBorrower {
-            getImageInfo.topInfo = topName
-        } else {
-            getImageInfo.topInfo = borrowInfo.topString
-        }
+        getImageInfo.topInfo = self.topTextOUT.text ?? "None"
+//        if let topName = nameOfBorrower {
+//            getImageInfo.topInfo = self.topTextOUT.text ?? "None"
+//        } else {
+//            getImageInfo.topInfo = borrowInfo.topString
+//        }
         getImageInfo.titleinfo = borrowInfo.titleString
         getImageInfo.bottomInfo = borrowInfo.bottomString
         getImageInfo.creationDate = Date()
