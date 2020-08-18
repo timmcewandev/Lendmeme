@@ -31,13 +31,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>We need permission for when you take a picture to use it in the app. </string>
+	<string> would like permision to use photo you take in the app</string>
 	<key>NSContactsUsageDescription</key>
 	<string>We would like to help you by populating the phone number</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>needs permission to write photos...</string>
+	<string>needs permission to write photos</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string> would like permision to use photo library</string>
+	<string>We would like permision to use photo library within the app</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

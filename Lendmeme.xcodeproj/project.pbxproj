@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1C9CCFA015E2DB2BB876C6F1 /* Pods_Lendmeme.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FFBA5C4B1F6641B98CC7E91 /* Pods_Lendmeme.framework */; };
+		22452C0724CEBE4100899312 /* LendmemeUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22452C0624CEBE4100899312 /* LendmemeUnitTests.swift */; };
 		2257DE462422B908009FD6BC /* BorrowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2257DE452422B908009FD6BC /* BorrowTableViewCell.swift */; };
 		22588106243E8C33002A2E37 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22588105243E8C33002A2E37 /* GoogleService-Info.plist */; };
+		225D698E24BA338600E03995 /* BorrowUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D698D24BA338600E03995 /* BorrowUpdateViewController.swift */; };
 		22F2ED8B249DB64200CBAA6B /* PVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F2ED8A249DB64200CBAA6B /* PVController.swift */; };
 		9B088C0B200DB28F00601CA9 /* BorrowInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B088C0A200DB28F00601CA9 /* BorrowInfo.swift */; };
 		9B39AA8A22F40B3B007EF340 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B39AA8922F40B3B007EF340 /* DataController.swift */; };
@@ -23,11 +25,25 @@
 		9BEF0BC22005356D0065B5A8 /* BorrowTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF0BC12005356D0065B5A8 /* BorrowTableViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		22452C0924CEBE4100899312 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9BDD35C71FD88B0C005ADBCD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9BDD35CE1FD88B0C005ADBCD;
+			remoteInfo = Lendmeme;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		14DFB47482A19BF524419586 /* Pods-Lendmeme.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lendmeme.release.xcconfig"; path = "Target Support Files/Pods-Lendmeme/Pods-Lendmeme.release.xcconfig"; sourceTree = "<group>"; };
 		1B8761B9DA191EB58377A18B /* Pods-iborrow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iborrow.debug.xcconfig"; path = "Target Support Files/Pods-iborrow/Pods-iborrow.debug.xcconfig"; sourceTree = "<group>"; };
+		22452C0424CEBE4100899312 /* LendmemeUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LendmemeUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22452C0624CEBE4100899312 /* LendmemeUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LendmemeUnitTests.swift; sourceTree = "<group>"; };
+		22452C0824CEBE4100899312 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2257DE452422B908009FD6BC /* BorrowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowTableViewCell.swift; sourceTree = "<group>"; };
 		22588105243E8C33002A2E37 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		225D698D24BA338600E03995 /* BorrowUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowUpdateViewController.swift; sourceTree = "<group>"; };
 		22F2ED8A249DB64200CBAA6B /* PVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVController.swift; sourceTree = "<group>"; };
 		2FFBA5C4B1F6641B98CC7E91 /* Pods_Lendmeme.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lendmeme.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6601F2216B378B12D2940F77 /* Pods-iborrow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iborrow.release.xcconfig"; path = "Target Support Files/Pods-iborrow/Pods-iborrow.release.xcconfig"; sourceTree = "<group>"; };
@@ -48,6 +64,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		22452C0124CEBE4100899312 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9BDD35CC1FD88B0C005ADBCD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -65,6 +88,15 @@
 				2FFBA5C4B1F6641B98CC7E91 /* Pods_Lendmeme.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		22452C0524CEBE4100899312 /* LendmemeUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				22452C0624CEBE4100899312 /* LendmemeUnitTests.swift */,
+				22452C0824CEBE4100899312 /* Info.plist */,
+			);
+			path = LendmemeUnitTests;
 			sourceTree = "<group>";
 		};
 		2282C184240E178100C41C34 /* Model */ = {
@@ -124,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				9BDD35D11FD88B0D005ADBCD /* Lendmeme */,
+				22452C0524CEBE4100899312 /* LendmemeUnitTests */,
 				9BDD35D01FD88B0D005ADBCD /* Products */,
 				320D02C71229A07307D764D2 /* Pods */,
 				21AA926064A646F41B1A3A5F /* Frameworks */,
@@ -134,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				9BDD35CF1FD88B0D005ADBCD /* Lendmeme.app */,
+				22452C0424CEBE4100899312 /* LendmemeUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -146,6 +180,7 @@
 				2282C185240E17A400C41C34 /* Controller */,
 				2282C186240E17CC00C41C34 /* Views */,
 				2282C187240E17F700C41C34 /* Supporting files */,
+				225D698D24BA338600E03995 /* BorrowUpdateViewController.swift */,
 			);
 			path = Lendmeme;
 			sourceTree = "<group>";
@@ -153,6 +188,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		22452C0324CEBE4100899312 /* LendmemeUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22452C0D24CEBE4100899312 /* Build configuration list for PBXNativeTarget "LendmemeUnitTests" */;
+			buildPhases = (
+				22452C0024CEBE4100899312 /* Sources */,
+				22452C0124CEBE4100899312 /* Frameworks */,
+				22452C0224CEBE4100899312 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22452C0A24CEBE4100899312 /* PBXTargetDependency */,
+			);
+			name = LendmemeUnitTests;
+			productName = LendmemeUnitTests;
+			productReference = 22452C0424CEBE4100899312 /* LendmemeUnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		9BDD35CE1FD88B0C005ADBCD /* Lendmeme */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BDD35E11FD88B0D005ADBCD /* Build configuration list for PBXNativeTarget "Lendmeme" */;
@@ -179,10 +232,15 @@
 		9BDD35C71FD88B0C005ADBCD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0910;
+				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = sudo;
 				TargetAttributes = {
+					22452C0324CEBE4100899312 = {
+						CreatedOnToolsVersion = 11.5;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 9BDD35CE1FD88B0C005ADBCD;
+					};
 					9BDD35CE1FD88B0C005ADBCD = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
@@ -208,11 +266,19 @@
 			projectRoot = "";
 			targets = (
 				9BDD35CE1FD88B0C005ADBCD /* Lendmeme */,
+				22452C0324CEBE4100899312 /* LendmemeUnitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		22452C0224CEBE4100899312 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9BDD35CD1FD88B0C005ADBCD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -301,6 +367,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		22452C0024CEBE4100899312 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22452C0724CEBE4100899312 /* LendmemeUnitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9BDD35CB1FD88B0C005ADBCD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -313,11 +387,20 @@
 				9B518CA92229CDDC004B1050 /* ImageViewController.swift in Sources */,
 				9B39AA8A22F40B3B007EF340 /* DataController.swift in Sources */,
 				9BDD35D31FD88B0D005ADBCD /* AppDelegate.swift in Sources */,
+				225D698E24BA338600E03995 /* BorrowUpdateViewController.swift in Sources */,
 				22F2ED8B249DB64200CBAA6B /* PVController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		22452C0A24CEBE4100899312 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9BDD35CE1FD88B0C005ADBCD /* Lendmeme */;
+			targetProxy = 22452C0924CEBE4100899312 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		9BDD35D61FD88B0D005ADBCD /* Main.storyboard */ = {
@@ -339,6 +422,49 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		22452C0B24CEBE4100899312 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A9UMG393DW;
+				INFOPLIST_FILE = LendmemeUnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.themcewantech.www.LendmemeUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lendmeme.app/Lendmeme";
+			};
+			name = Debug;
+		};
+		22452C0C24CEBE4100899312 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A9UMG393DW;
+				INFOPLIST_FILE = LendmemeUnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.themcewantech.www.LendmemeUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lendmeme.app/Lendmeme";
+			};
+			name = Release;
+		};
 		9BDD35DF1FD88B0D005ADBCD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -454,7 +580,7 @@
 				CODE_SIGN_ENTITLEMENTS = Lendmeme/Lendmeme.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = A9UMG393DW;
 				INFOPLIST_FILE = "Lendmeme/Supporting files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
@@ -476,7 +602,7 @@
 				CODE_SIGN_ENTITLEMENTS = Lendmeme/Lendmeme.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = A9UMG393DW;
 				INFOPLIST_FILE = "Lendmeme/Supporting files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
@@ -493,6 +619,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		22452C0D24CEBE4100899312 /* Build configuration list for PBXNativeTarget "LendmemeUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22452C0B24CEBE4100899312 /* Debug */,
+				22452C0C24CEBE4100899312 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9BDD35CA1FD88B0C005ADBCD /* Build configuration list for PBXProject "Lendmeme" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

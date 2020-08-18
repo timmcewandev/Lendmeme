@@ -11,6 +11,7 @@ import GoogleMobileAds
 
 class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessageComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
     // MARK: - Variables
@@ -89,12 +90,16 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
         dateFormatter.dateFormat = "MMM dd, yyyy"
         let todaysDate = dateFormatter.string(from: date)
         cell.myDateLabel.text = todaysDate
-        cell.myImageView.contentMode = .left
+        cell.myImageView.contentMode = .scaleAspectFill
         cell.myImageView.image = UIImage(data: memeImages.imageData!)
         cell.accessoryType = .none
-        cell.myDateLabel.backgroundColor = .systemPink
+        cell.myDateLabel.backgroundColor = .systemTeal
+        cell.dateToStatusLabel.text = "Date:"
+        cell.titleItemLabel.text = memeImages.titleinfo
+        cell.nameOfBorrower.text = memeImages.topInfo
         if imageInfo[indexPath.row].hasBeenReturned == true {
-            cell.myDateLabel.text = "RETURNED 👍"
+            cell.dateToStatusLabel.text = "Status:"
+            cell.myDateLabel.text = "Returned ✅"
             cell.myDateLabel.backgroundColor = .systemGreen
         }
         return cell
@@ -139,6 +144,13 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
             self.performSegue(withIdentifier: "toSell", sender: self)
             
         }))
+        
+//        alert.addAction(UIAlertAction(title: "Edit", style: .default, handler: { _ in
+//            let myphoto = [self.imageInfo[indexPath.row]]
+//            self.remindMe = myphoto
+//            self.performSegue(withIdentifier: "toEdit", sender: self)
+//
+//        }))
         
         if imageInfo[indexPath.row].bottomInfo != "" {
             alert.addAction(UIAlertAction(title: NSLocalizedString("Send Text message", comment: "Default action"), style: .default, handler: { _ in
@@ -279,6 +291,12 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
             //            destinationVC.dataController = self.dataController
             destinationVC.receivedItem = remindMe
         }
+        
+//        if segue.identifier == "toEdit" {
+//            let destinationVC = segue.destination as! BorrowUpdateViewController
+            //            destinationVC.dataController = self.dataController
+//            destinationVC.receivedItem = remindMe
+//        }
         
         
     }
