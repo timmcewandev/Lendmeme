@@ -76,8 +76,6 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
             performSegue(withIdentifier: "starter", sender: self)
         }
         self.navigationController?.isNavigationBarHidden = false
-//        self.segmentOut.didMoveToWindow()
-        
         tableView.reloadData()
     }
     
@@ -149,7 +147,7 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
                 tableView.cellForRow(at: indexPath)
                 self.dataController.viewContext.refreshAllObjects()
                 self.segmentControler(atSeg: 2, onReturn: false)
-
+                
                 self.segmentOut.reloadInputViews()
             }))
         } else {
@@ -161,9 +159,8 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
                 tableView.cellForRow(at: indexPath)
                 self.dataController.viewContext.refreshAllObjects()
                 self.segmentControler(atSeg: 1, onReturn: true)
-                    tableView.reloadData()
+                self.tableView.reloadData()
                 self.segmentOut.reloadInputViews()
-//                tableView.reloadData()
             }))
         }
         
@@ -175,13 +172,6 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
             self.performSegue(withIdentifier: "toSell", sender: self)
             
         }))
-        
-        //        alert.addAction(UIAlertAction(title: "Edit", style: .default, handler: { _ in
-        //            let myphoto = [self.imageInfo[indexPath.row]]
-        //            self.remindMe = myphoto
-        //            self.performSegue(withIdentifier: "toEdit", sender: self)
-        //
-        //        }))
         
         if imageInfo[indexPath.row].bottomInfo != "" {
             alert.addAction(UIAlertAction(title: NSLocalizedString("Send Text message", comment: "Default action"), style: .default, handler: { _ in
@@ -233,7 +223,7 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
     
     @IBAction func segmentControl(_ sender: Any) {
         if segmentOut.selectedSegmentIndex == 0 {
-                    let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
+            let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
             let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
             fetchRequest.sortDescriptors = [sortDescriptor]
             if let result = try? dataController.viewContext.fetch(fetchRequest){
@@ -369,17 +359,8 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
         }
         if segue.identifier == "toSell" {
             let destinationVC = segue.destination as! ImageViewController
-            //            destinationVC.dataController = self.dataController
             destinationVC.receivedItem = remindMe
         }
-        
-        //        if segue.identifier == "toEdit" {
-        //            let destinationVC = segue.destination as! BorrowUpdateViewController
-        //            destinationVC.dataController = self.dataController
-        //            destinationVC.receivedItem = remindMe
-        //        }
-        
-        
     }
 }
 

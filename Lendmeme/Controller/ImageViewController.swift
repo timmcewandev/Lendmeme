@@ -45,9 +45,7 @@ class ImageViewController: UIViewController, UITableViewDataSource, UITableViewD
                 let selectedDate = sender.date
                 let delegate = UIApplication.shared.delegate as? AppDelegate
                 delegate?.scheduleNotification(at: selectedDate, name: self.receivedItem[0].titleinfo?.lowercased() ?? "item")
-                self.dismiss(animated: true, completion: {
-                    print("Hello world it is completed")
-                })
+                self.dismiss(animated: true, completion: nil)
             }))
             self.present(alert, animated: true, completion: nil)
             

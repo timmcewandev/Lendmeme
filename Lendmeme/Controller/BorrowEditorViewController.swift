@@ -287,11 +287,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         let getImageInfo = ImageInfo(context: dataController.viewContext)
         getImageInfo.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)
         getImageInfo.topInfo = self.topTextOUT.text ?? "None"
-//        if let topName = nameOfBorrower {
-//            getImageInfo.topInfo = self.topTextOUT.text ?? "None"
-//        } else {
-//            getImageInfo.topInfo = borrowInfo.topString
-//        }
         getImageInfo.titleinfo = borrowInfo.titleString
         getImageInfo.bottomInfo = borrowInfo.bottomString
         getImageInfo.creationDate = Date()
