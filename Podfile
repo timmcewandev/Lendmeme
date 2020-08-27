@@ -8,7 +8,6 @@ pod 'FittedSheets'
 pod 'Firebase/Analytics'
 pod 'Firebase/Crashlytics'
 pod 'Firebase/Performance'
-pod 'Google-Mobile-Ads-SDK'
 pod 'BubbleTransition', '~> 3.2.0'
   # Pods for Lendmeme
 

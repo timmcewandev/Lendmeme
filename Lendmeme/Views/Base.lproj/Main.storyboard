@@ -157,7 +157,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="bannerView" destination="V8g-Cx-rVD" id="aFO-sq-8h0"/>
                         <outlet property="bottomTextOUT" destination="PMx-xr-uw1" id="za2-Do-dxn"/>
                         <outlet property="cameraButton" destination="GYI-Os-X7S" id="RbF-FM-Ic0"/>
                         <outlet property="cancelOut" destination="IYC-5o-RPP" id="czF-Dv-4iJ"/>
@@ -330,7 +329,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="183" estimatedRowHeight="130" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oZc-Dh-cn1">
-                                <rect key="frame" x="0.0" y="110" width="375" height="557"/>
+                                <rect key="frame" x="0.0" y="134" width="375" height="533"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="myCell" rowHeight="183" id="KB0-YQ-Qye" customClass="BorrowTableViewCell" customModule="Lendmeme" customModuleProvider="target">
@@ -461,7 +460,7 @@
                                 </connections>
                             </tableView>
                             <searchBar contentMode="redraw" id="C1q-Th-2rs">
-                                <rect key="frame" x="0.0" y="66" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
@@ -474,7 +473,7 @@
                             <constraint firstItem="oZc-Dh-cn1" firstAttribute="bottom" secondItem="x9A-SQ-b9v" secondAttribute="bottom" id="UJ0-7A-afw"/>
                             <constraint firstItem="OOM-qB-LPc" firstAttribute="top" secondItem="rxw-xU-awN" secondAttribute="top" constant="617" id="VSf-uq-Z4M"/>
                             <constraint firstItem="oZc-Dh-cn1" firstAttribute="leading" secondItem="C1q-Th-2rs" secondAttribute="leading" id="aJa-in-E0w"/>
-                            <constraint firstItem="oZc-Dh-cn1" firstAttribute="top" secondItem="C1q-Th-2rs" secondAttribute="bottom" id="cNo-WK-cvu"/>
+                            <constraint firstItem="oZc-Dh-cn1" firstAttribute="top" secondItem="C1q-Th-2rs" secondAttribute="bottom" constant="2" id="aNE-KA-gBM"/>
                             <constraint firstItem="oZc-Dh-cn1" firstAttribute="centerX" secondItem="OOM-qB-LPc" secondAttribute="centerX" id="w3h-Qh-H0x"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="x9A-SQ-b9v"/>
@@ -500,7 +499,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="bannerView" destination="OOM-qB-LPc" id="P5e-pc-wBW"/>
                         <outlet property="searchBar" destination="C1q-Th-2rs" id="UOF-Tx-XMp"/>
                         <outlet property="segmentOut" destination="yQY-1n-QQ2" id="Bdp-2A-nJQ"/>
                         <outlet property="tableView" destination="oZc-Dh-cn1" id="78g-ty-FEs"/>

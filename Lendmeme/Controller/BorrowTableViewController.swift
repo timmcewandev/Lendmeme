@@ -7,14 +7,14 @@ import UIKit
 import FittedSheets
 import CoreData
 import MessageUI
-import GoogleMobileAds
+//import GoogleMobileAds
 
 class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessageComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
     
     @IBOutlet weak var segmentOut: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var bannerView: GADBannerView!
+//    @IBOutlet weak var bannerView: GADBannerView!
     // MARK: - Variables
     var dataController:DataController!
     var member: UIImage?
@@ -52,10 +52,10 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
         super.viewDidLoad()
         self.reloadInputViews()
         searchBar.delegate = self
-        bannerView.adUnitID = "ca-app-pub-6335247657896931/7400741709"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
-        bannerView.delegate = self
+//        bannerView.adUnitID = "ca-app-pub-6335247657896931/7400741709"
+//        bannerView.rootViewController = self
+//        bannerView.load(GADRequest())
+//        bannerView.delegate = self
     }
     
     
@@ -364,12 +364,12 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
     }
 }
 
-extension BorrowTableViewController: GADBannerViewDelegate {
-    private func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        print("Recieved ad")
-    }
-    
-    public func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-        print(error)
-    }
-}
+//extension BorrowTableViewController: GADBannerViewDelegate {
+//    private func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+//        print("Recieved ad")
+//    }
+//    
+//    public func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+//        print(error)
+//    }
+//}

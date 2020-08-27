@@ -9,7 +9,7 @@ import Contacts
 import AVFoundation
 import BubbleTransition
 import FittedSheets
-import GoogleMobileAds
+//import GoogleMobileAds
 
 class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIViewControllerTransitioningDelegate {
     
@@ -20,7 +20,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     var nameOfBorrower: String?
     let transition = BubbleTransition()
     var selectedDate: String?
-    var interstitial: GADInterstitial!
+//    var interstitial: GADInterstitial!
     var imageInfo: [ImageInfo] = []
     let borrowTextAttributes: [String : Any] = [
         NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
@@ -29,7 +29,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     ]
     
     // MARK: Outlets
-    @IBOutlet weak var bannerView: GADBannerView!
+//    @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var shareOUT: UIBarButtonItem!
     @IBOutlet weak var bottomTextOUT: UITextField!
@@ -53,14 +53,14 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         bottomTextOUT.inputAccessoryView = accessoryView()
         bottomTextOUT.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
         view.addSubview(bottomTextOUT)
-        bannerView.adUnitID = "ca-app-pub-6335247657896931/5485024801"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
-        bannerView.delegate = self
-        
-        interstitial = GADInterstitial(adUnitID: "ca-app-pub-6335247657896931/9991246021")
-        let request = GADRequest()
-        interstitial.load(request)
+//        bannerView.adUnitID = "ca-app-pub-6335247657896931/5485024801"
+//        bannerView.rootViewController = self
+//        bannerView.load(GADRequest())
+//        bannerView.delegate = self
+//
+//        interstitial = GADInterstitial(adUnitID: "ca-app-pub-6335247657896931/9991246021")
+//        let request = GADRequest()
+//        interstitial.load(request)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,15 +107,15 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     @IBAction func share(sender: AnyObject) {
-        if imageInfo.count > 1 {
-            let firstNum = arc4random() % 5
-            let secondNum = arc4random() % 5
-            if firstNum == secondNum {
-                if (interstitial.isReady) {
-                    interstitial.present(fromRootViewController: self)
-                }
-            }
-        }
+//        if imageInfo.count > 1 {
+//            let firstNum = arc4random() % 5
+//            let secondNum = arc4random() % 5
+//            if firstNum == secondNum {
+//                if (interstitial.isReady) {
+//                    interstitial.present(fromRootViewController: self)
+//                }
+//            }
+//        }
         self.save()
     }
     
@@ -418,15 +418,15 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     
 }
 
-extension BorrowEditorViewController: GADBannerViewDelegate {
-    private func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        print("Recieved ad")
-    }
-    
-    public func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-        print(error)
-    }
-}
+//extension BorrowEditorViewController: GADBannerViewDelegate {
+//    private func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+//        print("Recieved ad")
+//    }
+//
+//    public func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+//        print(error)
+//    }
+//}
 
 
 

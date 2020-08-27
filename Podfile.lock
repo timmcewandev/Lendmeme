@@ -73,8 +73,6 @@ PODS:
     - "GoogleUtilities/NSData+zlib (~> 6.2)"
     - Protobuf (>= 3.9.2, ~> 3.9)
   - FittedSheets (1.1.3)
-  - Google-Mobile-Ads-SDK (7.57.0):
-    - GoogleAppMeasurement (~> 6.0)
   - GoogleAppMeasurement (6.3.1):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
@@ -124,7 +122,6 @@ DEPENDENCIES:
   - Firebase/Crashlytics
   - Firebase/Performance
   - FittedSheets
-  - Google-Mobile-Ads-SDK
 
 SPEC REPOS:
   trunk:
@@ -142,7 +139,6 @@ SPEC REPOS:
     - FirebasePerformance
     - FirebaseRemoteConfig
     - FittedSheets
-    - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
@@ -168,7 +164,6 @@ SPEC CHECKSUMS:
   FirebasePerformance: a9b0985f80d2a5cf780cf9bd4db920b45c200507
   FirebaseRemoteConfig: 47abf7a04a9082091955ea555aa79cfdd249b19c
   FittedSheets: fe34249dda374bee84a9108dd6b090706674ff79
-  Google-Mobile-Ads-SDK: ec897018b9ab9b447e7aa4876e7f75aba13ba2de
   GoogleAppMeasurement: c29d405ff76e18551b5d158eaba6753fda8c7542
   GoogleDataTransport: a857c6a002d201b524dd4bc2ed7e7355ed07e785
   GoogleDataTransportCCTSupport: 32f75fbe904c82772fcbb6b6bd4525bfb6f2a862
@@ -179,6 +174,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
 
-PODFILE CHECKSUM: 40fcb1f39272c73a1d87eaf0dc51af3486349f7f
+PODFILE CHECKSUM: cb5d2aa7164bd6ab8b2782da5b73934ca1f16594
 
 COCOAPODS: 1.9.3
