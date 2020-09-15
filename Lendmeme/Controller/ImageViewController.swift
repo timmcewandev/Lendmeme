@@ -6,11 +6,16 @@
 import UIKit
 import Foundation
 
+protocol getDateForReminderDelegate {
+    func getDate(date: Date, imageInfo: ImageInfo)
+}
+
+
 class ImageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UNUserNotificationCenterDelegate  {
-    
     // MARK: - Variables
     var selectedDate = Date()
     var receivedItem: [ImageInfo] = []
+    var delegater: getDateForReminderDelegate?
     // MARK: - Outlets
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var selectedDateLabel: UILabel!
@@ -18,10 +23,8 @@ class ImageViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let todaysDate = Date()
         datePicker.minimumDate = todaysDate
-        print("\(receivedItem.count)")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,6 +46,9 @@ class ImageViewController: UIViewController, UITableViewDataSource, UITableViewD
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Remind me", style: .default, handler: { (UIAlertAction) in
                 let selectedDate = sender.date
+                let imageInfo = self.receivedItem[0]
+                self.delegater?.getDate(date: selectedDate, imageInfo: imageInfo)
+                
                 let delegate = UIApplication.shared.delegate as? AppDelegate
                 delegate?.scheduleNotification(at: selectedDate, name: self.receivedItem[0].titleinfo?.lowercased() ?? "item")
                 self.dismiss(animated: true, completion: nil)

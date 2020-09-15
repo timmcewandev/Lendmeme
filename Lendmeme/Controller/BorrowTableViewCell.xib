@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BorrowTableViewCell" rowHeight="270" id="KGk-i7-Jjw" customClass="BorrowTableViewCell" customModule="Lendmeme" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="514" height="206"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="514" height="206"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3aq-MU-Oi6">
+                        <rect key="frame" x="286" y="0.0" width="228" height="206"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="3aq-MU-Oi6" secondAttribute="height" multiplier="129:103" constant="-30" id="gEc-Lp-Vlo"/>
+                            <constraint firstAttribute="width" constant="228" id="mOu-qI-RaF"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Borrowed item:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQw-0Q-sU8">
+                        <rect key="frame" x="10" y="10" width="268" height="18"/>
+                        <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irG-7P-kHE">
+                        <rect key="frame" x="10" y="28" width="218" height="15.5"/>
+                        <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cP-K0-NPO">
+                        <rect key="frame" x="10" y="46.5" width="274" height="18"/>
+                        <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vac-lW-ZZB">
+                        <rect key="frame" x="10" y="65.5" width="274" height="16"/>
+                        <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Borrowed:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kjh-Or-5kI">
+                        <rect key="frame" x="10" y="85.5" width="115" height="18"/>
+                        <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status: Not Returned" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aW6-XB-8u0">
+                        <rect key="frame" x="10" y="123" width="154" height="18"/>
+                        <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTA-2M-Kbw">
+                        <rect key="frame" x="10" y="103.5" width="29.5" height="15.5"/>
+                        <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t1x-zq-AjR">
+                        <rect key="frame" x="10" y="163" width="8" height="18"/>
+                        <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reminder Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgX-BB-9iJ">
+                        <rect key="frame" x="10" y="145" width="116" height="18"/>
+                        <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="afh-qA-IwQ">
+                        <rect key="frame" x="444" y="13" width="49.5" height="44"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="afh-qA-IwQ" secondAttribute="height" multiplier="52:45" constant="-8.2777777777777715" id="CSL-qL-tr0"/>
+                            <constraint firstAttribute="height" constant="50" id="fZs-ru-A1h"/>
+                        </constraints>
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small" weight="light"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="12"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstItem="ZgX-BB-9iJ" firstAttribute="top" secondItem="aW6-XB-8u0" secondAttribute="bottom" constant="4" id="0wY-tI-GBt"/>
+                    <constraint firstItem="Kjh-Or-5kI" firstAttribute="top" secondItem="vac-lW-ZZB" secondAttribute="bottom" constant="4" id="4fX-FZ-Lbe"/>
+                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="BQw-0Q-sU8" secondAttribute="trailing" constant="8" id="5GM-mY-DF2"/>
+                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="7ID-Qa-RXS"/>
+                    <constraint firstItem="aW6-XB-8u0" firstAttribute="top" secondItem="cTA-2M-Kbw" secondAttribute="bottom" constant="4" id="9lP-gM-pgk"/>
+                    <constraint firstItem="irG-7P-kHE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Bum-YG-3r1"/>
+                    <constraint firstItem="8cP-K0-NPO" firstAttribute="top" secondItem="irG-7P-kHE" secondAttribute="bottom" constant="3" id="CoS-Hw-S8m"/>
+                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="irG-7P-kHE" secondAttribute="trailing" constant="58" id="F89-rc-e2a"/>
+                    <constraint firstItem="vac-lW-ZZB" firstAttribute="top" secondItem="8cP-K0-NPO" secondAttribute="bottom" constant="1" id="Giy-B1-9Q5"/>
+                    <constraint firstItem="Kjh-Or-5kI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="SPl-cH-6hl"/>
+                    <constraint firstItem="afh-qA-IwQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Sac-R1-cfP"/>
+                    <constraint firstItem="8cP-K0-NPO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Tef-aZ-scD"/>
+                    <constraint firstAttribute="trailing" secondItem="afh-qA-IwQ" secondAttribute="trailing" constant="20.5" id="U96-U1-hqb"/>
+                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="vac-lW-ZZB" secondAttribute="trailing" constant="2" id="ZU7-yP-Qmy"/>
+                    <constraint firstItem="8cP-K0-NPO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-10" id="cvF-Hr-6sV"/>
+                    <constraint firstAttribute="bottom" secondItem="3aq-MU-Oi6" secondAttribute="bottom" id="hxz-ff-h7A"/>
+                    <constraint firstItem="BQw-0Q-sU8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="i87-hw-FP2"/>
+                    <constraint firstItem="cTA-2M-Kbw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="kxz-RO-b2K"/>
+                    <constraint firstItem="cTA-2M-Kbw" firstAttribute="top" secondItem="Kjh-Or-5kI" secondAttribute="bottom" id="lEW-59-GBd"/>
+                    <constraint firstItem="ZgX-BB-9iJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="q3r-yJ-A2C"/>
+                    <constraint firstItem="aW6-XB-8u0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="qG2-8U-aGB"/>
+                    <constraint firstItem="t1x-zq-AjR" firstAttribute="top" secondItem="ZgX-BB-9iJ" secondAttribute="bottom" id="qWk-9K-Em1"/>
+                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="8cP-K0-NPO" secondAttribute="trailing" constant="2" id="tQW-Di-w2u"/>
+                    <constraint firstItem="BQw-0Q-sU8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="taK-QK-pTP"/>
+                    <constraint firstItem="vac-lW-ZZB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="vjc-sd-b14"/>
+                    <constraint firstItem="t1x-zq-AjR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="wQS-b1-1Vh"/>
+                    <constraint firstItem="irG-7P-kHE" firstAttribute="top" secondItem="BQw-0Q-sU8" secondAttribute="bottom" id="wnw-zX-9AA"/>
+                    <constraint firstAttribute="trailing" secondItem="3aq-MU-Oi6" secondAttribute="trailing" id="wuI-by-bbg"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="borrowedDateLabel" destination="cTA-2M-Kbw" id="Tlj-uy-Kkc"/>
+                <outlet property="myImageView" destination="3aq-MU-Oi6" id="Ekc-2R-kzA"/>
+                <outlet property="nameOfBorrower" destination="vac-lW-ZZB" id="Dlz-gT-JBf"/>
+                <outlet property="reminderDate" destination="t1x-zq-AjR" id="KaT-58-3ji"/>
+                <outlet property="reminderDateIcon" destination="afh-qA-IwQ" id="4GI-Ai-Mue"/>
+                <outlet property="statusLabel" destination="aW6-XB-8u0" id="XbD-We-D86"/>
+                <outlet property="titleItemLabel" destination="irG-7P-kHE" id="nKC-F4-syB"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="207.58928571428569"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="calendar" catalog="system" width="128" height="106"/>
+    </resources>
+</document>

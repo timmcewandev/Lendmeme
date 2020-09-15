@@ -9,7 +9,9 @@ import CoreData
 import MessageUI
 //import GoogleMobileAds
 
-class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessageComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessageComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, getDateForReminderDelegate, UIGestureRecognizerDelegate {
+
+    
     
     
     @IBOutlet weak var segmentOut: UISegmentedControl!
@@ -21,6 +23,7 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
     var imageInfo: [ImageInfo] = []
     var filteredData: [ImageInfo] = []
     var remindMe: [ImageInfo] = []
+    var reminderDate: Date?
     @IBOutlet weak var searchBar: UISearchBar!
     // This method updates filteredData based on the text in the Search Box
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -47,11 +50,27 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
         
         tableView.reloadData()
     }
+    
+        func getDate(date: Date, imageInfo: ImageInfo) {
+            for i in self.imageInfo {
+                if i == imageInfo {
+                    i.reminderDate = date
+                               try? self.dataController.viewContext.save()
+                         
+                }
+            }
+//            self.dataController.viewContext.refreshAllObjects()
+            self.tableView.reloadData()
+        }
+    
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reloadInputViews()
         searchBar.delegate = self
+        let nib = UINib(nibName: "BorrowTableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "BorrowTableViewCell")
 //        bannerView.adUnitID = "ca-app-pub-6335247657896931/7400741709"
 //        bannerView.rootViewController = self
 //        bannerView.load(GADRequest())
@@ -84,25 +103,33 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! BorrowTableViewCell
-        let memeImages = imageInfo[indexPath.row]
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BorrowTableViewCell", for: indexPath) as! BorrowTableViewCell
+        let memeImages = imageInfo[indexPath.row]
+        cell.reminderDateIcon.isHidden = true
         let date : Date = memeImages.creationDate!
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd, yyyy"
         let todaysDate = dateFormatter.string(from: date)
-        cell.myDateLabel.text = todaysDate
+        cell.reminderDate.text = "_"
+        if let remdinderDate = memeImages.reminderDate {
+            let reminderDateToString = dateFormatter.string(from: remdinderDate)
+            cell.reminderDate.text = reminderDateToString
+            if #available(iOS 13.0, *) {
+                cell.reminderDateIcon.isHidden = false
+                cell.reminderDateIcon.image = UIImage(systemName: "calendar.circle")
+            }
+        }
+        
+        cell.borrowedDateLabel.text = todaysDate
         cell.myImageView.contentMode = .scaleAspectFill
         cell.myImageView.image = UIImage(data: memeImages.imageData!)
         cell.accessoryType = .none
-        cell.myDateLabel.backgroundColor = .systemTeal
-        cell.dateToStatusLabel.text = "Date:"
         cell.titleItemLabel.text = memeImages.titleinfo
         cell.nameOfBorrower.text = memeImages.topInfo
+        cell.statusLabel.text = "Returned?: No"
         if imageInfo[indexPath.row].hasBeenReturned == true {
-            cell.dateToStatusLabel.text = "Status:"
-            cell.myDateLabel.text = "Returned ✅"
-            cell.myDateLabel.backgroundColor = .systemGreen
+            cell.statusLabel.text = "Returned?: Yes"
         }
         return cell
         
@@ -133,7 +160,7 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        searchBar.resignFirstResponder()
+        self.searchBar.resignFirstResponder()
         let alert = UIAlertController(title: nil, message: nil , preferredStyle: .actionSheet)
         let selectedImage = self.imageInfo[indexPath.row]
         let markImageAsReturned = selectedImage
@@ -162,6 +189,7 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
                 self.tableView.reloadData()
                 self.segmentOut.reloadInputViews()
             }))
+            
         }
         
         
@@ -277,6 +305,7 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteItem = UITableViewRowAction(style: .destructive, title: "Delete", handler: { [weak self] (action, indexPath) in
+            self?.searchBar.resignFirstResponder()
             let myphoto = self?.imageInfo[indexPath.row]
             guard let selectedImage = self?.imageInfo else { return }
             for selectedImage in selectedImage  {
@@ -297,7 +326,8 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
         })
         deleteItem.backgroundColor = UIColor.systemRed
         let markItemAsReturned = UITableViewRowAction(style: .default, title: "Mark item as returned", handler: { [weak self] (_ , indexPath)  in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! BorrowTableViewCell
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BorrowTableViewCell", for: indexPath) as! BorrowTableViewCell
             let myphoto = self?.imageInfo[indexPath.row]
             guard let selectImage = self?.imageInfo else { return }
             for selectedImage in selectImage {
@@ -307,7 +337,6 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
                     try? self?.dataController.viewContext.save()
                     tableView.cellForRow(at: indexPath)
                     self?.dataController.viewContext.refreshAllObjects()
-                    cell.myDateLabel.backgroundColor = .systemGreen
                     self?.segmentControler(atSeg: 2, onReturn: false)
                     self?.segmentOut.reloadInputViews()
                 }
@@ -315,7 +344,7 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
             
         })
         let markItemAsNotReturned = UITableViewRowAction(style: .default, title: "Mark item as not returned", handler: { [weak self] (_ , indexPath)  in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! BorrowTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BorrowTableViewCell", for: indexPath) as! BorrowTableViewCell
             let myphoto = self?.imageInfo[indexPath.row]
             guard let selectImage = self?.imageInfo else { return }
             for selectedImage in selectImage {
@@ -336,7 +365,9 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
             return [deleteItem, markItemAsNotReturned]
         }
         markItemAsReturned.backgroundColor = UIColor.systemGreen
+        self.searchBar.resignFirstResponder()
         return [deleteItem, markItemAsReturned]
+        
     }
     
     fileprivate func DestroysCoreDataMaintence(_ result: [ImageInfo]) {
@@ -360,6 +391,7 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
         if segue.identifier == "toSell" {
             let destinationVC = segue.destination as! ImageViewController
             destinationVC.receivedItem = remindMe
+            destinationVC.delegater = self
         }
     }
 }

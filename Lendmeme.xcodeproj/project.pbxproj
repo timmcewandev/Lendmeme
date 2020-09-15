@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		1C9CCFA015E2DB2BB876C6F1 /* Pods_Lendmeme.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FFBA5C4B1F6641B98CC7E91 /* Pods_Lendmeme.framework */; };
 		22452C0724CEBE4100899312 /* LendmemeUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22452C0624CEBE4100899312 /* LendmemeUnitTests.swift */; };
-		2257DE462422B908009FD6BC /* BorrowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2257DE452422B908009FD6BC /* BorrowTableViewCell.swift */; };
 		22588106243E8C33002A2E37 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22588105243E8C33002A2E37 /* GoogleService-Info.plist */; };
 		225D698E24BA338600E03995 /* BorrowUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D698D24BA338600E03995 /* BorrowUpdateViewController.swift */; };
+		227E2A682510638C005E5074 /* BorrowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E2A662510638C005E5074 /* BorrowTableViewCell.swift */; };
+		227E2A692510638C005E5074 /* BorrowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 227E2A672510638C005E5074 /* BorrowTableViewCell.xib */; };
 		22F2ED8B249DB64200CBAA6B /* PVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F2ED8A249DB64200CBAA6B /* PVController.swift */; };
 		9B088C0B200DB28F00601CA9 /* BorrowInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B088C0A200DB28F00601CA9 /* BorrowInfo.swift */; };
 		9B39AA8A22F40B3B007EF340 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B39AA8922F40B3B007EF340 /* DataController.swift */; };
@@ -41,9 +42,10 @@
 		22452C0424CEBE4100899312 /* LendmemeUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LendmemeUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22452C0624CEBE4100899312 /* LendmemeUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LendmemeUnitTests.swift; sourceTree = "<group>"; };
 		22452C0824CEBE4100899312 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2257DE452422B908009FD6BC /* BorrowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowTableViewCell.swift; sourceTree = "<group>"; };
 		22588105243E8C33002A2E37 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		225D698D24BA338600E03995 /* BorrowUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowUpdateViewController.swift; sourceTree = "<group>"; };
+		227E2A662510638C005E5074 /* BorrowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowTableViewCell.swift; sourceTree = "<group>"; };
+		227E2A672510638C005E5074 /* BorrowTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BorrowTableViewCell.xib; sourceTree = "<group>"; };
 		22F2ED8A249DB64200CBAA6B /* PVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVController.swift; sourceTree = "<group>"; };
 		2FFBA5C4B1F6641B98CC7E91 /* Pods_Lendmeme.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lendmeme.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6601F2216B378B12D2940F77 /* Pods-iborrow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iborrow.release.xcconfig"; path = "Target Support Files/Pods-iborrow/Pods-iborrow.release.xcconfig"; sourceTree = "<group>"; };
@@ -114,7 +116,8 @@
 				9BDD35D41FD88B0D005ADBCD /* BorrowEditorViewController.swift */,
 				9B518CA82229CDDC004B1050 /* ImageViewController.swift */,
 				22F2ED8A249DB64200CBAA6B /* PVController.swift */,
-				2257DE452422B908009FD6BC /* BorrowTableViewCell.swift */,
+				227E2A662510638C005E5074 /* BorrowTableViewCell.swift */,
+				227E2A672510638C005E5074 /* BorrowTableViewCell.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 			files = (
 				9BDD35DD1FD88B0D005ADBCD /* LaunchScreen.storyboard in Resources */,
 				9BDD35DA1FD88B0D005ADBCD /* Assets.xcassets in Resources */,
+				227E2A692510638C005E5074 /* BorrowTableViewCell.xib in Resources */,
 				22588106243E8C33002A2E37 /* GoogleService-Info.plist in Resources */,
 				9BDD35D81FD88B0D005ADBCD /* Main.storyboard in Resources */,
 			);
@@ -383,7 +387,7 @@
 				9BDD35D51FD88B0D005ADBCD /* BorrowEditorViewController.swift in Sources */,
 				9B088C0B200DB28F00601CA9 /* BorrowInfo.swift in Sources */,
 				9BEF0BC22005356D0065B5A8 /* BorrowTableViewController.swift in Sources */,
-				2257DE462422B908009FD6BC /* BorrowTableViewCell.swift in Sources */,
+				227E2A682510638C005E5074 /* BorrowTableViewCell.swift in Sources */,
 				9B518CA92229CDDC004B1050 /* ImageViewController.swift in Sources */,
 				9B39AA8A22F40B3B007EF340 /* DataController.swift in Sources */,
 				9BDD35D31FD88B0D005ADBCD /* AppDelegate.swift in Sources */,
@@ -580,7 +584,7 @@
 				CODE_SIGN_ENTITLEMENTS = Lendmeme/Lendmeme.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = A9UMG393DW;
 				INFOPLIST_FILE = "Lendmeme/Supporting files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
@@ -602,7 +606,7 @@
 				CODE_SIGN_ENTITLEMENTS = Lendmeme/Lendmeme.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = A9UMG393DW;
 				INFOPLIST_FILE = "Lendmeme/Supporting files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;

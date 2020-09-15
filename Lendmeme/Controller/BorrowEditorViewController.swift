@@ -290,6 +290,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         getImageInfo.titleinfo = borrowInfo.titleString
         getImageInfo.bottomInfo = borrowInfo.bottomString
         getImageInfo.creationDate = Date()
+        getImageInfo.reminderDate = nil
         getImageInfo.hasBeenReturned = false
         try? dataController.viewContext.save()
         self.toolbar.isHidden = true
