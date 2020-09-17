@@ -17,10 +17,13 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
     @IBOutlet weak var searchBar: UISearchBar!
     //    @IBOutlet weak var bannerView: GADBannerView!
     
-    // MARK: - Variables
+    // MARK: - Properties
     let toStarterViewController = "starter"
     let toEditorViewController = "toPhoto"
     let toCalendarViewController = "toCalendar"
+    let borrowTableViewCell = "BorrowTableViewCell"
+    let creationDate = "creationDate"
+    var hasBeenSeen = false
     var dataController:DataController!
     var imageInfo: [ImageInfo] = []
     var filteredData: [ImageInfo] = []
@@ -44,8 +47,8 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
         super.viewDidLoad()
         self.reloadInputViews()
         searchBar.delegate = self
-        let nib = UINib(nibName: "BorrowTableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "BorrowTableViewCell")
+        let nib = UINib(nibName: borrowTableViewCell, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: borrowTableViewCell)
         //        bannerView.adUnitID = "ca-app-pub-6335247657896931/7400741709"
         //        bannerView.rootViewController = self
         //        bannerView.load(GADRequest())
@@ -57,7 +60,7 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
         super.viewWillAppear(true)
         
         let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: creationDate, ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let result = try? dataController.viewContext.fetch(fetchRequest){
             imageInfo = result
@@ -76,7 +79,7 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
     // MARK: - Actions
     @IBAction func segmentControl(_ sender: Any) {
         let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: creationDate, ascending: false)
         switch segmentOut.selectedSegmentIndex {
         case 0:
             fetchRequest.sortDescriptors = [sortDescriptor]
@@ -142,8 +145,9 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BorrowTableViewCell", for: indexPath) as? BorrowTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: borrowTableViewCell, for: indexPath) as? BorrowTableViewCell
         let memeImages = imageInfo[indexPath.row]
+        cell?.returnedIcon.isHidden = true
         cell?.reminderDateIcon.isHidden = true
         let date : Date = memeImages.creationDate!
         let dateFormatter = DateFormatter()
@@ -155,6 +159,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             cell?.reminderDate.text = reminderDateToString
             if #available(iOS 13.0, *) {
                 cell?.reminderDateIcon.isHidden = false
+                cell?.returnedIcon.isHidden = true
                 cell?.reminderDateIcon.image = UIImage(systemName: "calendar.circle")
             }
         }
@@ -166,8 +171,29 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         cell?.titleItemLabel.text = memeImages.titleinfo
         cell?.nameOfBorrower.text = memeImages.topInfo
         cell?.statusLabel.text = "Returned?: No"
-        if imageInfo[indexPath.row].hasBeenReturned == true {
+        if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == false {
             cell?.statusLabel.text = "Returned?: Yes"
+            cell?.returnedIcon.isHidden = false
+            if #available(iOS 13.0, *) {
+                cell?.reminderDateIcon.isHidden = true
+                cell?.returnedIcon.image = UIImage(systemName: "checkmark.shield.fill")
+                cell?.returnedAnimation()
+                for i in imageInfo {
+                    if i == memeImages {
+                        let selectedmeme = i
+                         selectedmeme.animationSeen = true
+                        try? self.dataController.viewContext.save()
+                        self.dataController.viewContext.refreshAllObjects()
+                    }
+                }
+            }
+        } else if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == true {
+            cell?.statusLabel.text = "Returned?: Yes"
+            cell?.returnedIcon.isHidden = false
+            if #available(iOS 13.0, *) {
+                cell?.reminderDateIcon.isHidden = true
+                cell?.returnedIcon.image = UIImage(systemName: "checkmark.shield.fill")
+            }
         }
         return cell ?? UITableViewCell()
         
@@ -180,7 +206,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             self.segmentOut.selectedSegmentIndex = atSeg
             if self.segmentOut.selectedSegmentIndex == atSeg {
                 let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-                let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+                let sortDescriptor = NSSortDescriptor(key: creationDate, ascending: false)
                 fetchRequest.sortDescriptors = [sortDescriptor]
                 if let result = try? self.dataController.viewContext.fetch(fetchRequest){
                     var returnedTrue = [ImageInfo]()

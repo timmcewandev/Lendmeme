@@ -20,6 +20,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     var nameOfBorrower: String?
     let transition = BubbleTransition()
     var selectedDate: String?
+    let creationDate = "creationDate"
     //    var interstitial: GADInterstitial!
     var imageInfo: [ImageInfo] = []
     let borrowTextAttributes: [String : Any] = [
@@ -67,7 +68,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
         let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: creationDate, ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let result = try? dataController.viewContext.fetch(fetchRequest){
             if result.count == 0 {
@@ -121,7 +122,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     
     @IBAction func remindMeAction(_ sender: UISwitch) {
         if sender.isOn == true {
-            let controller = self.storyboard?.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
+            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "ImageViewController") as? ImageViewController else { return }
             self.present(controller, animated: true, completion: nil)
         }
         
@@ -186,7 +187,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     func keyboardHeight(notification: NSNotification) -> CGFloat {
-        if let rect = notification.userInfo![UIKeyboardFrameBeginUserInfoKey] as? NSValue {
+        if let rect = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue {
             return rect.cgRectValue.height
         } else {
             return CGFloat(0)
@@ -199,7 +200,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         if textField == topTextOUT {
             _ = CNContactStore.authorizationStatus(for: .contacts)
             let nameMe = self.topTextOUT.text
-            let nameProperCapitalization = (nameMe?.lowercased().capitalized)!
+            let nameProperCapitalization = (nameMe?.lowercased().capitalized) ?? ""
             let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
             let store = CNContactStore()
             nameOfBorrower = nameProperCapitalization
@@ -215,7 +216,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
                             self.topTextOUT.text = contacts[0].givenName + " " + contacts[0].familyName
                             let phoneNumber = phoneNumberFound.replacingOccurrences(of: "+1", with: "")
                             self.bottomTextOUT.text = phoneNumber
-                            self.checkIfNextTextFieldIsEmpty(focusedTextField: (self.topTextOUT)!, toNextTextField: (self.titleTextOUT)!)
+                            self.checkIfNextTextFieldIsEmpty(focusedTextField: self.topTextOUT, toNextTextField: self.titleTextOUT)
                             
                         }))
                         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { [weak self] _ in
@@ -245,31 +246,15 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     func takeScreenshot() -> UIImage? {
-        if topTextOUT.text == "" {
-            topTextOUT.isHidden = true
-        }
-        
-        if bottomTextOUT.text == "" {
-            bottomTextOUT.isHidden = true
-        }
-        
-        if titleTextOUT.text == "" {
-            titleTextOUT.isHidden = true
-        }
-        
         self.navigationController?.isNavigationBarHidden = true
         var screenshotImage :UIImage?
-        let layer = UIApplication.shared.keyWindow!.layer
+        let layer = UIApplication.shared.keyWindow?.layer
         let scale = UIScreen.main.scale.binade
         UIGraphicsBeginImageContextWithOptions(view.frame.size, false, scale)
         guard let context = UIGraphicsGetCurrentContext() else {return nil}
-        layer.render(in:context)
+        layer?.render(in:context)
         screenshotImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
-        topTextOUT.isHidden = false
-        bottomTextOUT.isHidden = false
-        titleTextOUT.isHidden = false
         return screenshotImage
     }
     
@@ -283,7 +268,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         }
         toolbar.isHidden = true
         guard let memedImage = takeScreenshot() else { return }
-        let borrowInfo = BorrowInfo(topString: self.topTextOUT.text ?? "None", bottomString: bottomTextOUT.text!, titleString: titleTextOUT.text!, originalImage: imageView.image!, borrowImage: memedImage, hasBeenReturned: false)
+        let borrowInfo = BorrowInfo(topString: self.topTextOUT.text ?? "None", bottomString: bottomTextOUT.text ?? "", titleString: titleTextOUT.text ?? "", originalImage: imageView.image!, borrowImage: memedImage, hasBeenReturned: false)
         
         let getImageInfo = ImageInfo(context: dataController.viewContext)
         getImageInfo.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)
@@ -415,9 +400,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     @objc func keyboardWillHide(notification: NSNotification) {
         resetFrame()
     }
-    
-    
-    
 }
 
 //extension BorrowEditorViewController: GADBannerViewDelegate {

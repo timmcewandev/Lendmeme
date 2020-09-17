@@ -14,6 +14,7 @@ struct BorrowInfo {
     var hasBeenReturned = false
     var selectedDate: String?
     var reminderDate: Date?
+    var animationSeen: Bool = false
 }
 
 
