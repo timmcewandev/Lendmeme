@@ -20,7 +20,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     var nameOfBorrower: String?
     let transition = BubbleTransition()
     var selectedDate: String?
-//    var interstitial: GADInterstitial!
+    //    var interstitial: GADInterstitial!
     var imageInfo: [ImageInfo] = []
     let borrowTextAttributes: [String : Any] = [
         NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
@@ -29,7 +29,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     ]
     
     // MARK: Outlets
-//    @IBOutlet weak var bannerView: GADBannerView!
+    //    @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var shareOUT: UIBarButtonItem!
     @IBOutlet weak var bottomTextOUT: UITextField!
@@ -53,14 +53,14 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         bottomTextOUT.inputAccessoryView = accessoryView()
         bottomTextOUT.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
         view.addSubview(bottomTextOUT)
-//        bannerView.adUnitID = "ca-app-pub-6335247657896931/5485024801"
-//        bannerView.rootViewController = self
-//        bannerView.load(GADRequest())
-//        bannerView.delegate = self
-//
-//        interstitial = GADInterstitial(adUnitID: "ca-app-pub-6335247657896931/9991246021")
-//        let request = GADRequest()
-//        interstitial.load(request)
+        //        bannerView.adUnitID = "ca-app-pub-6335247657896931/5485024801"
+        //        bannerView.rootViewController = self
+        //        bannerView.load(GADRequest())
+        //        bannerView.delegate = self
+        //
+        //        interstitial = GADInterstitial(adUnitID: "ca-app-pub-6335247657896931/9991246021")
+        //        let request = GADRequest()
+        //        interstitial.load(request)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,15 +107,15 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     @IBAction func share(sender: AnyObject) {
-//        if imageInfo.count > 1 {
-//            let firstNum = arc4random() % 5
-//            let secondNum = arc4random() % 5
-//            if firstNum == secondNum {
-//                if (interstitial.isReady) {
-//                    interstitial.present(fromRootViewController: self)
-//                }
-//            }
-//        }
+        //        if imageInfo.count > 1 {
+        //            let firstNum = arc4random() % 5
+        //            let secondNum = arc4random() % 5
+        //            if firstNum == secondNum {
+        //                if (interstitial.isReady) {
+        //                    interstitial.present(fromRootViewController: self)
+        //                }
+        //            }
+        //        }
         self.save()
     }
     
@@ -211,14 +211,16 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
                         let phoneNumberFound = contacts[0].phoneNumbers[0].value.stringValue
                         let alert = UIAlertController(title: "We found a phone number for \(contacts[0].givenName) \(contacts[0].familyName)", message: "Would you like to use it?", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Sure", style: .default, handler: {[weak self] _ in
-                            self?.topTextOUT.text = contacts[0].givenName + " " + contacts[0].familyName
+                            guard let self = self else {return}
+                            self.topTextOUT.text = contacts[0].givenName + " " + contacts[0].familyName
                             let phoneNumber = phoneNumberFound.replacingOccurrences(of: "+1", with: "")
-                            self?.bottomTextOUT.text = phoneNumber
-                            self?.checkIfNextTextFieldIsEmpty(focusedTextField: (self?.topTextOUT)!, toNextTextField: (self?.titleTextOUT)!)
+                            self.bottomTextOUT.text = phoneNumber
+                            self.checkIfNextTextFieldIsEmpty(focusedTextField: (self.topTextOUT)!, toNextTextField: (self.titleTextOUT)!)
                             
                         }))
                         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { [weak self] _ in
-                            self?.checkIfNextTextFieldIsEmpty(focusedTextField: (self?.topTextOUT)!, toNextTextField: (self?.titleTextOUT)!)
+                            guard let self = self else {return}
+                            self.checkIfNextTextFieldIsEmpty(focusedTextField: self.topTextOUT, toNextTextField: self.titleTextOUT)
                         }))
                         self.present(alert, animated: true, completion: nil)
                     }
@@ -270,14 +272,13 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         titleTextOUT.isHidden = false
         return screenshotImage
     }
-
+    
     func save() {
         
         if topTextOUT.text == "" || titleTextOUT.text == "" || bottomTextOUT.text == "" {
             let alert = UIAlertController(title: "", message: "Missing content in textfield", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .default))
             present(alert, animated: true)
-           
             return
         }
         toolbar.isHidden = true

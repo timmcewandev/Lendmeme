@@ -7,9 +7,8 @@ import UIKit
 import Foundation
 
 protocol getDateForReminderDelegate {
-    func getDate(date: Date, imageInfo: ImageInfo)
+    func getDate(date: Date, imageInformation: ImageInfo)
 }
-
 
 class ImageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UNUserNotificationCenterDelegate  {
     // MARK: - Variables
@@ -47,7 +46,7 @@ class ImageViewController: UIViewController, UITableViewDataSource, UITableViewD
             alert.addAction(UIAlertAction(title: "Remind me", style: .default, handler: { (UIAlertAction) in
                 let selectedDate = sender.date
                 let imageInfo = self.receivedItem[0]
-                self.delegater?.getDate(date: selectedDate, imageInfo: imageInfo)
+                self.delegater?.getDate(date: selectedDate, imageInformation: imageInfo)
                 
                 let delegate = UIApplication.shared.delegate as? AppDelegate
                 delegate?.scheduleNotification(at: selectedDate, name: self.receivedItem[0].titleinfo?.lowercased() ?? "item")

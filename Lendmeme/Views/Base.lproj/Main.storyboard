@@ -380,7 +380,7 @@
                         <outlet property="segmentOut" destination="yQY-1n-QQ2" id="Bdp-2A-nJQ"/>
                         <outlet property="tableView" destination="oZc-Dh-cn1" id="78g-ty-FEs"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="starter" animates="NO" id="aK9-Dv-IeC"/>
-                        <segue destination="rhe-qd-6gO" kind="showDetail" identifier="toSell" id="6cg-LY-G6S"/>
+                        <segue destination="rhe-qd-6gO" kind="showDetail" identifier="toCalendar" id="6cg-LY-G6S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="51H-Ux-MkF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

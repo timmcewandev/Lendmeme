@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C9CCFA015E2DB2BB876C6F1 /* Pods_Lendmeme.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FFBA5C4B1F6641B98CC7E91 /* Pods_Lendmeme.framework */; };
+		220FD9362513023000C63EC3 /* BorrowTableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FD9352513023000C63EC3 /* BorrowTableViewExtension.swift */; };
 		22452C0724CEBE4100899312 /* LendmemeUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22452C0624CEBE4100899312 /* LendmemeUnitTests.swift */; };
 		22588106243E8C33002A2E37 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22588105243E8C33002A2E37 /* GoogleService-Info.plist */; };
 		225D698E24BA338600E03995 /* BorrowUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D698D24BA338600E03995 /* BorrowUpdateViewController.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		14DFB47482A19BF524419586 /* Pods-Lendmeme.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lendmeme.release.xcconfig"; path = "Target Support Files/Pods-Lendmeme/Pods-Lendmeme.release.xcconfig"; sourceTree = "<group>"; };
 		1B8761B9DA191EB58377A18B /* Pods-iborrow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iborrow.debug.xcconfig"; path = "Target Support Files/Pods-iborrow/Pods-iborrow.debug.xcconfig"; sourceTree = "<group>"; };
+		220FD9352513023000C63EC3 /* BorrowTableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowTableViewExtension.swift; sourceTree = "<group>"; };
 		22452C0424CEBE4100899312 /* LendmemeUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LendmemeUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22452C0624CEBE4100899312 /* LendmemeUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LendmemeUnitTests.swift; sourceTree = "<group>"; };
 		22452C0824CEBE4100899312 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -92,6 +94,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		220FD9342513021400C63EC3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				220FD9352513023000C63EC3 /* BorrowTableViewExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		22452C0524CEBE4100899312 /* LendmemeUnitTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,7 +144,6 @@
 		2282C187240E17F700C41C34 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
-				9BDD35D91FD88B0D005ADBCD /* Assets.xcassets */,
 				9BDD35DE1FD88B0D005ADBCD /* Info.plist */,
 				22588105243E8C33002A2E37 /* GoogleService-Info.plist */,
 				9BBD165E22F6ABFC00299384 /* BorrowTime.xcdatamodeld */,
@@ -178,10 +187,12 @@
 		9BDD35D11FD88B0D005ADBCD /* Lendmeme */ = {
 			isa = PBXGroup;
 			children = (
+				220FD9342513021400C63EC3 /* Extensions */,
 				9BDD35D21FD88B0D005ADBCD /* AppDelegate.swift */,
 				2282C184240E178100C41C34 /* Model */,
 				2282C185240E17A400C41C34 /* Controller */,
 				2282C186240E17CC00C41C34 /* Views */,
+				9BDD35D91FD88B0D005ADBCD /* Assets.xcassets */,
 				2282C187240E17F700C41C34 /* Supporting files */,
 				225D698D24BA338600E03995 /* BorrowUpdateViewController.swift */,
 			);
@@ -388,6 +399,7 @@
 				9B088C0B200DB28F00601CA9 /* BorrowInfo.swift in Sources */,
 				9BEF0BC22005356D0065B5A8 /* BorrowTableViewController.swift in Sources */,
 				227E2A682510638C005E5074 /* BorrowTableViewCell.swift in Sources */,
+				220FD9362513023000C63EC3 /* BorrowTableViewExtension.swift in Sources */,
 				9B518CA92229CDDC004B1050 /* ImageViewController.swift in Sources */,
 				9B39AA8A22F40B3B007EF340 /* DataController.swift in Sources */,
 				9BDD35D31FD88B0D005ADBCD /* AppDelegate.swift in Sources */,

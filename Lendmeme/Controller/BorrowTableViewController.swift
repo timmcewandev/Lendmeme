@@ -9,59 +9,34 @@ import CoreData
 import MessageUI
 //import GoogleMobileAds
 
-class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessageComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, getDateForReminderDelegate, UIGestureRecognizerDelegate {
-
+class BorrowTableViewController: UIViewController, getDateForReminderDelegate, MFMessageComposeViewControllerDelegate {
     
-    
-    
+    // MARK: - Outlets
     @IBOutlet weak var segmentOut: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-//    @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    //    @IBOutlet weak var bannerView: GADBannerView!
+    
     // MARK: - Variables
+    let toStarterViewController = "starter"
+    let toEditorViewController = "toPhoto"
+    let toCalendarViewController = "toCalendar"
     var dataController:DataController!
-    var member: UIImage?
     var imageInfo: [ImageInfo] = []
     var filteredData: [ImageInfo] = []
     var remindMe: [ImageInfo] = []
     var reminderDate: Date?
-    @IBOutlet weak var searchBar: UISearchBar!
-    // This method updates filteredData based on the text in the Search Box
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        var newData: [ImageInfo] = []
-        newData = searchText.isEmpty ? filteredData : filteredData.filter { $0.titleinfo!.lowercased().contains(searchText.lowercased()) }
-        if newData.isEmpty == true || searchText == "" {
-            imageInfo = filteredData
-        } else {
-            imageInfo = newData
-        }
-        
-        tableView.reloadData()
-    }
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        self.searchBar.showsCancelButton = true
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
-        searchBar.text = ""
-        imageInfo = filteredData
-        searchBar.resignFirstResponder()
-        
-        tableView.reloadData()
-    }
-    
-        func getDate(date: Date, imageInfo: ImageInfo) {
-            for i in self.imageInfo {
-                if i == imageInfo {
-                    i.reminderDate = date
-                               try? self.dataController.viewContext.save()
-                         
-                }
+    func getDate(date: Date, imageInformation: ImageInfo) {
+        for imageInfo in self.imageInfo {
+            if imageInfo == imageInformation {
+                imageInfo.reminderDate = date
+                try? self.dataController.viewContext.save()
             }
-//            self.dataController.viewContext.refreshAllObjects()
             self.tableView.reloadData()
         }
+        self.tableView.reloadData()
+    }
     
     
     // MARK: - Lifecycle
@@ -71,10 +46,10 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
         searchBar.delegate = self
         let nib = UINib(nibName: "BorrowTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "BorrowTableViewCell")
-//        bannerView.adUnitID = "ca-app-pub-6335247657896931/7400741709"
-//        bannerView.rootViewController = self
-//        bannerView.load(GADRequest())
-//        bannerView.delegate = self
+        //        bannerView.adUnitID = "ca-app-pub-6335247657896931/7400741709"
+        //        bannerView.rootViewController = self
+        //        bannerView.load(GADRequest())
+        //        bannerView.delegate = self
     }
     
     
@@ -92,46 +67,109 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
         self.segmentOut.selectedSegmentIndex = 0
         self.segmentOut.reloadInputViews()
         if imageInfo.count == 0 && self.segmentOut.selectedSegmentIndex == 0   {
-            performSegue(withIdentifier: "starter", sender: self)
+            performSegue(withIdentifier: self.toStarterViewController, sender: self)
         }
         self.navigationController?.isNavigationBarHidden = false
         tableView.reloadData()
     }
     
+    // MARK: - Actions
+    @IBAction func segmentControl(_ sender: Any) {
+        let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+        switch segmentOut.selectedSegmentIndex {
+        case 0:
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            if let result = try? dataController.viewContext.fetch(fetchRequest){
+                imageInfo = result
+                filteredData = imageInfo
+                tableView.isHidden = false
+            }
+            tableView.reloadData()
+        case 1:
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            if let result = try? dataController.viewContext.fetch(fetchRequest){
+                var returnedTrue = [ImageInfo]()
+                for i in result {
+                    if i.hasBeenReturned == true {
+                        returnedTrue.append(i)
+                    }
+                }
+                imageInfo = returnedTrue
+                tableView.reloadData()
+            }
+        case 2:
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            if let result = try? dataController.viewContext.fetch(fetchRequest){
+                var returnedTrue = [ImageInfo]()
+                for i in result {
+                    if i.hasBeenReturned == false {
+                        returnedTrue.append(i)
+                    }
+                }
+                imageInfo = returnedTrue
+                tableView.reloadData()
+            }
+        default: break
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        searchBar.resignFirstResponder()
+        switch segue.identifier {
+        case toStarterViewController:
+            guard let destinvationVC = segue.destination as? BorrowEditorViewController else { return }
+            destinvationVC.dataController = self.dataController
+        case toEditorViewController:
+            guard let destinationVC = segue.destination as? BorrowEditorViewController else { return }
+            destinationVC.dataController = self.dataController
+        case toCalendarViewController :
+            guard let destinationVC = segue.destination as? ImageViewController else { return }
+            destinationVC.receivedItem = remindMe
+            destinationVC.delegater = self
+        default: break
+        }
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return imageInfo.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BorrowTableViewCell", for: indexPath) as! BorrowTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BorrowTableViewCell", for: indexPath) as? BorrowTableViewCell
         let memeImages = imageInfo[indexPath.row]
-        cell.reminderDateIcon.isHidden = true
+        cell?.reminderDateIcon.isHidden = true
         let date : Date = memeImages.creationDate!
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd, yyyy"
         let todaysDate = dateFormatter.string(from: date)
-        cell.reminderDate.text = "_"
+        cell?.reminderDate.text = "_"
         if let remdinderDate = memeImages.reminderDate {
             let reminderDateToString = dateFormatter.string(from: remdinderDate)
-            cell.reminderDate.text = reminderDateToString
+            cell?.reminderDate.text = reminderDateToString
             if #available(iOS 13.0, *) {
-                cell.reminderDateIcon.isHidden = false
-                cell.reminderDateIcon.image = UIImage(systemName: "calendar.circle")
+                cell?.reminderDateIcon.isHidden = false
+                cell?.reminderDateIcon.image = UIImage(systemName: "calendar.circle")
             }
         }
         
-        cell.borrowedDateLabel.text = todaysDate
-        cell.myImageView.contentMode = .scaleAspectFill
-        cell.myImageView.image = UIImage(data: memeImages.imageData!)
-        cell.accessoryType = .none
-        cell.titleItemLabel.text = memeImages.titleinfo
-        cell.nameOfBorrower.text = memeImages.topInfo
-        cell.statusLabel.text = "Returned?: No"
+        cell?.borrowedDateLabel.text = todaysDate
+        cell?.myImageView.contentMode = .scaleAspectFill
+        cell?.myImageView.image = UIImage(data: memeImages.imageData!)
+        cell?.accessoryType = .none
+        cell?.titleItemLabel.text = memeImages.titleinfo
+        cell?.nameOfBorrower.text = memeImages.topInfo
+        cell?.statusLabel.text = "Returned?: No"
         if imageInfo[indexPath.row].hasBeenReturned == true {
-            cell.statusLabel.text = "Returned?: Yes"
+            cell?.statusLabel.text = "Returned?: Yes"
         }
-        return cell
+        return cell ?? UITableViewCell()
         
     }
     
@@ -192,12 +230,10 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
             
         }
         
-        
-        
         alert.addAction(UIAlertAction(title: "Remind me", style: .default, handler: { _ in
             let myphoto = [self.imageInfo[indexPath.row]]
             self.remindMe = myphoto
-            self.performSegue(withIdentifier: "toSell", sender: self)
+            self.performSegue(withIdentifier: self.toCalendarViewController, sender: self)
             
         }))
         
@@ -222,8 +258,10 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
             
         }
         alert.addAction(UIAlertAction(title: "View image 🌁", style: .default, handler: { _ in
-            let controller = self.storyboard?.instantiateViewController(withIdentifier: "PVController") as! PVController
-            controller.myImages = UIImage(data: self.imageInfo[indexPath.row].imageData!)
+            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "PVController") as? PVController else {return}
+            if let imageInfo = self.imageInfo[indexPath.row].imageData {
+                controller.myImages = UIImage(data: imageInfo)
+            }
             let sheet = SheetViewController(controller: controller, sizes: [.fullScreen])
             self.present(sheet, animated: false, completion: nil)
         }))
@@ -237,7 +275,7 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
             tableView.deleteRows(at: [indexPath], with: .bottom)
             self.dataController.viewContext.refreshAllObjects()
             if self.imageInfo.count == 0 {
-                self.performSegue(withIdentifier: "starter", sender: self)
+                self.performSegue(withIdentifier: self.toStarterViewController, sender: self)
             }
             self.tableView.reloadData()
         }))
@@ -249,75 +287,22 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
         self.present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func segmentControl(_ sender: Any) {
-        if segmentOut.selectedSegmentIndex == 0 {
-            let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-            let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
-            fetchRequest.sortDescriptors = [sortDescriptor]
-            if let result = try? dataController.viewContext.fetch(fetchRequest){
-                imageInfo = result
-                filteredData = imageInfo
-                tableView.isHidden = false
-            }
-            tableView.reloadData()
-        }
-        if segmentOut.selectedSegmentIndex == 1 {
-            let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-            let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
-            fetchRequest.sortDescriptors = [sortDescriptor]
-            if let result = try? dataController.viewContext.fetch(fetchRequest){
-                var returnedTrue = [ImageInfo]()
-                for i in result {
-                    if i.hasBeenReturned == true {
-                        returnedTrue.append(i)
-                    }
-                }
-                imageInfo = returnedTrue
-                tableView.reloadData()
-            }
-        }
-        
-        if segmentOut.selectedSegmentIndex == 2 {
-            let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-            let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
-            fetchRequest.sortDescriptors = [sortDescriptor]
-            if let result = try? dataController.viewContext.fetch(fetchRequest){
-                var returnedTrue = [ImageInfo]()
-                for i in result {
-                    if i.hasBeenReturned == false {
-                        returnedTrue.append(i)
-                    }
-                }
-                imageInfo = returnedTrue
-                tableView.reloadData()
-            }
-        }
-        self.tableView.reloadData()
-    }
-    
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 190.0
-    }
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteItem = UITableViewRowAction(style: .destructive, title: "Delete", handler: { [weak self] (action, indexPath) in
-            self?.searchBar.resignFirstResponder()
-            let myphoto = self?.imageInfo[indexPath.row]
-            guard let selectedImage = self?.imageInfo else { return }
+            guard let self = self else {return}
+            self.searchBar.resignFirstResponder()
+            let myphoto = self.imageInfo[indexPath.row]
+            let selectedImage = self.imageInfo
             for selectedImage in selectedImage  {
                 if selectedImage == myphoto {
                     let selectedImage = selectedImage
-                    self?.dataController.viewContext.delete(selectedImage)
-                    try? self?.dataController.viewContext.save()
-                    self?.imageInfo.remove(at: indexPath.row)
+                    self.dataController.viewContext.delete(selectedImage)
+                    try? self.dataController.viewContext.save()
+                    self.imageInfo.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .bottom)
-                    self?.dataController.viewContext.refreshAllObjects()
-                    if self?.imageInfo.isEmpty == true && self?.segmentOut.selectedSegmentIndex == 0 {
-                        self?.performSegue(withIdentifier: "toPhoto", sender: self)
+                    self.dataController.viewContext.refreshAllObjects()
+                    if self.imageInfo.isEmpty == true && self.segmentOut.selectedSegmentIndex == 0 {
+                        self.performSegue(withIdentifier: self.toEditorViewController, sender: self)
                     }
                     tableView.reloadData()
                 }
@@ -326,36 +311,35 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
         })
         deleteItem.backgroundColor = UIColor.systemRed
         let markItemAsReturned = UITableViewRowAction(style: .default, title: "Mark item as returned", handler: { [weak self] (_ , indexPath)  in
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "BorrowTableViewCell", for: indexPath) as! BorrowTableViewCell
-            let myphoto = self?.imageInfo[indexPath.row]
-            guard let selectImage = self?.imageInfo else { return }
+            guard let self = self else {return}
+            let myphoto = self.imageInfo[indexPath.row]
+            let selectImage = self.imageInfo
             for selectedImage in selectImage {
                 if selectedImage == myphoto {
                     let markImageAsReturned = selectedImage
                     markImageAsReturned.hasBeenReturned = true
-                    try? self?.dataController.viewContext.save()
+                    try? self.dataController.viewContext.save()
                     tableView.cellForRow(at: indexPath)
-                    self?.dataController.viewContext.refreshAllObjects()
-                    self?.segmentControler(atSeg: 2, onReturn: false)
-                    self?.segmentOut.reloadInputViews()
+                    self.dataController.viewContext.refreshAllObjects()
+                    self.segmentControler(atSeg: 2, onReturn: false)
+                    self.segmentOut.reloadInputViews()
                 }
             }
             
         })
         let markItemAsNotReturned = UITableViewRowAction(style: .default, title: "Mark item as not returned", handler: { [weak self] (_ , indexPath)  in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "BorrowTableViewCell", for: indexPath) as! BorrowTableViewCell
-            let myphoto = self?.imageInfo[indexPath.row]
-            guard let selectImage = self?.imageInfo else { return }
+            guard let self = self else {return}
+            let myphoto = self.imageInfo[indexPath.row]
+            let selectImage = self.imageInfo
             for selectedImage in selectImage {
                 if selectedImage == myphoto {
                     let markImageAsReturned = selectedImage
                     markImageAsReturned.hasBeenReturned = false
-                    try? self?.dataController.viewContext.save()
+                    try? self.dataController.viewContext.save()
                     tableView.cellForRow(at: indexPath)
-                    self?.dataController.viewContext.refreshAllObjects()
-                    self?.segmentControler(atSeg: 1, onReturn: true)
-                    self?.segmentOut.reloadInputViews()
+                    self.dataController.viewContext.refreshAllObjects()
+                    self.segmentControler(atSeg: 1, onReturn: true)
+                    self.segmentOut.reloadInputViews()
                 }
             }
             
@@ -367,32 +351,6 @@ class BorrowTableViewController: UIViewController, UISearchBarDelegate, MFMessag
         markItemAsReturned.backgroundColor = UIColor.systemGreen
         self.searchBar.resignFirstResponder()
         return [deleteItem, markItemAsReturned]
-        
-    }
-    
-    fileprivate func DestroysCoreDataMaintence(_ result: [ImageInfo]) {
-        for object in result {
-            dataController.viewContext.delete(object)
-        }
-        
-    }
-    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-        controller.dismiss(animated: true, completion: nil)
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "starter" {
-            let destinvationVC = segue.destination as! BorrowEditorViewController
-            destinvationVC.dataController = self.dataController
-        }
-        if segue.identifier == "toPhoto" {
-            let destinationVC = segue.destination as! BorrowEditorViewController
-            destinationVC.dataController = self.dataController
-        }
-        if segue.identifier == "toSell" {
-            let destinationVC = segue.destination as! ImageViewController
-            destinationVC.receivedItem = remindMe
-            destinationVC.delegater = self
-        }
     }
 }
 
