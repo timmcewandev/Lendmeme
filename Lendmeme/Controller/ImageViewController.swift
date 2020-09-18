@@ -49,11 +49,10 @@ class ImageViewController: UIViewController, UITableViewDataSource, UITableViewD
                 self.delegate?.getDate(date: selectedDate, imageInformation: imageInfo)
                 
                 let delegate = UIApplication.shared.delegate as? AppDelegate
-                delegate?.scheduleNotification(at: selectedDate, name: self.receivedItem[0].titleinfo?.lowercased() ?? "item")
+                delegate?.scheduleNotification(at: selectedDate, name: self.receivedItem[0].titleinfo?.lowercased() ?? "")
                 self.dismiss(animated: true, completion: nil)
             }))
             self.present(alert, animated: true, completion: nil)
-            
         }
         
     }

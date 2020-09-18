@@ -225,7 +225,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
                 }
                 
             } catch {
-                print("Failed to fetch contact, error: \(error)")
+                debugPrint(error.localizedDescription)
             }
         }
         checkIfNextTextFieldIsEmpty(focusedTextField: titleTextOUT, toNextTextField: topTextOUT)
@@ -265,7 +265,8 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         }
         toolbar.isHidden = true
         guard let memedImage = takeScreenshot() else { return }
-        let borrowInfo = BorrowInfo(topString: self.topTextOUT.text ?? "None", bottomString: bottomTextOUT.text ?? "", titleString: titleTextOUT.text ?? "", originalImage: imageView.image!, borrowImage: memedImage, hasBeenReturned: false)
+        guard let originalImage = imageView.image else { return }
+        let borrowInfo = BorrowInfo(topString: self.topTextOUT.text ?? "None", bottomString: bottomTextOUT.text ?? "", titleString: titleTextOUT.text ?? "", originalImage: originalImage, borrowImage: memedImage, hasBeenReturned: false)
         
         let getImageInfo = ImageInfo(context: dataController.viewContext)
         getImageInfo.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)

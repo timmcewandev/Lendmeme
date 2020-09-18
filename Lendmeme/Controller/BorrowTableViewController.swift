@@ -149,7 +149,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         let memeImages = imageInfo[indexPath.row]
         cell?.returnedIcon.isHidden = true
         cell?.reminderDateIcon.isHidden = true
-        let date : Date = memeImages.creationDate!
+        let date = memeImages.creationDate ?? Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd, yyyy"
         let todaysDate = dateFormatter.string(from: date)
@@ -166,7 +166,11 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         
         cell?.borrowedDateLabel.text = todaysDate
         cell?.myImageView.contentMode = .scaleAspectFill
-        cell?.myImageView.image = UIImage(data: memeImages.imageData!)
+        
+        if let memeImageData = memeImages.imageData {
+            cell?.myImageView.image = UIImage(data: memeImageData)
+        }
+        
         cell?.accessoryType = .none
         cell?.titleItemLabel.text = memeImages.titleinfo
         cell?.nameOfBorrower.text = memeImages.topInfo
@@ -178,10 +182,10 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 cell?.reminderDateIcon.isHidden = true
                 cell?.returnedIcon.image = UIImage(systemName: "checkmark.shield.fill")
                 cell?.returnedAnimation()
-                for i in imageInfo {
-                    if i == memeImages {
-                        let selectedmeme = i
-                         selectedmeme.animationSeen = true
+                for meme in imageInfo {
+                    if meme == memeImages {
+                        let selectedmeme = meme
+                        selectedmeme.animationSeen = true
                         try? self.dataController.viewContext.save()
                         self.dataController.viewContext.refreshAllObjects()
                     }
