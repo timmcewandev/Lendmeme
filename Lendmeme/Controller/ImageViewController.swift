@@ -14,7 +14,7 @@ class ImageViewController: UIViewController, UITableViewDataSource, UITableViewD
     // MARK: - Variables
     var selectedDate = Date()
     var receivedItem: [ImageInfo] = []
-    var delegater: getDateForReminderDelegate?
+    var delegate: getDateForReminderDelegate?
     // MARK: - Outlets
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var selectedDateLabel: UILabel!
@@ -46,7 +46,7 @@ class ImageViewController: UIViewController, UITableViewDataSource, UITableViewD
             alert.addAction(UIAlertAction(title: "Remind me", style: .default, handler: { (UIAlertAction) in
                 let selectedDate = sender.date
                 let imageInfo = self.receivedItem[0]
-                self.delegater?.getDate(date: selectedDate, imageInformation: imageInfo)
+                self.delegate?.getDate(date: selectedDate, imageInformation: imageInfo)
                 
                 let delegate = UIApplication.shared.delegate as? AppDelegate
                 delegate?.scheduleNotification(at: selectedDate, name: self.receivedItem[0].titleinfo?.lowercased() ?? "item")

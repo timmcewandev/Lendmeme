@@ -14,12 +14,9 @@ import FittedSheets
 class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIViewControllerTransitioningDelegate {
     
     // MARK: - Variables
-    let contact = CNMutableContact()
-    let borrow: [BorrowInfo]! = nil
     var dataController: DataController!
     var nameOfBorrower: String?
     let transition = BubbleTransition()
-    var selectedDate: String?
     let creationDate = "creationDate"
     //    var interstitial: GADInterstitial!
     var imageInfo: [ImageInfo] = []

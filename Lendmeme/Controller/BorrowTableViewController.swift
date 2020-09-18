@@ -129,7 +129,7 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
         case toCalendarViewController :
             guard let destinationVC = segue.destination as? ImageViewController else { return }
             destinationVC.receivedItem = remindMe
-            destinationVC.delegater = self
+            destinationVC.delegate = self
         default: break
         }
     }
