@@ -154,11 +154,14 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         let dateFormatterForCreationDate = DateFormatter()
         dateFormatterForCreationDate.dateFormat = "MMM-dd-yyyy"
         let todaysDate = dateFormatterForCreationDate.string(from: date)
-        cell?.reminderDate.textColor = .black
-         cell?.reminderDate.text = "_"
+        if #available(iOS 13.0, *) {
+            cell?.reminderDate.textColor = .label
+        } else {
+            // Fallback on earlier versions
+        }
+        cell?.reminderDate.text = "_"
         if let remdinderDate = memeImages.reminderDate {
             if dateToday > remdinderDate && memeImages.hasBeenReturned != true  {
-//                self.removeCalendarNotification(memeImages)
                 cell?.reminderDate.text = "Expired"
                 cell?.reminderDate.textColor = .systemPink
             } else if memeImages.hasBeenReturned != true {
@@ -259,7 +262,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 tableView.cellForRow(at: indexPath)
                 self.dataController.viewContext.refreshAllObjects()
                 self.segmentControler(atSeg: 2, onReturn: false)
-
+                
                 self.segmentOut.reloadInputViews()
             }))
         } else {
@@ -274,27 +277,26 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 self.tableView.reloadData()
                 self.segmentOut.reloadInputViews()
             }))
-
+            
         }
         
-
         if selectedImage.hasBeenReturned == false && selectedImage.reminderDate != nil {
-                alert.addAction(UIAlertAction(title: "Remove calender reminder", style: .default, handler: { _ in
-                    self.removeCalendarNotification(selectedImage)
-                }))
-
+            alert.addAction(UIAlertAction(title: "Remove calender reminder", style: .default, handler: { _ in
+                self.removeCalendarNotification(selectedImage)
+            }))
+            
             alert.addAction(UIAlertAction(title: "Change date & time", style: .default, handler: { _ in
                 let myphoto = [self.imageInfo[indexPath.row]]
                 self.remindMe = myphoto
                 self.performSegue(withIdentifier: self.toCalendarViewController, sender: self)
-
+                
             }))
         } else if selectedImage.reminderDate == nil && selectedImage.hasBeenReturned == false {
             alert.addAction(UIAlertAction(title: "Remind me", style: .default, handler: { _ in
                 let myphoto = [self.imageInfo[indexPath.row]]
                 self.remindMe = myphoto
                 self.performSegue(withIdentifier: self.toCalendarViewController, sender: self)
-
+                
             }))
         }
         if imageInfo[indexPath.row].bottomInfo != "" && selectedImage.hasBeenReturned == false {
