@@ -12,9 +12,9 @@ import Firebase
 //import GoogleMobileAds
 import UserNotifications
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-    
     var window: UIWindow?
 //    var borrowInfo = [BorrowInfo]()
   
@@ -42,28 +42,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return true
     }
     
-    func scheduleNotification(at date: Date, name: String) {
-        
+    func scheduleNotification(at date: Date, name: String, memedImage: ImageInfo) {
+        if memedImage.notificationIdentifier != nil {
+            guard let notificationIdentifier = memedImage.notificationIdentifier else { return }
+            memedImage.reminderDate = date
+            try? self.dataController.viewContext.save()
+            removeScheduleNotification(at: notificationIdentifier, at: memedImage)
+        }
          let center = UNUserNotificationCenter.current()
         let calendar = Calendar(identifier: .gregorian)
         let components = calendar.dateComponents(in: .current, from: date)
         let newComponents = DateComponents(calendar: calendar, timeZone: .current, month: components.month, day: components.day, hour: components.hour, minute: components.minute)
         
-        let trigger = UNCalendarNotificationTrigger(dateMatching: newComponents, repeats: true)
-        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: newComponents, repeats: false)
         let content = UNMutableNotificationContent()
         content.title = "🙌 Just a reminder"
         content.body = "Your \(name) has been out there for a while. Remind them that you want it back."
         content.sound = UNNotificationSound.default()
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        
+        memedImage.notificationIdentifier = request.identifier
+        try? dataController.viewContext.save()
         UNUserNotificationCenter.current().delegate = self
         center.add(request) {(error) in
             if let error = error {
                 print("Uh oh! We had an error: \(error)")
             }
         }
+    }
+    
+    func removeScheduleNotification(at identifier: String, at memedImage: ImageInfo) {
+        let center = UNUserNotificationCenter.current()
+        UNUserNotificationCenter.current().delegate = self
+        center.removePendingNotificationRequests(withIdentifiers: [identifier])
+        memedImage.notificationIdentifier = nil
+//        memedImage.reminderDate = nil
+        try? dataController.viewContext.save()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

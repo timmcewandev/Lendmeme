@@ -7,12 +7,13 @@
         <attribute name="hasBeenReturned" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="notificationIdentifier" optional="YES" attributeType="String"/>
         <attribute name="reminderDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="selectedDate" optional="YES" attributeType="String"/>
         <attribute name="titleinfo" optional="YES" attributeType="String"/>
         <attribute name="topInfo" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="ImageInfo" positionX="-54" positionY="-9" width="128" height="193"/>
+        <element name="ImageInfo" positionX="-54" positionY="-9" width="128" height="208"/>
     </elements>
 </model>
