@@ -44,13 +44,11 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         configureShareOut(isEnabled: false)
-        prepareTextField(textField: topTextOUT, name: "add persons name")
-        prepareTextField(textField: bottomTextOUT, name: "add phone")
+        prepareTextField(textField: topTextOUT, name: "add borrower name")
+        prepareTextField(textField: bottomTextOUT, name: "add phone#")
         prepareTextField(textField: titleTextOUT, name: "add title")
         self.tabBarController?.tabBar.isHidden = true
-        bottomTextOUT.inputAccessoryView = accessoryView()
-        bottomTextOUT.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
-        view.addSubview(bottomTextOUT)
+        
         //        bannerView.adUnitID = "ca-app-pub-6335247657896931/5485024801"
         //        bannerView.rootViewController = self
         //        bannerView.load(GADRequest())
@@ -59,6 +57,14 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         //        interstitial = GADInterstitial(adUnitID: "ca-app-pub-6335247657896931/9991246021")
         //        let request = GADRequest()
         //        interstitial.load(request)
+        
+        let returnButtonForPhoneNumber = UIButton(frame:CGRect(x: 0, y: 0, width: view.frame.size.width, height: 60))
+        returnButtonForPhoneNumber.backgroundColor = #colorLiteral(red: 0.9815835357, green: 0.632611692, blue: 0.1478855908, alpha: 1)
+        returnButtonForPhoneNumber.setTitle("RETURN", for: .normal)
+        returnButtonForPhoneNumber.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+        returnButtonForPhoneNumber.addTarget(self, action: #selector(BorrowEditorViewController.doneAction), for: .touchUpInside)
+        bottomTextOUT.inputAccessoryView = returnButtonForPhoneNumber
+        bottomTextOUT.inputAccessoryView = returnButtonForPhoneNumber
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +82,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         }
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
         view.addGestureRecognizer(tapGesture)
+        self.imageView.image = UIImage(named: "placeholder")
     }
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
         topTextOUT.resignFirstResponder()
@@ -87,6 +94,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
         configureShareOut(isEnabled: false)
+        self.imageView.image = nil
     }
     
     
@@ -258,8 +266,8 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     func save() {
         
         if topTextOUT.text == "" || titleTextOUT.text == "" || bottomTextOUT.text == "" {
-            let alert = UIAlertController(title: "", message: "Missing content in textfield", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .default))
+            let alert = UIAlertController(title: "", message: "Missing information in textfield", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "ok", style: .default))
             present(alert, animated: true)
             return
         }
@@ -342,25 +350,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
             view.frame.origin.y = -keyboardHeight(notification: notification)
         }
         
-        
-    }
-    func accessoryView() -> UIView {
-        
-        let view = UIView()
-        view.backgroundColor = .gray
-        
-        let returnButton = UIButton()
-        returnButton.frame = CGRect(x: self.view.frame.width - 80, y: 7, width: 60, height: 30)
-        returnButton.setTitle("Return", for: .normal)
-        if #available(iOS 13.0, *) {
-            returnButton.tintColor = .label
-        } else {
-            returnButton.tintColor = .white
-        }
-        returnButton.addTarget(self, action: #selector(BorrowEditorViewController.doneAction), for: .touchUpInside)
-        view.addSubview(returnButton)
-        
-        return view
         
     }
     

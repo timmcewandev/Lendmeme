@@ -48,25 +48,23 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="wRM-Rx-5QT">
-                                <rect key="frame" x="134.5" y="178" width="107.5" height="44.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44.5" id="v05-Fj-9LO"/>
-                                </constraints>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="wRM-Rx-5QT">
+                                <rect key="frame" x="134" y="177.5" width="107.5" height="44.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="alphabet" returnKeyType="next"/>
                             </textField>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="-8" translatesAutoresizingMaskIntoConstraints="NO" id="cEL-3L-VHw">
-                                <rect key="frame" x="120" y="305.5" width="135.5" height="56"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="-11" translatesAutoresizingMaskIntoConstraints="NO" id="cEL-3L-VHw">
+                                <rect key="frame" x="116" y="305.5" width="143.5" height="56"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insert Image Here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9a-2m-lYN">
-                                        <rect key="frame" x="0.0" y="0.0" width="135.5" height="16"/>
-                                        <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="143.5" height="19"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="18"/>
+                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                        <color key="highlightedColor" systemColor="systemFillColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="FeO-I2-KPi">
-                                        <rect key="frame" x="25" y="8" width="85" height="48"/>
+                                        <rect key="frame" x="29" y="8" width="85" height="48"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KyE-NW-OHe">
                                                 <rect key="frame" x="0.0" y="0.0" width="35" height="48"/>
@@ -91,59 +89,52 @@
                                         </subviews>
                                     </stackView>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remind me" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q87-XC-3VI">
-                                        <rect key="frame" x="24" y="21" width="87.5" height="0.0"/>
+                                        <rect key="frame" x="24" y="24" width="95.5" height="0.0"/>
                                         <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="17"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JIV-Rj-rkH">
-                                        <rect key="frame" x="43" y="56" width="51" height="31"/>
+                                        <rect key="frame" x="47" y="56" width="51" height="31"/>
                                         <connections>
                                             <action selector="remindMeAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="HXY-Ar-dtX"/>
                                         </connections>
                                     </switch>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="H9a-2m-lYN" firstAttribute="leading" secondItem="cEL-3L-VHw" secondAttribute="leading" id="8CY-yV-BU5"/>
-                                    <constraint firstItem="Q87-XC-3VI" firstAttribute="top" secondItem="H9a-2m-lYN" secondAttribute="bottom" constant="5" id="8N0-Lp-ghL"/>
-                                    <constraint firstAttribute="bottom" secondItem="JIV-Rj-rkH" secondAttribute="bottom" constant="-31" id="VDE-ub-ukr"/>
-                                    <constraint firstItem="JIV-Rj-rkH" firstAttribute="top" secondItem="FeO-I2-KPi" secondAttribute="bottom" id="aYo-wW-gGs"/>
-                                    <constraint firstAttribute="trailing" secondItem="H9a-2m-lYN" secondAttribute="trailing" id="aqJ-9x-YWw"/>
-                                    <constraint firstItem="H9a-2m-lYN" firstAttribute="top" secondItem="cEL-3L-VHw" secondAttribute="top" id="x5z-qM-AwR"/>
+                                    <constraint firstAttribute="bottom" secondItem="JIV-Rj-rkH" secondAttribute="bottom" constant="-31" id="2b5-lm-LoZ"/>
+                                    <constraint firstItem="Q87-XC-3VI" firstAttribute="top" secondItem="H9a-2m-lYN" secondAttribute="bottom" constant="5" id="2m3-pd-cyE"/>
+                                    <constraint firstItem="FeO-I2-KPi" firstAttribute="top" secondItem="cEL-3L-VHw" secondAttribute="top" constant="8" id="38b-fP-YRv"/>
+                                    <constraint firstItem="JIV-Rj-rkH" firstAttribute="top" secondItem="FeO-I2-KPi" secondAttribute="bottom" id="BAD-az-WQP"/>
+                                    <constraint firstItem="Q87-XC-3VI" firstAttribute="leading" secondItem="cEL-3L-VHw" secondAttribute="leading" constant="24" id="Wqe-7W-Cjm"/>
                                 </constraints>
                             </stackView>
                             <textField opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="cho-jd-ylO">
-                                <rect key="frame" x="145.5" y="116" width="84.5" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="FxT-AH-jmS"/>
-                                </constraints>
+                                <rect key="frame" x="145.5" y="116" width="84.5" height="44.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="alphabet" returnKeyType="next"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="cho-jd-ylO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="20H-s5-oda"/>
-                            <constraint firstItem="PMx-xr-uw1" firstAttribute="centerX" secondItem="Lua-XB-jXr" secondAttribute="centerX" id="4sc-EL-myB"/>
-                            <constraint firstItem="Lua-XB-jXr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="63F-Am-l7L"/>
-                            <constraint firstItem="cho-jd-ylO" firstAttribute="centerX" secondItem="wRM-Rx-5QT" secondAttribute="centerX" constant="-0.5" id="6Ho-Ci-fu0"/>
-                            <constraint firstItem="cho-jd-ylO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="72" id="8dq-OG-b63"/>
-                            <constraint firstItem="Lua-XB-jXr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="B14-N3-MKT"/>
-                            <constraint firstItem="wRM-Rx-5QT" firstAttribute="top" secondItem="cho-jd-ylO" secondAttribute="bottom" constant="17" id="ECL-jV-1hL"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="wfM-K2-jvl" secondAttribute="bottom" constant="-19.5" id="FYW-8v-7so"/>
-                            <constraint firstItem="wfM-K2-jvl" firstAttribute="leading" secondItem="Lua-XB-jXr" secondAttribute="leading" id="GX9-1s-XpP"/>
-                            <constraint firstItem="cho-jd-ylO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="HGO-Zv-VuD"/>
-                            <constraint firstItem="wRM-Rx-5QT" firstAttribute="centerX" secondItem="cEL-3L-VHw" secondAttribute="centerX" constant="0.5" id="Mn4-PX-72y"/>
-                            <constraint firstItem="wRM-Rx-5QT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="RBl-OM-h00"/>
-                            <constraint firstItem="Lua-XB-jXr" firstAttribute="top" secondItem="PMx-xr-uw1" secondAttribute="bottom" constant="90" id="SaU-Tf-5Yf"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wRM-Rx-5QT" secondAttribute="trailing" constant="10" id="XyA-mI-Fy2"/>
-                            <constraint firstItem="cEL-3L-VHw" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="hMn-U4-J86"/>
-                            <constraint firstItem="wfM-K2-jvl" firstAttribute="trailing" secondItem="Lua-XB-jXr" secondAttribute="trailing" id="j1i-B4-m8S"/>
-                            <constraint firstItem="cEL-3L-VHw" firstAttribute="centerX" secondItem="PMx-xr-uw1" secondAttribute="centerX" id="qQx-XB-Bkl"/>
-                            <constraint firstItem="wfM-K2-jvl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-46.5" id="tQK-dS-L9v"/>
-                            <constraint firstItem="cEL-3L-VHw" firstAttribute="top" secondItem="wRM-Rx-5QT" secondAttribute="bottom" constant="83" id="teZ-UI-N0B"/>
-                            <constraint firstItem="cEL-3L-VHw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yXk-aQ-PQ5"/>
-                            <constraint firstItem="cEL-3L-VHw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="zTz-zB-qSb"/>
+                            <constraint firstItem="wRM-Rx-5QT" firstAttribute="centerX" secondItem="cEL-3L-VHw" secondAttribute="centerX" id="0Vv-ec-DHP"/>
+                            <constraint firstItem="cho-jd-ylO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="14d-YV-70Y"/>
+                            <constraint firstItem="wfM-K2-jvl" firstAttribute="leading" secondItem="Lua-XB-jXr" secondAttribute="leading" id="4ba-L2-gjf"/>
+                            <constraint firstItem="cho-jd-ylO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="519-iN-xTW"/>
+                            <constraint firstItem="Lua-XB-jXr" firstAttribute="top" secondItem="PMx-xr-uw1" secondAttribute="bottom" constant="90" id="5G3-Wt-7Q8"/>
+                            <constraint firstItem="cho-jd-ylO" firstAttribute="centerX" secondItem="wRM-Rx-5QT" secondAttribute="centerX" id="GNf-rJ-VlU"/>
+                            <constraint firstItem="cEL-3L-VHw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="1" id="Lrs-Io-6Th"/>
+                            <constraint firstItem="Lua-XB-jXr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WO5-ah-nN0"/>
+                            <constraint firstItem="cEL-3L-VHw" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="XS7-na-XW1"/>
+                            <constraint firstItem="wRM-Rx-5QT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="XdB-cm-fHO"/>
+                            <constraint firstItem="PMx-xr-uw1" firstAttribute="centerX" secondItem="Lua-XB-jXr" secondAttribute="centerX" id="aHo-7P-h3d"/>
+                            <constraint firstItem="Lua-XB-jXr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ajW-tp-hEg"/>
+                            <constraint firstItem="cEL-3L-VHw" firstAttribute="centerX" secondItem="PMx-xr-uw1" secondAttribute="centerX" id="fuQ-qm-TeJ"/>
+                            <constraint firstItem="wfM-K2-jvl" firstAttribute="trailing" secondItem="Lua-XB-jXr" secondAttribute="trailing" id="gCf-2F-Phe"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="wfM-K2-jvl" secondAttribute="bottom" constant="-19.5" id="qFL-YG-b4e"/>
+                            <constraint firstItem="cho-jd-ylO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="72" id="rAG-Z6-htx"/>
+                            <constraint firstItem="wRM-Rx-5QT" firstAttribute="top" secondItem="cho-jd-ylO" secondAttribute="bottom" constant="17" id="wbo-zq-HMp"/>
+                            <constraint firstItem="wfM-K2-jvl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-46.5" id="xVU-D2-z70"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
