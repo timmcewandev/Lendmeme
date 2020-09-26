@@ -345,6 +345,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Default action"), style: .cancel, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))
+            addActionSheetForiPad(actionSheet: alert)
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -415,6 +416,15 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
     }
 }
 
+extension BorrowTableViewController {
+  public func addActionSheetForiPad(actionSheet: UIAlertController) {
+    if let popoverPresentationController = actionSheet.popoverPresentationController {
+      popoverPresentationController.sourceView = self.view
+      popoverPresentationController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+      popoverPresentationController.permittedArrowDirections = []
+    }
+  }
+}
 //extension BorrowTableViewController: GADBannerViewDelegate {
 //    private func adViewDidReceiveAd(_ bannerView: GADBannerView) {
 //        print("Recieved ad")
