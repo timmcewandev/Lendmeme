@@ -18,6 +18,7 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
     //    @IBOutlet weak var bannerView: GADBannerView!
     
     // MARK: - Properties
+    let secondDatePicker = UIDatePicker()
     let toStarterViewController = "starter"
     let toEditorViewController = "toPhoto"
     let toCalendarViewController = "toCalendar"
@@ -53,6 +54,7 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
         //        bannerView.rootViewController = self
         //        bannerView.load(GADRequest())
         //        bannerView.delegate = self
+        secondDatePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
     }
     
     
@@ -74,6 +76,13 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
         }
         self.navigationController?.isNavigationBarHidden = false
         tableView.reloadData()
+    }
+    @objc func dateChanged(_ sender: UIDatePicker) {
+        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: sender.date)
+        if let day = components.day, let month = components.month, let year = components.year, let hour = components.hour {
+            print("\(day) \(month) \(year) \(hour)")
+            secondDatePicker.alpha = 0.0
+        }
     }
     
     // MARK: - Actions
@@ -293,9 +302,51 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             }))
         } else if selectedImage.reminderDate == nil && selectedImage.hasBeenReturned == false {
             alert.addAction(UIAlertAction(title: "Remind me", style: .default, handler: { _ in
-                let myphoto = [self.imageInfo[indexPath.row]]
-                self.remindMe = myphoto
-                self.performSegue(withIdentifier: self.toCalendarViewController, sender: self)
+                if #available(iOS 14.0, *) {
+//                    let secondDatePicker = UIDatePicker()
+                    self.secondDatePicker.alpha = 1.0
+                    self.secondDatePicker.preferredDatePickerStyle = .compact
+                    self.secondDatePicker.backgroundColor = UIColor.white
+                    self.secondDatePicker.layer.borderWidth = 2
+                    self.secondDatePicker.layer.cornerRadius = 8
+                    
+                    self.view.addSubview(self.secondDatePicker)
+                         
+                    self.secondDatePicker.translatesAutoresizingMaskIntoConstraints = false
+                    self.secondDatePicker.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+                    self.secondDatePicker.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+                    
+//                    print("\(secondDatePicker.date)")
+//                    if secondDatePicker.isSelected == true {
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+//                            let dateformatter = DateFormatter()
+//                            dateformatter.dateStyle = DateFormatter.Style.medium
+//                            dateformatter.timeStyle = DateFormatter.Style.short
+//                            let strDate = dateformatter.string(from: secondDatePicker.date)
+//                            let alert = UIAlertController(title: "Selected Date", message: "\(strDate)", preferredStyle: UIAlertControllerStyle.alert)
+//                            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//                            alert.addAction(UIAlertAction(title: "Remind me", style: .default, handler: { (UIAlertAction) in
+    //                            let selectedDate = sender.date
+    //                            let imageInfo = self.receivedItem[0]
+    //                            self.delegate?.getDate(date: selectedDate, imageInformation: imageInfo)
+                                
+    //                            let delegate = UIApplication.shared.delegate as? AppDelegate
+    //                            delegate?.scheduleNotification(at: selectedDate, name: self.receivedItem[0].titleinfo?.lowercased() ?? "", memedImage: imageInfo)
+//                                self.dismiss(animated: true, completion: nil)
+//                            }))
+//                            self.present(alert, animated: true, completion: nil)
+//                        }
+//                    }
+//                    secondDatePicker.setDate(<#T##date: Date##Date#>, animated: true)
+//                    secondDatePicker.isSelected = true
+                    
+                    
+                } else {
+                    let myphoto = [self.imageInfo[indexPath.row]]
+                    self.remindMe = myphoto
+                    self.performSegue(withIdentifier: self.toCalendarViewController, sender: self)
+                }
+
                 
             }))
         }
