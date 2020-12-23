@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="3aq-MU-Oi6">
-                        <rect key="frame" x="331" y="5" width="133" height="179"/>
+                        <rect key="frame" x="346" y="5" width="133" height="179"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="3aq-MU-Oi6" secondAttribute="height" multiplier="129:103" constant="-30" id="gEc-Lp-Vlo">
                                 <variation key="heightClass=regular-widthClass=compact" constant="-91.184466019417499"/>
@@ -34,8 +34,8 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Borrowed item:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQw-0Q-sU8">
-                        <rect key="frame" x="50" y="5" width="273" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Borrowed item:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQw-0Q-sU8">
+                        <rect key="frame" x="35" y="5" width="303" height="18"/>
                         <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -43,26 +43,17 @@
                             <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irG-7P-kHE">
-                        <rect key="frame" x="50" y="23" width="273" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irG-7P-kHE">
+                        <rect key="frame" x="35" y="23" width="303" height="18"/>
                         <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                         <variation key="heightClass=regular-widthClass=regular">
                             <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="21"/>
-                        </variation>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cP-K0-NPO">
-                        <rect key="frame" x="50" y="44" width="279" height="18"/>
-                        <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
                         </variation>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vac-lW-ZZB">
-                        <rect key="frame" x="50" y="63" width="279" height="18"/>
+                        <rect key="frame" x="35" y="64" width="309" height="18"/>
                         <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -70,8 +61,8 @@
                             <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="21"/>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Borrowed:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kjh-Or-5kI">
-                        <rect key="frame" x="50" y="85" width="279" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Date Borrowed:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kjh-Or-5kI">
+                        <rect key="frame" x="35" y="85" width="309" height="18"/>
                         <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -79,8 +70,8 @@
                             <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status: Not Returned" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aW6-XB-8u0">
-                        <rect key="frame" x="50" y="125" width="279" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Status: Not Returned" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aW6-XB-8u0">
+                        <rect key="frame" x="35" y="125" width="309" height="18"/>
                         <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -88,8 +79,8 @@
                             <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTA-2M-Kbw">
-                        <rect key="frame" x="50" y="103" width="279" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTA-2M-Kbw">
+                        <rect key="frame" x="35" y="103" width="309" height="18"/>
                         <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -97,8 +88,8 @@
                             <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="21"/>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reminder Date:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgX-BB-9iJ">
-                        <rect key="frame" x="50" y="147" width="279" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="754" text="Reminder Date:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgX-BB-9iJ">
+                        <rect key="frame" x="35" y="147" width="309" height="18"/>
                         <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -106,8 +97,8 @@
                             <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="4" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t1x-zq-AjR">
-                        <rect key="frame" x="50" y="166" width="279" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="755" text="_" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="4" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t1x-zq-AjR">
+                        <rect key="frame" x="35" y="166" width="309" height="18"/>
                         <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -116,7 +107,7 @@
                         </variation>
                     </label>
                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hand.thumbsup.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="VAn-TU-Wf5">
-                        <rect key="frame" x="357" y="62.5" width="80" height="80.5"/>
+                        <rect key="frame" x="372" y="62.5" width="80" height="80.5"/>
                         <color key="tintColor" systemColor="systemGreenColor"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="VAn-TU-Wf5" secondAttribute="height" multiplier="4:5" constant="12.399999999999991" id="acO-Oq-iEa"/>
@@ -144,6 +135,15 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cP-K0-NPO">
+                        <rect key="frame" x="35" y="44" width="309" height="18"/>
+                        <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
+                        </variation>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                 <constraints>
@@ -156,54 +156,49 @@
                     </constraint>
                     <constraint firstItem="3aq-MU-Oi6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="7ID-Qa-RXS"/>
                     <constraint firstItem="aW6-XB-8u0" firstAttribute="top" secondItem="cTA-2M-Kbw" secondAttribute="bottom" constant="4" id="9lP-gM-pgk"/>
-                    <constraint firstItem="irG-7P-kHE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="Bum-YG-3r1">
+                    <constraint firstAttribute="bottom" secondItem="t1x-zq-AjR" secondAttribute="bottom" constant="22" id="Aa1-cp-Wqg"/>
+                    <constraint firstItem="irG-7P-kHE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="Bum-YG-3r1">
                         <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                     </constraint>
                     <constraint firstItem="8cP-K0-NPO" firstAttribute="top" secondItem="irG-7P-kHE" secondAttribute="bottom" constant="3" id="CoS-Hw-S8m"/>
                     <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="irG-7P-kHE" secondAttribute="trailing" constant="58" id="F89-rc-e2a">
                         <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                     </constraint>
-                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="aW6-XB-8u0" secondAttribute="trailing" constant="2" id="GJw-Uu-92r">
-                        <variation key="heightClass=regular-widthClass=compact" constant="2"/>
-                    </constraint>
-                    <constraint firstItem="vac-lW-ZZB" firstAttribute="top" secondItem="8cP-K0-NPO" secondAttribute="bottom" constant="1" id="Giy-B1-9Q5"/>
-                    <constraint firstAttribute="trailing" secondItem="3aq-MU-Oi6" secondAttribute="trailing" constant="50" id="JAa-9d-O7d">
+                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="aW6-XB-8u0" secondAttribute="trailing" constant="2" id="GJw-Uu-92r"/>
+                    <constraint firstItem="vac-lW-ZZB" firstAttribute="top" secondItem="8cP-K0-NPO" secondAttribute="bottom" constant="2" id="Giy-B1-9Q5"/>
+                    <constraint firstAttribute="trailing" secondItem="3aq-MU-Oi6" secondAttribute="trailing" constant="35" id="JAa-9d-O7d">
                         <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                     </constraint>
-                    <constraint firstItem="Kjh-Or-5kI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="SPl-cH-6hl">
+                    <constraint firstItem="Kjh-Or-5kI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="SPl-cH-6hl">
                         <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                     </constraint>
                     <constraint firstItem="afh-qA-IwQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Sac-R1-cfP"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="t1x-zq-AjR" secondAttribute="bottom" id="TOp-tS-eXB"/>
-                    <constraint firstItem="8cP-K0-NPO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="Tef-aZ-scD">
+                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="ZgX-BB-9iJ" secondAttribute="trailing" constant="2" id="T6F-e0-iTp"/>
+                    <constraint firstItem="8cP-K0-NPO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="Tef-aZ-scD">
                         <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                     </constraint>
                     <constraint firstAttribute="trailing" secondItem="afh-qA-IwQ" secondAttribute="trailing" constant="50" id="U96-U1-hqb">
                         <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                     </constraint>
-                    <constraint firstItem="Kjh-Or-5kI" firstAttribute="top" secondItem="vac-lW-ZZB" secondAttribute="bottom" constant="4" id="VDl-bN-aNN"/>
+                    <constraint firstItem="Kjh-Or-5kI" firstAttribute="top" secondItem="vac-lW-ZZB" secondAttribute="bottom" constant="3" id="VDl-bN-aNN"/>
+                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="t1x-zq-AjR" secondAttribute="trailing" constant="2" id="YUy-5W-1xh"/>
                     <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="vac-lW-ZZB" secondAttribute="trailing" constant="2" id="ZU7-yP-Qmy">
                         <variation key="heightClass=regular-widthClass=compact" constant="2"/>
                     </constraint>
-                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="ZgX-BB-9iJ" secondAttribute="trailing" constant="2" id="ZmS-Jx-hJt">
-                        <variation key="heightClass=regular-widthClass=compact" constant="2"/>
-                    </constraint>
-                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="t1x-zq-AjR" secondAttribute="trailing" id="acn-jJ-7kS">
-                        <variation key="heightClass=regular-widthClass=compact" constant="2"/>
-                    </constraint>
+                    <constraint firstItem="t1x-zq-AjR" firstAttribute="top" secondItem="ZgX-BB-9iJ" secondAttribute="bottom" constant="1" id="bP1-1U-ltq"/>
                     <constraint firstAttribute="bottom" secondItem="3aq-MU-Oi6" secondAttribute="bottom" constant="22" id="hxz-ff-h7A"/>
                     <constraint firstItem="VAn-TU-Wf5" firstAttribute="centerX" secondItem="3aq-MU-Oi6" secondAttribute="centerX" id="hyZ-y9-y1f">
                         <variation key="heightClass=regular-widthClass=compact" constant="-0.5"/>
                     </constraint>
                     <constraint firstItem="BQw-0Q-sU8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="i87-hw-FP2"/>
-                    <constraint firstItem="cTA-2M-Kbw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="kxz-RO-b2K">
+                    <constraint firstItem="cTA-2M-Kbw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="kxz-RO-b2K">
                         <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                     </constraint>
                     <constraint firstItem="cTA-2M-Kbw" firstAttribute="top" secondItem="Kjh-Or-5kI" secondAttribute="bottom" id="lEW-59-GBd"/>
-                    <constraint firstItem="ZgX-BB-9iJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="q3r-yJ-A2C">
+                    <constraint firstItem="ZgX-BB-9iJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="q3r-yJ-A2C">
                         <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                     </constraint>
-                    <constraint firstItem="aW6-XB-8u0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="qG2-8U-aGB">
+                    <constraint firstItem="aW6-XB-8u0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="qG2-8U-aGB">
                         <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                     </constraint>
                     <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="Kjh-Or-5kI" secondAttribute="trailing" constant="2" id="r73-DX-QFp">
@@ -212,20 +207,17 @@
                     <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="8cP-K0-NPO" secondAttribute="trailing" constant="2" id="tQW-Di-w2u">
                         <variation key="heightClass=regular-widthClass=compact" constant="2"/>
                     </constraint>
-                    <constraint firstItem="BQw-0Q-sU8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="taK-QK-pTP">
+                    <constraint firstItem="BQw-0Q-sU8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="taK-QK-pTP">
                         <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                     </constraint>
                     <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="cTA-2M-Kbw" secondAttribute="trailing" constant="2" id="veG-Wo-9ef">
                         <variation key="heightClass=regular-widthClass=compact" constant="2"/>
                     </constraint>
-                    <constraint firstItem="vac-lW-ZZB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="vjc-sd-b14">
-                        <variation key="heightClass=regular-widthClass=regular" constant="150"/>
-                    </constraint>
-                    <constraint firstItem="t1x-zq-AjR" firstAttribute="top" secondItem="ZgX-BB-9iJ" secondAttribute="bottom" constant="1" id="vw0-WU-YYP"/>
-                    <constraint firstItem="t1x-zq-AjR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="wQS-b1-1Vh">
+                    <constraint firstItem="vac-lW-ZZB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="vjc-sd-b14">
                         <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                     </constraint>
                     <constraint firstItem="irG-7P-kHE" firstAttribute="top" secondItem="BQw-0Q-sU8" secondAttribute="bottom" id="wnw-zX-9AA"/>
+                    <constraint firstItem="t1x-zq-AjR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="xaA-b7-LAu"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

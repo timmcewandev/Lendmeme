@@ -22,7 +22,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     var imageInfo: [ImageInfo] = []
     let borrowTextAttributes: [String : Any] = [
         NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
-        NSAttributedStringKey.strokeWidth.rawValue : -3.0,
         NSAttributedStringKey.foregroundColor.rawValue: UIColor.white
     ]
     
@@ -147,6 +146,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         imagePicker.delegate = self
         present(imagePicker, animated: true, completion: nil)
     }
+    
     func camera() {
         if UIImagePickerController.isSourceTypeAvailable(.camera){
             let myPickerController = UIImagePickerController()
