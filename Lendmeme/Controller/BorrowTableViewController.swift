@@ -202,7 +202,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             cell?.returnedIcon.isHidden = false
             if #available(iOS 13.0, *) {
                 cell?.reminderDateIcon.isHidden = true
-                cell?.returnedIcon.image = UIImage(systemName: "checkmark.circle")
+                cell?.returnedIcon.image = UIImage(systemName: "hand.thumbsup.fill")
                 cell?.returnedAnimation()
                 for meme in imageInfo {
                     if meme == memeImages {
@@ -218,7 +218,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             cell?.returnedIcon.isHidden = false
             if #available(iOS 13.0, *) {
                 cell?.reminderDateIcon.isHidden = true
-                cell?.returnedIcon.image = UIImage(systemName: "checkmark.circle")
+                cell?.returnedIcon.image = UIImage(systemName: "hand.thumbsup.fill")
             }
         }
         return cell ?? UITableViewCell()
