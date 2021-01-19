@@ -22,6 +22,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     var imageInfo: [ImageInfo] = []
     let borrowTextAttributes: [String : Any] = [
         NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
+        NSAttributedStringKey.strokeWidth.rawValue : -0.2,
         NSAttributedStringKey.foregroundColor.rawValue: UIColor.white
     ]
     
@@ -47,7 +48,9 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         prepareTextField(textField: bottomTextOUT, name: "add phone#")
         prepareTextField(textField: titleTextOUT, name: "add title")
         self.tabBarController?.tabBar.isHidden = true
-        
+        bottomTextOUT.inputAccessoryView = accessoryView()
+        bottomTextOUT.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
+        view.addSubview(bottomTextOUT)
         //        bannerView.adUnitID = "ca-app-pub-6335247657896931/5485024801"
         //        bannerView.rootViewController = self
         //        bannerView.load(GADRequest())
@@ -62,7 +65,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         returnButtonForPhoneNumber.setTitle("RETURN", for: .normal)
         returnButtonForPhoneNumber.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         returnButtonForPhoneNumber.addTarget(self, action: #selector(BorrowEditorViewController.doneAction), for: .touchUpInside)
-        bottomTextOUT.inputAccessoryView = returnButtonForPhoneNumber
         bottomTextOUT.inputAccessoryView = returnButtonForPhoneNumber
     }
     
@@ -81,8 +83,8 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         }
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
         view.addGestureRecognizer(tapGesture)
-        self.imageView.image = UIImage(named: "placeholder")
     }
+    
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
         topTextOUT.resignFirstResponder()
         titleTextOUT.resignFirstResponder()
@@ -93,7 +95,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
         configureShareOut(isEnabled: false)
-        self.imageView.image = nil
     }
     
     
@@ -107,7 +108,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     @IBAction func cancelBTN(_ sender: Any) {
-        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -350,6 +350,25 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
             view.frame.origin.y = -keyboardHeight(notification: notification)
         }
         
+        
+    }
+    func accessoryView() -> UIView {
+        
+        let view = UIView()
+        view.backgroundColor = .gray
+        
+        let returnButton = UIButton()
+        returnButton.frame = CGRect(x: self.view.frame.width - 80, y: 7, width: 60, height: 30)
+        returnButton.setTitle("Return", for: .normal)
+        if #available(iOS 13.0, *) {
+            returnButton.tintColor = .label
+        } else {
+            returnButton.tintColor = .white
+        }
+        returnButton.addTarget(self, action: #selector(BorrowEditorViewController.doneAction), for: .touchUpInside)
+        view.addSubview(returnButton)
+        
+        return view
         
     }
     

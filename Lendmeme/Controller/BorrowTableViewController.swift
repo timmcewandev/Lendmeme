@@ -305,10 +305,11 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 if #available(iOS 14.0, *) {
 //                    let secondDatePicker = UIDatePicker()
                     self.secondDatePicker.alpha = 1.0
-                    self.secondDatePicker.preferredDatePickerStyle = .compact
+                    self.secondDatePicker.preferredDatePickerStyle = .wheels
                     self.secondDatePicker.backgroundColor = UIColor.white
                     self.secondDatePicker.layer.borderWidth = 2
                     self.secondDatePicker.layer.cornerRadius = 8
+                    
                     
                     self.view.addSubview(self.secondDatePicker)
                          
@@ -346,8 +347,6 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                     self.remindMe = myphoto
                     self.performSegue(withIdentifier: self.toCalendarViewController, sender: self)
                 }
-
-                
             }))
         }
         if imageInfo[indexPath.row].bottomInfo != "" && selectedImage.hasBeenReturned == false {
