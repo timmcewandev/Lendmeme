@@ -8,7 +8,6 @@ import FittedSheets
 import CoreData
 import MessageUI
 //import GoogleMobileAds
-//chulllsdfsf
 
 class BorrowTableViewController: UIViewController, getDateForReminderDelegate, MFMessageComposeViewControllerDelegate {
     
@@ -162,7 +161,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         let dateToday = Date()
         let date = memeImages.creationDate ?? Date()
         let dateFormatterForCreationDate = DateFormatter()
-        dateFormatterForCreationDate.dateFormat = "MMM-dd-yyyy"
+        dateFormatterForCreationDate.dateFormat = Constants.DateText.dateOnly
         let todaysDate = dateFormatterForCreationDate.string(from: date)
         if #available(iOS 13.0, *) {
             cell?.reminderDate.textColor = .label
@@ -172,11 +171,11 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         cell?.reminderDate.text = "_"
         if let remdinderDate = memeImages.reminderDate {
             if dateToday > remdinderDate && memeImages.hasBeenReturned != true  {
-                cell?.reminderDate.text = "Expired"
+                cell?.reminderDate.text = Constants.NameConstants.expiredText
                 cell?.reminderDate.textColor = .systemPink
             } else if memeImages.hasBeenReturned != true {
                 let dateformatter = DateFormatter()
-                dateformatter.dateFormat = "MMM-dd-yyyy h:mm a"
+                dateformatter.dateFormat = Constants.DateText.dateAndTime
                 let reminderDateToString = dateformatter.string(from: remdinderDate)
                 cell?.reminderDate.text = reminderDateToString
                 if #available(iOS 13.0, *) {
@@ -264,7 +263,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         let markImageAsReturned = selectedImage
         
         if markImageAsReturned.hasBeenReturned == false {
-            alert.addAction(UIAlertAction(title: "Mark as returned", style: .default, handler: { _ in
+            alert.addAction(UIAlertAction(title: Constants.CommandListText.markAsNotReturned, style: .default, handler: { _ in
                 let markImageAsReturned = selectedImage
                 self.removeCalendarNotification(selectedImage)
                 markImageAsReturned.hasBeenReturned = true
@@ -276,7 +275,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 self.segmentOut.reloadInputViews()
             }))
         } else {
-            alert.addAction(UIAlertAction(title: "Mark as not returned", style: .default, handler: { _ in
+            alert.addAction(UIAlertAction(title: Constants.CommandListText.markAsNotReturned, style: .default, handler: { _ in
                 let selectedImage = self.imageInfo[indexPath.row]
                 let markImageAsReturned = selectedImage
                 markImageAsReturned.hasBeenReturned = false
@@ -291,18 +290,18 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         }
         
         if selectedImage.hasBeenReturned == false && selectedImage.reminderDate != nil {
-            alert.addAction(UIAlertAction(title: "Remove calender reminder", style: .default, handler: { _ in
+            alert.addAction(UIAlertAction(title: Constants.CommandListText.removeCalendar, style: .default, handler: { _ in
                 self.removeCalendarNotification(selectedImage)
             }))
             
-            alert.addAction(UIAlertAction(title: "Change date & time", style: .default, handler: { _ in
+            alert.addAction(UIAlertAction(title: Constants.CommandListText.changeDateAndTime, style: .default, handler: { _ in
                 let myphoto = [self.imageInfo[indexPath.row]]
                 self.remindMe = myphoto
                 self.performSegue(withIdentifier: self.toCalendarViewController, sender: self)
                 
             }))
         } else if selectedImage.reminderDate == nil && selectedImage.hasBeenReturned == false {
-            alert.addAction(UIAlertAction(title: "Remind me", style: .default, handler: { _ in
+            alert.addAction(UIAlertAction(title: Constants.CommandListText.remindMe, style: .default, handler: { _ in
                 if #available(iOS 14.0, *) {
 //                    let secondDatePicker = UIDatePicker()
                     self.secondDatePicker.alpha = 1.0
@@ -351,19 +350,20 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             }))
         }
         if imageInfo[indexPath.row].bottomInfo != "" && selectedImage.hasBeenReturned == false {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("Send text message", comment: "Default action"), style: .default, handler: { _ in
+            alert.addAction(UIAlertAction(title: NSLocalizedString(Constants.MesageText.sendMessage, comment: "Default action"), style: .default, handler: { _ in
                 let composeVC = MFMessageComposeViewController()
                 composeVC.messageComposeDelegate = self
                 guard let number = self.imageInfo[indexPath.row].bottomInfo else {return}
                 guard let image = self.imageInfo[indexPath.row].imageData else {return}
-                if let first = self.imageInfo[indexPath.row].topInfo, let title = self.imageInfo[indexPath.row].titleinfo?.lowercased() {
-                    composeVC.body = "Hello \(first) 👋, I was wondering if you are done with the \(title)? Is there a time you could return it? Thanks 👏"
+                if let name = self.imageInfo[indexPath.row].topInfo, let itemBorrowed = self.imageInfo[indexPath.row].titleinfo?.lowercased() {
+                    composeVC.body = Constants.MesageText.getNameAndItemBorrowed(name: name, item: itemBorrowed)
+                    composeVC.addAttachmentData(image, typeIdentifier: "public.data", filename: "\(itemBorrowed).png")
                 } else {
-                    composeVC.body = "Hello 👋, I was wondering if you are done with this item? Is there a time you could return it? Thanks 👏"
+                    composeVC.body = Constants.MesageText.noNameOrItem
+                    composeVC.addAttachmentData(image, typeIdentifier: "public.data", filename: "lendmeme.png")
                 }
                 composeVC.recipients = ["\(number)"]
                 
-                composeVC.addAttachmentData(image, typeIdentifier: "public.data", filename: "lendmeme.png")
                 if MFMessageComposeViewController.canSendText() {
                     self.present(composeVC, animated: true, completion: nil)
                 }
@@ -401,7 +401,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteItem = UITableViewRowAction(style: .destructive, title: "Delete", handler: { [weak self] (action, indexPath) in
+        let deleteItem = UITableViewRowAction(style: .destructive, title: Constants.CommandListText.delete, handler: { [weak self] (action, indexPath) in
             guard let self = self else {return}
             self.searchBar.resignFirstResponder()
             let myphoto = self.imageInfo[indexPath.row]
@@ -423,7 +423,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             
         })
         deleteItem.backgroundColor = UIColor.systemRed
-        let markItemAsReturned = UITableViewRowAction(style: .default, title: "Mark item as returned", handler: { [weak self] (_ , indexPath)  in
+        let markItemAsReturned = UITableViewRowAction(style: .default, title: Constants.CommandListText.markAsReturned, handler: { [weak self] (_ , indexPath)  in
             guard let self = self else {return}
             let myphoto = self.imageInfo[indexPath.row]
             let selectImage = self.imageInfo
@@ -440,7 +440,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             }
             
         })
-        let markItemAsNotReturned = UITableViewRowAction(style: .default, title: "Mark item as not returned", handler: { [weak self] (_ , indexPath)  in
+        let markItemAsNotReturned = UITableViewRowAction(style: .default, title: Constants.CommandListText.markAsNotReturned, handler: { [weak self] (_ , indexPath)  in
             guard let self = self else {return}
             let myphoto = self.imageInfo[indexPath.row]
             let selectImage = self.imageInfo

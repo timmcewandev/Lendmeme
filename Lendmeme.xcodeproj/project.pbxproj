@@ -15,6 +15,7 @@
 		227E2A682510638C005E5074 /* BorrowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E2A662510638C005E5074 /* BorrowTableViewCell.swift */; };
 		227E2A692510638C005E5074 /* BorrowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 227E2A672510638C005E5074 /* BorrowTableViewCell.xib */; };
 		22F2ED8B249DB64200CBAA6B /* PVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F2ED8A249DB64200CBAA6B /* PVController.swift */; };
+		841E4F7C25F6F3F10014DD58 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E4F7B25F6F3F10014DD58 /* Constants.swift */; };
 		9B088C0B200DB28F00601CA9 /* BorrowInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B088C0A200DB28F00601CA9 /* BorrowInfo.swift */; };
 		9B39AA8A22F40B3B007EF340 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B39AA8922F40B3B007EF340 /* DataController.swift */; };
 		9B518CA92229CDDC004B1050 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B518CA82229CDDC004B1050 /* ImageViewController.swift */; };
@@ -52,6 +53,7 @@
 		2FFBA5C4B1F6641B98CC7E91 /* Pods_Lendmeme.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lendmeme.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6601F2216B378B12D2940F77 /* Pods-iborrow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iborrow.release.xcconfig"; path = "Target Support Files/Pods-iborrow/Pods-iborrow.release.xcconfig"; sourceTree = "<group>"; };
 		78DB84F656F0B34BEED75E5A /* Pods-Lendmeme.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lendmeme.debug.xcconfig"; path = "Target Support Files/Pods-Lendmeme/Pods-Lendmeme.debug.xcconfig"; sourceTree = "<group>"; };
+		841E4F7B25F6F3F10014DD58 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9B088C0A200DB28F00601CA9 /* BorrowInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowInfo.swift; sourceTree = "<group>"; };
 		9B39AA8922F40B3B007EF340 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		9B518CA82229CDDC004B1050 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				9BBD165E22F6ABFC00299384 /* BorrowTime.xcdatamodeld */,
 				9B39AA8922F40B3B007EF340 /* DataController.swift */,
 				9B90F13122F7DC540035104E /* Lendmeme.entitlements */,
+				841E4F7B25F6F3F10014DD58 /* Constants.swift */,
 			);
 			path = "Supporting files";
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				9BDD35D31FD88B0D005ADBCD /* AppDelegate.swift in Sources */,
 				225D698E24BA338600E03995 /* BorrowUpdateViewController.swift in Sources */,
 				22F2ED8B249DB64200CBAA6B /* PVController.swift in Sources */,
+				841E4F7C25F6F3F10014DD58 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
