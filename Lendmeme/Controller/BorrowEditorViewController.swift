@@ -17,7 +17,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     var dataController: DataController!
     var nameOfBorrower: String?
     let transition = BubbleTransition()
-    let creationDate = "creationDate"
     //    var interstitial: GADInterstitial!
     var imageInfo: [ImageInfo] = []
     let borrowTextAttributes: [String : Any] = [
@@ -30,9 +29,9 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     //    @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var shareOUT: UIBarButtonItem!
-    @IBOutlet weak var bottomTextOUT: UITextField!
-    @IBOutlet weak var topTextOUT: UITextField!
-    @IBOutlet weak var titleTextOUT: UITextField!
+    @IBOutlet weak var phoneNumberTextField: UITextField!
+    @IBOutlet weak var titleOfItemTextField: UITextField!
+    @IBOutlet weak var nameOfBorrowerTextField: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cancelOut: UIBarButtonItem!
     @IBOutlet weak var insertImageContainer: UIStackView!
@@ -44,13 +43,14 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         configureShareOut(isEnabled: false)
-        prepareTextField(textField: topTextOUT, name: "add borrower name")
-        prepareTextField(textField: bottomTextOUT, name: "add phone#")
-        prepareTextField(textField: titleTextOUT, name: "add title")
+        prepareTextField(textField: titleOfItemTextField, name: Constants.TextFieldNames.itemTitle)
+        prepareTextField(textField: nameOfBorrowerTextField, name: Constants.TextFieldNames.nameOfPersonBorrowing)
+        prepareTextField(textField: phoneNumberTextField, name: Constants.TextFieldNames.phoneNumberText)
+        
         self.tabBarController?.tabBar.isHidden = true
-        bottomTextOUT.inputAccessoryView = accessoryView()
-        bottomTextOUT.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
-        view.addSubview(bottomTextOUT)
+        phoneNumberTextField.inputAccessoryView = accessoryView()
+        phoneNumberTextField.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
+        view.addSubview(phoneNumberTextField)
         //        bannerView.adUnitID = "ca-app-pub-6335247657896931/5485024801"
         //        bannerView.rootViewController = self
         //        bannerView.load(GADRequest())
@@ -62,17 +62,17 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         
         let returnButtonForPhoneNumber = UIButton(frame:CGRect(x: 0, y: 0, width: view.frame.size.width, height: 60))
         returnButtonForPhoneNumber.backgroundColor = #colorLiteral(red: 0.9815835357, green: 0.632611692, blue: 0.1478855908, alpha: 1)
-        returnButtonForPhoneNumber.setTitle("RETURN", for: .normal)
+        returnButtonForPhoneNumber.setTitle("Return", for: .normal)
         returnButtonForPhoneNumber.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         returnButtonForPhoneNumber.addTarget(self, action: #selector(BorrowEditorViewController.doneAction), for: .touchUpInside)
-        bottomTextOUT.inputAccessoryView = returnButtonForPhoneNumber
+        phoneNumberTextField.inputAccessoryView = returnButtonForPhoneNumber
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
         let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: creationDate, ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let result = try? dataController.viewContext.fetch(fetchRequest){
             if result.count == 0 {
@@ -86,9 +86,9 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
-        topTextOUT.resignFirstResponder()
-        titleTextOUT.resignFirstResponder()
-        bottomTextOUT.resignFirstResponder()
+        titleOfItemTextField.resignFirstResponder()
+        nameOfBorrowerTextField.resignFirstResponder()
+        phoneNumberTextField.resignFirstResponder()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -202,9 +202,9 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         
-        if textField == topTextOUT {
+        if textField == titleOfItemTextField {
             _ = CNContactStore.authorizationStatus(for: .contacts)
-            let nameMe = self.topTextOUT.text
+            let nameMe = self.titleOfItemTextField.text
             let nameProperCapitalization = (nameMe?.lowercased().capitalized) ?? ""
             let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
             let store = CNContactStore()
@@ -218,15 +218,15 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
                         let alert = UIAlertController(title: "We found a phone number for \(contacts[0].givenName) \(contacts[0].familyName)", message: "Would you like to use it?", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Sure", style: .default, handler: {[weak self] _ in
                             guard let self = self else {return}
-                            self.topTextOUT.text = contacts[0].givenName + " " + contacts[0].familyName
+                            self.titleOfItemTextField.text = contacts[0].givenName + " " + contacts[0].familyName
                             let phoneNumber = phoneNumberFound.replacingOccurrences(of: "+1", with: "")
-                            self.bottomTextOUT.text = phoneNumber
-                            self.checkIfNextTextFieldIsEmpty(focusedTextField: self.topTextOUT, toNextTextField: self.titleTextOUT)
+                            self.phoneNumberTextField.text = phoneNumber
+                            self.checkIfNextTextFieldIsEmpty(focusedTextField: self.titleOfItemTextField, toNextTextField: self.nameOfBorrowerTextField)
                             
                         }))
                         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { [weak self] _ in
                             guard let self = self else {return}
-                            self.checkIfNextTextFieldIsEmpty(focusedTextField: self.topTextOUT, toNextTextField: self.titleTextOUT)
+                            self.checkIfNextTextFieldIsEmpty(focusedTextField: self.titleOfItemTextField, toNextTextField: self.nameOfBorrowerTextField)
                         }))
                         self.present(alert, animated: true, completion: nil)
                     }
@@ -236,8 +236,8 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
                 debugPrint(error.localizedDescription)
             }
         }
-        checkIfNextTextFieldIsEmpty(focusedTextField: titleTextOUT, toNextTextField: topTextOUT)
-        checkIfNextTextFieldIsEmpty(focusedTextField: topTextOUT, toNextTextField: titleTextOUT)
+        checkIfNextTextFieldIsEmpty(focusedTextField: nameOfBorrowerTextField, toNextTextField: titleOfItemTextField)
+        checkIfNextTextFieldIsEmpty(focusedTextField: titleOfItemTextField, toNextTextField: nameOfBorrowerTextField)
         
         resetFrame()
         return false
@@ -265,20 +265,20 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     
     func save() {
         
-        if topTextOUT.text == "" || titleTextOUT.text == "" || bottomTextOUT.text == "" {
+        if titleOfItemTextField.text == "" || nameOfBorrowerTextField.text == "" || phoneNumberTextField.text == "" {
             let alert = UIAlertController(title: "", message: "Missing information in textfield", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "ok", style: .default))
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
             present(alert, animated: true)
             return
         }
         toolbar.isHidden = true
         guard let memedImage = takeScreenshot() else { return }
         guard let originalImage = imageView.image else { return }
-        let borrowInfo = BorrowInfo(topString: self.topTextOUT.text ?? "None", bottomString: bottomTextOUT.text ?? "", titleString: titleTextOUT.text ?? "", originalImage: originalImage, borrowImage: memedImage, hasBeenReturned: false)
+        let borrowInfo = BorrowInfo(topString: self.titleOfItemTextField.text ?? "None", bottomString: phoneNumberTextField.text ?? "", titleString: nameOfBorrowerTextField.text ?? "", originalImage: originalImage, borrowImage: memedImage, hasBeenReturned: false)
         
         let getImageInfo = ImageInfo(context: dataController.viewContext)
         getImageInfo.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)
-        getImageInfo.topInfo = self.topTextOUT.text ?? "None"
+        getImageInfo.topInfo = self.titleOfItemTextField.text ?? "None"
         getImageInfo.titleinfo = borrowInfo.titleString
         getImageInfo.bottomInfo = borrowInfo.bottomString
         getImageInfo.creationDate = Date()
@@ -346,7 +346,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     
     // MARK: Objects
     @objc func keyboardWillShow(notification: NSNotification) {
-        if bottomTextOUT.isFirstResponder {
+        if phoneNumberTextField.isFirstResponder {
             view.frame.origin.y = -keyboardHeight(notification: notification)
         }
         
@@ -359,7 +359,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         
         let returnButton = UIButton()
         returnButton.frame = CGRect(x: self.view.frame.width - 80, y: 7, width: 60, height: 30)
-        returnButton.setTitle("Return", for: .normal)
+        returnButton.setTitle(Constants.CommandListText.returnText, for: .normal)
         if #available(iOS 13.0, *) {
             returnButton.tintColor = .label
         } else {
@@ -373,10 +373,10 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == bottomTextOUT {
-            guard let text = bottomTextOUT.text else { return false }
+        if textField == phoneNumberTextField {
+            guard let text = phoneNumberTextField.text else { return false }
             let newString = (text as NSString).replacingCharacters(in: range, with: string)
-            bottomTextOUT.text = formattedNumber(number: newString)
+            phoneNumberTextField.text = formattedNumber(number: newString)
             return false
         }
         return true
@@ -400,7 +400,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     @objc func doneAction() {
-        bottomTextOUT.resignFirstResponder()
+        phoneNumberTextField.resignFirstResponder()
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {

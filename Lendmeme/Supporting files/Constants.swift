@@ -11,13 +11,32 @@ import UIKit
 
 
 struct Constants {
+    struct CoreData {
+        static let creationDate = "creationDate"
+    }
     
-//    struct StoryboardIdentifier {
-//        <#fields#>
-//    }
+    struct Segue {
+        static let toStarterViewController = "starter"
+        static let toEditorViewController = "toPhoto"
+        static let toCalendarViewController = "toCalendar"
+        static let borrowTableViewCell = "BorrowTableViewCell"
+        static let pvController = "PVController"
+    }
     
+    struct Cell {
+        static let borrowTableViewCell = "BorrowTableViewCell"
+    }
+
+    struct TextFieldNames {
+        static let itemTitle = "add borrower name"
+        static let nameOfPersonBorrowing = "add title"
+        static let phoneNumberText = "add phone number"
+    }
     struct NameConstants {
         static let expiredText = "Expired"
+        static let statusNotReturned  = "Not returned"
+        static let statusReturned = "Returned"
+        static let selectedDate = "Selected Date"
     }
     
     struct CommandListText {
@@ -27,18 +46,25 @@ struct Constants {
         static let changeDateAndTime = "Change date & time"
         static let remindMe = "Remind me"
         static let delete = "Delete"
+        static let returnText = "Return"
+        static let viewImage = "View image 🌁"
+        static let cancel = "Cancel"
     }
     
     struct MesageText {
         
         static func getNameAndItemBorrowed(name: String, item: String) -> String {
-            return "Hello \(name) 👋, I was wondering if you are done with the \(item)? Is there a time you could return it? Thanks 👏"
+            return "Hello \(name) 👋, I was wondering if you are done with my \(item)? Is there a time you could return it? Thanks"
         }
         static let sendMessage = "Send text message"
-        static let noNameOrItem = "Hello 👋, I was wondering if you are done with this item? Is there a time you could return it? Thanks 👏"
+        static let noNameOrItem = "Hello 👋, I was wondering if you are done with this item? Is there a time you could return it? Thanks"
     }
     struct DateText {
         static let dateOnly = "MMM-dd-yyyy"
         static let dateAndTime = "MMM-dd-yyyy h:mm a"
+    }
+    struct SymbolsImage {
+        static let checkMarkCircleFilled = "checkmark.circle.fill"
+        static let calendarCircle = "calendar.circle"
     }
 }

@@ -34,8 +34,8 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Borrowed item:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQw-0Q-sU8">
-                        <rect key="frame" x="35" y="5" width="303" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Item borrowed:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQw-0Q-sU8">
+                        <rect key="frame" x="20" y="5" width="318" height="18"/>
                         <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -44,7 +44,7 @@
                         </variation>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irG-7P-kHE">
-                        <rect key="frame" x="35" y="23" width="303" height="18"/>
+                        <rect key="frame" x="20" y="23" width="318" height="18"/>
                         <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -53,7 +53,7 @@
                         </variation>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vac-lW-ZZB">
-                        <rect key="frame" x="35" y="64" width="309" height="18"/>
+                        <rect key="frame" x="20" y="64" width="324" height="18"/>
                         <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -61,17 +61,8 @@
                             <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="21"/>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Date Borrowed:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kjh-Or-5kI">
-                        <rect key="frame" x="35" y="85" width="309" height="18"/>
-                        <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
-                        </variation>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Status: Not Returned" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aW6-XB-8u0">
-                        <rect key="frame" x="35" y="125" width="303" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Date borrowed:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kjh-Or-5kI">
+                        <rect key="frame" x="20" y="85" width="324" height="18"/>
                         <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -80,7 +71,7 @@
                         </variation>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTA-2M-Kbw">
-                        <rect key="frame" x="35" y="103" width="232" height="18"/>
+                        <rect key="frame" x="20" y="103" width="247" height="18"/>
                         <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -88,8 +79,8 @@
                             <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="21"/>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="754" text="Reminder Date:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgX-BB-9iJ">
-                        <rect key="frame" x="35" y="147" width="116" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="754" text="Reminder date:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgX-BB-9iJ">
+                        <rect key="frame" x="20" y="147" width="112" height="18"/>
                         <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -122,7 +113,7 @@
                         <variation key="heightClass=regular-widthClass=compact" hidden="YES"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cP-K0-NPO">
-                        <rect key="frame" x="35" y="44" width="309" height="18"/>
+                        <rect key="frame" x="20" y="44" width="324" height="18"/>
                         <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -144,10 +135,31 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLs-4F-v4e">
+                        <rect key="frame" x="20" y="127" width="49.5" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="49.5" id="Fak-s6-YdI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
+                        </variation>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Status: Not Returned" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aW6-XB-8u0">
+                        <rect key="frame" x="74.5" y="127" width="153.5" height="18"/>
+                        <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
+                        </variation>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                 <constraints>
-                    <constraint firstItem="ZgX-BB-9iJ" firstAttribute="top" secondItem="aW6-XB-8u0" secondAttribute="bottom" constant="4" id="0wY-tI-GBt"/>
+                    <constraint firstItem="ZgX-BB-9iJ" firstAttribute="top" secondItem="aW6-XB-8u0" secondAttribute="bottom" constant="2" id="0kh-mk-wgo"/>
                     <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="BQw-0Q-sU8" secondAttribute="trailing" constant="8" id="5GM-mY-DF2">
                         <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                     </constraint>
@@ -155,28 +167,31 @@
                         <variation key="heightClass=regular-widthClass=compact" constant="8.75"/>
                     </constraint>
                     <constraint firstItem="3aq-MU-Oi6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="7ID-Qa-RXS"/>
-                    <constraint firstItem="aW6-XB-8u0" firstAttribute="top" secondItem="cTA-2M-Kbw" secondAttribute="bottom" constant="4" id="9lP-gM-pgk"/>
+                    <constraint firstItem="BLs-4F-v4e" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="80R-nX-gCC"/>
                     <constraint firstAttribute="bottom" secondItem="t1x-zq-AjR" secondAttribute="bottom" constant="22" id="Aa1-cp-Wqg"/>
-                    <constraint firstItem="irG-7P-kHE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="Bum-YG-3r1">
+                    <constraint firstItem="irG-7P-kHE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Bum-YG-3r1">
                         <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                     </constraint>
                     <constraint firstItem="8cP-K0-NPO" firstAttribute="top" secondItem="irG-7P-kHE" secondAttribute="bottom" constant="3" id="CoS-Hw-S8m"/>
                     <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="irG-7P-kHE" secondAttribute="trailing" constant="58" id="F89-rc-e2a">
                         <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                     </constraint>
-                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="aW6-XB-8u0" secondAttribute="trailing" constant="8" id="GJw-Uu-92r"/>
                     <constraint firstItem="vac-lW-ZZB" firstAttribute="top" secondItem="8cP-K0-NPO" secondAttribute="bottom" constant="2" id="Giy-B1-9Q5"/>
                     <constraint firstAttribute="trailing" secondItem="3aq-MU-Oi6" secondAttribute="trailing" constant="35" id="JAa-9d-O7d">
                         <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                     </constraint>
-                    <constraint firstItem="Kjh-Or-5kI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="SPl-cH-6hl">
+                    <constraint firstItem="aW6-XB-8u0" firstAttribute="top" secondItem="cTA-2M-Kbw" secondAttribute="bottom" constant="6" id="L5e-WH-rtN"/>
+                    <constraint firstItem="Kjh-Or-5kI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="SPl-cH-6hl">
                         <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                     </constraint>
-                    <constraint firstItem="8cP-K0-NPO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="Tef-aZ-scD">
+                    <constraint firstItem="8cP-K0-NPO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Tef-aZ-scD">
                         <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                     </constraint>
                     <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="afh-qA-IwQ" secondAttribute="trailing" constant="2" id="TtM-op-PZW"/>
+                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aW6-XB-8u0" secondAttribute="trailing" constant="10" id="U5C-JP-fLq"/>
                     <constraint firstItem="Kjh-Or-5kI" firstAttribute="top" secondItem="vac-lW-ZZB" secondAttribute="bottom" constant="3" id="VDl-bN-aNN"/>
+                    <constraint firstItem="ZgX-BB-9iJ" firstAttribute="top" secondItem="BLs-4F-v4e" secondAttribute="bottom" constant="2" id="XvP-lX-JHG"/>
+                    <constraint firstItem="BLs-4F-v4e" firstAttribute="top" secondItem="cTA-2M-Kbw" secondAttribute="bottom" constant="6" id="YHR-Oa-saq"/>
                     <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="vac-lW-ZZB" secondAttribute="trailing" constant="2" id="ZU7-yP-Qmy">
                         <variation key="heightClass=regular-widthClass=compact" constant="2"/>
                     </constraint>
@@ -187,14 +202,11 @@
                     </constraint>
                     <constraint firstItem="BQw-0Q-sU8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="i87-hw-FP2"/>
                     <constraint firstItem="afh-qA-IwQ" firstAttribute="top" secondItem="Kjh-Or-5kI" secondAttribute="bottom" constant="44" id="kLy-fN-M2e"/>
-                    <constraint firstItem="cTA-2M-Kbw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="kxz-RO-b2K">
+                    <constraint firstItem="cTA-2M-Kbw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="kxz-RO-b2K">
                         <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                     </constraint>
                     <constraint firstItem="cTA-2M-Kbw" firstAttribute="top" secondItem="Kjh-Or-5kI" secondAttribute="bottom" id="lEW-59-GBd"/>
-                    <constraint firstItem="ZgX-BB-9iJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="q3r-yJ-A2C">
-                        <variation key="heightClass=regular-widthClass=regular" constant="150"/>
-                    </constraint>
-                    <constraint firstItem="aW6-XB-8u0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="qG2-8U-aGB">
+                    <constraint firstItem="ZgX-BB-9iJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="q3r-yJ-A2C">
                         <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                     </constraint>
                     <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="Kjh-Or-5kI" secondAttribute="trailing" constant="2" id="r73-DX-QFp">
@@ -203,18 +215,19 @@
                     <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="8cP-K0-NPO" secondAttribute="trailing" constant="2" id="tQW-Di-w2u">
                         <variation key="heightClass=regular-widthClass=compact" constant="2"/>
                     </constraint>
-                    <constraint firstItem="BQw-0Q-sU8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="taK-QK-pTP">
+                    <constraint firstItem="BQw-0Q-sU8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="taK-QK-pTP">
                         <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                     </constraint>
                     <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="cTA-2M-Kbw" secondAttribute="trailing" constant="2" id="veG-Wo-9ef">
                         <variation key="heightClass=regular-widthClass=compact" constant="79"/>
                     </constraint>
-                    <constraint firstItem="vac-lW-ZZB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="vjc-sd-b14">
+                    <constraint firstItem="vac-lW-ZZB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="vjc-sd-b14">
                         <variation key="heightClass=regular-widthClass=regular" constant="150"/>
                     </constraint>
                     <constraint firstItem="irG-7P-kHE" firstAttribute="top" secondItem="BQw-0Q-sU8" secondAttribute="bottom" id="wnw-zX-9AA"/>
-                    <constraint firstItem="t1x-zq-AjR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="xaA-b7-LAu"/>
+                    <constraint firstItem="t1x-zq-AjR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="xaA-b7-LAu"/>
                     <constraint firstAttribute="bottomMargin" secondItem="afh-qA-IwQ" secondAttribute="bottom" constant="11" id="xl7-nO-cuq"/>
+                    <constraint firstItem="aW6-XB-8u0" firstAttribute="leading" secondItem="BLs-4F-v4e" secondAttribute="trailing" constant="5" id="ywa-xC-4Ym"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

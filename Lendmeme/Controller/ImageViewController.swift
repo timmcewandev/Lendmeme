@@ -41,9 +41,9 @@ class ImageViewController: UIViewController, UITableViewDataSource, UITableViewD
             dateformatter.dateStyle = DateFormatter.Style.medium
             dateformatter.timeStyle = DateFormatter.Style.short
             let strDate = dateformatter.string(from: self.datePicker.date)
-            let alert = UIAlertController(title: "Selected Date", message: "\(strDate)", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: "Remind me", style: .default, handler: { (UIAlertAction) in
+            let alert = UIAlertController(title: Constants.NameConstants.selectedDate, message: "\(strDate)", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: Constants.CommandListText.cancel, style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: Constants.CommandListText.remindMe, style: .default, handler: { (UIAlertAction) in
                 let selectedDate = sender.date
                 let imageInfo = self.receivedItem[0]
                 self.delegate?.getDate(date: selectedDate, imageInformation: imageInfo)

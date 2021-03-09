@@ -19,11 +19,6 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
     
     // MARK: - Properties
     let secondDatePicker = UIDatePicker()
-    let toStarterViewController = "starter"
-    let toEditorViewController = "toPhoto"
-    let toCalendarViewController = "toCalendar"
-    let borrowTableViewCell = "BorrowTableViewCell"
-    let creationDate = "creationDate"
     var hasBeenSeen = false
     var dataController:DataController!
     var imageInfo: [ImageInfo] = []
@@ -48,8 +43,8 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
         super.viewDidLoad()
         self.reloadInputViews()
         searchBar.delegate = self
-        let nib = UINib(nibName: borrowTableViewCell, bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: borrowTableViewCell)
+        let nib = UINib(nibName: Constants.Cell.borrowTableViewCell, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: Constants.Cell.borrowTableViewCell)
         //        bannerView.adUnitID = "ca-app-pub-6335247657896931/7400741709"
         //        bannerView.rootViewController = self
         //        bannerView.load(GADRequest())
@@ -62,7 +57,7 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
         super.viewWillAppear(true)
         
         let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: creationDate, ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let result = try? dataController.viewContext.fetch(fetchRequest){
             imageInfo = result
@@ -72,7 +67,7 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
         self.segmentOut.selectedSegmentIndex = 0
         self.segmentOut.reloadInputViews()
         if imageInfo.count == 0 && self.segmentOut.selectedSegmentIndex == 0   {
-            performSegue(withIdentifier: self.toStarterViewController, sender: self)
+            performSegue(withIdentifier: Constants.Segue.toStarterViewController, sender: self)
         }
         self.navigationController?.isNavigationBarHidden = false
         tableView.reloadData()
@@ -88,7 +83,7 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
     // MARK: - Actions
     @IBAction func segmentControl(_ sender: Any) {
         let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: creationDate, ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
         switch segmentOut.selectedSegmentIndex {
         case 0:
             fetchRequest.sortDescriptors = [sortDescriptor]
@@ -129,13 +124,13 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         searchBar.resignFirstResponder()
         switch segue.identifier {
-        case toStarterViewController:
+        case Constants.Segue.toStarterViewController:
             guard let destinvationVC = segue.destination as? BorrowEditorViewController else { return }
             destinvationVC.dataController = self.dataController
-        case toEditorViewController:
+        case Constants.Segue.toEditorViewController:
             guard let destinationVC = segue.destination as? BorrowEditorViewController else { return }
             destinationVC.dataController = self.dataController
-        case toCalendarViewController :
+        case Constants.Segue.toCalendarViewController :
             guard let destinationVC = segue.destination as? ImageViewController else { return }
             destinationVC.receivedItem = remindMe
             destinationVC.delegate = self
@@ -154,7 +149,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: borrowTableViewCell, for: indexPath) as? BorrowTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.borrowTableViewCell, for: indexPath) as? BorrowTableViewCell
         let memeImages = imageInfo[indexPath.row]
         cell?.returnedIcon.isHidden = true
         cell?.reminderDateIcon.isHidden = true
@@ -181,7 +176,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 if #available(iOS 13.0, *) {
                     cell?.reminderDateIcon.isHidden = false
                     cell?.returnedIcon.isHidden = true
-                    cell?.reminderDateIcon.image = UIImage(systemName: "calendar.circle")
+                    cell?.reminderDateIcon.image = UIImage(systemName: Constants.SymbolsImage.calendarCircle)
                 }
             }
         }
@@ -196,13 +191,15 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         cell?.accessoryType = .none
         cell?.titleItemLabel.text = memeImages.titleinfo
         cell?.nameOfBorrower.text = memeImages.topInfo
-        cell?.statusLabel.text = "Returned?: No"
+        cell?.statusLabel.text = Constants.NameConstants.statusNotReturned
+        cell?.statusLabel.textColor = .systemPink
         if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == false {
-            cell?.statusLabel.text = "Returned?: Yes"
+            cell?.statusLabel.text = Constants.NameConstants.statusReturned
+            cell?.statusLabel.textColor = .systemGreen
             cell?.returnedIcon.isHidden = false
             if #available(iOS 13.0, *) {
                 cell?.reminderDateIcon.isHidden = true
-                cell?.returnedIcon.image = UIImage(systemName: "hand.thumbsup.fill")
+                cell?.returnedIcon.image = UIImage(systemName: Constants.SymbolsImage.checkMarkCircleFilled)
                 cell?.returnedAnimation()
                 for meme in imageInfo {
                     if meme == memeImages {
@@ -214,11 +211,12 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 }
             }
         } else if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == true {
-            cell?.statusLabel.text = "Returned?: Yes"
+            cell?.statusLabel.text = Constants.NameConstants.statusReturned
+            cell?.statusLabel.textColor = .systemGreen
             cell?.returnedIcon.isHidden = false
             if #available(iOS 13.0, *) {
                 cell?.reminderDateIcon.isHidden = true
-                cell?.returnedIcon.image = UIImage(systemName: "hand.thumbsup.fill")
+                cell?.returnedIcon.image = UIImage(systemName: Constants.SymbolsImage.checkMarkCircleFilled)
             }
         }
         return cell ?? UITableViewCell()
@@ -232,7 +230,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             self.segmentOut.selectedSegmentIndex = atSeg
             if self.segmentOut.selectedSegmentIndex == atSeg {
                 let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-                let sortDescriptor = NSSortDescriptor(key: creationDate, ascending: false)
+                let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
                 fetchRequest.sortDescriptors = [sortDescriptor]
                 if let result = try? self.dataController.viewContext.fetch(fetchRequest){
                     var returnedTrue = [ImageInfo]()
@@ -263,7 +261,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         let markImageAsReturned = selectedImage
         
         if markImageAsReturned.hasBeenReturned == false {
-            alert.addAction(UIAlertAction(title: Constants.CommandListText.markAsNotReturned, style: .default, handler: { _ in
+            alert.addAction(UIAlertAction(title: Constants.CommandListText.markAsReturned, style: .default, handler: { _ in
                 let markImageAsReturned = selectedImage
                 self.removeCalendarNotification(selectedImage)
                 markImageAsReturned.hasBeenReturned = true
@@ -297,7 +295,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             alert.addAction(UIAlertAction(title: Constants.CommandListText.changeDateAndTime, style: .default, handler: { _ in
                 let myphoto = [self.imageInfo[indexPath.row]]
                 self.remindMe = myphoto
-                self.performSegue(withIdentifier: self.toCalendarViewController, sender: self)
+                self.performSegue(withIdentifier: Constants.Segue.toCalendarViewController, sender: self)
                 
             }))
         } else if selectedImage.reminderDate == nil && selectedImage.hasBeenReturned == false {
@@ -345,7 +343,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 } else {
                     let myphoto = [self.imageInfo[indexPath.row]]
                     self.remindMe = myphoto
-                    self.performSegue(withIdentifier: self.toCalendarViewController, sender: self)
+                    self.performSegue(withIdentifier: Constants.Segue.toCalendarViewController, sender: self)
                 }
             }))
         }
@@ -370,8 +368,8 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             }))
             
         }
-        alert.addAction(UIAlertAction(title: "View image 🌁", style: .default, handler: { _ in
-            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "PVController") as? PVController else {return}
+        alert.addAction(UIAlertAction(title: Constants.CommandListText.viewImage, style: .default, handler: { _ in
+            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: Constants.Segue.pvController) as? PVController else { return }
             if let imageInfo = self.imageInfo[indexPath.row].imageData {
                 controller.myImages = UIImage(data: imageInfo)
             }
@@ -379,7 +377,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             self.present(sheet, animated: false, completion: nil)
         }))
         
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+        alert.addAction(UIAlertAction(title: Constants.CommandListText.delete, style: .destructive, handler: { _ in
             let selectedImage = self.imageInfo[indexPath.row]
             
             self.dataController.viewContext.delete(selectedImage)
@@ -388,7 +386,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             tableView.deleteRows(at: [indexPath], with: .bottom)
             self.dataController.viewContext.refreshAllObjects()
             if self.imageInfo.count == 0 {
-                self.performSegue(withIdentifier: self.toStarterViewController, sender: self)
+                self.performSegue(withIdentifier: Constants.Segue.toStarterViewController, sender: self)
             }
             self.tableView.reloadData()
         }))
@@ -415,7 +413,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                     tableView.deleteRows(at: [indexPath], with: .bottom)
                     self.dataController.viewContext.refreshAllObjects()
                     if self.imageInfo.isEmpty == true && self.segmentOut.selectedSegmentIndex == 0 {
-                        self.performSegue(withIdentifier: self.toEditorViewController, sender: self)
+                        self.performSegue(withIdentifier: Constants.Segue.toEditorViewController, sender: self)
                     }
                     tableView.reloadData()
                 }

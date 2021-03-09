@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wgD-jp-AVG">
-    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -14,15 +12,15 @@
             <objects>
                 <viewController storyboardIdentifier="MemeEditorViewController" id="BYZ-38-t0r" customClass="BorrowEditorViewController" customModule="Lendmeme" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wfM-K2-jvl">
-                                <rect key="frame" x="0.0" y="-2.5" width="320" height="590"/>
+                                <rect key="frame" x="0.0" y="-2.5" width="600" height="622"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lua-XB-jXr">
-                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="eGV-wh-qg0"/>
                                     <barButtonItem systemItem="cancel" id="IYC-5o-RPP">
@@ -40,7 +38,7 @@
                                 </items>
                             </toolbar>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone#" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="PMx-xr-uw1">
-                                <rect key="frame" x="95.5" y="428.5" width="129.5" height="45.5"/>
+                                <rect key="frame" x="235.5" y="460.5" width="129.5" height="45.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" keyboardType="numberPad" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                                 <userDefinedRuntimeAttributes>
@@ -50,12 +48,12 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="wRM-Rx-5QT">
-                                <rect key="frame" x="107.5" y="149.5" width="105" height="45.5"/>
+                                <rect key="frame" x="247.5" y="149.5" width="105" height="45.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="alphabet" returnKeyType="next"/>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="-11" translatesAutoresizingMaskIntoConstraints="NO" id="cEL-3L-VHw">
-                                <rect key="frame" x="88.5" y="256" width="143.5" height="56"/>
+                                <rect key="frame" x="228.5" y="272" width="143.5" height="56"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insert Image Here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9a-2m-lYN">
                                         <rect key="frame" x="0.0" y="0.0" width="143.5" height="19"/>
@@ -111,7 +109,7 @@
                                 </constraints>
                             </stackView>
                             <textField opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="cho-jd-ylO">
-                                <rect key="frame" x="118.5" y="94" width="83.5" height="45.5"/>
+                                <rect key="frame" x="258.5" y="94" width="83.5" height="45.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="alphabet" returnKeyType="next"/>
                             </textField>
@@ -153,16 +151,16 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="bottomTextOUT" destination="PMx-xr-uw1" id="za2-Do-dxn"/>
                         <outlet property="cameraButton" destination="GYI-Os-X7S" id="RbF-FM-Ic0"/>
                         <outlet property="cancelOut" destination="IYC-5o-RPP" id="czF-Dv-4iJ"/>
                         <outlet property="imageView" destination="wfM-K2-jvl" id="5EF-7V-CfE"/>
                         <outlet property="insertImageContainer" destination="cEL-3L-VHw" id="pQD-Y3-Lu8"/>
+                        <outlet property="nameOfBorrowerTextField" destination="cho-jd-ylO" id="Mef-KU-zgg"/>
+                        <outlet property="phoneNumberTextField" destination="PMx-xr-uw1" id="za2-Do-dxn"/>
                         <outlet property="remindMe" destination="JIV-Rj-rkH" id="bzb-za-b9c"/>
                         <outlet property="shareOUT" destination="mST-PZ-z3s" id="DVi-X2-6YO"/>
-                        <outlet property="titleTextOUT" destination="cho-jd-ylO" id="Mef-KU-zgg"/>
+                        <outlet property="titleOfItemTextField" destination="wRM-Rx-5QT" id="oQw-WX-yQx"/>
                         <outlet property="toolbar" destination="Lua-XB-jXr" id="ffk-ar-eHe"/>
-                        <outlet property="topTextOUT" destination="wRM-Rx-5QT" id="oQw-WX-yQx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -173,12 +171,12 @@
         <scene sceneID="712-oz-40N">
             <objects>
                 <viewController storyboardIdentifier="PVController" id="ilU-mP-Obw" customClass="PVController" customModule="Lendmeme" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="bfH-Xp-Orj">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="bfH-Xp-Orj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zpZ-vi-hUt">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zpZ-vi-hUt">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="548"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="zpZ-vi-hUt" secondAttribute="height" multiplier="80:137" id="aun-BI-HY6"/>
@@ -235,17 +233,17 @@
             <objects>
                 <tableViewController storyboardIdentifier="OptionTableViewController" id="S2G-nb-b94" customClass="OptionTableViewController" customModule="Lendmeme" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lk5-jr-laq">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="separatorColor" systemColor="systemGrayColor"/>
                         <color key="sectionIndexBackgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="q6p-5a-6JW">
-                                <rect key="frame" x="0.0" y="28" width="320" height="43.5"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="q6p-5a-6JW" id="A8M-fb-FlC">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -269,7 +267,7 @@
             <objects>
                 <viewController storyboardIdentifier="ImageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rhe-qd-6gO" customClass="ImageViewController" customModule="Lendmeme" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dut-Yu-UES">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Select a Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8n1-A8-REf">
@@ -282,7 +280,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" translatesAutoresizingMaskIntoConstraints="NO" id="yKC-hT-w8f">
-                                <rect key="frame" x="0.0" y="110" width="320" height="458"/>
+                                <rect key="frame" x="0.0" y="110" width="600" height="470"/>
                                 <connections>
                                     <action selector="datePickerDidSelectDate:" destination="rhe-qd-6gO" eventType="valueChanged" id="OlJ-fk-cg0"/>
                                 </connections>
@@ -317,15 +315,15 @@
             <objects>
                 <viewController id="mPV-sN-QLf" customClass="BorrowTableViewController" customModule="Lendmeme" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rxw-xU-awN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OOM-qB-LPc" customClass="GADBannerView">
-                                <rect key="frame" x="27" y="617" width="266" height="275"/>
+                                <rect key="frame" x="27" y="617" width="546" height="275"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="183" estimatedRowHeight="130" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oZc-Dh-cn1">
-                                <rect key="frame" x="0.0" y="134" width="320" height="434"/>
+                                <rect key="frame" x="0.0" y="134" width="600" height="466"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="mPV-sN-QLf" id="kMR-uZ-gBe"/>
@@ -333,7 +331,7 @@
                                 </connections>
                             </tableView>
                             <searchBar contentMode="redraw" id="C1q-Th-2rs">
-                                <rect key="frame" x="0.0" y="88" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="88" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
@@ -353,7 +351,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="xXf-Ly-zqP">
                         <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="yQY-1n-QQ2">
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="yQY-1n-QQ2">
                             <rect key="frame" x="8" y="6" width="257.5" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
