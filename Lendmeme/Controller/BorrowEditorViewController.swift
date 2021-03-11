@@ -24,6 +24,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         NSAttributedStringKey.strokeWidth.rawValue : -0.2,
         NSAttributedStringKey.foregroundColor.rawValue: UIColor.white
     ]
+    var dataSource: [String] = ["Anything", "Books", "Movies", "Video games", "Tools" ]
     
     // MARK: Outlets
     //    @IBOutlet weak var bannerView: GADBannerView!
@@ -37,11 +38,15 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var insertImageContainer: UIStackView!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var remindMe: UISwitch!
+    @IBOutlet weak var categoryLabel: UIButton!
+    @IBOutlet weak var pickerView: UIPickerView!
     
     
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.pickerView.dataSource = self
+        self.pickerView.delegate = self
         configureShareOut(isEnabled: false)
         prepareTextField(textField: titleOfItemTextField, name: Constants.TextFieldNames.itemTitle)
         prepareTextField(textField: nameOfBorrowerTextField, name: Constants.TextFieldNames.nameOfPersonBorrowing)
@@ -129,6 +134,12 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
             guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "ImageViewController") as? ImageViewController else { return }
             self.present(controller, animated: true, completion: nil)
         }
+        
+    }
+    
+    @IBAction func addCategoryAction(_ sender: UIButton) {
+        phoneNumberTextField.isHidden = true
+        pickerView.isHidden = false
         
     }
     
@@ -405,6 +416,32 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     
     @objc func keyboardWillHide(notification: NSNotification) {
         resetFrame()
+    }
+}
+
+extension BorrowEditorViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 5
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return dataSource[row]
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            let title = self.dataSource[row]
+            self.categoryLabel.setTitle("Category: \(title)", for: .normal)
+            self.pickerView.isHidden = true
+            self.phoneNumberTextField.isHidden = false
+            if #available(iOS 13.0, *) {
+                self.categoryLabel.tintColor = UIColor.label
+            }
+        }
+
     }
 }
 

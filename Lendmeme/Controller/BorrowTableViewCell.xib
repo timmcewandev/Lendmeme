@@ -36,7 +36,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemTealColor"/>
+                        <color key="backgroundColor" systemColor="systemBlueColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="afh-qA-IwQ" secondAttribute="trailing" constant="102" id="Ldt-Ki-2Y9"/>
                             <constraint firstItem="afh-qA-IwQ" firstAttribute="bottom" secondItem="Utz-uk-heF" secondAttribute="bottomMargin" id="xAc-qp-xnK"/>
@@ -78,7 +78,7 @@
                                 </variation>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemTealColor"/>
+                        <color key="backgroundColor" systemColor="systemBlueColor"/>
                         <constraints>
                             <constraint firstItem="ZgX-BB-9iJ" firstAttribute="top" secondItem="aW6-XB-8u0" secondAttribute="bottom" constant="8" symbolic="YES" id="00E-Vj-SGA"/>
                             <constraint firstItem="aW6-XB-8u0" firstAttribute="leading" secondItem="BhL-bj-hlF" secondAttribute="leading" constant="65" id="6zs-Uo-t7W"/>
@@ -234,14 +234,14 @@
     <resources>
         <image name="hand.thumbsup.fill" catalog="system" width="128" height="121"/>
         <image name="placeholder" width="750" height="750"/>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGroupedBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
