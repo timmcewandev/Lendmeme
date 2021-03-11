@@ -18,6 +18,7 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
     //    @IBOutlet weak var bannerView: GADBannerView!
     
     // MARK: - Properties
+    let button = UIButton()
     let secondDatePicker = UIDatePicker()
     var hasBeenSeen = false
     var dataController:DataController!
@@ -159,7 +160,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         dateFormatterForCreationDate.dateFormat = Constants.DateText.dateOnly
         let todaysDate = dateFormatterForCreationDate.string(from: date)
         if #available(iOS 13.0, *) {
-            cell?.reminderDate.textColor = .label
+            cell?.reminderDate.textColor = .systemBlue
         } else {
             // Fallback on earlier versions
         }
@@ -192,10 +193,18 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         cell?.titleItemLabel.text = memeImages.titleinfo
         cell?.nameOfBorrower.text = memeImages.topInfo
         cell?.statusLabel.text = Constants.NameConstants.statusNotReturned
-        cell?.statusLabel.textColor = .systemPink
+        if #available(iOS 13.0, *) {
+            cell?.statusLabel.textColor = .systemGroupedBackground
+        } else {
+            // Fallback on earlier versions
+        }
         if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == false {
             cell?.statusLabel.text = Constants.NameConstants.statusReturned
-            cell?.statusLabel.textColor = .systemGreen
+            if #available(iOS 13.0, *) {
+                cell?.statusLabel.textColor = .systemGroupedBackground
+            } else {
+                // Fallback on earlier versions
+            }
             cell?.returnedIcon.isHidden = false
             if #available(iOS 13.0, *) {
                 cell?.reminderDateIcon.isHidden = true
@@ -212,7 +221,11 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             }
         } else if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == true {
             cell?.statusLabel.text = Constants.NameConstants.statusReturned
-            cell?.statusLabel.textColor = .systemGreen
+            if #available(iOS 13.0, *) {
+                cell?.statusLabel.textColor = .systemGroupedBackground
+            } else {
+                // Fallback on earlier versions
+            }
             cell?.returnedIcon.isHidden = false
             if #available(iOS 13.0, *) {
                 cell?.reminderDateIcon.isHidden = true
@@ -288,6 +301,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         }
         
         if selectedImage.hasBeenReturned == false && selectedImage.reminderDate != nil {
+
             alert.addAction(UIAlertAction(title: Constants.CommandListText.removeCalendar, style: .default, handler: { _ in
                 self.removeCalendarNotification(selectedImage)
             }))
@@ -299,21 +313,32 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 
             }))
         } else if selectedImage.reminderDate == nil && selectedImage.hasBeenReturned == false {
-            alert.addAction(UIAlertAction(title: Constants.CommandListText.remindMe, style: .default, handler: { _ in
-                if #available(iOS 14.0, *) {
+
+            alert.addAction(UIAlertAction(title: Constants.CommandListText.remindMe, style: .default, handler: {[weak self] _ in
+                guard let self = self else { return }
+                if #available(iOS 13.4, *) {
+                    self.button.isHidden = false
+                    self.secondDatePicker.isHidden = false
 //                    let secondDatePicker = UIDatePicker()
                     self.secondDatePicker.alpha = 1.0
                     self.secondDatePicker.preferredDatePickerStyle = .wheels
-                    self.secondDatePicker.backgroundColor = UIColor.white
+                    self.secondDatePicker.backgroundColor = UIColor.systemGroupedBackground
                     self.secondDatePicker.layer.borderWidth = 2
-                    self.secondDatePicker.layer.cornerRadius = 8
                     
-                    
+                    self.button.frame = CGRect(x: 50, y: 0, width: 120, height: 40)
+                    self.button.layer.cornerRadius = 4
+                    self.button.backgroundColor = UIColor.systemBlue
+                    self.button.setTitle("Save date", for: .normal)
                     self.view.addSubview(self.secondDatePicker)
-                         
+                    self.view.addSubview(self.button)
+                    
                     self.secondDatePicker.translatesAutoresizingMaskIntoConstraints = false
                     self.secondDatePicker.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
                     self.secondDatePicker.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+//                    self.secondDatePicker.addTarget(self, action: #selector(self.datePickerChanged(picker:)), for: .valueChanged)
+//
+//
+//                    self.button.addTarget(self, action: #selector(self.buttonAction), for: .touchUpInside)
                     
 //                    print("\(secondDatePicker.date)")
 //                    if secondDatePicker.isSelected == true {
@@ -420,7 +445,11 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             }
             
         })
-        deleteItem.backgroundColor = UIColor.systemRed
+        if #available(iOS 13.0, *) {
+            deleteItem.backgroundColor = UIColor.systemPink
+        } else {
+            // Fallback on earlier versions
+        }
         let markItemAsReturned = UITableViewRowAction(style: .default, title: Constants.CommandListText.markAsReturned, handler: { [weak self] (_ , indexPath)  in
             guard let self = self else {return}
             let myphoto = self.imageInfo[indexPath.row]
@@ -456,10 +485,10 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             
         })
         if imageInfo[indexPath.row].hasBeenReturned == true {
-            markItemAsNotReturned.backgroundColor = .systemTeal
+            markItemAsNotReturned.backgroundColor = .systemBlue
             return [deleteItem, markItemAsNotReturned]
         }
-        markItemAsReturned.backgroundColor = UIColor.systemGreen
+        markItemAsReturned.backgroundColor = UIColor.systemBlue
         self.searchBar.resignFirstResponder()
         return [deleteItem, markItemAsReturned]
     }
