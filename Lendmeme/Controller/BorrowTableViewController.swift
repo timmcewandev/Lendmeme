@@ -151,6 +151,8 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.borrowTableViewCell, for: indexPath) as? BorrowTableViewCell
+
+        
         let memeImages = imageInfo[indexPath.row]
         cell?.returnedIcon.isHidden = true
         cell?.reminderDateIcon.isHidden = true
@@ -485,10 +487,10 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             
         })
         if imageInfo[indexPath.row].hasBeenReturned == true {
-            markItemAsNotReturned.backgroundColor = .systemBlue
+            markItemAsNotReturned.backgroundColor = .systemTeal
             return [deleteItem, markItemAsNotReturned]
         }
-        markItemAsReturned.backgroundColor = UIColor.systemBlue
+        markItemAsReturned.backgroundColor = UIColor.systemOrange
         self.searchBar.resignFirstResponder()
         return [deleteItem, markItemAsReturned]
     }

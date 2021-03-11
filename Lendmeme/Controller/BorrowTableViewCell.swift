@@ -18,6 +18,8 @@ class BorrowTableViewCell: UITableViewCell {
     @IBOutlet weak var reminderDate: UILabel!
     @IBOutlet weak var reminderDateIcon: UIImageView!
     @IBOutlet weak var returnedIcon: UIImageView!
+    @IBOutlet weak var cover1: UIView!
+    @IBOutlet weak var cover2: UIView!
     
     
     override func awakeFromNib() {
