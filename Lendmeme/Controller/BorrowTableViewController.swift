@@ -161,28 +161,22 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         let dateFormatterForCreationDate = DateFormatter()
         dateFormatterForCreationDate.dateFormat = Constants.DateText.dateOnly
         let todaysDate = dateFormatterForCreationDate.string(from: date)
-        if #available(iOS 13.0, *) {
-            cell?.reminderDate.textColor = .systemBlue
-        } else {
-            // Fallback on earlier versions
-        }
-        cell?.reminderDate.text = "_"
-        if let remdinderDate = memeImages.reminderDate {
-            if dateToday > remdinderDate && memeImages.hasBeenReturned != true  {
-                cell?.reminderDate.text = Constants.NameConstants.expiredText
-                cell?.reminderDate.textColor = .systemPink
-            } else if memeImages.hasBeenReturned != true {
-                let dateformatter = DateFormatter()
-                dateformatter.dateFormat = Constants.DateText.dateAndTime
-                let reminderDateToString = dateformatter.string(from: remdinderDate)
-                cell?.reminderDate.text = reminderDateToString
-                if #available(iOS 13.0, *) {
-                    cell?.reminderDateIcon.isHidden = false
-                    cell?.returnedIcon.isHidden = true
-                    cell?.reminderDateIcon.image = UIImage(systemName: Constants.SymbolsImage.calendarCircle)
-                }
-            }
-        }
+//        if let remdinderDate = memeImages.reminderDate {
+//            if dateToday > remdinderDate && memeImages.hasBeenReturned != true  {
+//                cell?.reminderDate.text = Constants.NameConstants.expiredText
+//                cell?.reminderDate.textColor = .systemPink
+//            } else if memeImages.hasBeenReturned != true {
+//                let dateformatter = DateFormatter()
+//                dateformatter.dateFormat = Constants.DateText.dateAndTime
+//                let reminderDateToString = dateformatter.string(from: remdinderDate)
+//                cell?.reminderDate.text = reminderDateToString
+//                if #available(iOS 13.0, *) {
+//                    cell?.reminderDateIcon.isHidden = false
+//                    cell?.returnedIcon.isHidden = true
+//                    cell?.reminderDateIcon.image = UIImage(systemName: Constants.SymbolsImage.calendarCircle)
+//                }
+//            }
+//        }
         
         cell?.borrowedDateLabel.text = todaysDate
         cell?.myImageView.contentMode = .scaleAspectFill
@@ -264,7 +258,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
     fileprivate func removeCalendarNotification(_ selectedImage: ImageInfo) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.removeScheduleNotification(at: selectedImage.notificationIdentifier ?? "", at: selectedImage)
-        selectedImage.reminderDate = nil
+//        selectedImage.reminderDate = nil
         try? self.dataController.viewContext.save()
         self.tableView.reloadData()
     }
@@ -302,71 +296,47 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             
         }
         
-        if selectedImage.hasBeenReturned == false && selectedImage.reminderDate != nil {
-
-            alert.addAction(UIAlertAction(title: Constants.CommandListText.removeCalendar, style: .default, handler: { _ in
-                self.removeCalendarNotification(selectedImage)
-            }))
-            
-            alert.addAction(UIAlertAction(title: Constants.CommandListText.changeDateAndTime, style: .default, handler: { _ in
-                let myphoto = [self.imageInfo[indexPath.row]]
-                self.remindMe = myphoto
-                self.performSegue(withIdentifier: Constants.Segue.toCalendarViewController, sender: self)
-                
-            }))
-        } else if selectedImage.reminderDate == nil && selectedImage.hasBeenReturned == false {
+//        if selectedImage.hasBeenReturned == false && selectedImage.reminderDate != nil {
+//
+//            alert.addAction(UIAlertAction(title: Constants.CommandListText.removeCalendar, style: .default, handler: { _ in
+//                self.removeCalendarNotification(selectedImage)
+//            }))
+//            
+//            alert.addAction(UIAlertAction(title: Constants.CommandListText.changeDateAndTime, style: .default, handler: { _ in
+//                let myphoto = [self.imageInfo[indexPath.row]]
+//                self.remindMe = myphoto
+//                self.performSegue(withIdentifier: Constants.Segue.toCalendarViewController, sender: self)
+//                
+//            }))
+//        }
+        if selectedImage.reminderDate == nil && selectedImage.hasBeenReturned == false {
 
             alert.addAction(UIAlertAction(title: Constants.CommandListText.remindMe, style: .default, handler: {[weak self] _ in
                 guard let self = self else { return }
                 if #available(iOS 13.4, *) {
-                    self.button.isHidden = false
-                    self.secondDatePicker.isHidden = false
-//                    let secondDatePicker = UIDatePicker()
-                    self.secondDatePicker.alpha = 1.0
-                    self.secondDatePicker.preferredDatePickerStyle = .wheels
-                    self.secondDatePicker.backgroundColor = UIColor.systemGroupedBackground
-                    self.secondDatePicker.layer.borderWidth = 2
-                    
-                    self.button.frame = CGRect(x: 50, y: 0, width: 120, height: 40)
-                    self.button.layer.cornerRadius = 4
-                    self.button.backgroundColor = UIColor.systemBlue
-                    self.button.setTitle("Save date", for: .normal)
-                    self.view.addSubview(self.secondDatePicker)
-                    self.view.addSubview(self.button)
-                    
-                    self.secondDatePicker.translatesAutoresizingMaskIntoConstraints = false
-                    self.secondDatePicker.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-                    self.secondDatePicker.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-//                    self.secondDatePicker.addTarget(self, action: #selector(self.datePickerChanged(picker:)), for: .valueChanged)
+//                    self.button.isHidden = false
+//                    self.secondDatePicker.isHidden = false
+//                    self.secondDatePicker.alpha = 1.0
+//                    self.secondDatePicker.preferredDatePickerStyle = .wheels
+//                    self.secondDatePicker.backgroundColor = UIColor.systemGroupedBackground
+//                    self.secondDatePicker.layer.borderWidth = 2
 //
 //
-//                    self.button.addTarget(self, action: #selector(self.buttonAction), for: .touchUpInside)
+//                    self.button.setTitle("Save date", for: .normal)
+//                    self.view.addSubview(self.secondDatePicker)
+//                    self.view.addSubview(self.button)
+//                    self.button.translatesAutoresizingMaskIntoConstraints = false
+//                    self.secondDatePicker.translatesAutoresizingMaskIntoConstraints = false
+//                    self.secondDatePicker.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//                    self.secondDatePicker.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+//                    self.button.centerXAnchor.constraint(equalTo: self.secondDatePicker.bottomAnchor).isActive = true
+//                    self.button.centerYAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+
+//                    let selectedDate = sender.date
+//                    let delegate = UIApplication.shared.delegate as? AppDelegate
+//                    delegate?.scheduleNotification(at: selectedDate, name: self.receivedItem[0].titleinfo?.lowercased() ?? "", memedImage: imageInfo)
                     
-//                    print("\(secondDatePicker.date)")
-//                    if secondDatePicker.isSelected == true {
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
-//                            let dateformatter = DateFormatter()
-//                            dateformatter.dateStyle = DateFormatter.Style.medium
-//                            dateformatter.timeStyle = DateFormatter.Style.short
-//                            let strDate = dateformatter.string(from: secondDatePicker.date)
-//                            let alert = UIAlertController(title: "Selected Date", message: "\(strDate)", preferredStyle: UIAlertControllerStyle.alert)
-//                            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//                            alert.addAction(UIAlertAction(title: "Remind me", style: .default, handler: { (UIAlertAction) in
-    //                            let selectedDate = sender.date
-    //                            let imageInfo = self.receivedItem[0]
-    //                            self.delegate?.getDate(date: selectedDate, imageInformation: imageInfo)
-                                
-    //                            let delegate = UIApplication.shared.delegate as? AppDelegate
-    //                            delegate?.scheduleNotification(at: selectedDate, name: self.receivedItem[0].titleinfo?.lowercased() ?? "", memedImage: imageInfo)
-//                                self.dismiss(animated: true, completion: nil)
-//                            }))
-//                            self.present(alert, animated: true, completion: nil)
-//                        }
-//                    }
-//                    secondDatePicker.setDate(<#T##date: Date##Date#>, animated: true)
-//                    secondDatePicker.isSelected = true
-                    
-                    
+
                 } else {
                     let myphoto = [self.imageInfo[indexPath.row]]
                     self.remindMe = myphoto

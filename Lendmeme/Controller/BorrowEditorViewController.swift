@@ -24,7 +24,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         NSAttributedStringKey.strokeWidth.rawValue : -0.2,
         NSAttributedStringKey.foregroundColor.rawValue: UIColor.white
     ]
-    var dataSource: [String] = ["Anything", "Books", "Movies", "Video games", "Tools" ]
+    var datasource = Constants.Categories.gatherCategories()
     
     // MARK: Outlets
     //    @IBOutlet weak var bannerView: GADBannerView!
@@ -425,15 +425,15 @@ extension BorrowEditorViewController: UIPickerViewDelegate, UIPickerViewDataSour
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 5
+        return datasource.count
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return dataSource[row]
+        return datasource[row]
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            let title = self.dataSource[row]
+            let title = self.datasource[row]
             self.categoryLabel.setTitle("Category: \(title)", for: .normal)
             self.pickerView.isHidden = true
             self.phoneNumberTextField.isHidden = false

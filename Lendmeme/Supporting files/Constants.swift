@@ -8,13 +8,28 @@
 
 import UIKit
 
-
-
 struct Constants {
     struct CoreData {
         static let creationDate = "creationDate"
     }
     
+    enum Categories: String, CaseIterable {
+        case anything = "Anything"
+        case books = "Books"
+        case clothes = "Clothes"
+        case movies = "Movies"
+        case videoGames = "Video games"
+        case tools = "Tools"
+        
+        static func gatherCategories() -> [String] {
+            var categoryList: [String] = []
+            for category in Categories.allCases {
+                categoryList.append(category.rawValue)
+            }
+            return categoryList
+        }
+    }
+
     struct Segue {
         static let toStarterViewController = "starter"
         static let toEditorViewController = "toPhoto"

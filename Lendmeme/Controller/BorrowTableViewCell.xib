@@ -19,14 +19,130 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Utz-uk-heF">
-                        <rect key="frame" x="0.0" y="0.0" width="477" height="206"/>
+                        <rect key="frame" x="0.0" y="0.0" width="518" height="206"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="3aq-MU-Oi6">
+                                <rect key="frame" x="374" y="26" width="118" height="155.5"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hand.thumbsup.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="VAn-TU-Wf5">
+                                <rect key="frame" x="400" y="73.5" width="66" height="60"/>
+                                <color key="tintColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="66" id="AUE-Th-ygK"/>
+                                </constraints>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small" weight="light"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="heightClass=regular-widthClass=compact" hidden="YES"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EcP-wB-O3B">
+                                <rect key="frame" x="17" y="164" width="137" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="137" id="ckF-NC-R2l"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Status: Not Returned" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aW6-XB-8u0">
+                                <rect key="frame" x="69.5" y="147" width="153.5" height="18"/>
+                                <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
+                                <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLs-4F-v4e">
+                                <rect key="frame" x="16" y="147" width="49.5" height="18"/>
+                                <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
+                                <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="254" verticalCompressionResistancePriority="753" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTA-2M-Kbw">
+                                <rect key="frame" x="16" y="128" width="33.5" height="18"/>
+                                <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="16"/>
+                                <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="21"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Item borrowed:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQw-0Q-sU8">
+                                <rect key="frame" x="17" y="32" width="114" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="ocD-Vc-RHo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
+                                <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irG-7P-kHE">
+                                <rect key="frame" x="17" y="52" width="114" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="e9t-3J-M3E"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="16"/>
+                                <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="21"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vac-lW-ZZB">
+                                <rect key="frame" x="17" y="91" width="114" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="uwG-Ma-ZOi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="16"/>
+                                <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="21"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Date borrowed:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kjh-Or-5kI">
+                                <rect key="frame" x="17" y="110" width="114" height="16.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16.5" id="sb3-g9-mi3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
+                                <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cP-K0-NPO">
+                                <rect key="frame" x="17" y="72" width="114" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="gY8-dQ-yAH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
+                                <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
+                                </variation>
+                            </label>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="afh-qA-IwQ">
-                                <rect key="frame" x="322" y="161" width="53" height="37"/>
+                                <rect key="frame" x="162" y="163" width="53" height="37"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="53" id="VTT-H9-KVx"/>
-                                    <constraint firstAttribute="height" constant="37" id="y5k-fr-XjC"/>
+                                    <constraint firstAttribute="width" constant="53" id="SsT-nf-Td5"/>
                                 </constraints>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small" weight="light"/>
                                 <userDefinedRuntimeAttributes>
@@ -38,197 +154,62 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBlueColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="afh-qA-IwQ" secondAttribute="trailing" constant="102" id="Ldt-Ki-2Y9"/>
-                            <constraint firstItem="afh-qA-IwQ" firstAttribute="bottom" secondItem="Utz-uk-heF" secondAttribute="bottomMargin" id="xAc-qp-xnK"/>
-                        </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="16"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BhL-bj-hlF">
-                        <rect key="frame" x="0.0" y="0.0" width="188" height="206"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="254" verticalCompressionResistancePriority="753" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTA-2M-Kbw">
-                                <rect key="frame" x="12" y="105" width="33.5" height="18"/>
-                                <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="16"/>
-                                <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="21"/>
-                                </variation>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Status: Not Returned" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aW6-XB-8u0">
-                                <rect key="frame" x="65" y="125" width="153.5" height="18"/>
-                                <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
-                                <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
-                                </variation>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="253" verticalCompressionResistancePriority="754" text="Reminder date:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgX-BB-9iJ">
-                                <rect key="frame" x="12" y="151" width="112" height="18"/>
-                                <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
-                                <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
-                                </variation>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBlueColor"/>
-                        <constraints>
-                            <constraint firstItem="ZgX-BB-9iJ" firstAttribute="top" secondItem="aW6-XB-8u0" secondAttribute="bottom" constant="8" symbolic="YES" id="00E-Vj-SGA"/>
-                            <constraint firstItem="aW6-XB-8u0" firstAttribute="leading" secondItem="BhL-bj-hlF" secondAttribute="leading" constant="65" id="6zs-Uo-t7W"/>
-                            <constraint firstItem="aW6-XB-8u0" firstAttribute="top" secondItem="cTA-2M-Kbw" secondAttribute="bottom" constant="2" id="EvA-gg-HJc"/>
-                            <constraint firstItem="ZgX-BB-9iJ" firstAttribute="leading" secondItem="cTA-2M-Kbw" secondAttribute="leading" id="y95-aH-Kqm"/>
-                            <constraint firstItem="ZgX-BB-9iJ" firstAttribute="leading" secondItem="BhL-bj-hlF" secondAttribute="leading" constant="12" id="yV1-5c-0jA"/>
+                            <constraint firstItem="EcP-wB-O3B" firstAttribute="top" secondItem="BLs-4F-v4e" secondAttribute="bottom" constant="-1" id="2fz-I3-0CV"/>
+                            <constraint firstItem="cTA-2M-Kbw" firstAttribute="top" secondItem="Kjh-Or-5kI" secondAttribute="bottom" constant="1.5" id="3uu-GV-O3p"/>
+                            <constraint firstAttribute="bottom" secondItem="3aq-MU-Oi6" secondAttribute="bottom" constant="24.5" id="679-d4-3Se"/>
+                            <constraint firstItem="8cP-K0-NPO" firstAttribute="leading" secondItem="Kjh-Or-5kI" secondAttribute="leading" id="7ml-Qm-Jql"/>
+                            <constraint firstItem="irG-7P-kHE" firstAttribute="trailing" secondItem="8cP-K0-NPO" secondAttribute="trailing" id="9nZ-TO-dUo"/>
+                            <constraint firstItem="aW6-XB-8u0" firstAttribute="leading" secondItem="BLs-4F-v4e" secondAttribute="trailing" constant="4" id="CTr-X5-6Km"/>
+                            <constraint firstItem="8cP-K0-NPO" firstAttribute="top" secondItem="irG-7P-kHE" secondAttribute="bottom" constant="2" id="DXO-Wh-imy"/>
+                            <constraint firstItem="Kjh-Or-5kI" firstAttribute="centerY" secondItem="3aq-MU-Oi6" secondAttribute="centerY" constant="14.5" id="FBC-9D-Ykq"/>
+                            <constraint firstItem="Kjh-Or-5kI" firstAttribute="centerY" secondItem="VAn-TU-Wf5" secondAttribute="centerY" constant="14.25" id="ImJ-Hh-W6A"/>
+                            <constraint firstItem="vac-lW-ZZB" firstAttribute="top" secondItem="8cP-K0-NPO" secondAttribute="bottom" constant="1" id="OUy-84-Vs2"/>
+                            <constraint firstItem="Kjh-Or-5kI" firstAttribute="top" secondItem="vac-lW-ZZB" secondAttribute="bottom" constant="1" id="Qva-HN-8oj"/>
+                            <constraint firstItem="irG-7P-kHE" firstAttribute="top" secondItem="BQw-0Q-sU8" secondAttribute="bottom" constant="2" id="RCV-iN-c6h"/>
+                            <constraint firstItem="BLs-4F-v4e" firstAttribute="baseline" secondItem="aW6-XB-8u0" secondAttribute="baseline" id="Rg7-5G-Fgw"/>
+                            <constraint firstItem="8cP-K0-NPO" firstAttribute="leading" secondItem="Utz-uk-heF" secondAttribute="leading" constant="17" id="UD6-20-cex"/>
+                            <constraint firstItem="afh-qA-IwQ" firstAttribute="leading" secondItem="Kjh-Or-5kI" secondAttribute="trailing" constant="31" id="UkZ-8y-pLt"/>
+                            <constraint firstItem="3aq-MU-Oi6" firstAttribute="top" secondItem="Utz-uk-heF" secondAttribute="top" constant="26" id="UrF-ip-uMI"/>
+                            <constraint firstItem="EcP-wB-O3B" firstAttribute="leading" secondItem="Utz-uk-heF" secondAttribute="leadingMargin" constant="9" id="VzQ-ZU-RAP"/>
+                            <constraint firstItem="aW6-XB-8u0" firstAttribute="top" secondItem="afh-qA-IwQ" secondAttribute="bottom" constant="-53" id="W0R-Kg-bQf"/>
+                            <constraint firstItem="VAn-TU-Wf5" firstAttribute="top" secondItem="Utz-uk-heF" secondAttribute="top" constant="72" id="bdv-Tq-hhW"/>
+                            <constraint firstItem="BLs-4F-v4e" firstAttribute="top" secondItem="cTA-2M-Kbw" secondAttribute="bottom" constant="1" id="cJJ-Ac-epX"/>
+                            <constraint firstItem="irG-7P-kHE" firstAttribute="centerX" secondItem="vac-lW-ZZB" secondAttribute="centerX" id="eI6-hB-zmq"/>
+                            <constraint firstItem="irG-7P-kHE" firstAttribute="centerX" secondItem="8cP-K0-NPO" secondAttribute="centerX" id="ft1-3X-2gb"/>
+                            <constraint firstItem="8cP-K0-NPO" firstAttribute="trailing" secondItem="Kjh-Or-5kI" secondAttribute="trailing" id="gcG-Up-bSr"/>
+                            <constraint firstAttribute="trailing" secondItem="VAn-TU-Wf5" secondAttribute="trailing" constant="52" id="giU-Kc-FKb"/>
+                            <constraint firstItem="BQw-0Q-sU8" firstAttribute="leading" secondItem="irG-7P-kHE" secondAttribute="leading" id="iKD-jB-tPL"/>
+                            <constraint firstItem="vac-lW-ZZB" firstAttribute="leading" secondItem="cTA-2M-Kbw" secondAttribute="leading" constant="1" id="iui-je-HQF"/>
+                            <constraint firstItem="BQw-0Q-sU8" firstAttribute="trailing" secondItem="irG-7P-kHE" secondAttribute="trailing" id="l3b-w4-OUK"/>
+                            <constraint firstAttribute="trailing" secondItem="3aq-MU-Oi6" secondAttribute="trailing" constant="26" id="mFQ-dn-Atb"/>
+                            <constraint firstItem="3aq-MU-Oi6" firstAttribute="centerX" secondItem="VAn-TU-Wf5" secondAttribute="centerX" id="n4f-F5-1ov"/>
+                            <constraint firstItem="cTA-2M-Kbw" firstAttribute="leading" secondItem="BLs-4F-v4e" secondAttribute="leading" id="oZa-rG-wx5"/>
+                            <constraint firstItem="EcP-wB-O3B" firstAttribute="bottom" secondItem="Utz-uk-heF" secondAttribute="bottomMargin" id="p1A-ab-v5S"/>
+                            <constraint firstItem="irG-7P-kHE" firstAttribute="leading" secondItem="vac-lW-ZZB" secondAttribute="leading" id="qfR-D1-CoC"/>
+                            <constraint firstItem="BQw-0Q-sU8" firstAttribute="top" secondItem="Utz-uk-heF" secondAttribute="top" constant="32" id="qmL-BB-5zL"/>
+                            <constraint firstItem="afh-qA-IwQ" firstAttribute="top" secondItem="Utz-uk-heF" secondAttribute="top" constant="163" id="u5B-vu-7Hl"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Item borrowed:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQw-0Q-sU8">
-                        <rect key="frame" x="8" y="5" width="362" height="18"/>
-                        <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
-                        <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
-                        <nil key="highlightedColor"/>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
-                        </variation>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irG-7P-kHE">
-                        <rect key="frame" x="8" y="23" width="362" height="18"/>
-                        <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="16"/>
-                        <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
-                        <nil key="highlightedColor"/>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="21"/>
-                        </variation>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vac-lW-ZZB">
-                        <rect key="frame" x="8" y="64" width="368" height="18"/>
-                        <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="16"/>
-                        <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
-                        <nil key="highlightedColor"/>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="21"/>
-                        </variation>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Date borrowed:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kjh-Or-5kI">
-                        <rect key="frame" x="8" y="85" width="368" height="16.5"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="16.5" id="5Gy-CM-T1K"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
-                        <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
-                        <nil key="highlightedColor"/>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
-                        </variation>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="755" text="_" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="4" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t1x-zq-AjR">
-                        <rect key="frame" x="23" y="166" width="8" height="18"/>
-                        <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="16"/>
-                        <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
-                        <nil key="highlightedColor"/>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="21"/>
-                        </variation>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cP-K0-NPO">
-                        <rect key="frame" x="8" y="44" width="368" height="18"/>
-                        <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
-                        <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
-                        <nil key="highlightedColor"/>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
-                        </variation>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLs-4F-v4e">
-                        <rect key="frame" x="8" y="125" width="49.5" height="18"/>
-                        <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="16"/>
-                        <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
-                        <nil key="highlightedColor"/>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="21"/>
-                        </variation>
-                    </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="3aq-MU-Oi6">
-                        <rect key="frame" x="385" y="23" width="117" height="155.5"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="12"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </imageView>
-                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hand.thumbsup.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="VAn-TU-Wf5">
-                        <rect key="frame" x="396" y="57" width="95" height="86.5"/>
-                        <color key="tintColor" systemColor="systemGreenColor"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="95" id="AUE-Th-ygK"/>
-                        </constraints>
-                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small" weight="light"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="12"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                        <variation key="heightClass=regular-widthClass=compact" hidden="YES"/>
-                    </imageView>
                 </subviews>
                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                 <constraints>
-                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="irG-7P-kHE" secondAttribute="trailing" constant="15" id="0em-FY-ULi"/>
-                    <constraint firstItem="BLs-4F-v4e" firstAttribute="top" secondItem="Kjh-Or-5kI" secondAttribute="bottom" constant="23.5" id="1iQ-iN-5mc"/>
-                    <constraint firstItem="Kjh-Or-5kI" firstAttribute="top" secondItem="vac-lW-ZZB" secondAttribute="bottom" constant="3" id="63z-53-6KS"/>
-                    <constraint firstItem="BhL-bj-hlF" firstAttribute="top" secondItem="Utz-uk-heF" secondAttribute="top" id="70a-W1-Jb5"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="Utz-uk-heF" secondAttribute="trailing" constant="21" id="7yx-OO-xB2"/>
-                    <constraint firstItem="aW6-XB-8u0" firstAttribute="centerY" secondItem="BLs-4F-v4e" secondAttribute="centerY" id="8tw-lb-VYQ"/>
-                    <constraint firstItem="irG-7P-kHE" firstAttribute="top" secondItem="3aq-MU-Oi6" secondAttribute="top" id="9Jm-MF-BCO"/>
-                    <constraint firstItem="8cP-K0-NPO" firstAttribute="trailing" secondItem="vac-lW-ZZB" secondAttribute="trailing" id="COH-nK-nyl"/>
-                    <constraint firstItem="BhL-bj-hlF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="D1I-fn-rBa"/>
-                    <constraint firstItem="BQw-0Q-sU8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="De6-bh-III"/>
-                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="8cP-K0-NPO" secondAttribute="trailing" constant="9" id="FRs-Ta-pwY"/>
-                    <constraint firstItem="8cP-K0-NPO" firstAttribute="top" secondItem="irG-7P-kHE" secondAttribute="bottom" constant="3" id="Fqn-3G-dBd"/>
-                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="centerX" secondItem="VAn-TU-Wf5" secondAttribute="centerX" id="Iem-Ow-LVJ"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="3aq-MU-Oi6" secondAttribute="bottom" constant="16.5" id="Jab-CY-X5j"/>
-                    <constraint firstItem="8cP-K0-NPO" firstAttribute="leading" secondItem="vac-lW-ZZB" secondAttribute="leading" id="MI5-oM-Mct"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Utz-uk-heF" secondAttribute="trailing" constant="-20" id="7yx-OO-xB2"/>
                     <constraint firstItem="Utz-uk-heF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="NzL-kM-HqI"/>
-                    <constraint firstItem="t1x-zq-AjR" firstAttribute="top" secondItem="BLs-4F-v4e" secondAttribute="bottom" constant="23" id="ODD-J8-oct"/>
-                    <constraint firstItem="vac-lW-ZZB" firstAttribute="top" secondItem="8cP-K0-NPO" secondAttribute="bottom" constant="2" id="Op2-Q1-wjg"/>
-                    <constraint firstItem="irG-7P-kHE" firstAttribute="leading" secondItem="8cP-K0-NPO" secondAttribute="leading" id="Q7d-rW-hxc"/>
-                    <constraint firstItem="vac-lW-ZZB" firstAttribute="trailing" secondItem="Kjh-Or-5kI" secondAttribute="trailing" id="T5N-UQ-W5R"/>
-                    <constraint firstAttribute="trailing" secondItem="BhL-bj-hlF" secondAttribute="trailing" constant="326" id="aMu-yx-ait"/>
-                    <constraint firstItem="VAn-TU-Wf5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="44.5" id="bUp-WD-1yt"/>
-                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="centerY" secondItem="VAn-TU-Wf5" secondAttribute="centerY" id="dko-Bo-rYS"/>
                     <constraint firstAttribute="bottom" secondItem="Utz-uk-heF" secondAttribute="bottom" id="hAg-by-OFa"/>
-                    <constraint firstItem="Utz-uk-heF" firstAttribute="leading" secondItem="BhL-bj-hlF" secondAttribute="leading" id="htZ-Nb-9qK"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="3aq-MU-Oi6" secondAttribute="trailing" constant="-4" id="s91-Hc-dqR"/>
-                    <constraint firstItem="VAn-TU-Wf5" firstAttribute="leading" secondItem="vac-lW-ZZB" secondAttribute="trailing" constant="20" id="sae-is-Jg8"/>
-                    <constraint firstItem="BQw-0Q-sU8" firstAttribute="leading" secondItem="irG-7P-kHE" secondAttribute="leading" id="tFu-Ie-22P"/>
-                    <constraint firstItem="irG-7P-kHE" firstAttribute="top" secondItem="BQw-0Q-sU8" secondAttribute="bottom" id="uZl-MC-4D4"/>
-                    <constraint firstItem="BQw-0Q-sU8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-6" id="vgq-kF-2Fh"/>
-                    <constraint firstItem="BhL-bj-hlF" firstAttribute="bottom" secondItem="Utz-uk-heF" secondAttribute="bottom" id="vwh-L6-lAY"/>
-                    <constraint firstItem="vac-lW-ZZB" firstAttribute="leading" secondItem="Kjh-Or-5kI" secondAttribute="leading" id="wFd-ne-GP0"/>
-                    <constraint firstItem="BQw-0Q-sU8" firstAttribute="trailing" secondItem="irG-7P-kHE" secondAttribute="trailing" id="wqU-6Q-SUi"/>
-                    <constraint firstItem="t1x-zq-AjR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="yQ8-Zs-59z"/>
-                    <constraint firstItem="Kjh-Or-5kI" firstAttribute="leading" secondItem="BLs-4F-v4e" secondAttribute="leading" id="zNF-O9-7WZ"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="borrowedDateLabel" destination="cTA-2M-Kbw" id="Tlj-uy-Kkc"/>
                 <outlet property="cover1" destination="Utz-uk-heF" id="egr-EV-TzX"/>
-                <outlet property="cover2" destination="BhL-bj-hlF" id="8hX-0U-Auf"/>
                 <outlet property="myImageView" destination="3aq-MU-Oi6" id="Ekc-2R-kzA"/>
                 <outlet property="nameOfBorrower" destination="vac-lW-ZZB" id="Dlz-gT-JBf"/>
-                <outlet property="reminderDate" destination="t1x-zq-AjR" id="KaT-58-3ji"/>
                 <outlet property="reminderDateIcon" destination="afh-qA-IwQ" id="4GI-Ai-Mue"/>
                 <outlet property="returnedIcon" destination="VAn-TU-Wf5" id="qcc-S7-goN"/>
                 <outlet property="statusLabel" destination="aW6-XB-8u0" id="XbD-We-D86"/>
                 <outlet property="titleItemLabel" destination="irG-7P-kHE" id="nKC-F4-syB"/>
             </connections>
-            <point key="canvasLocation" x="131.25" y="207.04225352112675"/>
+            <point key="canvasLocation" x="-18405" y="639.08450704225356"/>
         </tableViewCell>
     </objects>
     <resources>

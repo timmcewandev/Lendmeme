@@ -45,7 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func scheduleNotification(at date: Date, name: String, memedImage: ImageInfo) {
         if memedImage.notificationIdentifier != nil {
             guard let notificationIdentifier = memedImage.notificationIdentifier else { return }
-            memedImage.reminderDate = date
+            #warning("Enter in date")
+//            memedImage.reminderDate = date
             try? self.dataController.viewContext.save()
             removeScheduleNotification(at: notificationIdentifier, at: memedImage)
         }
