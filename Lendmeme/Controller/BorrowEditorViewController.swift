@@ -19,11 +19,11 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     let transition = BubbleTransition()
     //    var interstitial: GADInterstitial!
     var imageInfo: [ImageInfo] = []
-    let borrowTextAttributes: [String : Any] = [
-        NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
-        NSAttributedStringKey.strokeWidth.rawValue : -0.2,
-        NSAttributedStringKey.foregroundColor.rawValue: UIColor.white
-    ]
+//    let borrowTextAttributes: [String : Any] = [
+//        NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
+//        NSAttributedStringKey.strokeWidth.rawValue : -2.2,
+//        NSAttributedStringKey.foregroundColor.rawValue: UIColor.white
+//    ]
     var datasource = Constants.Categories.gatherCategories()
     
     // MARK: Outlets
@@ -37,9 +37,9 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var cancelOut: UIBarButtonItem!
     @IBOutlet weak var insertImageContainer: UIStackView!
     @IBOutlet weak var cameraButton: UIButton!
-    @IBOutlet weak var remindMe: UISwitch!
     @IBOutlet weak var categoryLabel: UIButton!
     @IBOutlet weak var pickerView: UIPickerView!
+    
     
     
     // MARK: Lifecycle
@@ -127,14 +127,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         //            }
         //        }
         self.save()
-    }
-    
-    @IBAction func remindMeAction(_ sender: UISwitch) {
-        if sender.isOn == true {
-            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "ImageViewController") as? ImageViewController else { return }
-            self.present(controller, animated: true, completion: nil)
-        }
-        
     }
     
     @IBAction func addCategoryAction(_ sender: UIButton) {
@@ -337,10 +329,10 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
             string: name,
             attributes:
             [NSAttributedStringKey.foregroundColor: UIColor.white,
-             NSAttributedStringKey.strokeWidth : -3.0,
+             NSAttributedStringKey.strokeWidth : 3.0,
              NSAttributedStringKey.strokeColor: UIColor.black
         ])
-        textField.defaultTextAttributes = borrowTextAttributes
+
         textField.textAlignment = .center
         textField.delegate = self
     }
@@ -435,12 +427,15 @@ extension BorrowEditorViewController: UIPickerViewDelegate, UIPickerViewDataSour
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             let title = self.datasource[row]
             self.categoryLabel.setTitle("Category: \(title)", for: .normal)
-            self.pickerView.isHidden = true
-            self.phoneNumberTextField.isHidden = false
+            self.phoneNumberTextField.isHidden = true
             if #available(iOS 13.0, *) {
                 self.categoryLabel.tintColor = UIColor.label
             }
+            self.pickerView.isHidden = true
+            self.categoryLabel.backgroundColor = UIColor.white
+            self.phoneNumberTextField.isHidden = false
         }
+
 
     }
 }

@@ -102,9 +102,6 @@
                                     </label>
                                     <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JIV-Rj-rkH">
                                         <rect key="frame" x="47" y="56" width="51" height="31"/>
-                                        <connections>
-                                            <action selector="remindMeAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="HXY-Ar-dtX"/>
-                                        </connections>
                                     </switch>
                                 </subviews>
                                 <constraints>
@@ -123,6 +120,7 @@
                             <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wvm-wN-iT7">
                                 <rect key="frame" x="0.0" y="680" width="414" height="216"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="12"/>
@@ -130,7 +128,10 @@
                                 </userDefinedRuntimeAttributes>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Rx-Oj-YT6">
-                                <rect key="frame" x="138" y="93" width="138" height="40"/>
+                                <rect key="frame" x="79" y="93" width="256" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="256" id="pjg-1b-JZa"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="Add Category"/>
                                 <connections>
@@ -165,7 +166,7 @@
                             <constraint firstItem="wfM-K2-jvl" firstAttribute="trailing" secondItem="Lua-XB-jXr" secondAttribute="trailing" id="gCf-2F-Phe"/>
                             <constraint firstAttribute="bottomMargin" secondItem="wfM-K2-jvl" secondAttribute="bottom" constant="-19.5" id="qFL-YG-b4e"/>
                             <constraint firstItem="wvm-wN-iT7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="sLm-HQ-O7D"/>
-                            <constraint firstItem="cho-jd-ylO" firstAttribute="top" secondItem="9Rx-Oj-YT6" secondAttribute="bottom" constant="8" symbolic="YES" id="w0g-Dd-dmF"/>
+                            <constraint firstItem="cho-jd-ylO" firstAttribute="top" secondItem="9Rx-Oj-YT6" secondAttribute="bottom" constant="8" id="w0g-Dd-dmF"/>
                             <constraint firstItem="wRM-Rx-5QT" firstAttribute="top" secondItem="cho-jd-ylO" secondAttribute="bottom" constant="10" id="wbo-zq-HMp"/>
                             <constraint firstItem="wfM-K2-jvl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-46.5" id="xVU-D2-z70"/>
                         </constraints>
@@ -182,13 +183,12 @@
                     <connections>
                         <outlet property="cameraButton" destination="GYI-Os-X7S" id="RbF-FM-Ic0"/>
                         <outlet property="cancelOut" destination="IYC-5o-RPP" id="czF-Dv-4iJ"/>
-                        <outlet property="categoryLabel" destination="9Rx-Oj-YT6" id="Ble-uy-ELt"/>
+                        <outlet property="categoryLabel" destination="9Rx-Oj-YT6" id="xwt-1X-qVl"/>
                         <outlet property="imageView" destination="wfM-K2-jvl" id="5EF-7V-CfE"/>
                         <outlet property="insertImageContainer" destination="cEL-3L-VHw" id="pQD-Y3-Lu8"/>
                         <outlet property="nameOfBorrowerTextField" destination="cho-jd-ylO" id="Mef-KU-zgg"/>
                         <outlet property="phoneNumberTextField" destination="PMx-xr-uw1" id="za2-Do-dxn"/>
                         <outlet property="pickerView" destination="wvm-wN-iT7" id="Atd-zR-nQw"/>
-                        <outlet property="remindMe" destination="JIV-Rj-rkH" id="bzb-za-b9c"/>
                         <outlet property="shareOUT" destination="mST-PZ-z3s" id="DVi-X2-6YO"/>
                         <outlet property="titleOfItemTextField" destination="wRM-Rx-5QT" id="oQw-WX-yQx"/>
                         <outlet property="toolbar" destination="Lua-XB-jXr" id="ffk-ar-eHe"/>
@@ -293,54 +293,6 @@
             </objects>
             <point key="canvasLocation" x="-906" y="-809"/>
         </scene>
-        <!--Image View Controller-->
-        <scene sceneID="tA7-li-9lP">
-            <objects>
-                <viewController storyboardIdentifier="ImageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rhe-qd-6gO" customClass="ImageViewController" customModule="Lendmeme" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Dut-Yu-UES">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Select a Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8n1-A8-REf">
-                                <rect key="frame" x="56" y="70" width="262" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="W0a-gb-LnN"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" translatesAutoresizingMaskIntoConstraints="NO" id="yKC-hT-w8f">
-                                <rect key="frame" x="0.0" y="154" width="414" height="708"/>
-                                <connections>
-                                    <action selector="datePickerDidSelectDate:" destination="rhe-qd-6gO" eventType="valueChanged" id="OlJ-fk-cg0"/>
-                                </connections>
-                            </datePicker>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="2CS-hw-CdB"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="yKC-hT-w8f" firstAttribute="top" secondItem="8n1-A8-REf" secondAttribute="bottom" id="6jO-Wp-RwH"/>
-                            <constraint firstItem="yKC-hT-w8f" firstAttribute="centerX" secondItem="Dut-Yu-UES" secondAttribute="centerX" id="7h8-Oh-t81"/>
-                            <constraint firstItem="yKC-hT-w8f" firstAttribute="leading" secondItem="2CS-hw-CdB" secondAttribute="leading" id="F9L-l8-iVi"/>
-                            <constraint firstItem="8n1-A8-REf" firstAttribute="top" secondItem="2CS-hw-CdB" secondAttribute="top" constant="70" id="WpG-Fo-2F5"/>
-                            <constraint firstItem="8n1-A8-REf" firstAttribute="leading" secondItem="2CS-hw-CdB" secondAttribute="leading" constant="56" id="hGW-2p-343"/>
-                            <constraint firstItem="8n1-A8-REf" firstAttribute="centerX" secondItem="yKC-hT-w8f" secondAttribute="centerX" id="uC3-km-Qns"/>
-                            <constraint firstItem="2CS-hw-CdB" firstAttribute="bottom" secondItem="yKC-hT-w8f" secondAttribute="bottom" id="yXY-G9-nJp"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="pg7-AZ-mpw"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="datePicker" destination="yKC-hT-w8f" id="GSA-Kc-fdT"/>
-                        <outlet property="selectedDateLabel" destination="8n1-A8-REf" id="chA-6v-LY7"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q8b-bi-Ets" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-906.39999999999998" y="600.44977511244383"/>
-        </scene>
         <!--Borrow Table View Controller-->
         <scene sceneID="LIF-v8-nY9">
             <objects>
@@ -382,7 +334,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="xXf-Ly-zqP">
                         <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="yQY-1n-QQ2">
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="yQY-1n-QQ2">
                             <rect key="frame" x="50.5" y="6" width="305" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
@@ -405,7 +357,6 @@
                         <outlet property="segmentOut" destination="yQY-1n-QQ2" id="Bdp-2A-nJQ"/>
                         <outlet property="tableView" destination="oZc-Dh-cn1" id="78g-ty-FEs"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="starter" animates="NO" id="aK9-Dv-IeC"/>
-                        <segue destination="rhe-qd-6gO" kind="showDetail" identifier="toCalendar" id="6cg-LY-G6S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="51H-Ux-MkF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
