@@ -24,7 +24,6 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
     var dataController:DataController!
     var imageInfo: [ImageInfo] = []
     var filteredData: [ImageInfo] = []
-    var remindMe: [ImageInfo] = []
     var reminderDate: Date?
     
     func getDate(date: Date, imageInformation: ImageInfo) {
@@ -131,10 +130,6 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
         case Constants.Segue.toEditorViewController:
             guard let destinationVC = segue.destination as? BorrowEditorViewController else { return }
             destinationVC.dataController = self.dataController
-        case Constants.Segue.toCalendarViewController :
-            guard let destinationVC = segue.destination as? ImageViewController else { return }
-            destinationVC.receivedItem = remindMe
-            destinationVC.delegate = self
         default: break
         }
     }
@@ -295,55 +290,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             }))
             
         }
-        
-//        if selectedImage.hasBeenReturned == false && selectedImage.reminderDate != nil {
-//
-//            alert.addAction(UIAlertAction(title: Constants.CommandListText.removeCalendar, style: .default, handler: { _ in
-//                self.removeCalendarNotification(selectedImage)
-//            }))
-//            
-//            alert.addAction(UIAlertAction(title: Constants.CommandListText.changeDateAndTime, style: .default, handler: { _ in
-//                let myphoto = [self.imageInfo[indexPath.row]]
-//                self.remindMe = myphoto
-//                self.performSegue(withIdentifier: Constants.Segue.toCalendarViewController, sender: self)
-//                
-//            }))
-//        }
-        if selectedImage.reminderDate == nil && selectedImage.hasBeenReturned == false {
 
-            alert.addAction(UIAlertAction(title: Constants.CommandListText.remindMe, style: .default, handler: {[weak self] _ in
-                guard let self = self else { return }
-                if #available(iOS 13.4, *) {
-//                    self.button.isHidden = false
-//                    self.secondDatePicker.isHidden = false
-//                    self.secondDatePicker.alpha = 1.0
-//                    self.secondDatePicker.preferredDatePickerStyle = .wheels
-//                    self.secondDatePicker.backgroundColor = UIColor.systemGroupedBackground
-//                    self.secondDatePicker.layer.borderWidth = 2
-//
-//
-//                    self.button.setTitle("Save date", for: .normal)
-//                    self.view.addSubview(self.secondDatePicker)
-//                    self.view.addSubview(self.button)
-//                    self.button.translatesAutoresizingMaskIntoConstraints = false
-//                    self.secondDatePicker.translatesAutoresizingMaskIntoConstraints = false
-//                    self.secondDatePicker.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//                    self.secondDatePicker.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-//                    self.button.centerXAnchor.constraint(equalTo: self.secondDatePicker.bottomAnchor).isActive = true
-//                    self.button.centerYAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-
-//                    let selectedDate = sender.date
-//                    let delegate = UIApplication.shared.delegate as? AppDelegate
-//                    delegate?.scheduleNotification(at: selectedDate, name: self.receivedItem[0].titleinfo?.lowercased() ?? "", memedImage: imageInfo)
-                    
-
-                } else {
-                    let myphoto = [self.imageInfo[indexPath.row]]
-                    self.remindMe = myphoto
-                    self.performSegue(withIdentifier: Constants.Segue.toCalendarViewController, sender: self)
-                }
-            }))
-        }
         if imageInfo[indexPath.row].bottomInfo != "" && selectedImage.hasBeenReturned == false {
             alert.addAction(UIAlertAction(title: NSLocalizedString(Constants.MesageText.sendMessage, comment: "Default action"), style: .default, handler: { _ in
                 let composeVC = MFMessageComposeViewController()

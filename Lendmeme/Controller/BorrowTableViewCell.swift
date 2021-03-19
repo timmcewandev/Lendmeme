@@ -25,8 +25,6 @@ class BorrowTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        //        myImageView.layer.borderWidth = 1
-        //        myImageView.layer.borderColor = UIColor.black.cgColor
         calendarTextField.addInputViewDatePicker(target: self, selector: #selector(doneButtonPressed))
     }
 

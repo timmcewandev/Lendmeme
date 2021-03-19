@@ -59,7 +59,6 @@ struct Constants {
         static let markAsNotReturned = "Mark as not returned"
         static let removeCalendar = "Remove calendar reminder"
         static let changeDateAndTime = "Change date & time"
-        static let remindMe = "Remind me"
         static let delete = "Delete"
         static let returnText = "Return"
         static let viewImage = "View image 🌁"
