@@ -40,7 +40,15 @@ class BorrowTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        if selected {
+            self.isHighlighted = true
+            calendarTextField.resignFirstResponder()
+        } else {
+            self.isHighlighted = false
+            print("not selected")
+        }
     }
+    
     
     func returnedAnimation() {
         UIView.animate(withDuration: 0.3, delay: 0, options: .allowUserInteraction, animations: {() -> Void in
@@ -64,13 +72,12 @@ class BorrowTableViewCell: UITableViewCell {
 extension UITextField {
 
   func addInputViewDatePicker(target: Any, selector: Selector) {
-
-   let screenWidth = UIScreen.main.bounds.width
+    let todaysDate = Date()
+    let screenWidth = UIScreen.main.bounds.width
    //Add DatePicker as inputView
-    let datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 216))
-   datePicker.datePickerMode = .dateAndTime
-
-
+    let datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 100))
+    datePicker.datePickerMode = .dateAndTime
+    datePicker.minimumDate = todaysDate
     self.inputView = datePicker
 
    //Add Tool Bar as input AccessoryView
