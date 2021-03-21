@@ -74,11 +74,7 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
         segmentControler(atSeg: 0, onReturn: true)
         tableView.reloadData()
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        segmentControler(atSeg: 0, onReturn: true)
-    }
+
     
     
     // MARK: - Actions
@@ -147,7 +143,6 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.borrowTableViewCell, for: indexPath) as? BorrowTableViewCell
-        print("Cool \(imageInfo[0].reminderDate)")
         let memeImages = self.imageInfo[indexPath.row]
         cell?.returnedIcon.isHidden = true
         cell?.reminderDateIcon.isHidden = true
@@ -231,7 +226,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         if let date = memeImages.reminderDate {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = Constants.DateText.dateAndTime
-            cell?.calendarTextField.text = "Reminder date: \(dateFormatter.string(from: date))"
+            cell?.calendarTextField.text = dateFormatter.string(from: date)
         }
 //        if cell?.calendarTextField.text != "" {
 //            if let cooler = cell?.calendarTextField.text {
