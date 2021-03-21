@@ -51,8 +51,6 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
         //        bannerView.rootViewController = self
         //        bannerView.load(GADRequest())
         //        bannerView.delegate = self
-        
-        secondDatePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
     }
     
     
@@ -82,13 +80,6 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
         segmentControler(atSeg: 0, onReturn: true)
     }
     
-    @objc func dateChanged(_ sender: UIDatePicker) {
-        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: sender.date)
-        if let day = components.day, let month = components.month, let year = components.year, let hour = components.hour {
-            print("\(day) \(month) \(year) \(hour)")
-            secondDatePicker.alpha = 0.0
-        }
-    }
     
     // MARK: - Actions
     @IBAction func segmentControl(_ sender: Any) {
