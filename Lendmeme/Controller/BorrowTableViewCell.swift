@@ -8,6 +8,9 @@
 
 import UIKit
 
+protocol getDateForReminderDelegate {
+    func getDate(date: Date, row: Int)
+}
 class BorrowTableViewCell: UITableViewCell {
     
     @IBOutlet weak var borrowedDateLabel: UILabel!
@@ -21,10 +24,12 @@ class BorrowTableViewCell: UITableViewCell {
     @IBOutlet weak var cover1: UIView!
     @IBOutlet weak var calendarTextField: UITextField!
     
+    var delegate: getDateForReminderDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
         calendarTextField.addInputViewDatePicker(target: self, selector: #selector(doneButtonPressed))
     }
 
@@ -34,6 +39,10 @@ class BorrowTableViewCell: UITableViewCell {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = Constants.DateText.dateAndTime
             self.calendarTextField.text = dateFormatter.string(from: datePicker.date)
+            guard let row = self.indexPath?.row else { return }
+            self.delegate?.getDate(date: datePicker.date, row: row)
+
+//            print(" Here is the index path\(String(describing: self.indexPath?.row))")
         }
         self.calendarTextField.resignFirstResponder()
      }
@@ -72,6 +81,7 @@ class BorrowTableViewCell: UITableViewCell {
 extension UITextField {
 
   func addInputViewDatePicker(target: Any, selector: Selector) {
+    
     let todaysDate = Date()
     let screenWidth = UIScreen.main.bounds.width
    //Add DatePicker as inputView
@@ -94,4 +104,21 @@ extension UITextField {
     self.resignFirstResponder()
   }
 }
+extension UIResponder {
+    /**
+     * Returns the next responder in the responder chain cast to the given type, or
+     * if nil, recurses the chain until the next responder is nil or castable.
+     */
+    func next<U: UIResponder>(of type: U.Type = U.self) -> U? {
+        return self.next.flatMap({ $0 as? U ?? $0.next() })
+    }
+}
+extension UITableViewCell {
+    var tableView: UITableView? {
+        return self.next(of: UITableView.self)
+    }
 
+    var indexPath: IndexPath? {
+        return self.tableView?.indexPath(for: self)
+    }
+}

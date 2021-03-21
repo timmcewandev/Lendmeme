@@ -9,8 +9,7 @@ import CoreData
 import MessageUI
 //import GoogleMobileAds
 
-class BorrowTableViewController: UIViewController, getDateForReminderDelegate, MFMessageComposeViewControllerDelegate {
-    
+class BorrowTableViewController: UIViewController, getDateForReminderDelegate, MFMessageComposeViewControllerDelegate, UNUserNotificationCenterDelegate {
     // MARK: - Outlets
     @IBOutlet weak var segmentOut: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
@@ -26,17 +25,20 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
     var filteredData: [ImageInfo] = []
     var reminderDate: Date?
     
-    func getDate(date: Date, imageInformation: ImageInfo) {
+    
+    func getDate(date: Date, row: Int) {
         for imageInfo in self.imageInfo {
-            if imageInfo == imageInformation {
+            if imageInfo == self.imageInfo[row] {
                 imageInfo.reminderDate = date
                 try? self.dataController.viewContext.save()
+//                self.dataController.viewContext.refreshAllObjects()
+                let delegate = UIApplication.shared.delegate as? AppDelegate
+                delegate?.scheduleNotification(at: date, name: imageInfo.titleinfo ?? "", memedImage: imageInfo)
             }
             self.tableView.reloadData()
         }
         self.tableView.reloadData()
     }
-    
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -49,6 +51,7 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
         //        bannerView.rootViewController = self
         //        bannerView.load(GADRequest())
         //        bannerView.delegate = self
+        
         secondDatePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
     }
     
@@ -70,8 +73,15 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
             performSegue(withIdentifier: Constants.Segue.toStarterViewController, sender: self)
         }
         self.navigationController?.isNavigationBarHidden = false
+        segmentControler(atSeg: 0, onReturn: true)
         tableView.reloadData()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        segmentControler(atSeg: 0, onReturn: true)
+    }
+    
     @objc func dateChanged(_ sender: UIDatePicker) {
         let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: sender.date)
         if let day = components.day, let month = components.month, let year = components.year, let hour = components.hour {
@@ -146,9 +156,8 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.borrowTableViewCell, for: indexPath) as? BorrowTableViewCell
-
-        
-        let memeImages = imageInfo[indexPath.row]
+        print("Cool \(imageInfo[0].reminderDate)")
+        let memeImages = self.imageInfo[indexPath.row]
         cell?.returnedIcon.isHidden = true
         cell?.reminderDateIcon.isHidden = true
         let dateToday = Date()
@@ -172,7 +181,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
 //                }
 //            }
 //        }
-        
+        cell?.delegate = self
         cell?.borrowedDateLabel.text = todaysDate
         cell?.myImageView.contentMode = .scaleAspectFill
         
@@ -223,9 +232,37 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 cell?.returnedIcon.image = UIImage(systemName: Constants.SymbolsImage.checkMarkCircleFilled)
             }
         }
+        print("Hello \(memeImages.reminderDate)")
+
+        if let date = memeImages.reminderDate {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = Constants.DateText.dateAndTime
+            cell?.calendarTextField.text = dateFormatter.string(from: date)
+        }
+//        if cell?.calendarTextField.text != "" {
+//            if let cooler = cell?.calendarTextField.text {
+//                let isoDate = cooler
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+//                dateFormatter.dateFormat = Constants.DateText.dateAndTime
+//                let date = dateFormatter.date(from:isoDate)!
+//
+//                let calendar = Calendar.current
+//                let components = calendar.dateComponents([.year, .month, .day, .hour], from: date)
+//
+//                let finalDate = calendar.date(from:components)
+//                let selectedImage = self.imageInfo[indexPath.row]
+//                let markImageAsReturned = selectedImage
+//                markImageAsReturned.reminderDate = finalDate
+//
+//                try? self.dataController.viewContext.save()
+//                self.dataController.viewContext.refreshAllObjects()
+//
+//            }
+//        }
         return cell ?? UITableViewCell()
-        
     }
+    
     
     fileprivate func segmentControler(atSeg: Int, onReturn: Bool) {
         if self.segmentOut.selectedSegmentIndex == 0 {
@@ -250,13 +287,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         }
     }
     
-    fileprivate func removeCalendarNotification(_ selectedImage: ImageInfo) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.removeScheduleNotification(at: selectedImage.notificationIdentifier ?? "", at: selectedImage)
-//        selectedImage.reminderDate = nil
-        try? self.dataController.viewContext.save()
-        self.tableView.reloadData()
-    }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedImage = self.imageInfo[indexPath.row]
@@ -411,6 +442,15 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         self.searchBar.resignFirstResponder()
         return [deleteItem, markItemAsReturned]
     }
+    
+    fileprivate func removeCalendarNotification(_ selectedImage: ImageInfo) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.removeScheduleNotification(at: selectedImage.notificationIdentifier ?? "", at: selectedImage)
+//        selectedImage.reminderDate = nil
+        try? self.dataController.viewContext.save()
+        self.tableView.reloadData()
+    }
+
 }
 
 extension BorrowTableViewController {
