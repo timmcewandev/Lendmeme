@@ -184,11 +184,13 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         cell?.titleItemLabel.text = memeImages.titleinfo
         cell?.nameOfBorrower.text = memeImages.topInfo
         cell?.statusLabel.text = Constants.NameConstants.statusNotReturned
+        cell?.calendarTextField.isHidden = false
         if #available(iOS 13.0, *) {
             cell?.statusLabel.textColor = .systemGroupedBackground
         } else {
             // Fallback on earlier versions
         }
+        
         if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == false {
             cell?.statusLabel.text = Constants.NameConstants.statusReturned
             if #available(iOS 13.0, *) {
@@ -217,18 +219,19 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             } else {
                 // Fallback on earlier versions
             }
+            
             cell?.returnedIcon.isHidden = false
+            cell?.calendarTextField.isHidden = true
             if #available(iOS 13.0, *) {
                 cell?.reminderDateIcon.isHidden = true
                 cell?.returnedIcon.image = UIImage(systemName: Constants.SymbolsImage.checkMarkCircleFilled)
             }
         }
-        print("Hello \(memeImages.reminderDate)")
 
         if let date = memeImages.reminderDate {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = Constants.DateText.dateAndTime
-            cell?.calendarTextField.text = dateFormatter.string(from: date)
+            cell?.calendarTextField.text = "Reminder date: \(dateFormatter.string(from: date))"
         }
 //        if cell?.calendarTextField.text != "" {
 //            if let cooler = cell?.calendarTextField.text {
