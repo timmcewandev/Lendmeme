@@ -40,9 +40,7 @@ class BorrowTableViewCell: UITableViewCell {
             dateFormatter.dateFormat = Constants.DateText.dateAndTime
             self.calendarTextField.text = dateFormatter.string(from: datePicker.date)
             guard let row = self.indexPath?.row else { return }
-            self.delegate?.getDate(date: datePicker.date, row: row)
-
-//            print(" Here is the index path\(String(describing: self.indexPath?.row))")
+            self.delegate?.getDate(date: datePicker.date, row: row) 
         }
         self.calendarTextField.resignFirstResponder()
      }
