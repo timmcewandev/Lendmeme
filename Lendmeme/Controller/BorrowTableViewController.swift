@@ -43,7 +43,8 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.reloadInputViews()
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
         searchBar.delegate = self
         let nib = UINib(nibName: Constants.Cell.borrowTableViewCell, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: Constants.Cell.borrowTableViewCell)
@@ -143,6 +144,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.borrowTableViewCell, for: indexPath) as? BorrowTableViewCell
+//        cell?.returnedIcon.isHidden = true
         let memeImages = self.imageInfo[indexPath.row]
         cell?.returnedIcon.isHidden = true
         cell?.reminderDateIcon.isHidden = true
@@ -151,22 +153,23 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         let dateFormatterForCreationDate = DateFormatter()
         dateFormatterForCreationDate.dateFormat = Constants.DateText.dateOnly
         let todaysDate = dateFormatterForCreationDate.string(from: date)
-//        if let remdinderDate = memeImages.reminderDate {
-//            if dateToday > remdinderDate && memeImages.hasBeenReturned != true  {
-//                cell?.reminderDate.text = Constants.NameConstants.expiredText
-//                cell?.reminderDate.textColor = .systemPink
-//            } else if memeImages.hasBeenReturned != true {
-//                let dateformatter = DateFormatter()
-//                dateformatter.dateFormat = Constants.DateText.dateAndTime
-//                let reminderDateToString = dateformatter.string(from: remdinderDate)
-//                cell?.reminderDate.text = reminderDateToString
-//                if #available(iOS 13.0, *) {
-//                    cell?.reminderDateIcon.isHidden = false
-//                    cell?.returnedIcon.isHidden = true
-//                    cell?.reminderDateIcon.image = UIImage(systemName: Constants.SymbolsImage.calendarCircle)
-//                }
-//            }
-//        }
+        if let remdinderDate = memeImages.reminderDate {
+            if dateToday > remdinderDate && memeImages.hasBeenReturned != true  {
+                cell?.calendarTextField.text = "Enter Reminder Date 📅"
+            } else if memeImages.hasBeenReturned != true {
+                if let date = memeImages.reminderDate {
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = Constants.DateText.dateAndTime
+                    cell?.calendarTextField.text = dateFormatter.string(from: date)
+                }
+                
+                if #available(iOS 13.0, *) {
+                    cell?.reminderDateIcon.isHidden = false
+                    cell?.returnedIcon.isHidden = true
+                    cell?.reminderDateIcon.image = UIImage(systemName: Constants.SymbolsImage.calendarCircle)
+                }
+            }
+        }
         cell?.delegate = self
         cell?.borrowedDateLabel.text = todaysDate
         cell?.myImageView.contentMode = .scaleAspectFill
@@ -194,7 +197,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 // Fallback on earlier versions
             }
             cell?.returnedIcon.isHidden = false
-            if #available(iOS 13.0, *) {
+            if #available(iOS 13.0, *) {  
                 cell?.reminderDateIcon.isHidden = true
                 cell?.returnedIcon.image = UIImage(systemName: Constants.SymbolsImage.checkMarkCircleFilled)
                 cell?.returnedAnimation()
@@ -206,6 +209,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                         self.dataController.viewContext.refreshAllObjects()
                     }
                 }
+                
             }
         } else if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == true {
             cell?.statusLabel.text = Constants.NameConstants.statusReturned
@@ -223,32 +227,8 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             }
         }
 
-        if let date = memeImages.reminderDate {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = Constants.DateText.dateAndTime
-            cell?.calendarTextField.text = dateFormatter.string(from: date)
-        }
-//        if cell?.calendarTextField.text != "" {
-//            if let cooler = cell?.calendarTextField.text {
-//                let isoDate = cooler
-//                let dateFormatter = DateFormatter()
-//                dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
-//                dateFormatter.dateFormat = Constants.DateText.dateAndTime
-//                let date = dateFormatter.date(from:isoDate)!
-//
-//                let calendar = Calendar.current
-//                let components = calendar.dateComponents([.year, .month, .day, .hour], from: date)
-//
-//                let finalDate = calendar.date(from:components)
-//                let selectedImage = self.imageInfo[indexPath.row]
-//                let markImageAsReturned = selectedImage
-//                markImageAsReturned.reminderDate = finalDate
-//
-//                try? self.dataController.viewContext.save()
-//                self.dataController.viewContext.refreshAllObjects()
-//
-//            }
-//        }
+
+
         return cell ?? UITableViewCell()
     }
     
