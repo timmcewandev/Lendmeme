@@ -11,7 +11,6 @@
 		220FD9362513023000C63EC3 /* BorrowTableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220FD9352513023000C63EC3 /* BorrowTableViewExtension.swift */; };
 		22452C0724CEBE4100899312 /* LendmemeUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22452C0624CEBE4100899312 /* LendmemeUnitTests.swift */; };
 		22588106243E8C33002A2E37 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22588105243E8C33002A2E37 /* GoogleService-Info.plist */; };
-		225D698E24BA338600E03995 /* BorrowUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D698D24BA338600E03995 /* BorrowUpdateViewController.swift */; };
 		227E2A682510638C005E5074 /* BorrowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E2A662510638C005E5074 /* BorrowTableViewCell.swift */; };
 		227E2A692510638C005E5074 /* BorrowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 227E2A672510638C005E5074 /* BorrowTableViewCell.xib */; };
 		22F2ED8B249DB64200CBAA6B /* PVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F2ED8A249DB64200CBAA6B /* PVController.swift */; };
@@ -46,7 +45,6 @@
 		22452C0624CEBE4100899312 /* LendmemeUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LendmemeUnitTests.swift; sourceTree = "<group>"; };
 		22452C0824CEBE4100899312 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22588105243E8C33002A2E37 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		225D698D24BA338600E03995 /* BorrowUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowUpdateViewController.swift; sourceTree = "<group>"; };
 		227E2A662510638C005E5074 /* BorrowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowTableViewCell.swift; sourceTree = "<group>"; };
 		227E2A672510638C005E5074 /* BorrowTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BorrowTableViewCell.xib; sourceTree = "<group>"; };
 		22F2ED8A249DB64200CBAA6B /* PVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVController.swift; sourceTree = "<group>"; };
@@ -197,7 +195,6 @@
 				2282C186240E17CC00C41C34 /* Views */,
 				9BDD35D91FD88B0D005ADBCD /* Assets.xcassets */,
 				2282C187240E17F700C41C34 /* Supporting files */,
-				225D698D24BA338600E03995 /* BorrowUpdateViewController.swift */,
 			);
 			path = Lendmeme;
 			sourceTree = "<group>";
@@ -406,7 +403,6 @@
 				9B518CA92229CDDC004B1050 /* ImageViewController.swift in Sources */,
 				9B39AA8A22F40B3B007EF340 /* DataController.swift in Sources */,
 				9BDD35D31FD88B0D005ADBCD /* AppDelegate.swift in Sources */,
-				225D698E24BA338600E03995 /* BorrowUpdateViewController.swift in Sources */,
 				22F2ED8B249DB64200CBAA6B /* PVController.swift in Sources */,
 				841E4F7C25F6F3F10014DD58 /* Constants.swift in Sources */,
 			);
