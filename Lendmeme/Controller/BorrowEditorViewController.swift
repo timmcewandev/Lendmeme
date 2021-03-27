@@ -325,14 +325,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     func prepareTextField(textField: UITextField, name: String) {
-        textField.attributedPlaceholder = NSAttributedString(
-            string: name,
-            attributes:
-            [NSAttributedStringKey.foregroundColor: UIColor.white,
-             NSAttributedStringKey.strokeWidth : 3.0,
-             NSAttributedStringKey.strokeColor: UIColor.black
-        ])
-
         textField.textAlignment = .center
         textField.delegate = self
     }
