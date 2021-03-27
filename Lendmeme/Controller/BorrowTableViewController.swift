@@ -175,10 +175,11 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                     cell?.returnedIcon.isHidden = true
                     cell?.reminderDateIcon.image = UIImage(systemName: Constants.SymbolsImage.calendarCircle)
                 }
+                
             }
         }
         cell?.delegate = self
-        cell?.borrowedDateLabel.text = todaysDate
+        cell?.borrowedDateLabel.text = "Date Borrowed: \(todaysDate)"
         cell?.myImageView.contentMode = .scaleAspectFill
         
         if let memeImageData = memeImages.imageData {
@@ -188,7 +189,8 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         cell?.accessoryType = .none
         cell?.titleItemLabel.text = memeImages.titleinfo
         cell?.nameOfBorrower.text = memeImages.topInfo
-        cell?.statusLabel.text = Constants.NameConstants.statusNotReturned
+        cell?.statusLabel.text = nil
+        
         cell?.calendarTextField.isHidden = false
         if #available(iOS 13.0, *) {
             cell?.statusLabel.textColor = .systemGroupedBackground
@@ -206,7 +208,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             } else {
                 // Fallback on earlier versions
             }
-
+            removeCalendarNotification(memeImages)
             cell?.returnedIcon.isHidden = false
             if #available(iOS 13.0, *) {  
                 cell?.reminderDateIcon.isHidden = true
@@ -428,7 +430,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
     fileprivate func removeCalendarNotification(_ selectedImage: ImageInfo) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.removeScheduleNotification(at: selectedImage.notificationIdentifier ?? "", at: selectedImage)
-//        selectedImage.reminderDate = nil
+        selectedImage.reminderDate = nil
         try? self.dataController.viewContext.save()
         self.tableView.reloadData()
     }
