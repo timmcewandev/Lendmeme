@@ -144,8 +144,15 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.borrowTableViewCell, for: indexPath) as? BorrowTableViewCell
-//        cell?.returnedIcon.isHidden = true
+        
         let memeImages = self.imageInfo[indexPath.row]
+        
+        
+        if memeImages.reminderDate == nil {
+            cell?.calendarTextField.text = "Enter Reminder Date 📅"
+        }
+        
+
         cell?.returnedIcon.isHidden = true
         cell?.reminderDateIcon.isHidden = true
         let dateToday = Date()
@@ -190,12 +197,16 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         }
         
         if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == false {
+
+            
             cell?.statusLabel.text = Constants.NameConstants.statusReturned
+
             if #available(iOS 13.0, *) {
                 cell?.statusLabel.textColor = .systemGroupedBackground
             } else {
                 // Fallback on earlier versions
             }
+
             cell?.returnedIcon.isHidden = false
             if #available(iOS 13.0, *) {  
                 cell?.reminderDateIcon.isHidden = true
@@ -212,6 +223,8 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 
             }
         } else if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == true {
+            cell?.myImageView.backgroundColor = .systemTeal
+            cell?.myImageView.image = nil
             cell?.statusLabel.text = Constants.NameConstants.statusReturned
             if #available(iOS 13.0, *) {
                 cell?.statusLabel.textColor = .systemGroupedBackground

@@ -40,7 +40,7 @@ class BorrowTableViewCell: UITableViewCell {
             dateFormatter.dateFormat = Constants.DateText.dateAndTime
             self.calendarTextField.text = dateFormatter.string(from: datePicker.date)
             guard let row = self.indexPath?.row else { return }
-            self.delegate?.getDate(date: datePicker.date, row: row) 
+            self.delegate?.getDate(date: datePicker.date, row: row)
         }
         self.calendarTextField.resignFirstResponder()
      }
@@ -52,6 +52,7 @@ class BorrowTableViewCell: UITableViewCell {
             calendarTextField.resignFirstResponder()
         } else {
             self.isHighlighted = false
+            
             print("not selected")
         }
     }
