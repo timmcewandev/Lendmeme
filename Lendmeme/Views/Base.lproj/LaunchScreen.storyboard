@@ -17,11 +17,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Slice" translatesAutoresizingMaskIntoConstraints="NO" id="z8D-o7-z7y">
+                                <rect key="frame" x="-146" y="147" width="667" height="355"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="z8D-o7-z7y" secondAttribute="height" multiplier="667:355" id="RcS-15-X9V"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="o9H-Xi-hdJ"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lendmeme" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKY-xz-Dki">
-                                <rect key="frame" x="75" y="310.5" width="225" height="46.5"/>
-                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                                <rect key="frame" x="75" y="308.5" width="225" height="50.5"/>
+                                <color key="backgroundColor" red="0.41960784313725491" green="0.80784313725490198" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" systemColor="systemTealColor"/>
-                                <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="42"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="42"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -29,9 +36,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="z8D-o7-z7y" secondAttribute="bottom" constant="165" id="3Tm-t1-8a7"/>
                             <constraint firstItem="nKY-xz-Dki" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ShQ-Mm-Oua"/>
                             <constraint firstItem="nKY-xz-Dki" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="75" id="XdX-yf-wXq"/>
+                            <constraint firstItem="z8D-o7-z7y" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="147" id="bTp-N3-G9i"/>
                             <constraint firstItem="nKY-xz-Dki" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="nHU-2g-wIJ"/>
+                            <constraint firstItem="z8D-o7-z7y" firstAttribute="centerX" secondItem="nKY-xz-Dki" secondAttribute="centerX" id="yGQ-gX-sia"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -41,6 +51,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Slice" width="578" height="499"/>
         <systemColor name="systemGroupedBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
