@@ -57,13 +57,17 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="alphabet" returnKeyType="next"/>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="-8" translatesAutoresizingMaskIntoConstraints="NO" id="cEL-3L-VHw">
-                                <rect key="frame" x="135.5" y="420" width="143" height="56"/>
+                                <rect key="frame" x="132" y="406.5" width="150" height="83"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insert Image Here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9a-2m-lYN">
-                                        <rect key="frame" x="0.0" y="0.0" width="143" height="16"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="43"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="43" id="Srv-Z8-WMs"/>
+                                            <constraint firstAttribute="width" constant="150" id="qiu-ap-3eX"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <color key="textColor" systemColor="scrollViewTexturedBackgroundColor"/>
+                                        <color key="textColor" systemColor="systemOrangeColor"/>
                                         <color key="highlightedColor" systemColor="systemFillColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -72,7 +76,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="FeO-I2-KPi">
-                                        <rect key="frame" x="28" y="8" width="87" height="48"/>
+                                        <rect key="frame" x="31.5" y="35" width="87" height="48"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KyE-NW-OHe">
                                                 <rect key="frame" x="0.0" y="0.0" width="35" height="48"/>
@@ -99,19 +103,18 @@
                                         </subviews>
                                     </stackView>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remind me" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q87-XC-3VI">
-                                        <rect key="frame" x="24" y="21" width="95" height="0.0"/>
+                                        <rect key="frame" x="24" y="48" width="102" height="0.0"/>
                                         <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="17"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JIV-Rj-rkH">
-                                        <rect key="frame" x="47" y="56" width="51" height="31"/>
+                                        <rect key="frame" x="50.5" y="83" width="51" height="31"/>
                                     </switch>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="JIV-Rj-rkH" secondAttribute="bottom" constant="-31" id="2b5-lm-LoZ"/>
                                     <constraint firstItem="Q87-XC-3VI" firstAttribute="top" secondItem="H9a-2m-lYN" secondAttribute="bottom" constant="5" id="2m3-pd-cyE"/>
-                                    <constraint firstItem="FeO-I2-KPi" firstAttribute="top" secondItem="cEL-3L-VHw" secondAttribute="top" constant="8" id="38b-fP-YRv"/>
                                     <constraint firstItem="JIV-Rj-rkH" firstAttribute="top" secondItem="FeO-I2-KPi" secondAttribute="bottom" id="BAD-az-WQP"/>
                                     <constraint firstItem="Q87-XC-3VI" firstAttribute="leading" secondItem="cEL-3L-VHw" secondAttribute="leading" constant="24" id="Wqe-7W-Cjm"/>
                                 </constraints>
@@ -1486,9 +1489,6 @@ AADu9gAA7vgAAO76AAEAmgABAJ8AAQCsAAEArwABALwAAQDBAAEAyQABAMwAAQDRAAEA2QAAAAAAAAQB
 AAAAAAAAAGgAAAAAAAAAAAAAAAAAAQDcA
 </mutableData>
         </image>
-        <systemColor name="scrollViewTexturedBackgroundColor">
-            <color red="0.43529411764705878" green="0.44313725490196082" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
