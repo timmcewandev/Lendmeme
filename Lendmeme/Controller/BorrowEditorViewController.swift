@@ -17,6 +17,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     var dataController: DataController!
     var nameOfBorrower: String?
     let transition = BubbleTransition()
+    var category: String?
     //    var interstitial: GADInterstitial!
     var imageInfo: [ImageInfo] = []
 //    let borrowTextAttributes: [String : Any] = [
@@ -284,6 +285,9 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         getImageInfo.topInfo = self.titleOfItemTextField.text ?? "None"
         getImageInfo.titleinfo = borrowInfo.titleString
         getImageInfo.bottomInfo = borrowInfo.bottomString
+        if let selectedCategpry = category {
+            getImageInfo.category = selectedCategpry
+        }
         getImageInfo.creationDate = Date()
         getImageInfo.reminderDate = nil
         getImageInfo.hasBeenReturned = false
@@ -419,6 +423,7 @@ extension BorrowEditorViewController: UIPickerViewDelegate, UIPickerViewDataSour
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             let title = self.datasource[row]
             self.categoryLabel.setTitle("Category: \(title)", for: .normal)
+            self.category = title
             self.phoneNumberTextField.isHidden = true
             if #available(iOS 13.0, *) {
                 self.categoryLabel.tintColor = UIColor.label

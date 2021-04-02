@@ -24,6 +24,7 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
     var imageInfo: [ImageInfo] = []
     var filteredData: [ImageInfo] = []
     var reminderDate: Date?
+    var categoryList: [String] = []
     
     
     func getDate(date: Date, row: Int) {
@@ -73,6 +74,7 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
         }
         self.navigationController?.isNavigationBarHidden = false
         segmentControler(atSeg: 0, onReturn: true)
+        categoryList = Constants.Categories.gatherCategories()
         tableView.reloadData()
     }
 
@@ -179,7 +181,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             }
         }
         cell?.delegate = self
-        cell?.borrowedDateLabel.text = "Date Borrowed: \(todaysDate)"
+        cell?.borrowedDateLabel.text = "Date Borrowed: \(memeImages.category)"
         cell?.myImageView.contentMode = .scaleAspectFill
         
         if let memeImageData = memeImages.imageData {
