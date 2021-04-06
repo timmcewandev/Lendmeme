@@ -328,17 +328,36 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7df-fM-rSY">
+                                <rect key="frame" x="319" y="95" width="75" height="30"/>
+                                <state key="normal" title="Categories"/>
+                                <connections>
+                                    <action selector="categoriesButtonTapped:" destination="mPV-sN-QLf" eventType="touchUpInside" id="lgE-eO-MmY"/>
+                                </connections>
+                            </button>
+                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search by category" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ueu-fh-kAK">
+                                <rect key="frame" x="9" y="93" width="396" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="x9A-SQ-b9v"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Ueu-fh-kAK" firstAttribute="leading" secondItem="x9A-SQ-b9v" secondAttribute="leading" constant="9" id="0mu-HX-tIE"/>
+                            <constraint firstItem="Ueu-fh-kAK" firstAttribute="centerX" secondItem="C1q-Th-2rs" secondAttribute="centerX" id="9ep-HA-bvm"/>
+                            <constraint firstItem="x9A-SQ-b9v" firstAttribute="trailing" secondItem="7df-fM-rSY" secondAttribute="trailing" constant="20" id="BCM-Po-dhR"/>
+                            <constraint firstItem="oZc-Dh-cn1" firstAttribute="top" secondItem="7df-fM-rSY" secondAttribute="bottom" constant="9" id="GrZ-Ws-PZ9"/>
                             <constraint firstItem="oZc-Dh-cn1" firstAttribute="bottom" secondItem="OOM-qB-LPc" secondAttribute="bottom" id="JZV-iW-Kov"/>
                             <constraint firstItem="oZc-Dh-cn1" firstAttribute="trailing" secondItem="C1q-Th-2rs" secondAttribute="trailing" id="Nhu-wQ-mN8"/>
                             <constraint firstItem="OOM-qB-LPc" firstAttribute="leading" secondItem="x9A-SQ-b9v" secondAttribute="leading" constant="27" id="OSP-w3-kOc"/>
                             <constraint firstItem="oZc-Dh-cn1" firstAttribute="bottom" secondItem="x9A-SQ-b9v" secondAttribute="bottom" id="UJ0-7A-afw"/>
                             <constraint firstItem="OOM-qB-LPc" firstAttribute="top" secondItem="rxw-xU-awN" secondAttribute="top" constant="617" id="VSf-uq-Z4M"/>
+                            <constraint firstItem="Ueu-fh-kAK" firstAttribute="top" secondItem="x9A-SQ-b9v" secondAttribute="top" constant="5" id="VoX-bX-dAU"/>
                             <constraint firstItem="oZc-Dh-cn1" firstAttribute="leading" secondItem="C1q-Th-2rs" secondAttribute="leading" id="aJa-in-E0w"/>
                             <constraint firstItem="oZc-Dh-cn1" firstAttribute="top" secondItem="C1q-Th-2rs" secondAttribute="bottom" constant="2" id="aNE-KA-gBM"/>
+                            <constraint firstItem="7df-fM-rSY" firstAttribute="top" secondItem="x9A-SQ-b9v" secondAttribute="top" constant="7" id="i0R-Kh-G1c"/>
+                            <constraint firstItem="oZc-Dh-cn1" firstAttribute="top" secondItem="Ueu-fh-kAK" secondAttribute="bottom" constant="7" id="oMb-bo-Buq"/>
                             <constraint firstItem="oZc-Dh-cn1" firstAttribute="centerX" secondItem="OOM-qB-LPc" secondAttribute="centerX" id="w3h-Qh-H0x"/>
                         </constraints>
                     </view>
@@ -363,6 +382,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="categoriesButton" destination="Ueu-fh-kAK" id="uLy-MS-bVI"/>
+                        <outlet property="dropdown" destination="Ueu-fh-kAK" id="z3D-Xv-VGw"/>
                         <outlet property="searchBar" destination="C1q-Th-2rs" id="UOF-Tx-XMp"/>
                         <outlet property="segmentOut" destination="yQY-1n-QQ2" id="Bdp-2A-nJQ"/>
                         <outlet property="tableView" destination="oZc-Dh-cn1" id="78g-ty-FEs"/>
@@ -371,7 +392,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="51H-Ux-MkF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-906.39999999999998" y="-109.29535232383809"/>
+            <point key="canvasLocation" x="-907.24637681159425" y="-109.82142857142857"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

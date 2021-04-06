@@ -14,6 +14,8 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
     @IBOutlet weak var segmentOut: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var dropdown: UITextField!
+    @IBOutlet weak var categoriesButton: UITextField!
     //    @IBOutlet weak var bannerView: GADBannerView!
     
     // MARK: - Properties
@@ -32,7 +34,6 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
             if imageInfo == self.imageInfo[row] {
                 imageInfo.reminderDate = date
                 try? self.dataController.viewContext.save()
-//                self.dataController.viewContext.refreshAllObjects()
                 let delegate = UIApplication.shared.delegate as? AppDelegate
                 delegate?.scheduleNotification(at: date, name: imageInfo.titleinfo ?? "", memedImage: imageInfo)
             }
@@ -120,6 +121,13 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
         default: break
         }
     }
+    
+    @IBAction func categoriesButtonTapped(_ sender: Any) {
+        searchBar.isHidden = true
+        dropdown.isHidden = false
+    }
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         searchBar.resignFirstResponder()
