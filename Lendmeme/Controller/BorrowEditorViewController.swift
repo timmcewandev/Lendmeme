@@ -256,6 +256,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     
     func takeScreenshot() -> UIImage? {
         self.navigationController?.isNavigationBarHidden = true
+        categoryLabel.isHidden = true
         var screenshotImage :UIImage?
         let layer = UIApplication.shared.keyWindow?.layer
         let scale = UIScreen.main.scale.binade
