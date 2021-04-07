@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 import Firebase
-//import GoogleMobileAds
+import GoogleMobileAds
 import UserNotifications
 
 
@@ -23,7 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         FirebaseApp.configure()
         // Override point for customization after application launch.
         dataController.load()
-//        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
         let navigationController = window?.rootViewController as! UINavigationController
         let BorrowTableViewStarter = navigationController.topViewController as! BorrowTableViewController
         BorrowTableViewStarter.dataController = dataController

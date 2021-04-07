@@ -7,7 +7,7 @@ import UIKit
 import FittedSheets
 import CoreData
 import MessageUI
-//import GoogleMobileAds
+import GoogleMobileAds
 
 class BorrowTableViewController: UIViewController, getDateForReminderDelegate, MFMessageComposeViewControllerDelegate, UNUserNotificationCenterDelegate {
     // MARK: - Outlets
@@ -16,7 +16,7 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var dropdown: UITextField!
     @IBOutlet weak var categoriesButton: UITextField!
-    //    @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var bannerView: GADBannerView!
     
     // MARK: - Properties
     let button = UIButton()
@@ -50,10 +50,13 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
         searchBar.delegate = self
         let nib = UINib(nibName: Constants.Cell.borrowTableViewCell, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: Constants.Cell.borrowTableViewCell)
-        //        bannerView.adUnitID = "ca-app-pub-6335247657896931/7400741709"
-        //        bannerView.rootViewController = self
-        //        bannerView.load(GADRequest())
-        //        bannerView.delegate = self
+                
+//                bannerView.adUnitID = "ca-app-pub-4726435113512089/9616934090" //Real
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" //fake
+                bannerView.rootViewController = self
+        bannerView.delegate = self
+                bannerView.load(GADRequest())
+                
     }
     
     
@@ -189,7 +192,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             }
         }
         cell?.delegate = self
-        cell?.borrowedDateLabel.text = "Date Borrowed: \(memeImages.category)"
+        cell?.borrowedDateLabel.text = "Date Borrowed: \(todaysDate)"
         cell?.myImageView.contentMode = .scaleAspectFill
         
         if let memeImageData = memeImages.imageData {
@@ -394,47 +397,10 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         } else {
             // Fallback on earlier versions
         }
-        let markItemAsReturned = UITableViewRowAction(style: .default, title: Constants.CommandListText.markAsReturned, handler: { [weak self] (_ , indexPath)  in
-            guard let self = self else {return}
-            let myphoto = self.imageInfo[indexPath.row]
-            let selectImage = self.imageInfo
-            for selectedImage in selectImage {
-                if selectedImage == myphoto {
-                    let markImageAsReturned = selectedImage
-                    markImageAsReturned.hasBeenReturned = true
-                    try? self.dataController.viewContext.save()
-                    tableView.cellForRow(at: indexPath)
-                    self.dataController.viewContext.refreshAllObjects()
-                    self.segmentControler(atSeg: 2, onReturn: false)
-                    self.segmentOut.reloadInputViews()
-                }
-            }
-            
-        })
-        let markItemAsNotReturned = UITableViewRowAction(style: .default, title: Constants.CommandListText.markAsNotReturned, handler: { [weak self] (_ , indexPath)  in
-            guard let self = self else {return}
-            let myphoto = self.imageInfo[indexPath.row]
-            let selectImage = self.imageInfo
-            for selectedImage in selectImage {
-                if selectedImage == myphoto {
-                    let markImageAsReturned = selectedImage
-                    markImageAsReturned.hasBeenReturned = false
-                    try? self.dataController.viewContext.save()
-                    tableView.cellForRow(at: indexPath)
-                    self.dataController.viewContext.refreshAllObjects()
-                    self.segmentControler(atSeg: 1, onReturn: true)
-                    self.segmentOut.reloadInputViews()
-                }
-            }
-            
-        })
-        if imageInfo[indexPath.row].hasBeenReturned == true {
-            markItemAsNotReturned.backgroundColor = .systemTeal
-            return [deleteItem, markItemAsNotReturned]
-        }
-        markItemAsReturned.backgroundColor = UIColor.systemOrange
+
+
         self.searchBar.resignFirstResponder()
-        return [deleteItem, markItemAsReturned]
+        return [deleteItem]
     }
     
     fileprivate func removeCalendarNotification(_ selectedImage: ImageInfo) {
@@ -456,12 +422,12 @@ extension BorrowTableViewController {
     }
   }
 }
-//extension BorrowTableViewController: GADBannerViewDelegate {
-//    private func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-//        print("Recieved ad")
-//    }
-//    
-//    public func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-//        print(error)
-//    }
-//}
+extension BorrowTableViewController: GADBannerViewDelegate {
+    private func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("Recieved ad")
+    }
+    
+    public func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print(error)
+    }
+}
