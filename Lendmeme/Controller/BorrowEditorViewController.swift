@@ -46,8 +46,8 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        //                bannerView.adUnitID = "ca-app-pub-4726435113512089/3043786886" // real
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" //fake
+        bannerView.adUnitID = "ca-app-pub-4726435113512089/3043786886" // real
+//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" //fake
                 bannerView.rootViewController = self
         bannerView.delegate = self
                 bannerView.load(GADRequest())
@@ -91,8 +91,8 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
 
                 
                 //
-                //        interstitial = GADInterstitial(adUnitID: "ca-app-pub-4726435113512089/5286806844") //real
-                        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910") //fake
+                        interstitial = GADInterstitial(adUnitID: "ca-app-pub-4726435113512089/5286806844") //real
+//                        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910") //fake
                         let request = GADRequest()
                         interstitial.load(request)
     }

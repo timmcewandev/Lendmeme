@@ -51,8 +51,8 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
         let nib = UINib(nibName: Constants.Cell.borrowTableViewCell, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: Constants.Cell.borrowTableViewCell)
                 
-//                bannerView.adUnitID = "ca-app-pub-4726435113512089/9616934090" //Real
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" //fake
+                bannerView.adUnitID = "ca-app-pub-4726435113512089/9616934090" //Real
+//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" //fake
                 bannerView.rootViewController = self
         bannerView.delegate = self
                 bannerView.load(GADRequest())

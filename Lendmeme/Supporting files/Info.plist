@@ -31,7 +31,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string> would like permision to use photo you take in the app</string>
+	<string> We would like permision to use the pictures you take within the app and use them within the app. The pictures you take in the app won't show up in your photos. </string>
 	<key>NSContactsUsageDescription</key>
 	<string>We would like to help you by populating the phone number</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
