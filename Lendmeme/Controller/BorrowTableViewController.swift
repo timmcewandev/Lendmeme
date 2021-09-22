@@ -226,7 +226,6 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             if #available(iOS 13.0, *) {  
                 cell?.reminderDateIcon.isHidden = true
                 cell?.returnedIcon.image = UIImage(systemName: Constants.SymbolsImage.checkMarkCircleFilled)
-                cell?.returnedAnimation()
                 for meme in imageInfo {
                     if meme == memeImages {
                         let selectedmeme = meme
