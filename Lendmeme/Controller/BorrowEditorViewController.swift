@@ -339,6 +339,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     func prepareTextField(textField: UITextField, name: String) {
         textField.textAlignment = .center
         textField.delegate = self
+        textField.placeholder = name
     }
     
     

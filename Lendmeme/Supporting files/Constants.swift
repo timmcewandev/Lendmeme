@@ -43,9 +43,9 @@ struct Constants {
     }
 
     struct TextFieldNames {
-        static let itemTitle = "add borrower name"
-        static let nameOfPersonBorrowing = "add title"
-        static let phoneNumberText = "add phone number"
+        static let itemTitle = "add borrower's name"
+        static let nameOfPersonBorrowing = "add item title"
+        static let phoneNumberText = "add borrower's phone#"
     }
     struct NameConstants {
         static let expiredText = "Expired"
