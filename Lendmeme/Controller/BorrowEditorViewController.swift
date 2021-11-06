@@ -46,11 +46,11 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        bannerView.adUnitID = "ca-app-pub-4726435113512089/3043786886" // real
+//        bannerView.adUnitID = "ca-app-pub-4726435113512089/3043786886" // real
 //        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" //fake
-                bannerView.rootViewController = self
-        bannerView.delegate = self
-                bannerView.load(GADRequest())
+//                bannerView.rootViewController = self
+//        bannerView.delegate = self
+//                bannerView.load(GADRequest())
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
         configureShareOut(isEnabled: false)

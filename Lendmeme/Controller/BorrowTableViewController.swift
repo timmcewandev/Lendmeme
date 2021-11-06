@@ -4,7 +4,6 @@
 //
 import UIKit
 
-import FittedSheets
 import CoreData
 import MessageUI
 import GoogleMobileAds
@@ -28,7 +27,6 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
     var reminderDate: Date?
     var categoryList: [String] = []
     
-    
     func getDate(date: Date, row: Int) {
         for imageInfo in self.imageInfo {
             if imageInfo == self.imageInfo[row] {
@@ -51,11 +49,11 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
         let nib = UINib(nibName: Constants.Cell.borrowTableViewCell, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: Constants.Cell.borrowTableViewCell)
                 
-                bannerView.adUnitID = "ca-app-pub-4726435113512089/9616934090" //Real
+//                bannerView.adUnitID = "ca-app-pub-4726435113512089/9616934090" //Real
 //        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" //fake
-                bannerView.rootViewController = self
-        bannerView.delegate = self
-                bannerView.load(GADRequest())
+//                bannerView.rootViewController = self
+//        bannerView.delegate = self
+//                bannerView.load(GADRequest())
                 
     }
     
@@ -162,12 +160,12 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         
         
         if memeImages.reminderDate == nil {
-            cell?.calendarTextField.text = "Enter Reminder Date 📅"
+            cell?.calendarTextField.text = "Set Reminder Date 📅"
         }
         
 
         cell?.returnedIcon.isHidden = true
-        cell?.reminderDateIcon.isHidden = true
+//        cell?.reminderDateIcon.isHidden = true
         let dateToday = Date()
         let date = memeImages.creationDate ?? Date()
         let dateFormatterForCreationDate = DateFormatter()
@@ -175,7 +173,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         let todaysDate = dateFormatterForCreationDate.string(from: date)
         if let remdinderDate = memeImages.reminderDate {
             if dateToday > remdinderDate && memeImages.hasBeenReturned != true  {
-                cell?.calendarTextField.text = "Enter Reminder Date 📅"
+                cell?.calendarTextField.text = "Set Reminder Date 📅"
             } else if memeImages.hasBeenReturned != true {
                 if let date = memeImages.reminderDate {
                     let dateFormatter = DateFormatter()
@@ -184,9 +182,9 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 }
                 
                 if #available(iOS 13.0, *) {
-                    cell?.reminderDateIcon.isHidden = false
+//                    cell?.reminderDateIcon.isHidden = false
                     cell?.returnedIcon.isHidden = true
-                    cell?.reminderDateIcon.image = UIImage(systemName: Constants.SymbolsImage.calendarCircle)
+//                    cell?.reminderDateIcon.image = UIImage(systemName: Constants.SymbolsImage.calendarCircle)
                 }
                 
             }
@@ -200,9 +198,11 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         }
         
         cell?.accessoryType = .none
-        cell?.titleItemLabel.text = memeImages.titleinfo
+        if let top = memeImages.titleinfo {
+            cell?.titleItemLabel.text = top
+        }
+        
         cell?.nameOfBorrower.text = memeImages.topInfo
-        cell?.statusLabel.text = nil
         
         cell?.calendarTextField.isHidden = false
         if #available(iOS 13.0, *) {
@@ -213,52 +213,49 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         
         if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == false {
 
-            
-            cell?.statusLabel.text = Constants.NameConstants.statusReturned
-
-            if #available(iOS 13.0, *) {
-                cell?.statusLabel.textColor = .systemGroupedBackground
-            } else {
-                // Fallback on earlier versions
-            }
+            cell?.statusLabel.textColor = .systemGroupedBackground
             removeCalendarNotification(memeImages)
             cell?.returnedIcon.isHidden = false
-            if #available(iOS 13.0, *) {  
-                cell?.reminderDateIcon.isHidden = true
-                cell?.returnedIcon.image = UIImage(systemName: Constants.SymbolsImage.checkMarkCircleFilled)
-                for meme in imageInfo {
-                    if meme == memeImages {
-                        let selectedmeme = meme
-                        selectedmeme.animationSeen = true
-                        try? self.dataController.viewContext.save()
-                        self.dataController.viewContext.refreshAllObjects()
+//                cell?.reminderDateIcon.isHidden = true
+            cell?.returnedIcon.image = UIImage(systemName: Constants.SymbolsImage.checkMarkCircleFilled)
+            for meme in imageInfo {
+                if meme == memeImages {
+                    let selectedmeme = meme
+                    selectedmeme.animationSeen = true
+                    try? self.dataController.viewContext.save()
+                    self.dataController.viewContext.refreshAllObjects()
                     }
-                }
-                
             }
         } else if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == true {
+            cell?.myImageView.layer.cornerRadius = 20
             cell?.myImageView.backgroundColor = .systemTeal
             cell?.myImageView.image = nil
-            cell?.statusLabel.text = Constants.NameConstants.statusReturned
-            if #available(iOS 13.0, *) {
-                cell?.statusLabel.textColor = .systemGroupedBackground
-            } else {
-                // Fallback on earlier versions
-            }
-            
+            cell?.statusLabel.textColor = .systemTeal
             cell?.returnedIcon.isHidden = false
             cell?.calendarTextField.isHidden = true
-            if #available(iOS 13.0, *) {
-                cell?.reminderDateIcon.isHidden = true
-                cell?.returnedIcon.image = UIImage(systemName: Constants.SymbolsImage.checkMarkCircleFilled)
+            cell?.returnedIcon.image = UIImage(systemName: Constants.SymbolsImage.checkMarkCircleFilled)
+        } else {
+           
+            cell?.statusLabel.textColor = .systemTeal
+            cell?.statusLabel.adjustsFontSizeToFitWidth = true
+        }
+        if memeImages.reminderDate != nil {
+            let myDate = Date()
+            if memeImages.reminderDate! >= myDate {
+                cell?.statusLabel.text = "Schedule is set for 👉 \n Awesome Job 😀 "
+            } else {
+                cell?.statusLabel.text = "Overdue 🙈"
+                
             }
+            
+        }else {
+            let cool = memeImages.hasBeenReturned == true ? "\(Constants.NameConstants.statusReturned) 👏" : "* Click on \"Set reminder Date\" to set a return date 👉"
+            cell?.statusLabel.text = cool
         }
 
-
-
+        cell?.statusLabel.adjustsFontSizeToFitWidth = true
         return cell ?? UITableViewCell()
     }
-    
     
     fileprivate func segmentControler(atSeg: Int, onReturn: Bool) {
         if self.segmentOut.selectedSegmentIndex == 0 {
@@ -288,19 +285,21 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedImage = self.imageInfo[indexPath.row]
         self.searchBar.resignFirstResponder()
+
         let alert = UIAlertController(title: nil, message: nil , preferredStyle: .actionSheet)
         let markImageAsReturned = selectedImage
-        
+
         if markImageAsReturned.hasBeenReturned == false {
             alert.addAction(UIAlertAction(title: Constants.CommandListText.markAsReturned, style: .default, handler: { _ in
                 let markImageAsReturned = selectedImage
                 self.removeCalendarNotification(selectedImage)
                 markImageAsReturned.hasBeenReturned = true
+                markImageAsReturned.reminderDate = nil
                 try? self.dataController.viewContext.save()
                 tableView.cellForRow(at: indexPath)
                 self.dataController.viewContext.refreshAllObjects()
                 self.segmentControler(atSeg: 2, onReturn: false)
-                
+
                 self.segmentOut.reloadInputViews()
             }))
         } else {
@@ -315,7 +314,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 self.tableView.reloadData()
                 self.segmentOut.reloadInputViews()
             }))
-            
+
         }
 
         if imageInfo[indexPath.row].bottomInfo != "" && selectedImage.hasBeenReturned == false {
@@ -332,25 +331,33 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                     composeVC.addAttachmentData(image, typeIdentifier: "public.data", filename: "lendmeme.png")
                 }
                 composeVC.recipients = ["\(number)"]
-                
+
                 if MFMessageComposeViewController.canSendText() {
                     self.present(composeVC, animated: true, completion: nil)
                 }
             }))
-            
+
         }
         alert.addAction(UIAlertAction(title: Constants.CommandListText.viewImage, style: .default, handler: { _ in
             guard let controller = self.storyboard?.instantiateViewController(withIdentifier: Constants.Segue.pvController) as? PVController else { return }
             if let imageInfo = self.imageInfo[indexPath.row].imageData {
                 controller.myImages = UIImage(data: imageInfo)
             }
-            let sheet = SheetViewController(controller: controller, sizes: [.fullScreen])
-            self.present(sheet, animated: false, completion: nil)
+            if let sheet = controller.sheetPresentationController {
+                    sheet.detents = [.medium()]
+                    sheet.prefersGrabberVisible = true
+                    sheet.largestUndimmedDetentIdentifier = .large
+                    sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+                    sheet.prefersEdgeAttachedInCompactHeight = true
+                    sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+                }
+            self.present(controller, animated: true, completion: nil)
+
         }))
-        
+
         alert.addAction(UIAlertAction(title: Constants.CommandListText.delete, style: .destructive, handler: { _ in
             let selectedImage = self.imageInfo[indexPath.row]
-            
+
             self.dataController.viewContext.delete(selectedImage)
             try? self.dataController.viewContext.save()
             self.imageInfo.remove(at: indexPath.row)
@@ -362,10 +369,10 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             self.tableView.reloadData()
         }))
 
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Default action"), style: .cancel, handler: { _ in
-            NSLog("The \"OK\" alert occured.")
-        }))
-            addActionSheetForiPad(actionSheet: alert)
+//        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Default action"), style: .cancel, handler: { _ in
+//            NSLog("The \"OK\" alert occured.")
+//        }))
+////            addActionSheetForiPad(actionSheet: alert)
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -413,13 +420,13 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
 }
 
 extension BorrowTableViewController {
-  public func addActionSheetForiPad(actionSheet: UIAlertController) {
-    if let popoverPresentationController = actionSheet.popoverPresentationController {
-      popoverPresentationController.sourceView = self.view
-      popoverPresentationController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
-      popoverPresentationController.permittedArrowDirections = []
-    }
-  }
+//  public func addActionSheetForiPad(actionSheet: UIAlertController) {
+//    if let popoverPresentationController = actionSheet.popoverPresentationController {
+//      popoverPresentationController.sourceView = self.view
+//      popoverPresentationController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+//      popoverPresentationController.permittedArrowDirections = []
+//    }
+//  }
 }
 extension BorrowTableViewController: GADBannerViewDelegate {
     private func adViewDidReceiveAd(_ bannerView: GADBannerView) {

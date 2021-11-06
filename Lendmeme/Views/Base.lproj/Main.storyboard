@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wgD-jp-AVG">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -211,31 +210,32 @@
         <scene sceneID="712-oz-40N">
             <objects>
                 <viewController storyboardIdentifier="PVController" id="ilU-mP-Obw" customClass="PVController" customModule="Lendmeme" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="bfH-Xp-Orj">
+                    <view key="view" contentMode="scaleToFill" id="bfH-Xp-Orj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zpZ-vi-hUt">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="548"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zpZ-vi-hUt">
+                                <rect key="frame" x="20" y="20" width="374" height="788"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="zpZ-vi-hUt" secondAttribute="height" multiplier="80:137" id="aun-BI-HY6"/>
-                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="15"/>
+                                        <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dlD-Y9-hD3"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="zpZ-vi-hUt" firstAttribute="top" secondItem="dlD-Y9-hD3" secondAttribute="top" id="9f0-i0-cvc"/>
-                            <constraint firstAttribute="bottom" secondItem="zpZ-vi-hUt" secondAttribute="bottom" id="L6I-Im-SNr"/>
-                            <constraint firstItem="zpZ-vi-hUt" firstAttribute="leading" secondItem="dlD-Y9-hD3" secondAttribute="leading" id="YQ2-P7-MVA"/>
-                            <constraint firstItem="zpZ-vi-hUt" firstAttribute="trailing" secondItem="dlD-Y9-hD3" secondAttribute="trailing" id="nce-X1-Hiz"/>
+                            <constraint firstItem="zpZ-vi-hUt" firstAttribute="leading" secondItem="bfH-Xp-Orj" secondAttribute="leadingMargin" id="3q5-ud-7oE"/>
+                            <constraint firstItem="zpZ-vi-hUt" firstAttribute="centerY" secondItem="bfH-Xp-Orj" secondAttribute="centerY" constant="-7" id="Un7-7b-ofb"/>
+                            <constraint firstItem="zpZ-vi-hUt" firstAttribute="centerX" secondItem="bfH-Xp-Orj" secondAttribute="centerX" id="W5I-F1-Wvo"/>
+                            <constraint firstItem="zpZ-vi-hUt" firstAttribute="top" secondItem="dlD-Y9-hD3" secondAttribute="top" constant="20" id="hhi-FT-Jex"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="Layer.cornerRadius">
+                                <integer key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <navigationItem key="navigationItem" id="QGy-oc-IX9"/>
                     <connections>
@@ -244,7 +244,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TNd-L3-N16" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-92" y="-809"/>
+            <point key="canvasLocation" x="-92.753623188405811" y="-809.59821428571422"/>
         </scene>
         <!--Table-->
         <scene sceneID="8AK-w4-3QM">
@@ -313,6 +313,16 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="183" estimatedRowHeight="130" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oZc-Dh-cn1">
                                 <rect key="frame" x="0.0" y="134" width="414" height="728"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="C2Y-iN-2Fs">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="183"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="C2Y-iN-2Fs" id="77j-52-YPX">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="183"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="mPV-sN-QLf" id="kMR-uZ-gBe"/>
                                     <outlet property="delegate" destination="mPV-sN-QLf" id="H6E-F5-aF3"/>
