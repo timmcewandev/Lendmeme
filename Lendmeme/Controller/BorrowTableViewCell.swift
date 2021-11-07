@@ -32,6 +32,20 @@ class BorrowTableViewCell: UITableViewCell {
         
         calendarTextField.addInputViewDatePicker(target: self, selector: #selector(doneButtonPressed))
     }
+    
+    @IBAction func calendarButtonPressed(_ sender: UIButton) {
+        guard let controller = self.window?.rootViewController?.storyboard?.instantiateViewController(withIdentifier: "DatePickerViewController") as? DatePickerViewController else { return }
+        if let sheet = controller.sheetPresentationController {
+                sheet.detents = [.medium()]
+                sheet.prefersGrabberVisible = true
+                sheet.largestUndimmedDetentIdentifier = .large
+                sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+                sheet.prefersEdgeAttachedInCompactHeight = true
+                sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+            }
+        self.window?.rootViewController?.present(controller, animated: true, completion: nil)
+    }
+    
 
 
     @objc func doneButtonPressed() {
