@@ -254,11 +254,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="ZLc-ib-v2c">
+                            <datePicker contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="ZLc-ib-v2c">
                                 <rect key="frame" x="0.0" y="54" width="414" height="216"/>
-                                <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
-                                    <!--1970-01-01 11:00:00 +0000-->
-                                </date>
                             </datePicker>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DRR-KV-5JC">
                                 <rect key="frame" x="42" y="278" width="330" height="91"/>
@@ -272,6 +269,9 @@
                                         <buttonConfiguration key="configuration" style="filled" title="Cancel">
                                             <color key="baseBackgroundColor" systemColor="systemPinkColor"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="cancelButton:" destination="5cu-h4-lmM" eventType="touchUpInside" id="p3G-z7-LDl"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMo-iX-0su">
                                         <rect key="frame" x="0.0" y="48" width="330" height="43"/>
@@ -282,6 +282,9 @@
                                         <buttonConfiguration key="configuration" style="filled" title="Done">
                                             <color key="baseBackgroundColor" red="0.41990086440000002" green="0.80862730739999999" blue="0.99284499879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="DoneButton:" destination="5cu-h4-lmM" eventType="touchUpInside" id="vxs-fW-MMZ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>

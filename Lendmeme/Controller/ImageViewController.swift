@@ -6,15 +6,10 @@
 import UIKit
 import Foundation
 
-//protocol getDateForReminderDelegate {
-//    func getDate(date: Date, imageInformation: IndexPath)
-//}
-
 class ImageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UNUserNotificationCenterDelegate  {
     // MARK: - Variables
     var selectedDate = Date()
     var receivedItem: [ImageInfo] = []
-//    var delegate: getDateForReminderDelegate?
     // MARK: - Outlets
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var selectedDateLabel: UILabel!

@@ -8,7 +8,20 @@ import CoreData
 import MessageUI
 import GoogleMobileAds
 
-class BorrowTableViewController: UIViewController, getDateForReminderDelegate, MFMessageComposeViewControllerDelegate, UNUserNotificationCenterDelegate {
+class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMessageComposeViewControllerDelegate, UNUserNotificationCenterDelegate {
+    func getRowAndDate(date: Date, row: Int) {
+        for imageInfo in self.imageInfo {
+            if imageInfo == self.imageInfo[row] {
+                imageInfo.reminderDate = date
+                try? self.dataController.viewContext.save()
+                let delegate = UIApplication.shared.delegate as? AppDelegate
+                delegate?.scheduleNotification(at: date, name: imageInfo.titleinfo ?? "", memedImage: imageInfo)
+            }
+            self.tableView.reloadData()
+        }
+        self.tableView.reloadData()
+    }
+    
     // MARK: - Outlets
     @IBOutlet weak var segmentOut: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
@@ -26,19 +39,6 @@ class BorrowTableViewController: UIViewController, getDateForReminderDelegate, M
     var filteredData: [ImageInfo] = []
     var reminderDate: Date?
     var categoryList: [String] = []
-    
-    func getDate(date: Date, row: Int) {
-        for imageInfo in self.imageInfo {
-            if imageInfo == self.imageInfo[row] {
-                imageInfo.reminderDate = date
-                try? self.dataController.viewContext.save()
-                let delegate = UIApplication.shared.delegate as? AppDelegate
-                delegate?.scheduleNotification(at: date, name: imageInfo.titleinfo ?? "", memedImage: imageInfo)
-            }
-            self.tableView.reloadData()
-        }
-        self.tableView.reloadData()
-    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

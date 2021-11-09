@@ -8,10 +8,20 @@
 
 import UIKit
 
-protocol getDateForReminderDelegate {
-    func getDate(date: Date, row: Int)
+protocol passBackRowAndDateable {
+    func getRowAndDate(date: Date, row: Int)
 }
-class BorrowTableViewCell: UITableViewCell {
+
+class BorrowTableViewCell: UITableViewCell, getDateForReminderDelegate {
+    func getDate(date: Date) {
+        let dateformater = DateFormatter()
+        dateformater.locale = Locale(identifier: "en_US_POSIX")
+        dateformater.dateFormat = Constants.DateText.dateAndTime
+        self.titleItemLabel.text = dateformater.string(from: date)
+        guard let row = self.indexPath?.row else { return }
+        self.delegate?.getRowAndDate(date: date, row: row)
+        
+    }
     
     @IBOutlet weak var borrowedDateLabel: UILabel!
     @IBOutlet var myImageView: UIImageView!
@@ -24,17 +34,16 @@ class BorrowTableViewCell: UITableViewCell {
     @IBOutlet weak var cover1: UIView!
     @IBOutlet weak var calendarTextField: UITextField!
     
-    var delegate: getDateForReminderDelegate?
+    var delegate: passBackRowAndDateable?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
-        calendarTextField.addInputViewDatePicker(target: self, selector: #selector(doneButtonPressed))
+
     }
     
     @IBAction func calendarButtonPressed(_ sender: UIButton) {
         guard let controller = self.window?.rootViewController?.storyboard?.instantiateViewController(withIdentifier: "DatePickerViewController") as? DatePickerViewController else { return }
+        controller.delegate = self
         if let sheet = controller.sheetPresentationController {
                 sheet.detents = [.medium()]
                 sheet.prefersGrabberVisible = true
@@ -45,19 +54,6 @@ class BorrowTableViewCell: UITableViewCell {
             }
         self.window?.rootViewController?.present(controller, animated: true, completion: nil)
     }
-    
-
-
-    @objc func doneButtonPressed() {
-        if let  datePicker = self.calendarTextField.inputView as? UIDatePicker {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = Constants.DateText.dateAndTime
-            self.calendarTextField.text = dateFormatter.string(from: datePicker.date)
-            guard let row = self.indexPath?.row else { return }
-            self.delegate?.getDate(date: datePicker.date, row: row)
-        }
-        self.calendarTextField.resignFirstResponder()
-     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -89,33 +85,6 @@ class BorrowTableViewCell: UITableViewCell {
             })
         })
     }
-}
-
-extension UITextField {
-
-  func addInputViewDatePicker(target: Any, selector: Selector) {
-    
-    let todaysDate = Date()
-    let screenWidth = UIScreen.main.bounds.width
-   //Add DatePicker as inputView
-    let datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 100))
-    datePicker.datePickerMode = .dateAndTime
-    datePicker.minimumDate = todaysDate
-    self.inputView = datePicker
-
-   //Add Tool Bar as input AccessoryView
-   let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44))
-   let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-   let cancelBarButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelPressed))
-   let doneBarButton = UIBarButtonItem(title: "Done", style: .plain, target: target, action: selector)
-   toolBar.setItems([cancelBarButton, flexibleSpace, doneBarButton], animated: false)
-
-   self.inputAccessoryView = toolBar
-}
-
-  @objc func cancelPressed() {
-    self.resignFirstResponder()
-  }
 }
 extension UIResponder {
     /**
