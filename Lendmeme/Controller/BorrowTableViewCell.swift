@@ -33,6 +33,9 @@ class BorrowTableViewCell: UITableViewCell, getDateForReminderDelegate {
     @IBOutlet weak var returnedIcon: UIImageView!
     @IBOutlet weak var cover1: UIView!
     @IBOutlet weak var calendarTextField: UITextField!
+    @IBOutlet weak var scheduleBTN: UIButton!
+    
+    
     
     var delegate: passBackRowAndDateable?
     
@@ -54,19 +57,6 @@ class BorrowTableViewCell: UITableViewCell, getDateForReminderDelegate {
             }
         self.window?.rootViewController?.present(controller, animated: true, completion: nil)
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        if selected {
-            self.isHighlighted = true
-            calendarTextField.resignFirstResponder()
-        } else {
-            self.isHighlighted = false
-            
-            print("not selected")
-        }
-    }
-    
     
     func returnedAnimation() {
         UIView.animate(withDuration: 0.3, delay: 0, options: .allowUserInteraction, animations: {() -> Void in

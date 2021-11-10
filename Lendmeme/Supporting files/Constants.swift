@@ -29,6 +29,10 @@ struct Constants {
             return categoryList
         }
     }
+    
+    struct NotificationKey {
+        static let key = "com.mcewantech.NotifyWhenTimeIsUP"
+    }
 
     struct Segue {
         static let toStarterViewController = "starter"

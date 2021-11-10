@@ -16,6 +16,8 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
                 try? self.dataController.viewContext.save()
                 let delegate = UIApplication.shared.delegate as? AppDelegate
                 delegate?.scheduleNotification(at: date, name: imageInfo.titleinfo ?? "", memedImage: imageInfo)
+                let title = NSNotification.Name(Constants.NotificationKey.key)
+                NotificationCenter.default.post(name: title, object: imageInfo.reminderDate)
             }
             self.tableView.reloadData()
         }
@@ -56,6 +58,7 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
 //                bannerView.load(GADRequest())
                 
     }
+
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -157,10 +160,10 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.borrowTableViewCell, for: indexPath) as? BorrowTableViewCell
         
         let memeImages = self.imageInfo[indexPath.row]
-        
+        let name = NSNotification.Name(Constants.NotificationKey.key)
         
         if memeImages.reminderDate == nil {
-            cell?.calendarTextField.text = "Set Reminder Date 📅"
+//            cell?.calendarTextField.text = "Set Reminder Date 📅"
         }
         
 
@@ -173,12 +176,12 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         let todaysDate = dateFormatterForCreationDate.string(from: date)
         if let remdinderDate = memeImages.reminderDate {
             if dateToday > remdinderDate && memeImages.hasBeenReturned != true  {
-                cell?.calendarTextField.text = "Set Reminder Date 📅"
+//                cell?.calendarTextField.text = "Set Reminder Date 📅"
             } else if memeImages.hasBeenReturned != true {
                 if let date = memeImages.reminderDate {
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = Constants.DateText.dateAndTime
-                    cell?.calendarTextField.text = dateFormatter.string(from: date)
+//                    cell?.calendarTextField.text = dateFormatter.string(from: date)
                 }
                 
                 if #available(iOS 13.0, *) {
@@ -204,7 +207,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         
         cell?.nameOfBorrower.text = memeImages.topInfo
         
-        cell?.calendarTextField.isHidden = false
+//        cell?.calendarTextField.isHidden = false
         if #available(iOS 13.0, *) {
             cell?.statusLabel.textColor = .systemGroupedBackground
         } else {
@@ -232,7 +235,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             cell?.myImageView.image = nil
             cell?.statusLabel.textColor = .systemTeal
             cell?.returnedIcon.isHidden = false
-            cell?.calendarTextField.isHidden = true
+//            cell?.calendarTextField.isHidden = true
             cell?.returnedIcon.image = UIImage(systemName: Constants.SymbolsImage.checkMarkCircleFilled)
         } else {
            
