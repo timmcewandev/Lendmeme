@@ -286,7 +286,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         toolbar.isHidden = true
         guard let memedImage = takeScreenshot() else { return }
         guard let originalImage = imageView.image else { return }
-        let borrowInfo = BorrowInfo(topString: self.titleOfItemTextField.text ?? "None", bottomString: phoneNumberTextField.text ?? "", titleString: nameOfBorrowerTextField.text ?? "", originalImage: originalImage, borrowImage: memedImage, hasBeenReturned: false)
+        let borrowInfo = BorrowInfo(topString: self.titleOfItemTextField.text ?? "None", bottomString: phoneNumberTextField.text ?? "", titleString: nameOfBorrowerTextField.text ?? "", originalImage: originalImage, borrowImage: memedImage, hasBeenReturned: false, timeHasExpired: false)
         
         let getImageInfo = ImageInfo(context: dataController.viewContext)
         getImageInfo.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)
@@ -299,6 +299,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         getImageInfo.creationDate = Date()
         getImageInfo.reminderDate = nil
         getImageInfo.hasBeenReturned = false
+        getImageInfo.timeHasExpired = false
         try? dataController.viewContext.save()
         self.toolbar.isHidden = true
         

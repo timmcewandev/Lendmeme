@@ -16,6 +16,7 @@ struct BorrowInfo {
     var reminderDate: Date?
     var animationSeen: Bool = false
     var category: String?
+    var timeHasExpired: Bool = false
 }
 
 

@@ -260,8 +260,21 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DRR-KV-5JC">
                                 <rect key="frame" x="42" y="278" width="330" height="91"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x6b-SN-q2H">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMo-iX-0su">
                                         <rect key="frame" x="0.0" y="0.0" width="330" height="43"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="43" id="jek-mW-QYx"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Submit">
+                                            <color key="baseBackgroundColor" systemColor="systemBlueColor"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="DoneButton:" destination="5cu-h4-lmM" eventType="touchUpInside" id="vxs-fW-MMZ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x6b-SN-q2H">
+                                        <rect key="frame" x="0.0" y="48" width="330" height="43"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="43" id="x0Q-eQ-U7S"/>
                                         </constraints>
@@ -271,19 +284,6 @@
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="cancelButton:" destination="5cu-h4-lmM" eventType="touchUpInside" id="p3G-z7-LDl"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMo-iX-0su">
-                                        <rect key="frame" x="0.0" y="48" width="330" height="43"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="43" id="jek-mW-QYx"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Done">
-                                            <color key="baseBackgroundColor" red="0.41990086440000002" green="0.80862730739999999" blue="0.99284499879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </buttonConfiguration>
-                                        <connections>
-                                            <action selector="DoneButton:" destination="5cu-h4-lmM" eventType="touchUpInside" id="vxs-fW-MMZ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1586,6 +1586,9 @@ AAAAAAAAAGgAAAAAAAAAAAAAAAAAAQDcA
         </image>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemFillColor">
             <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>

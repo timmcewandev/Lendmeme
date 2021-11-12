@@ -10,18 +10,28 @@ import GoogleMobileAds
 
 class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMessageComposeViewControllerDelegate, UNUserNotificationCenterDelegate {
     func getRowAndDate(date: Date, row: Int) {
+        
         for imageInfo in self.imageInfo {
             if imageInfo == self.imageInfo[row] {
                 imageInfo.reminderDate = date
+                imageInfo.timeHasExpired = false
+                if imageInfo.reminderDate != nil {
+                    self.moreThanOne += 1
+                }
                 try? self.dataController.viewContext.save()
+                self.dataController.viewContext.refreshAllObjects()
                 let delegate = UIApplication.shared.delegate as? AppDelegate
                 delegate?.scheduleNotification(at: date, name: imageInfo.titleinfo ?? "", memedImage: imageInfo)
-                let title = NSNotification.Name(Constants.NotificationKey.key)
-                NotificationCenter.default.post(name: title, object: imageInfo.reminderDate)
             }
-            self.tableView.reloadData()
         }
-        self.tableView.reloadData()
+        print("aaaa \(self.moreThanOne)")
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            if self.moreThanOne == 1 {
+                self.refreshAll()
+            }
+        }
+        
     }
     
     // MARK: - Outlets
@@ -41,7 +51,8 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
     var filteredData: [ImageInfo] = []
     var reminderDate: Date?
     var categoryList: [String] = []
-    
+    var isRunningLoop: Bool = false
+    var moreThanOne = 0
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,11 +91,33 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
         self.navigationController?.isNavigationBarHidden = false
         segmentControler(atSeg: 0, onReturn: true)
         categoryList = Constants.Categories.gatherCategories()
-        tableView.reloadData()
+        self.refreshAll()
     }
 
     
-    
+    func refreshAll(interval:TimeInterval = 30) {
+        guard interval > 0 else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
+            let cool = self.imageInfo.contains(where: { image in
+                if image.reminderDate != nil {
+                    return true
+                }else {
+                    return false
+                }
+            })
+            if cool == true {
+                self.moreThanOne = 1
+                self.refreshAll(interval: interval)
+                self.tableView.reloadData()
+                print("refresh DATA")
+            } else {
+                self.tableView.reloadData()
+                print("Terminate LOOP")
+                self.moreThanOne = 0
+                return
+            }
+        }
+    }
     // MARK: - Actions
     @IBAction func segmentControl(_ sender: Any) {
         let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
@@ -160,13 +193,6 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.borrowTableViewCell, for: indexPath) as? BorrowTableViewCell
         
         let memeImages = self.imageInfo[indexPath.row]
-        let name = NSNotification.Name(Constants.NotificationKey.key)
-        
-        if memeImages.reminderDate == nil {
-//            cell?.calendarTextField.text = "Set Reminder Date 📅"
-        }
-        
-
         cell?.returnedIcon.isHidden = true
 //        cell?.reminderDateIcon.isHidden = true
         let dateToday = Date()
@@ -174,26 +200,19 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         let dateFormatterForCreationDate = DateFormatter()
         dateFormatterForCreationDate.dateFormat = Constants.DateText.dateOnly
         let todaysDate = dateFormatterForCreationDate.string(from: date)
+        cell?.borrowedDateLabel.text = "Date Borrowed: \(todaysDate)"
+        cell?.scheduleBTN.backgroundColor = .systemBlue
+        
         if let remdinderDate = memeImages.reminderDate {
-            if dateToday > remdinderDate && memeImages.hasBeenReturned != true  {
-//                cell?.calendarTextField.text = "Set Reminder Date 📅"
-            } else if memeImages.hasBeenReturned != true {
-                if let date = memeImages.reminderDate {
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = Constants.DateText.dateAndTime
-//                    cell?.calendarTextField.text = dateFormatter.string(from: date)
-                }
-                
-                if #available(iOS 13.0, *) {
-//                    cell?.reminderDateIcon.isHidden = false
-                    cell?.returnedIcon.isHidden = true
-//                    cell?.reminderDateIcon.image = UIImage(systemName: Constants.SymbolsImage.calendarCircle)
-                }
+            if dateToday > remdinderDate && memeImages.hasBeenReturned != true {
+                cell?.scheduleBTN.setTitle("Re-schedule reminder" , for: .highlighted)
+                cell?.scheduleBTN.backgroundColor = .systemPink
                 
             }
+        } else {
+            cell?.scheduleBTN.setTitle("Set Reminder Date 📅", for: .normal)
         }
         cell?.delegate = self
-        cell?.borrowedDateLabel.text = "Date Borrowed: \(todaysDate)"
         cell?.myImageView.contentMode = .scaleAspectFill
         
         if let memeImageData = memeImages.imageData {
@@ -204,21 +223,15 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         if let top = memeImages.titleinfo {
             cell?.titleItemLabel.text = top
         }
-        
         cell?.nameOfBorrower.text = memeImages.topInfo
-        
-//        cell?.calendarTextField.isHidden = false
-        if #available(iOS 13.0, *) {
-            cell?.statusLabel.textColor = .systemGroupedBackground
-        } else {
-            // Fallback on earlier versions
-        }
+        cell?.statusLabel.textColor = .systemGroupedBackground
         
         if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == false {
 
             cell?.statusLabel.textColor = .systemGroupedBackground
             removeCalendarNotification(memeImages)
             cell?.returnedIcon.isHidden = false
+            
 //                cell?.reminderDateIcon.isHidden = true
             cell?.returnedIcon.image = UIImage(systemName: Constants.SymbolsImage.checkMarkCircleFilled)
             for meme in imageInfo {
@@ -231,24 +244,37 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             }
         } else if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == true {
             cell?.myImageView.layer.cornerRadius = 20
-            cell?.myImageView.backgroundColor = .systemTeal
+            cell?.myImageView.backgroundColor = .systemBlue
             cell?.myImageView.image = nil
-            cell?.statusLabel.textColor = .systemTeal
+            cell?.statusLabel.textColor = .systemBlue
             cell?.returnedIcon.isHidden = false
 //            cell?.calendarTextField.isHidden = true
             cell?.returnedIcon.image = UIImage(systemName: Constants.SymbolsImage.checkMarkCircleFilled)
+            cell?.scheduleBTN.isHidden = true
         } else {
            
-            cell?.statusLabel.textColor = .systemTeal
+            cell?.statusLabel.textColor = .label
             cell?.statusLabel.adjustsFontSizeToFitWidth = true
+            cell?.scheduleBTN.isHidden = false
         }
         if memeImages.reminderDate != nil {
             let myDate = Date()
             if memeImages.reminderDate! >= myDate {
-                cell?.statusLabel.text = "Schedule is set for 👉 \n Awesome Job 😀 "
-            } else {
-                cell?.statusLabel.text = "Overdue 🙈"
+                if let date = memeImages.reminderDate {
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = Constants.DateText.dateAndTime
+                    cell?.statusLabel.text = "Schedule is set for 👇\nReturn Date: \(dateFormatter.string(from: date))"
+                    cell?.scheduleBTN.setTitle("Re-schedule reminder", for: .normal)
+                    cell?.scheduleBTN.backgroundColor = .systemIndigo
+                }
                 
+            } else {
+                cell?.scheduleBTN.setTitle("Re-schedule reminder", for: .normal)
+                cell?.statusLabel.text = "Schedule Expired 🙈"
+                memeImages.timeHasExpired = true
+                memeImages.reminderDate = nil
+                try? self.dataController.viewContext.save()
+                dataController.viewContext.refreshAllObjects()
             }
             
         }else {
@@ -370,6 +396,9 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 self.performSegue(withIdentifier: Constants.Segue.toStarterViewController, sender: self)
             }
             self.tableView.reloadData()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
+            self.dismiss(animated: true, completion: nil)
         }))
 
 //        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Default action"), style: .cancel, handler: { _ in

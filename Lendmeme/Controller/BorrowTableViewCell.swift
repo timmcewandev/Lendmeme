@@ -17,7 +17,6 @@ class BorrowTableViewCell: UITableViewCell, getDateForReminderDelegate {
         let dateformater = DateFormatter()
         dateformater.locale = Locale(identifier: "en_US_POSIX")
         dateformater.dateFormat = Constants.DateText.dateAndTime
-        self.titleItemLabel.text = dateformater.string(from: date)
         guard let row = self.indexPath?.row else { return }
         self.delegate?.getRowAndDate(date: date, row: row)
         
@@ -41,7 +40,10 @@ class BorrowTableViewCell: UITableViewCell, getDateForReminderDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        self.myImageView.layer.cornerRadius = 10
+        self.myImageView.layer.borderWidth = 2
+        self.tintColor = .label
+        self.scheduleBTN.layer.cornerRadius = 6
     }
     
     @IBAction func calendarButtonPressed(_ sender: UIButton) {

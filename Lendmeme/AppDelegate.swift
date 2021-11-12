@@ -63,6 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         memedImage.notificationIdentifier = request.identifier
+//        memedImage.reminderDate = nil
         try? dataController.viewContext.save()
         UNUserNotificationCenter.current().delegate = self
         center.add(request) {(error) in
