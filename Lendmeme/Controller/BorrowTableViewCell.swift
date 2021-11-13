@@ -47,6 +47,7 @@ class BorrowTableViewCell: UITableViewCell, getDateForReminderDelegate {
     }
     
     @IBAction func calendarButtonPressed(_ sender: UIButton) {
+        self.window?.rootViewController?.view.endEditing(true)
         guard let controller = self.window?.rootViewController?.storyboard?.instantiateViewController(withIdentifier: "DatePickerViewController") as? DatePickerViewController else { return }
         controller.delegate = self
         if let sheet = controller.sheetPresentationController {
