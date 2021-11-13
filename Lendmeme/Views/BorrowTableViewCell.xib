@@ -48,14 +48,13 @@
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="3aq-MU-Oi6">
                                 <rect key="frame" x="11" y="9" width="164" height="137"/>
-                                <color key="backgroundColor" red="0.41990086440000002" green="0.80862730739999999" blue="0.99284499879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <imageView hidden="YES" autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" translatesAutoresizingMaskIntoConstraints="NO" id="VAn-TU-Wf5">
                                 <rect key="frame" x="42" y="56" width="102" height="43"/>
                                 <color key="tintColor" systemColor="tertiarySystemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="102" id="722-TO-6hL"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="43" id="bwo-J7-GEb"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="bwo-J7-GEb"/>
                                     <constraint firstAttribute="height" constant="43" id="qgt-CK-QLW"/>
                                 </constraints>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small" weight="light"/>
@@ -65,7 +64,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Status: Not Returned" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aW6-XB-8u0">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aW6-XB-8u0">
                                 <rect key="frame" x="10" y="147" width="165" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="51" id="EEd-5f-IAT"/>
@@ -79,7 +78,6 @@
                             </label>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="bCR-1d-sq2">
                                 <rect key="frame" x="183" y="147" width="327" height="39"/>
-                                <color key="backgroundColor" red="0.41990086440000002" green="0.80862730739999999" blue="0.99284499879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>

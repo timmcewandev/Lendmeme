@@ -243,11 +243,9 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                     }
             }
         } else if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == true {
-            cell?.myImageView.layer.cornerRadius = 20
-            cell?.myImageView.backgroundColor = .systemBlue
-            cell?.myImageView.image = nil
             cell?.statusLabel.textColor = .systemBlue
             cell?.returnedIcon.isHidden = false
+            cell?.returnedIcon.tintColor = .systemGreen
 //            cell?.calendarTextField.isHidden = true
             cell?.returnedIcon.image = UIImage(systemName: Constants.SymbolsImage.checkMarkCircleFilled)
             cell?.scheduleBTN.isHidden = true
@@ -278,8 +276,8 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             }
             
         }else {
-            let cool = memeImages.hasBeenReturned == true ? "\(Constants.NameConstants.statusReturned) 👏" : "* Click on \"Set reminder Date\" to set a return date 👉"
-            cell?.statusLabel.text = cool
+//            let cool = memeImages.hasBeenReturned == true ? "\(Constants.NameConstants.statusReturned) 👏" : "* Click on \"Set reminder Date\" to set a return date 👉"
+//            cell?.statusLabel.text = cool
         }
 
         cell?.statusLabel.adjustsFontSizeToFitWidth = true
@@ -330,6 +328,11 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 self.segmentControler(atSeg: 2, onReturn: false)
 
                 self.segmentOut.reloadInputViews()
+            }))
+            alert.addAction(UIAlertAction(title: "Call: \(selectedImage.titleinfo!)", style: .default, handler: { _ in
+                guard let userPhone = selectedImage.bottomInfo else { return }
+                guard let number = URL(string: "tel://" + userPhone) else { return }
+                UIApplication.shared.open(number)
             }))
         } else {
             alert.addAction(UIAlertAction(title: Constants.CommandListText.markAsNotReturned, style: .default, handler: { _ in
