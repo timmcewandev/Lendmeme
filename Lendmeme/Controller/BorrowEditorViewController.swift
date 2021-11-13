@@ -64,12 +64,12 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         view.addSubview(phoneNumberTextField)
 
         
-        let returnButtonForPhoneNumber = UIButton(frame:CGRect(x: 0, y: 0, width: view.frame.size.width, height: 60))
-        returnButtonForPhoneNumber.backgroundColor = #colorLiteral(red: 0.9815835357, green: 0.632611692, blue: 0.1478855908, alpha: 1)
-        returnButtonForPhoneNumber.setTitle("Return", for: .normal)
-        returnButtonForPhoneNumber.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-        returnButtonForPhoneNumber.addTarget(self, action: #selector(BorrowEditorViewController.doneAction), for: .touchUpInside)
-        phoneNumberTextField.inputAccessoryView = returnButtonForPhoneNumber
+//        let returnButtonForPhoneNumber = UIButton(frame:CGRect(x: 0, y: 0, width: view.frame.size.width, height: 60))
+//        returnButtonForPhoneNumber.backgroundColor = #colorLiteral(red: 0.9815835357, green: 0.632611692, blue: 0.1478855908, alpha: 1)
+//        returnButtonForPhoneNumber.setTitle("Return", for: .normal)
+//        returnButtonForPhoneNumber.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+//        returnButtonForPhoneNumber.addTarget(self, action: #selector(BorrowEditorViewController.doneAction), for: .touchUpInside)
+//        phoneNumberTextField.inputAccessoryView = returnButtonForPhoneNumber
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,10 +91,10 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
 
                 
                 //
-                        interstitial = GADInterstitial(adUnitID: "ca-app-pub-4726435113512089/5286806844") //real
+//                        interstitial = GADInterstitial(adUnitID: "ca-app-pub-4726435113512089/5286806844") //real
 //                        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910") //fake
-                        let request = GADRequest()
-                        interstitial.load(request)
+//                        let request = GADRequest()
+//                        interstitial.load(request)
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
@@ -128,9 +128,9 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
                     let firstNum = arc4random() % 2
                     let secondNum = arc4random() % 2
                     if firstNum == secondNum {
-                        if (interstitial.isReady) {
-                            interstitial.present(fromRootViewController: self)
-                        }
+//                        if (interstitial.isReady) {
+//                            interstitial.present(fromRootViewController: self)
+//                        }
                     }
                 }
         self.save()
@@ -364,18 +364,15 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     func accessoryView() -> UIView {
         
         let view = UIView()
-        view.backgroundColor = .gray
+        view.backgroundColor = .systemBlue
         
-        let returnButton = UIButton()
-        returnButton.frame = CGRect(x: self.view.frame.width - 80, y: 7, width: 60, height: 30)
-        returnButton.setTitle(Constants.CommandListText.returnText, for: .normal)
-        if #available(iOS 13.0, *) {
-            returnButton.tintColor = .label
-        } else {
-            returnButton.tintColor = .white
-        }
-        returnButton.addTarget(self, action: #selector(BorrowEditorViewController.doneAction), for: .touchUpInside)
-        view.addSubview(returnButton)
+        let doneButton = UIButton()
+        doneButton.frame = CGRect(x: self.view.frame.width - 80, y: 7, width: 60, height: 30)
+        doneButton.setTitle("Done", for: .normal)
+        doneButton.tintColor = .label
+        doneButton.addTarget(self, action: #selector(BorrowEditorViewController.doneAction), for: .touchUpInside)
+        
+        view.addSubview(doneButton)
         
         return view
         

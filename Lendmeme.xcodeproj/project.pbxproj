@@ -107,7 +107,6 @@
 				9B518CA82229CDDC004B1050 /* ImageViewController.swift */,
 				22F2ED8A249DB64200CBAA6B /* PVController.swift */,
 				227E2A662510638C005E5074 /* BorrowTableViewCell.swift */,
-				227E2A672510638C005E5074 /* BorrowTableViewCell.xib */,
 				84532720273796F70070ABD8 /* DatePickerViewController.swift */,
 			);
 			path = Controller;
@@ -118,6 +117,7 @@
 			children = (
 				9BDD35D61FD88B0D005ADBCD /* Main.storyboard */,
 				9BDD35DB1FD88B0D005ADBCD /* LaunchScreen.storyboard */,
+				227E2A672510638C005E5074 /* BorrowTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";

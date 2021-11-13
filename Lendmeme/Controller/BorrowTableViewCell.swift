@@ -50,7 +50,7 @@ class BorrowTableViewCell: UITableViewCell, getDateForReminderDelegate {
         guard let controller = self.window?.rootViewController?.storyboard?.instantiateViewController(withIdentifier: "DatePickerViewController") as? DatePickerViewController else { return }
         controller.delegate = self
         if let sheet = controller.sheetPresentationController {
-                sheet.detents = [.medium()]
+                sheet.detents = [.large()]
                 sheet.prefersGrabberVisible = true
                 sheet.largestUndimmedDetentIdentifier = .large
                 sheet.prefersScrollingExpandsWhenScrolledToEdge = false

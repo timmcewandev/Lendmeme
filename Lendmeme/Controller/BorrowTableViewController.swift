@@ -373,7 +373,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 controller.myImages = UIImage(data: imageInfo)
             }
             if let sheet = controller.sheetPresentationController {
-                    sheet.detents = [.medium()]
+                    sheet.detents = [.large()]
                     sheet.prefersGrabberVisible = true
                     sheet.largestUndimmedDetentIdentifier = .large
                     sheet.prefersScrollingExpandsWhenScrolledToEdge = false

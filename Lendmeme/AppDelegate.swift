@@ -69,6 +69,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         center.add(request) {(error) in
             if let error = error {
                 print("Uh oh! We had an error: \(error)")
+            } else {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = Constants.DateText.dateAndTime
+                let alertController = UIAlertController(title: "Successfully Added 😀", message: "\(dateFormatter.string(from: date))", preferredStyle: .alert)
+                var okAction = UIAlertAction(title: "great!", style: UIAlertActionStyle.default) {
+                                    UIAlertAction in
+                                    NSLog("OK Pressed")
+                                }
+                var cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.cancel) {
+                                    UIAlertAction in
+                                    NSLog("Cancel Pressed")
+                                }
+                alertController.addAction(okAction)
+                self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+
             }
         }
     }

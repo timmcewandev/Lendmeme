@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wgD-jp-AVG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wgD-jp-AVG">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wfM-K2-jvl">
-                                <rect key="frame" x="0.0" y="41.5" width="414" height="840"/>
+                                <rect key="frame" x="0.0" y="39" width="414" height="878"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                             </imageView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Rx-Oj-YT6">
@@ -35,18 +35,18 @@
                                 </connections>
                             </button>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lua-XB-jXr">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="808" width="414" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="eGV-wh-qg0"/>
                                     <barButtonItem systemItem="cancel" id="IYC-5o-RPP">
-                                        <color key="tintColor" systemColor="systemOrangeColor"/>
+                                        <color key="tintColor" systemColor="systemBlueColor"/>
                                         <connections>
                                             <action selector="cancelBTN:" destination="BYZ-38-t0r" id="BS0-e8-8dp"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="glI-lX-kRB"/>
                                     <barButtonItem systemItem="save" id="mST-PZ-z3s">
-                                        <color key="tintColor" systemColor="systemOrangeColor"/>
+                                        <color key="tintColor" systemColor="systemBlueColor"/>
                                         <connections>
                                             <action selector="shareWithSender:" destination="BYZ-38-t0r" id="oBC-0o-sCC"/>
                                         </connections>
@@ -55,7 +55,7 @@
                                 </items>
                             </toolbar>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone#" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="PMx-xr-uw1">
-                                <rect key="frame" x="142.5" y="717.5" width="129.5" height="45.5"/>
+                                <rect key="frame" x="142.5" y="712.5" width="129.5" height="45.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" keyboardType="numberPad" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                                 <userDefinedRuntimeAttributes>
@@ -80,7 +80,6 @@
                                             <constraint firstAttribute="width" constant="150" id="qiu-ap-3eX"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <color key="textColor" systemColor="systemOrangeColor"/>
                                         <color key="highlightedColor" systemColor="systemFillColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -94,7 +93,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KyE-NW-OHe">
                                                 <rect key="frame" x="0.0" y="0.0" width="35" height="48"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <color key="tintColor" systemColor="systemOrangeColor"/>
+                                                <color key="tintColor" systemColor="systemBlueColor"/>
                                                 <state key="normal" image="photo" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="regular"/>
                                                 </state>
@@ -105,7 +104,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GYI-Os-X7S">
                                                 <rect key="frame" x="51" y="0.0" width="36" height="48"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                                <color key="tintColor" systemColor="systemOrangeColor"/>
+                                                <color key="tintColor" systemColor="systemBlueColor"/>
                                                 <state key="normal" image="camera" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="regular"/>
                                                 </state>
@@ -169,14 +168,14 @@
                             <constraint firstItem="wRM-Rx-5QT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="XdB-cm-fHO"/>
                             <constraint firstItem="wvm-wN-iT7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ZX2-Ml-lBN"/>
                             <constraint firstItem="PMx-xr-uw1" firstAttribute="centerX" secondItem="Lua-XB-jXr" secondAttribute="centerX" id="aHo-7P-h3d"/>
-                            <constraint firstItem="Lua-XB-jXr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ajW-tp-hEg"/>
+                            <constraint firstItem="Lua-XB-jXr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-10" id="ajW-tp-hEg"/>
                             <constraint firstItem="cEL-3L-VHw" firstAttribute="centerX" secondItem="PMx-xr-uw1" secondAttribute="centerX" id="fuQ-qm-TeJ"/>
                             <constraint firstItem="wfM-K2-jvl" firstAttribute="trailing" secondItem="Lua-XB-jXr" secondAttribute="trailing" id="gCf-2F-Phe"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="wfM-K2-jvl" secondAttribute="bottom" constant="-19.5" id="qFL-YG-b4e"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="wfM-K2-jvl" secondAttribute="bottom" constant="-55" id="qFL-YG-b4e"/>
                             <constraint firstItem="wvm-wN-iT7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="sLm-HQ-O7D"/>
                             <constraint firstItem="cho-jd-ylO" firstAttribute="top" secondItem="9Rx-Oj-YT6" secondAttribute="bottom" constant="8" id="w0g-Dd-dmF"/>
                             <constraint firstItem="wRM-Rx-5QT" firstAttribute="top" secondItem="cho-jd-ylO" secondAttribute="bottom" constant="10" id="wbo-zq-HMp"/>
-                            <constraint firstItem="wfM-K2-jvl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-46.5" id="xVU-D2-z70"/>
+                            <constraint firstItem="wfM-K2-jvl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-49" id="xVU-D2-z70"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="UdA-bB-R1T">
@@ -254,11 +253,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="ZLc-ib-v2c">
-                                <rect key="frame" x="0.0" y="54" width="414" height="216"/>
+                            <datePicker contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="ZLc-ib-v2c">
+                                <rect key="frame" x="0.0" y="104" width="414" height="393"/>
                             </datePicker>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DRR-KV-5JC">
-                                <rect key="frame" x="42" y="278" width="330" height="91"/>
+                                <rect key="frame" x="42" y="607" width="330" height="91"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMo-iX-0su">
                                         <rect key="frame" x="0.0" y="0.0" width="330" height="43"/>
@@ -294,10 +293,10 @@
                         <constraints>
                             <constraint firstItem="ZLc-ib-v2c" firstAttribute="trailing" secondItem="Jld-NH-rU0" secondAttribute="trailing" id="1eC-H7-mRm"/>
                             <constraint firstItem="ZLc-ib-v2c" firstAttribute="leading" secondItem="Jld-NH-rU0" secondAttribute="leading" id="Gee-Uo-DBV"/>
-                            <constraint firstItem="DRR-KV-5JC" firstAttribute="top" secondItem="ZLc-ib-v2c" secondAttribute="bottom" constant="8" symbolic="YES" id="MgL-kj-wP8"/>
                             <constraint firstItem="DRR-KV-5JC" firstAttribute="centerX" secondItem="ZLc-ib-v2c" secondAttribute="centerX" id="PyQ-gs-Hzh"/>
-                            <constraint firstItem="ZLc-ib-v2c" firstAttribute="top" secondItem="Jld-NH-rU0" secondAttribute="top" constant="10" id="Xei-by-gm6"/>
+                            <constraint firstItem="ZLc-ib-v2c" firstAttribute="top" secondItem="Jld-NH-rU0" secondAttribute="top" constant="60" id="Xei-by-gm6"/>
                             <constraint firstItem="DRR-KV-5JC" firstAttribute="leading" secondItem="Jld-NH-rU0" secondAttribute="leading" constant="42" id="qz3-U1-fEI"/>
+                            <constraint firstItem="DRR-KV-5JC" firstAttribute="top" secondItem="ZLc-ib-v2c" secondAttribute="bottom" constant="110" id="xUr-7b-ELJ"/>
                         </constraints>
                     </view>
                     <connections>
