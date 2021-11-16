@@ -24,7 +24,6 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
                 delegate?.scheduleNotification(at: date, name: imageInfo.titleinfo ?? "", memedImage: imageInfo)
             }
         }
-        print("aaaa \(self.moreThanOne)")
         DispatchQueue.main.async {
             self.tableView.reloadData()
             if self.moreThanOne == 1 {
@@ -45,7 +44,6 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
     // MARK: - Properties
     let button = UIButton()
     let secondDatePicker = UIDatePicker()
-    var hasBeenSeen = false
     var dataController:DataController!
     var imageInfo: [ImageInfo] = []
     var filteredData: [ImageInfo] = []
@@ -109,11 +107,9 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
                 self.moreThanOne = 1
                 self.refreshAll(interval: interval)
                 self.tableView.reloadData()
-                print("refresh DATA")
             } else {
-                self.tableView.reloadData()
-                print("Terminate LOOP")
                 self.moreThanOne = 0
+                self.tableView.reloadData()
                 return
             }
         }
@@ -164,8 +160,6 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
         dropdown.isHidden = false
     }
     
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         searchBar.resignFirstResponder()
         switch segue.identifier {
@@ -200,12 +194,13 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         let dateFormatterForCreationDate = DateFormatter()
         dateFormatterForCreationDate.dateFormat = Constants.DateText.dateOnly
         let todaysDate = dateFormatterForCreationDate.string(from: date)
-        cell?.borrowedDateLabel.text = "Date Borrowed: \(todaysDate)"
+        cell?.borrowedDateLabel.text = "Date Borrowed:\n\(todaysDate)"
         cell?.scheduleBTN.backgroundColor = .systemBlue
-        
+        cell?.scheduleBTN.alpha = 1.0
+        cell?.myImageView.alpha = 1.0
         if let remdinderDate = memeImages.reminderDate {
             if dateToday > remdinderDate && memeImages.hasBeenReturned != true {
-                cell?.scheduleBTN.setTitle("Re-schedule reminder" , for: .highlighted)
+                cell?.scheduleBTN.setTitle("Re-schedule reminder" , for: .normal)
                 cell?.scheduleBTN.backgroundColor = .systemPink
                 
             }
@@ -223,17 +218,18 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         if let top = memeImages.titleinfo {
             cell?.titleItemLabel.text = top
         }
-        cell?.nameOfBorrower.text = memeImages.topInfo
-        cell?.statusLabel.textColor = .systemGroupedBackground
         
+        cell?.nameOfBorrower.text = memeImages.nameOfPersonBorrowing
+        cell?.statusLabel.textColor = .systemGroupedBackground
+        cell?.scheduleBTN.isEnabled = true
+
         if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == false {
 
             cell?.statusLabel.textColor = .systemGroupedBackground
             removeCalendarNotification(memeImages)
             cell?.returnedIcon.isHidden = false
-            
-//                cell?.reminderDateIcon.isHidden = true
             cell?.returnedIcon.image = UIImage(systemName: Constants.SymbolsImage.checkMarkCircleFilled)
+            
             for meme in imageInfo {
                 if meme == memeImages {
                     let selectedmeme = meme
@@ -243,18 +239,23 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                     }
             }
         } else if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == true {
-            cell?.statusLabel.textColor = .systemBlue
+            cell?.statusLabel.textColor = .label
             cell?.returnedIcon.isHidden = false
             cell?.returnedIcon.tintColor = .systemGreen
-//            cell?.calendarTextField.isHidden = true
             cell?.returnedIcon.image = UIImage(systemName: Constants.SymbolsImage.checkMarkCircleFilled)
-            cell?.scheduleBTN.isHidden = true
+            cell?.scheduleBTN.isHidden = false
+            cell?.scheduleBTN.isEnabled = false
+            cell?.scheduleBTN.tintAdjustmentMode = .dimmed
+            cell?.myImageView.alpha = 0.5
+            cell?.scheduleBTN.alpha = 0.5
+            cell?.statusLabel.text = "Returned"
         } else {
-           
             cell?.statusLabel.textColor = .label
             cell?.statusLabel.adjustsFontSizeToFitWidth = true
             cell?.scheduleBTN.isHidden = false
+            cell?.statusLabel.text = "Not Returned"
         }
+        
         if memeImages.reminderDate != nil {
             let myDate = Date()
             if memeImages.reminderDate! >= myDate {
@@ -265,7 +266,6 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                     cell?.scheduleBTN.setTitle("Re-schedule reminder", for: .normal)
                     cell?.scheduleBTN.backgroundColor = .systemIndigo
                 }
-                
             } else {
                 cell?.scheduleBTN.setTitle("Re-schedule reminder", for: .normal)
                 cell?.statusLabel.text = "Schedule Expired 🙈"
@@ -274,7 +274,6 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 try? self.dataController.viewContext.save()
                 dataController.viewContext.refreshAllObjects()
             }
-            
         }else {
 //            let cool = memeImages.hasBeenReturned == true ? "\(Constants.NameConstants.statusReturned) 👏" : "* Click on \"Set reminder Date\" to set a return date 👉"
 //            cell?.statusLabel.text = cool
@@ -329,7 +328,8 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
 
                 self.segmentOut.reloadInputViews()
             }))
-            alert.addAction(UIAlertAction(title: "Call: \(selectedImage.titleinfo!)", style: .default, handler: { _ in
+            guard let name = selectedImage.nameOfPersonBorrowing else { return }
+            alert.addAction(UIAlertAction(title: "Call: \(name)", style: .default, handler: { _ in
                 guard let userPhone = selectedImage.bottomInfo else { return }
                 guard let number = URL(string: "tel://" + userPhone) else { return }
                 UIApplication.shared.open(number)
@@ -355,7 +355,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 composeVC.messageComposeDelegate = self
                 guard let number = self.imageInfo[indexPath.row].bottomInfo else {return}
                 guard let image = self.imageInfo[indexPath.row].imageData else {return}
-                if let name = self.imageInfo[indexPath.row].topInfo, let itemBorrowed = self.imageInfo[indexPath.row].titleinfo?.lowercased() {
+                if let name = self.imageInfo[indexPath.row].nameOfPersonBorrowing, let itemBorrowed = self.imageInfo[indexPath.row].titleinfo?.lowercased() {
                     composeVC.body = Constants.MesageText.getNameAndItemBorrowed(name: name, item: itemBorrowed)
                     composeVC.addAttachmentData(image, typeIdentifier: "public.data", filename: "\(itemBorrowed).png")
                 } else {

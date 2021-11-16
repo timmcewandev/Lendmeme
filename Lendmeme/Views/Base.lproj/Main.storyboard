@@ -262,7 +262,7 @@
                                             <constraint firstAttribute="height" constant="43" id="jek-mW-QYx"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Submit">
+                                        <buttonConfiguration key="configuration" style="filled" title="Submit date">
                                             <color key="baseBackgroundColor" systemColor="systemBlueColor"/>
                                         </buttonConfiguration>
                                         <connections>
@@ -284,7 +284,7 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <datePicker contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="ZLc-ib-v2c">
+                            <datePicker contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="ZLc-ib-v2c">
                                 <rect key="frame" x="0.0" y="250" width="414" height="491"/>
                             </datePicker>
                         </subviews>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="20G224" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ImageInfo" representedClassName="ImageInfo" syncable="YES" codeGenerationType="class">
         <attribute name="animationSeen" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="bottomInfo" optional="YES" attributeType="String"/>
@@ -8,12 +8,12 @@
         <attribute name="hasBeenReturned" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="nameOfPersonBorrowing" optional="YES" attributeType="String"/>
         <attribute name="notificationIdentifier" optional="YES" attributeType="String"/>
         <attribute name="reminderDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="selectedDate" optional="YES" attributeType="String"/>
         <attribute name="timeHasExpired" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="titleinfo" optional="YES" attributeType="String"/>
-        <attribute name="topInfo" optional="YES" attributeType="String"/>
     </entity>
     <elements>
         <element name="ImageInfo" positionX="-54" positionY="-9" width="128" height="224"/>

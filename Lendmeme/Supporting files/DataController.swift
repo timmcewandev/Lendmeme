@@ -11,15 +11,11 @@ import CoreData
 
 class DataController {
     
-    
     var viewContext:NSManagedObjectContext {
         return persistantContainer.viewContext
-        
     }
     
-    
     let persistantContainer:NSPersistentContainer
-    
     init(modelName: String) {
         persistantContainer = NSPersistentContainer(name: modelName)
     }

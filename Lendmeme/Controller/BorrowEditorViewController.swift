@@ -286,11 +286,13 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         toolbar.isHidden = true
         guard let memedImage = takeScreenshot() else { return }
         guard let originalImage = imageView.image else { return }
-        let borrowInfo = BorrowInfo(topString: self.titleOfItemTextField.text ?? "None", bottomString: phoneNumberTextField.text ?? "", titleString: nameOfBorrowerTextField.text ?? "", originalImage: originalImage, borrowImage: memedImage, hasBeenReturned: false, timeHasExpired: false)
+        var phone = phoneNumberTextField.text
+        phone = phone?.replacingOccurrences(of: "[ |()-]", with: "", options: [.regularExpression])
+        let borrowInfo = BorrowInfo(topString: self.titleOfItemTextField.text ?? "None", bottomString: phone, titleString: nameOfBorrowerTextField.text ?? "", originalImage: originalImage, borrowImage: memedImage, hasBeenReturned: false, timeHasExpired: false)
         
         let getImageInfo = ImageInfo(context: dataController.viewContext)
         getImageInfo.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)
-        getImageInfo.topInfo = self.titleOfItemTextField.text ?? "None"
+        getImageInfo.nameOfPersonBorrowing = self.titleOfItemTextField.text ?? "None"
         getImageInfo.titleinfo = borrowInfo.titleString
         getImageInfo.bottomInfo = borrowInfo.bottomString
         if let selectedCategpry = category {
