@@ -96,14 +96,14 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
     func refreshAll(interval:TimeInterval = 30) {
         guard interval > 0 else { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
-            let cool = self.imageInfo.contains(where: { image in
+            let totalReminderDates = self.imageInfo.contains(where: { image in
                 if image.reminderDate != nil {
                     return true
                 }else {
                     return false
                 }
             })
-            if cool == true {
+            if totalReminderDates == true {
                 self.moreThanOne = 1
                 self.refreshAll(interval: interval)
                 self.tableView.reloadData()
@@ -121,10 +121,10 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
         switch segmentOut.selectedSegmentIndex {
         case 0:
             fetchRequest.sortDescriptors = [sortDescriptor]
-            if let result = try? dataController.viewContext.fetch(fetchRequest){
-                imageInfo = result
-                filteredData = imageInfo
-                tableView.isHidden = false
+            if let result = try? self.dataController.viewContext.fetch(fetchRequest){
+                let cool = result.sorted { !$0.hasBeenReturned && $1.hasBeenReturned }
+                self.imageInfo = cool
+                tableView.reloadData()
             }
             tableView.reloadData()
         case 1:
@@ -285,7 +285,15 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
     
     fileprivate func segmentControler(atSeg: Int, onReturn: Bool) {
         if self.segmentOut.selectedSegmentIndex == 0 {
-            tableView.reloadData()
+            let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
+            let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            if let result = try? self.dataController.viewContext.fetch(fetchRequest){
+                let cool = result.sorted { !$0.hasBeenReturned && $1.hasBeenReturned }
+                self.imageInfo = cool
+                tableView.reloadData()
+            }
+            
         } else {
             self.segmentOut.selectedSegmentIndex = atSeg
             if self.segmentOut.selectedSegmentIndex == atSeg {
