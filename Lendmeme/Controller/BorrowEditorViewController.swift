@@ -278,10 +278,25 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     func save() {
         
         if titleOfItemTextField.text == "" || nameOfBorrowerTextField.text == "" || phoneNumberTextField.text == "" {
+                for i in [titleOfItemTextField, nameOfBorrowerTextField, phoneNumberTextField] {
+                    if i?.text == "" {
+                        i?.layer.borderWidth = 2
+                        i?.layer.borderColor = UIColor.systemPink.cgColor
+                    } else {
+                        i?.layer.borderWidth = 0
+                        i?.layer.borderColor = UIColor.label.cgColor
+                    }
+                }
             let alert = UIAlertController(title: "", message: "Missing information in textfield", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             present(alert, animated: true)
             return
+        }
+        for i in [titleOfItemTextField, nameOfBorrowerTextField, phoneNumberTextField] {
+            if i?.text != "" {
+                    i?.layer.borderWidth = 0
+                i?.layer.borderColor = UIColor.label.cgColor
+            }
         }
         toolbar.isHidden = true
         guard let memedImage = takeScreenshot() else { return }
