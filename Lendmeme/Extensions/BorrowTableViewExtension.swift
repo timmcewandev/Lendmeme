@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 
 extension BorrowTableViewController: UISearchBarDelegate {
@@ -18,8 +19,10 @@ extension BorrowTableViewController: UISearchBarDelegate {
         } else {
             imageInfo = newData
         }
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
         
-        tableView.reloadData()
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -31,8 +34,10 @@ extension BorrowTableViewController: UISearchBarDelegate {
         searchBar.text = ""
         imageInfo = filteredData
         searchBar.resignFirstResponder()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
         
-        tableView.reloadData()
     }
 
     

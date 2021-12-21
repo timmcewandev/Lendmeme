@@ -6,6 +6,7 @@
 import UIKit
 import Foundation
 
+
 class ImageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UNUserNotificationCenterDelegate  {
     // MARK: - Variables
     var selectedDate = Date()
@@ -15,10 +16,14 @@ class ImageViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var selectedDateLabel: UILabel!
     @IBOutlet weak var submit: UIButton!
     
+ 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let todaysDate = Date()
         datePicker.minimumDate = todaysDate
+        
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

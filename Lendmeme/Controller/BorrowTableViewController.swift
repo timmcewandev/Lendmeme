@@ -60,12 +60,11 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
         let nib = UINib(nibName: Constants.Cell.borrowTableViewCell, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: Constants.Cell.borrowTableViewCell)
                 
-//                bannerView.adUnitID = "ca-app-pub-4726435113512089/9616934090" //Real
+                bannerView.adUnitID = "ca-app-pub-4726435113512089/9616934090" //Real
 //        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" //fake
-//                bannerView.rootViewController = self
-//        bannerView.delegate = self
-//                bannerView.load(GADRequest())
-                
+                bannerView.rootViewController = self
+        bannerView.delegate = self
+                bannerView.load(GADRequest())
     }
 
     
@@ -74,6 +73,7 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
         super.viewWillAppear(true)
         
         let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
+        fetchRequest.shouldRefreshRefetchedObjects = true
         let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let result = try? dataController.viewContext.fetch(fetchRequest){
@@ -117,9 +117,11 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
     // MARK: - Actions
     @IBAction func segmentControl(_ sender: Any) {
         let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
+        fetchRequest.shouldRefreshRefetchedObjects = true
         let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
         switch segmentOut.selectedSegmentIndex {
         case 0:
+            searchBar.isHidden = false
             fetchRequest.sortDescriptors = [sortDescriptor]
             if let result = try? self.dataController.viewContext.fetch(fetchRequest){
                 let cool = result.sorted { !$0.hasBeenReturned && $1.hasBeenReturned }
@@ -128,6 +130,7 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
             }
             tableView.reloadData()
         case 1:
+            searchBar.isHidden = true
             fetchRequest.sortDescriptors = [sortDescriptor]
             if let result = try? dataController.viewContext.fetch(fetchRequest){
                 var returnedTrue = [ImageInfo]()
@@ -140,6 +143,7 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
                 tableView.reloadData()
             }
         case 2:
+            searchBar.isHidden = true
             fetchRequest.sortDescriptors = [sortDescriptor]
             if let result = try? dataController.viewContext.fetch(fetchRequest){
                 var returnedTrue = [ImageInfo]()
@@ -249,11 +253,18 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             cell?.myImageView.alpha = 0.5
             cell?.scheduleBTN.alpha = 0.5
             cell?.statusLabel.text = "Returned"
-        } else {
+        } else if imageInfo[indexPath.row].timeHasExpired != true {
             cell?.statusLabel.textColor = .label
             cell?.statusLabel.adjustsFontSizeToFitWidth = true
             cell?.scheduleBTN.isHidden = false
             cell?.statusLabel.text = "Not Returned"
+        } else {
+            cell?.statusLabel.text = "Schedule Expired\n🙈"
+            cell?.statusLabel.textColor = .label
+            cell?.statusLabel.adjustsFontSizeToFitWidth = true
+            cell?.scheduleBTN.setTitle("Re-schedule reminder", for: .normal)
+            cell?.scheduleBTN.backgroundColor = .systemPink
+            
         }
         
         if memeImages.reminderDate != nil {
@@ -268,7 +279,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 }
             } else {
                 cell?.scheduleBTN.setTitle("Re-schedule reminder", for: .normal)
-                cell?.statusLabel.text = "Schedule Expired 🙈"
+                cell?.statusLabel.text = "Schedule Expired\n🙈"
                 memeImages.timeHasExpired = true
                 memeImages.reminderDate = nil
                 try? self.dataController.viewContext.save()
@@ -286,11 +297,12 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
     fileprivate func segmentControler(atSeg: Int, onReturn: Bool) {
         if self.segmentOut.selectedSegmentIndex == 0 {
             let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
+            fetchRequest.shouldRefreshRefetchedObjects = true
             let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
             fetchRequest.sortDescriptors = [sortDescriptor]
             if let result = try? self.dataController.viewContext.fetch(fetchRequest){
-                let cool = result.sorted { !$0.hasBeenReturned && $1.hasBeenReturned }
-                self.imageInfo = cool
+                let sortedArray = result.sorted { !$0.hasBeenReturned && $1.hasBeenReturned }
+                self.imageInfo = sortedArray
                 tableView.reloadData()
             }
             
@@ -298,6 +310,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             self.segmentOut.selectedSegmentIndex = atSeg
             if self.segmentOut.selectedSegmentIndex == atSeg {
                 let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
+                fetchRequest.shouldRefreshRefetchedObjects = true
                 let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
                 fetchRequest.sortDescriptors = [sortDescriptor]
                 if let result = try? self.dataController.viewContext.fetch(fetchRequest){
@@ -402,6 +415,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             try? self.dataController.viewContext.save()
             self.imageInfo.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .bottom)
+            self.filteredData.remove(at: indexPath.row)
             self.dataController.viewContext.refreshAllObjects()
             if self.imageInfo.count == 0 {
                 self.performSegue(withIdentifier: Constants.Segue.toStarterViewController, sender: self)
@@ -431,11 +445,10 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                     self.dataController.viewContext.delete(selectedImage)
                     try? self.dataController.viewContext.save()
                     self.imageInfo.remove(at: indexPath.row)
+                    self.filteredData.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .bottom)
                     self.dataController.viewContext.refreshAllObjects()
-                    if self.imageInfo.isEmpty == true && self.segmentOut.selectedSegmentIndex == 0 {
-                        self.performSegue(withIdentifier: Constants.Segue.toEditorViewController, sender: self)
-                    }
+//                    id
                     tableView.reloadData()
                 }
             }
@@ -457,6 +470,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         appDelegate.removeScheduleNotification(at: selectedImage.notificationIdentifier ?? "", at: selectedImage)
         selectedImage.reminderDate = nil
         try? self.dataController.viewContext.save()
+        self.dataController.viewContext.refreshAllObjects()
         self.tableView.reloadData()
     }
 

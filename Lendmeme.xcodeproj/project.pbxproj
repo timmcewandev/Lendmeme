@@ -582,7 +582,7 @@
 				CODE_SIGN_ENTITLEMENTS = Lendmeme/Lendmeme.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = A9UMG393DW;
 				INFOPLIST_FILE = "Lendmeme/Supporting files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -604,7 +604,7 @@
 				CODE_SIGN_ENTITLEMENTS = Lendmeme/Lendmeme.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = A9UMG393DW;
 				INFOPLIST_FILE = "Lendmeme/Supporting files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;

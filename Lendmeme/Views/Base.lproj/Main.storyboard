@@ -222,13 +222,21 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A5a-yk-iji" customClass="GADBannerView">
+                                <rect key="frame" x="27" y="735" width="360" height="73"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dlD-Y9-hD3"/>
                         <constraints>
                             <constraint firstItem="zpZ-vi-hUt" firstAttribute="leading" secondItem="bfH-Xp-Orj" secondAttribute="leadingMargin" id="3q5-ud-7oE"/>
+                            <constraint firstItem="A5a-yk-iji" firstAttribute="leading" secondItem="dlD-Y9-hD3" secondAttribute="leading" constant="27" id="C2F-fU-Gom"/>
+                            <constraint firstItem="dlD-Y9-hD3" firstAttribute="trailing" secondItem="A5a-yk-iji" secondAttribute="trailing" constant="27" id="IUX-7f-4Pd"/>
+                            <constraint firstItem="A5a-yk-iji" firstAttribute="bottom" secondItem="dlD-Y9-hD3" secondAttribute="bottom" id="RXf-dE-Bfu"/>
                             <constraint firstItem="zpZ-vi-hUt" firstAttribute="centerY" secondItem="bfH-Xp-Orj" secondAttribute="centerY" constant="-7" id="Un7-7b-ofb"/>
                             <constraint firstItem="zpZ-vi-hUt" firstAttribute="centerX" secondItem="bfH-Xp-Orj" secondAttribute="centerX" id="W5I-F1-Wvo"/>
                             <constraint firstItem="zpZ-vi-hUt" firstAttribute="top" secondItem="dlD-Y9-hD3" secondAttribute="top" constant="20" id="hhi-FT-Jex"/>
+                            <constraint firstItem="A5a-yk-iji" firstAttribute="top" secondItem="dlD-Y9-hD3" secondAttribute="top" constant="735" id="rxN-bj-IAm"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="Layer.cornerRadius">
@@ -238,6 +246,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="QGy-oc-IX9"/>
                     <connections>
+                        <outlet property="bannerView" destination="A5a-yk-iji" id="itC-Q1-PW5"/>
                         <outlet property="imageControl" destination="zpZ-vi-hUt" id="2Li-yw-8WE"/>
                     </connections>
                 </viewController>

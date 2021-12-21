@@ -46,18 +46,17 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-//        bannerView.adUnitID = "ca-app-pub-4726435113512089/3043786886" // real
+        bannerView.adUnitID = "ca-app-pub-4726435113512089/3043786886" // real
 //        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" //fake
-//                bannerView.rootViewController = self
-//        bannerView.delegate = self
-//                bannerView.load(GADRequest())
+                bannerView.rootViewController = self
+        bannerView.delegate = self
+                bannerView.load(GADRequest())
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
         configureShareOut(isEnabled: false)
         prepareTextField(textField: titleOfItemTextField, name: Constants.TextFieldNames.itemTitle)
         prepareTextField(textField: nameOfBorrowerTextField, name: Constants.TextFieldNames.nameOfPersonBorrowing)
         prepareTextField(textField: phoneNumberTextField, name: Constants.TextFieldNames.phoneNumberText)
-        navigationController?.navigationBar.tintColor = .systemOrange
         self.tabBarController?.tabBar.isHidden = true
         phoneNumberTextField.inputAccessoryView = accessoryView()
         phoneNumberTextField.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
@@ -90,11 +89,11 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         bannerView.isHidden = false
 
                 
-                //
-//                        interstitial = GADInterstitial(adUnitID: "ca-app-pub-4726435113512089/5286806844") //real
+                
+                        interstitial = GADInterstitial(adUnitID: "ca-app-pub-4726435113512089/5286806844") //real
 //                        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910") //fake
-//                        let request = GADRequest()
-//                        interstitial.load(request)
+                        let request = GADRequest()
+                        interstitial.load(request)
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
@@ -124,13 +123,13 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     @IBAction func share(sender: AnyObject) {
-                if imageInfo.count > 1 {
+                if imageInfo.count > 0 {
                     let firstNum = arc4random() % 2
                     let secondNum = arc4random() % 2
                     if firstNum == secondNum {
-//                        if (interstitial.isReady) {
-//                            interstitial.present(fromRootViewController: self)
-//                        }
+                        if (interstitial.isReady) {
+                            interstitial.present(fromRootViewController: self)
+                        }
                     }
                 }
         self.save()
@@ -265,7 +264,12 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         categoryLabel.isHidden = true
         bannerView.isHidden = true
         var screenshotImage :UIImage?
-        let layer = UIApplication.shared.keyWindow?.layer
+        let keyWindow = UIApplication.shared.connectedScenes
+                .filter({$0.activationState == .foregroundActive})
+                .compactMap({$0 as? UIWindowScene})
+                .first?.windows
+                .filter({$0.isKeyWindow}).first
+        let layer = keyWindow?.layer
         let scale = UIScreen.main.scale.binade
         UIGraphicsBeginImageContextWithOptions(view.frame.size, false, scale)
         guard let context = UIGraphicsGetCurrentContext() else {return nil}

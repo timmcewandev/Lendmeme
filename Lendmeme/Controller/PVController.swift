@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
-class PVController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class PVController: UIViewController, UITableViewDataSource, UITableViewDelegate, GADBannerViewDelegate {
     @IBOutlet weak var imageControl: UIImageView!
+    @IBOutlet weak var bannerView: GADBannerView!
+    
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 0
@@ -26,5 +30,10 @@ class PVController: UIViewController, UITableViewDataSource, UITableViewDelegate
         // Do any additional setup after loading the view.
         imageControl.image = myImages
         self.imageControl.contentScaleFactor = 3
+        bannerView.adUnitID = "ca-app-pub-4726435113512089/1677733583" // real
+//                bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" //fake
+                        bannerView.rootViewController = self
+                bannerView.delegate = self
+                        bannerView.load(GADRequest())
     }
 }

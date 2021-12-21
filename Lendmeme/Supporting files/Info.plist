@@ -31,7 +31,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string> We would like permision to use the pictures you take within the app and use them within the app. The pictures you take in the app won't show up in your photos. </string>
+	<string>We need this permission for camera in order meme the picture. This may help you remember the items by taking pictures. We will not save pictures taken to your photos it exist only in the app.</string>
 	<key>NSContactsUsageDescription</key>
 	<string>We would like to help you by populating the phone number</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
