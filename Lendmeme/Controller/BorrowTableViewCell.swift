@@ -9,7 +9,7 @@
 import UIKit
 
 protocol passBackRowAndDateable {
-    func getRowAndDate(date: Date, row: Int)
+    func getRowAndDate(date: Date, row: Int, section: Int)
 }
 
 class BorrowTableViewCell: UITableViewCell, getDateForReminderDelegate {
@@ -18,32 +18,29 @@ class BorrowTableViewCell: UITableViewCell, getDateForReminderDelegate {
         dateformater.locale = Locale(identifier: "en_US_POSIX")
         dateformater.dateFormat = Constants.DateText.dateAndTime
         guard let row = self.indexPath?.row else { return }
-        self.delegate?.getRowAndDate(date: date, row: row)
+        guard let section = self.indexPath?.section else { return }
+        self.delegate?.getRowAndDate(date: date, row: row, section: section)
         
     }
     
-    @IBOutlet weak var borrowedDateLabel: UILabel!
     @IBOutlet var myImageView: UIImageView!
-    @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var titleItemLabel: UILabel!
-    @IBOutlet weak var nameOfBorrower: UILabel!
-    @IBOutlet weak var reminderDate: UILabel!
-    @IBOutlet weak var reminderDateIcon: UIImageView!
-    @IBOutlet weak var returnedIcon: UIImageView!
     @IBOutlet weak var cover1: UIView!
-    @IBOutlet weak var calendarTextField: UITextField!
-    @IBOutlet weak var scheduleBTN: UIButton!
-    
-    
     
     var delegate: passBackRowAndDateable?
     
+    var imageCell: ImageInfo! {
+        didSet {
+            if let memeImageData = imageCell.imageData {
+                myImageView.image = UIImage(data: memeImageData)
+                myImageView.isOpaque = true
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.myImageView.layer.cornerRadius = 10
-        self.myImageView.layer.borderWidth = 2
-        self.tintColor = .label
-        self.scheduleBTN.layer.cornerRadius = 6
+        self.isOpaque = true
+        self.backgroundColor = UIColor.white
     }
     
     @IBAction func calendarButtonPressed(_ sender: UIButton) {
@@ -59,24 +56,6 @@ class BorrowTableViewCell: UITableViewCell, getDateForReminderDelegate {
                 sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
             }
         self.window?.rootViewController?.present(controller, animated: true, completion: nil)
-    }
-    
-    func returnedAnimation() {
-        UIView.animate(withDuration: 0.3, delay: 0, options: .allowUserInteraction, animations: {() -> Void in
-            self.returnedIcon.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-            self.returnedIcon.alpha = 1.0
-        }, completion: {(_ finished: Bool) -> Void in
-            UIView.animate(withDuration: 0.1, delay: 0, options: .allowUserInteraction, animations: {() -> Void in
-                self.returnedIcon.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            }, completion: {(_ finished: Bool) -> Void in
-                UIView.animate(withDuration: 0.3, delay: 0, options: .allowUserInteraction, animations: {() -> Void in
-                    self.returnedIcon.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-                    self.returnedIcon.alpha = 1.0
-                }, completion: {(_ finished: Bool) -> Void in
-                    self.returnedIcon.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                })
-            })
-        })
     }
 }
 extension UIResponder {

@@ -2,69 +2,65 @@
 //  Created by sudo on 1/9/18.
 //  Copyright © 2018 sudo. All rights reserved.
 //
+
 import UIKit
 
 import CoreData
 import MessageUI
-import GoogleMobileAds
 
 class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMessageComposeViewControllerDelegate, UNUserNotificationCenterDelegate {
-    func getRowAndDate(date: Date, row: Int) {
-        
-        for imageInfo in self.imageInfo {
+    func getRowAndDate(date: Date, row: Int, section: Int) {
+        for (index, imageInfo) in imageInfo.enumerated() {
             if imageInfo == self.imageInfo[row] {
-                imageInfo.reminderDate = date
-                imageInfo.timeHasExpired = false
-                if imageInfo.reminderDate != nil {
+                imageInfo[row].reminderDate = date
+                imageInfo[row].timeHasExpired = false
+                if imageInfo[row].reminderDate != nil {
                     self.moreThanOne += 1
                 }
                 try? self.dataController.viewContext.save()
                 self.dataController.viewContext.refreshAllObjects()
                 let delegate = UIApplication.shared.delegate as? AppDelegate
-                delegate?.scheduleNotification(at: date, name: imageInfo.titleinfo ?? "", memedImage: imageInfo)
+                delegate?.scheduleNotification(at: date, name: imageInfo[row].titleinfo ?? "", memedImage: imageInfo[row])
             }
         }
         DispatchQueue.main.async {
             self.tableView.reloadData()
             if self.moreThanOne == 1 {
-                self.refreshAll()
+//                self.refreshAll()
             }
         }
         
     }
-    
+    let headerTitles = ["Not Returned", "Returned"]
+    let refreshControl = UIRefreshControl()
     // MARK: - Outlets
-    @IBOutlet weak var segmentOut: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var dropdown: UITextField!
     @IBOutlet weak var categoriesButton: UITextField!
-    @IBOutlet weak var bannerView: GADBannerView!
+
     
     // MARK: - Properties
     let button = UIButton()
     let secondDatePicker = UIDatePicker()
     var dataController:DataController!
-    var imageInfo: [ImageInfo] = []
-    var filteredData: [ImageInfo] = []
+    var imageInfo: [[ImageInfo]] = [[]]
+    var expired: [ImageInfo] = []
+    var filteredData: [[ImageInfo]] = [[]]
     var reminderDate: Date?
     var categoryList: [String] = []
     var isRunningLoop: Bool = false
     var moreThanOne = 0
+    var selectedBorrowedInfo: ImageInfo?
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self
         self.tableView.delegate = self
         searchBar.delegate = self
+        tableView.contentInset = UIEdgeInsets(top: -1, left: 0, bottom: 0, right: 0)
         let nib = UINib(nibName: Constants.Cell.borrowTableViewCell, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: Constants.Cell.borrowTableViewCell)
-                
-                bannerView.adUnitID = "ca-app-pub-4726435113512089/9616934090" //Real
-//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" //fake
-                bannerView.rootViewController = self
-        bannerView.delegate = self
-                bannerView.load(GADRequest())
     }
 
     
@@ -77,92 +73,62 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
         let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let result = try? dataController.viewContext.fetch(fetchRequest){
-            imageInfo = result
+            let hasBeenReturned = result.filter ({ return $0.hasBeenReturned })
+            let hasNotBeenReturned = result.filter ({ return !$0.hasBeenReturned })
+            imageInfo = [hasNotBeenReturned, hasBeenReturned]
             filteredData = imageInfo
-            tableView.isHidden = false
         }
-        self.segmentOut.selectedSegmentIndex = 0
-        self.segmentOut.reloadInputViews()
-        if imageInfo.count == 0 && self.segmentOut.selectedSegmentIndex == 0   {
-            performSegue(withIdentifier: Constants.Segue.toStarterViewController, sender: self)
-        }
-        self.navigationController?.isNavigationBarHidden = false
-        segmentControler(atSeg: 0, onReturn: true)
-        categoryList = Constants.Categories.gatherCategories()
-        self.refreshAll()
+        navigationItem.hidesSearchBarWhenScrolling = false
+//        self.refreshAll()
+//        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+           refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        refreshControl.backgroundColor = .systemBlue
+        refreshControl.tintColor = .white
+           tableView.addSubview(refreshControl)
+        tableView.reloadData()
     }
-
-    
-    func refreshAll(interval:TimeInterval = 30) {
-        guard interval > 0 else { return }
-        DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
-            let totalReminderDates = self.imageInfo.contains(where: { image in
-                if image.reminderDate != nil {
-                    return true
-                }else {
-                    return false
-                }
-            })
-            if totalReminderDates == true {
-                self.moreThanOne = 1
-                self.refreshAll(interval: interval)
-                self.tableView.reloadData()
-            } else {
-                self.moreThanOne = 0
-                self.tableView.reloadData()
-                return
+    @objc func refresh(_ sender: AnyObject) {
+       // Code to refresh table view
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
+    @objc func btnShowHideTapped(_ sender: AnyObject) {
+       // Code to refresh table view
+        self.performSegue(withIdentifier: Constants.Segue.toStarterViewController, sender: self)
+    }
+    @objc func trashAll(_ sender: AnyObject) {
+        for (indexer, element) in imageInfo.enumerated() {
+            if indexer == 2 {
+//                let me = imageInfo[indexer][element];)
             }
         }
+        try? dataController.viewContext.save()
+        self.dataController.viewContext.refreshAllObjects()
+        self.tableView.reloadData()
     }
+//    func refreshAll(interval:TimeInterval = 30) {
+//        guard interval > 0 else { return }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
+//            let totalReminderDates = self.imageInfo.contains(where: { image in
+//                if image.reminderDate != nil {
+//                    return true
+//                }else {
+//                    return false
+//                }
+//            })
+//            if totalReminderDates == true {
+//                self.moreThanOne = 1
+//                self.refreshAll(interval: interval)
+//                self.tableView.reloadData()
+//            } else {
+//                self.moreThanOne = 0
+//                self.tableView.reloadData()
+//                return
+//            }
+//        }
+//    }
     // MARK: - Actions
-    @IBAction func segmentControl(_ sender: Any) {
-        let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-        fetchRequest.shouldRefreshRefetchedObjects = true
-        let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
-        switch segmentOut.selectedSegmentIndex {
-        case 0:
-            searchBar.isHidden = false
-            fetchRequest.sortDescriptors = [sortDescriptor]
-            if let result = try? self.dataController.viewContext.fetch(fetchRequest){
-                let cool = result.sorted { !$0.hasBeenReturned && $1.hasBeenReturned }
-                self.imageInfo = cool
-                tableView.reloadData()
-            }
-            tableView.reloadData()
-        case 1:
-            searchBar.isHidden = true
-            fetchRequest.sortDescriptors = [sortDescriptor]
-            if let result = try? dataController.viewContext.fetch(fetchRequest){
-                var returnedTrue = [ImageInfo]()
-                for i in result {
-                    if i.hasBeenReturned == true {
-                        returnedTrue.append(i)
-                    }
-                }
-                imageInfo = returnedTrue
-                tableView.reloadData()
-            }
-        case 2:
-            searchBar.isHidden = true
-            fetchRequest.sortDescriptors = [sortDescriptor]
-            if let result = try? dataController.viewContext.fetch(fetchRequest){
-                var returnedTrue = [ImageInfo]()
-                for i in result {
-                    if i.hasBeenReturned == false {
-                        returnedTrue.append(i)
-                    }
-                }
-                imageInfo = returnedTrue
-                tableView.reloadData()
-            }
-        default: break
-        }
-    }
     
-    @IBAction func categoriesButtonTapped(_ sender: Any) {
-        searchBar.isHidden = true
-        dropdown.isHidden = false
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         searchBar.resignFirstResponder()
@@ -170,11 +136,16 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
         case Constants.Segue.toStarterViewController:
             guard let destinvationVC = segue.destination as? BorrowEditorViewController else { return }
             destinvationVC.dataController = self.dataController
+            if selectedBorrowedInfo != nil {
+                destinvationVC.selectedBorrowedInfo = selectedBorrowedInfo
+                destinvationVC.onEdit = true
+            }
         case Constants.Segue.toEditorViewController:
             guard let destinationVC = segue.destination as? BorrowEditorViewController else { return }
             destinationVC.dataController = self.dataController
         default: break
         }
+        selectedBorrowedInfo = nil
     }
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
@@ -183,158 +154,87 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
 }
 
 extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return imageInfo.count
+    
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+         if section == 0 {
+            return self.imageInfo[0].count
+         } else if section == 1 {
+             return self.imageInfo[1].count
+         } else {
+             return 0
+         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.borrowTableViewCell, for: indexPath) as? BorrowTableViewCell
-        
-        let memeImages = self.imageInfo[indexPath.row]
-        cell?.returnedIcon.isHidden = true
-//        cell?.reminderDateIcon.isHidden = true
-        let dateToday = Date()
-        let date = memeImages.creationDate ?? Date()
-        let dateFormatterForCreationDate = DateFormatter()
-        dateFormatterForCreationDate.dateFormat = Constants.DateText.dateOnly
-        let todaysDate = dateFormatterForCreationDate.string(from: date)
-        cell?.borrowedDateLabel.text = "Date Borrowed:\n\(todaysDate)"
-        cell?.scheduleBTN.backgroundColor = .systemBlue
-        cell?.scheduleBTN.alpha = 1.0
-        cell?.myImageView.alpha = 1.0
-        if let remdinderDate = memeImages.reminderDate {
-            if dateToday > remdinderDate && memeImages.hasBeenReturned != true {
-                cell?.scheduleBTN.setTitle("Re-schedule reminder" , for: .normal)
-                cell?.scheduleBTN.backgroundColor = .systemPink
-                
-            }
-        } else {
-            cell?.scheduleBTN.setTitle("Set Reminder Date 📅", for: .normal)
-        }
-        cell?.delegate = self
-        cell?.myImageView.contentMode = .scaleAspectFill
-        
-        if let memeImageData = memeImages.imageData {
-            cell?.myImageView.image = UIImage(data: memeImageData)
-        }
-        
-        cell?.accessoryType = .none
-        if let top = memeImages.titleinfo {
-            cell?.titleItemLabel.text = top
-        }
-        
-        cell?.nameOfBorrower.text = memeImages.nameOfPersonBorrowing
-        cell?.statusLabel.textColor = .systemGroupedBackground
-        cell?.scheduleBTN.isEnabled = true
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+         return headerTitles.count
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    {
+        let verticalPadding: CGFloat = 2
 
-        if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == false {
+        let maskLayer = CALayer()
+        maskLayer.backgroundColor = UIColor.black.cgColor
+        maskLayer.frame = CGRect(x: cell.bounds.origin.x, y: cell.bounds.origin.y, width: cell.bounds.width, height: cell.bounds.height).insetBy(dx: 0, dy: verticalPadding/2)
+        cell.layer.mask = maskLayer
+    }
 
-            cell?.statusLabel.textColor = .systemGroupedBackground
-            removeCalendarNotification(memeImages)
-            cell?.returnedIcon.isHidden = false
-            cell?.returnedIcon.image = UIImage(systemName: Constants.SymbolsImage.checkMarkCircleFilled)
-            
-            for meme in imageInfo {
-                if meme == memeImages {
-                    let selectedmeme = meme
-                    selectedmeme.animationSeen = true
-                    try? self.dataController.viewContext.save()
-                    self.dataController.viewContext.refreshAllObjects()
-                    }
-            }
-        } else if imageInfo[indexPath.row].hasBeenReturned == true && memeImages.animationSeen == true {
-            cell?.statusLabel.textColor = .label
-            cell?.returnedIcon.isHidden = false
-            cell?.returnedIcon.tintColor = .systemGreen
-            cell?.returnedIcon.image = UIImage(systemName: Constants.SymbolsImage.checkMarkCircleFilled)
-            cell?.scheduleBTN.isHidden = false
-            cell?.scheduleBTN.isEnabled = false
-            cell?.scheduleBTN.tintAdjustmentMode = .dimmed
-            cell?.myImageView.alpha = 0.5
-            cell?.scheduleBTN.alpha = 0.5
-            cell?.statusLabel.text = "Returned"
-        } else if imageInfo[indexPath.row].timeHasExpired != true {
-            cell?.statusLabel.textColor = .label
-            cell?.statusLabel.adjustsFontSizeToFitWidth = true
-            cell?.scheduleBTN.isHidden = false
-            cell?.statusLabel.text = "Not Returned"
-        } else {
-            cell?.statusLabel.text = "Schedule Expired\n🙈"
-            cell?.statusLabel.textColor = .label
-            cell?.statusLabel.adjustsFontSizeToFitWidth = true
-            cell?.scheduleBTN.setTitle("Re-schedule reminder", for: .normal)
-            cell?.scheduleBTN.backgroundColor = .systemPink
-            
-        }
-        
-        if memeImages.reminderDate != nil {
-            let myDate = Date()
-            if memeImages.reminderDate! >= myDate {
-                if let date = memeImages.reminderDate {
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = Constants.DateText.dateAndTime
-                    cell?.statusLabel.text = "Schedule is set for 👇\nReturn Date: \(dateFormatter.string(from: date))"
-                    cell?.scheduleBTN.setTitle("Re-schedule reminder", for: .normal)
-                    cell?.scheduleBTN.backgroundColor = .systemIndigo
-                }
-            } else {
-                cell?.scheduleBTN.setTitle("Re-schedule reminder", for: .normal)
-                cell?.statusLabel.text = "Schedule Expired\n🙈"
-                memeImages.timeHasExpired = true
-                memeImages.reminderDate = nil
-                try? self.dataController.viewContext.save()
-                dataController.viewContext.refreshAllObjects()
-            }
+
+    func tableView(_ tableView: UITableView,
+                   viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100))
+        // code for adding centered title
+        let showHideButton: UIButton = UIButton(frame: CGRect(x:headerView.frame.size.width - 100, y:12, width:100, height:25))
+        let trashHideButton: UIButton = UIButton(frame: CGRect(x:headerView.frame.size.width - 100, y:12, width:100, height:25))
+           let headerLabel = UILabel(frame: CGRect(x: 12, y: 0, width:
+               tableView.bounds.size.width, height: 50))
+        headerLabel.textColor = .label
+        headerView.backgroundColor = .systemBackground
+        headerLabel.text = "\(headerTitles[section]): \(self.imageInfo[section].count)"
+        headerLabel.textAlignment = .left
+           headerView.addSubview(headerLabel)
+        let config = UIImage.SymbolConfiguration(
+            pointSize: 25, weight: .thin, scale: .medium)
+           // code for adding button to right corner of section header
+        if headerTitles[section] != "Returned" {
+            let image = UIImage(systemName: "plus", withConfiguration: config)
+            showHideButton.setImage(image, for: .normal)
+            showHideButton.addTarget(self, action: #selector(btnShowHideTapped), for: .touchUpInside)
+            headerView.addSubview(showHideButton)
         }else {
-//            let cool = memeImages.hasBeenReturned == true ? "\(Constants.NameConstants.statusReturned) 👏" : "* Click on \"Set reminder Date\" to set a return date 👉"
-//            cell?.statusLabel.text = cool
+            let image = UIImage(systemName: "trash", withConfiguration: config)
+            trashHideButton.setImage(image, for: .normal)
+            trashHideButton.addTarget(self, action: #selector(trashAll), for: .touchUpInside)
+            headerView.addSubview(trashHideButton)
         }
+           
+        
+           return headerView
+    }
 
-        cell?.statusLabel.adjustsFontSizeToFitWidth = true
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.borrowTableViewCell, for: indexPath) as? BorrowTableViewCell
+        let memeImages = self.imageInfo[indexPath.section][indexPath.row]
+        cell?.imageCell = memeImages
         return cell ?? UITableViewCell()
     }
     
-    fileprivate func segmentControler(atSeg: Int, onReturn: Bool) {
-        if self.segmentOut.selectedSegmentIndex == 0 {
-            let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-            fetchRequest.shouldRefreshRefetchedObjects = true
-            let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
-            fetchRequest.sortDescriptors = [sortDescriptor]
-            if let result = try? self.dataController.viewContext.fetch(fetchRequest){
-                let sortedArray = result.sorted { !$0.hasBeenReturned && $1.hasBeenReturned }
-                self.imageInfo = sortedArray
-                tableView.reloadData()
-            }
-            
-        } else {
-            self.segmentOut.selectedSegmentIndex = atSeg
-            if self.segmentOut.selectedSegmentIndex == atSeg {
-                let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-                fetchRequest.shouldRefreshRefetchedObjects = true
-                let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
-                fetchRequest.sortDescriptors = [sortDescriptor]
-                if let result = try? self.dataController.viewContext.fetch(fetchRequest){
-                    var returnedTrue = [ImageInfo]()
-                    for i in result {
-                        if i.hasBeenReturned == onReturn {
-                            returnedTrue.append(i)
-                        }
-                    }
-                    self.imageInfo = returnedTrue
-                    tableView.reloadData()
-                }
-            }
-        }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
     }
     
-
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedImage = self.imageInfo[indexPath.row]
+        let selectedImage = self.imageInfo[indexPath.section][indexPath.row]
         self.searchBar.resignFirstResponder()
 
         let alert = UIAlertController(title: nil, message: nil , preferredStyle: .actionSheet)
         let markImageAsReturned = selectedImage
+
 
         if markImageAsReturned.hasBeenReturned == false {
             alert.addAction(UIAlertAction(title: Constants.CommandListText.markAsReturned, style: .default, handler: { _ in
@@ -343,11 +243,20 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 markImageAsReturned.hasBeenReturned = true
                 markImageAsReturned.reminderDate = nil
                 try? self.dataController.viewContext.save()
+                
                 tableView.cellForRow(at: indexPath)
+                let imageInfoSorted = Array(self.imageInfo.joined())
+                let hasBeenReturned = imageInfoSorted.filter ({ return $0.hasBeenReturned })
+                let hasNotBeenReturned = imageInfoSorted.filter ({ return !$0.hasBeenReturned })
+                self.imageInfo = [hasNotBeenReturned, hasBeenReturned]
+                self.filteredData = [hasNotBeenReturned, hasBeenReturned]
                 self.dataController.viewContext.refreshAllObjects()
-                self.segmentControler(atSeg: 2, onReturn: false)
-
-                self.segmentOut.reloadInputViews()
+                self.tableView.reloadData()
+            }))
+            alert.addAction(UIAlertAction(title: "Edit", style: .default, handler: { _ in
+                let selectedImage = self.imageInfo[indexPath.section][indexPath.row]
+                self.selectedBorrowedInfo = selectedImage
+                self.performSegue(withIdentifier: Constants.Segue.toStarterViewController, sender: self)
             }))
             guard let name = selectedImage.nameOfPersonBorrowing else { return }
             alert.addAction(UIAlertAction(title: "Call: \(name)", style: .default, handler: { _ in
@@ -357,26 +266,28 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             }))
         } else {
             alert.addAction(UIAlertAction(title: Constants.CommandListText.markAsNotReturned, style: .default, handler: { _ in
-                let selectedImage = self.imageInfo[indexPath.row]
+                let selectedImage = self.imageInfo[indexPath.section][indexPath.row]
                 let markImageAsReturned = selectedImage
                 markImageAsReturned.hasBeenReturned = false
                 try? self.dataController.viewContext.save()
                 tableView.cellForRow(at: indexPath)
                 self.dataController.viewContext.refreshAllObjects()
-                self.segmentControler(atSeg: 1, onReturn: true)
+                let cool = Array(self.imageInfo.joined())
+                let hasBeenReturned = cool.filter ({ return $0.hasBeenReturned })
+                let hasNotBeenReturned = cool.filter ({ return !$0.hasBeenReturned })
+                self.imageInfo = [hasNotBeenReturned, hasBeenReturned]
+                self.filteredData = [hasNotBeenReturned, hasBeenReturned]
+                self.dataController.viewContext.refreshAllObjects()
                 self.tableView.reloadData()
-                self.segmentOut.reloadInputViews()
             }))
-
         }
-
-        if imageInfo[indexPath.row].bottomInfo != "" && selectedImage.hasBeenReturned == false {
+        if self.imageInfo[indexPath.section][indexPath.row].bottomInfo != "" && selectedImage.hasBeenReturned == false {
             alert.addAction(UIAlertAction(title: NSLocalizedString(Constants.MesageText.sendMessage, comment: "Default action"), style: .default, handler: { _ in
                 let composeVC = MFMessageComposeViewController()
                 composeVC.messageComposeDelegate = self
-                guard let number = self.imageInfo[indexPath.row].bottomInfo else {return}
-                guard let image = self.imageInfo[indexPath.row].imageData else {return}
-                if let name = self.imageInfo[indexPath.row].nameOfPersonBorrowing, let itemBorrowed = self.imageInfo[indexPath.row].titleinfo?.lowercased() {
+                guard let number = self.imageInfo[indexPath.section][indexPath.row].bottomInfo else {return}
+                guard let image = self.imageInfo[indexPath.section][indexPath.row].imageData else {return}
+                if let name = self.imageInfo[indexPath.section][indexPath.row].nameOfPersonBorrowing, let itemBorrowed = self.imageInfo[indexPath.section][indexPath.row].titleinfo?.lowercased() {
                     composeVC.body = Constants.MesageText.getNameAndItemBorrowed(name: name, item: itemBorrowed)
                     composeVC.addAttachmentData(image, typeIdentifier: "public.data", filename: "\(itemBorrowed).png")
                 } else {
@@ -389,11 +300,10 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                     self.present(composeVC, animated: true, completion: nil)
                 }
             }))
-
         }
         alert.addAction(UIAlertAction(title: Constants.CommandListText.viewImage, style: .default, handler: { _ in
             guard let controller = self.storyboard?.instantiateViewController(withIdentifier: Constants.Segue.pvController) as? PVController else { return }
-            if let imageInfo = self.imageInfo[indexPath.row].imageData {
+            if let imageInfo = self.imageInfo[indexPath.section][indexPath.row].imageData {
                 controller.myImages = UIImage(data: imageInfo)
             }
             if let sheet = controller.sheetPresentationController {
@@ -409,7 +319,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         }))
 
         alert.addAction(UIAlertAction(title: Constants.CommandListText.delete, style: .destructive, handler: { _ in
-            let selectedImage = self.imageInfo[indexPath.row]
+            let selectedImage = self.imageInfo[indexPath.section][indexPath.row]
 
             self.dataController.viewContext.delete(selectedImage)
             try? self.dataController.viewContext.save()
@@ -426,10 +336,6 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             self.dismiss(animated: true, completion: nil)
         }))
 
-//        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Default action"), style: .cancel, handler: { _ in
-//            NSLog("The \"OK\" alert occured.")
-//        }))
-////            addActionSheetForiPad(actionSheet: alert)
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -437,21 +343,21 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         let deleteItem = UITableViewRowAction(style: .destructive, title: Constants.CommandListText.delete, handler: { [weak self] (action, indexPath) in
             guard let self = self else {return}
             self.searchBar.resignFirstResponder()
-            let myphoto = self.imageInfo[indexPath.row]
+            let myphoto = self.imageInfo[indexPath.section][indexPath.row]
             let selectedImage = self.imageInfo
-            for selectedImage in selectedImage  {
-                if selectedImage == myphoto {
-                    let selectedImage = selectedImage
-                    self.dataController.viewContext.delete(selectedImage)
-                    try? self.dataController.viewContext.save()
-                    self.imageInfo.remove(at: indexPath.row)
-                    self.filteredData.remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: .bottom)
-                    self.dataController.viewContext.refreshAllObjects()
+//            for selectedImage in selectedImage  {
+//                if selectedImage == myphoto {
+//                    let selectedImage = selectedImage
+//                    self.dataController.viewContext.delete(selectedImage)
+//                    try? self.dataController.viewContext.save()
+//                    self.imageInfo.remove(at: indexPath.row)
+//                    self.filteredData.remove(at: indexPath.row)
+//                    tableView.deleteRows(at: [indexPath], with: .bottom)
+//                    self.dataController.viewContext.refreshAllObjects()
 //                    id
-                    tableView.reloadData()
-                }
-            }
+//                    tableView.reloadData()
+//                }
+//            }
             
         })
         if #available(iOS 13.0, *) {
@@ -474,23 +380,4 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         self.tableView.reloadData()
     }
 
-}
-
-extension BorrowTableViewController {
-//  public func addActionSheetForiPad(actionSheet: UIAlertController) {
-//    if let popoverPresentationController = actionSheet.popoverPresentationController {
-//      popoverPresentationController.sourceView = self.view
-//      popoverPresentationController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
-//      popoverPresentationController.permittedArrowDirections = []
-//    }
-//  }
-}
-extension BorrowTableViewController: GADBannerViewDelegate {
-    private func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        print("Recieved ad")
-    }
-    
-    public func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-        print(error)
-    }
 }

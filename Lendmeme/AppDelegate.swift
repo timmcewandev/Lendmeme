@@ -9,14 +9,13 @@
 import UIKit
 import CoreData
 import Firebase
-import GoogleMobileAds
 import UserNotifications
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
-//    var borrowInfo = [BorrowInfo]()
+    var borrowInfo = [[BorrowInfo]]()
   
     let dataController = DataController(modelName: "BorrowTime")
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -24,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Override point for customization after application launch.
         dataController.load()
         
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
         let navigationController = window?.rootViewController as! UINavigationController
         let BorrowTableViewStarter = navigationController.topViewController as! BorrowTableViewController
         BorrowTableViewStarter.dataController = dataController

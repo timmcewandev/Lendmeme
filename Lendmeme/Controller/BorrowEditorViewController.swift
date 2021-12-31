@@ -9,7 +9,6 @@ import Contacts
 import AVFoundation
 import BubbleTransition
 import FittedSheets
-import GoogleMobileAds
 
 class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIViewControllerTransitioningDelegate {
     
@@ -18,8 +17,9 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     var nameOfBorrower: String?
     let transition = BubbleTransition()
     var category: String?
-    var interstitial: GADInterstitial!
-    var imageInfo: [ImageInfo] = []
+    var imageInfo: [[ImageInfo]] = [[]]
+    var selectedBorrowedInfo: ImageInfo?
+    var onEdit = false
 //    let borrowTextAttributes: [String : Any] = [
 //        NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
 //        NSAttributedStringKey.strokeWidth.rawValue : -2.2,
@@ -28,7 +28,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     var datasource = Constants.Categories.gatherCategories()
     
     // MARK: Outlets
-    @IBOutlet weak var bannerView: GADBannerView!
+//    @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var shareOUT: UIBarButtonItem!
     @IBOutlet weak var phoneNumberTextField: UITextField!
@@ -46,11 +46,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        bannerView.adUnitID = "ca-app-pub-4726435113512089/3043786886" // real
-//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" //fake
-                bannerView.rootViewController = self
-        bannerView.delegate = self
-                bannerView.load(GADRequest())
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
         configureShareOut(isEnabled: false)
@@ -62,7 +57,20 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         phoneNumberTextField.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
         view.addSubview(phoneNumberTextField)
 
-        
+        if onEdit == true {
+            phoneNumberTextField.text = selectedBorrowedInfo?.bottomInfo
+            nameOfBorrowerTextField.text = selectedBorrowedInfo?.titleinfo
+            titleOfItemTextField.text = selectedBorrowedInfo?.nameOfPersonBorrowing
+           
+            if let memeImageData = selectedBorrowedInfo?.originalImage {
+                self.imageView.image = UIImage(data: memeImageData)
+                self.imageView.image?.fixedOrientation()
+                configureShareOut(isEnabled: true)
+            }else {
+                configureShareOut(isEnabled: false)
+            }
+            
+        }
 //        let returnButtonForPhoneNumber = UIButton(frame:CGRect(x: 0, y: 0, width: view.frame.size.width, height: 60))
 //        returnButtonForPhoneNumber.backgroundColor = #colorLiteral(red: 0.9815835357, green: 0.632611692, blue: 0.1478855908, alpha: 1)
 //        returnButtonForPhoneNumber.setTitle("Return", for: .normal)
@@ -82,18 +90,12 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
                 self.navigationController?.isNavigationBarHidden = true
                 configureCancelOut(isEnabled: false)
             }
-            imageInfo = result
+//            imageInfo = result
         }
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
         view.addGestureRecognizer(tapGesture)
-        bannerView.isHidden = false
-
-                
-                
-                        interstitial = GADInterstitial(adUnitID: "ca-app-pub-4726435113512089/5286806844") //real
-//                        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910") //fake
-                        let request = GADRequest()
-                        interstitial.load(request)
+        
+        print("\(selectedBorrowedInfo?.titleinfo!)")
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
@@ -119,19 +121,12 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     @IBAction func cancelBTN(_ sender: Any) {
+        self.selectedBorrowedInfo = nil
+        self.onEdit = false
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func share(sender: AnyObject) {
-                if imageInfo.count > 0 {
-                    let firstNum = arc4random() % 2
-                    let secondNum = arc4random() % 2
-                    if firstNum == secondNum {
-                        if (interstitial.isReady) {
-                            interstitial.present(fromRootViewController: self)
-                        }
-                    }
-                }
         self.save()
     }
     
@@ -190,7 +185,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.contentMode = .scaleAspectFit
-            imageView.image = pickedImage
+            imageView.image = pickedImage.fixedOrientation()
             insertImageContainer.isHidden = true
             self.configureShareOut(isEnabled: true)
         }
@@ -262,7 +257,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     func takeScreenshot() -> UIImage? {
         self.navigationController?.isNavigationBarHidden = true
         categoryLabel.isHidden = true
-        bannerView.isHidden = true
         var screenshotImage :UIImage?
         let keyWindow = UIApplication.shared.connectedScenes
                 .filter({$0.activationState == .foregroundActive})
@@ -281,49 +275,77 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     
     func save() {
         
-        if titleOfItemTextField.text == "" || nameOfBorrowerTextField.text == "" || phoneNumberTextField.text == "" {
-                for i in [titleOfItemTextField, nameOfBorrowerTextField, phoneNumberTextField] {
-                    if i?.text == "" {
-                        i?.layer.borderWidth = 2
-                        i?.layer.borderColor = UIColor.systemPink.cgColor
-                    } else {
-                        i?.layer.borderWidth = 0
-                        i?.layer.borderColor = UIColor.label.cgColor
+        if onEdit == true {
+            self.insertImageContainer.isHidden = true
+            guard let memedImage = takeScreenshot() else { return }
+            guard let originalImage = imageView.image else { return }
+            var phone = phoneNumberTextField.text
+            phone = phone?.replacingOccurrences(of: "[ |()-]", with: "", options: [.regularExpression])
+            
+            selectedBorrowedInfo?.titleinfo = nameOfBorrowerTextField.text
+            selectedBorrowedInfo?.nameOfPersonBorrowing = titleOfItemTextField.text
+            selectedBorrowedInfo?.bottomInfo = phone
+            selectedBorrowedInfo?.originalImage = UIImagePNGRepresentation(originalImage)
+            
+            selectedBorrowedInfo?.imageData = UIImagePNGRepresentation(memedImage)
+            onEdit = false
+            selectedBorrowedInfo = nil
+            try? self.dataController.viewContext.save()
+            self.toolbar.isHidden = true
+            self.dataController.viewContext.refreshAllObjects()
+        } else {
+            if titleOfItemTextField.text == "" || nameOfBorrowerTextField.text == "" || phoneNumberTextField.text == "" {
+                    for i in [titleOfItemTextField, nameOfBorrowerTextField, phoneNumberTextField] {
+                        if i?.text == "" {
+                            i?.layer.borderWidth = 2
+                            i?.layer.borderColor = UIColor.systemPink.cgColor
+                        } else {
+                            i?.layer.borderWidth = 0
+                            i?.layer.borderColor = UIColor.label.cgColor
+                        }
                     }
-                }
-            let alert = UIAlertController(title: "", message: "Missing information in textfield", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alert, animated: true)
-            return
-        }
-        for i in [titleOfItemTextField, nameOfBorrowerTextField, phoneNumberTextField] {
-            if i?.text != "" {
-                    i?.layer.borderWidth = 0
-                i?.layer.borderColor = UIColor.label.cgColor
+                let alert = UIAlertController(title: "", message: "Missing information in textfield", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                present(alert, animated: true)
+                return
             }
+            for i in [titleOfItemTextField, nameOfBorrowerTextField, phoneNumberTextField] {
+                if i?.text != "" {
+                        i?.layer.borderWidth = 0
+                    i?.layer.borderColor = UIColor.label.cgColor
+                }
+            }
+            toolbar.isHidden = true
+            guard let memedImage = takeScreenshot() else { return }
+            guard let originalImage = imageView.image else { return }
+            var phone = phoneNumberTextField.text
+            phone = phone?.replacingOccurrences(of: "[ |()-]", with: "", options: [.regularExpression])
+            let borrowInfo = BorrowInfo(topString: self.titleOfItemTextField.text ?? "None", bottomString: phone, titleString: nameOfBorrowerTextField.text ?? "", originalImage: originalImage, borrowImage: memedImage, hasBeenReturned: false, timeHasExpired: false)
+            
+            let getImageInfo = ImageInfo(context: dataController.viewContext)
+            getImageInfo.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)
+            
+            getImageInfo.nameOfPersonBorrowing = self.titleOfItemTextField.text ?? "None"
+            getImageInfo.titleinfo = borrowInfo.titleString
+            getImageInfo.bottomInfo = borrowInfo.bottomString
+            if let selectedCategpry = category {
+                getImageInfo.category = selectedCategpry
+            }
+            getImageInfo.originalImage = UIImagePNGRepresentation(borrowInfo.originalImage)
+            getImageInfo.creationDate = Date()
+            getImageInfo.reminderDate = nil
+            getImageInfo.hasBeenReturned = false
+            getImageInfo.timeHasExpired = false
+            var date = Date()
+            date = Calendar.current.date(bySettingHour: 9, minute: 00, second: 00, of: date)!
+            let nextDate = Calendar.current.date(byAdding: .day, value: 7, to: date)
+            getImageInfo.reminderDate = nextDate
+            print("gggggg \(nextDate)")
+            let delegate = UIApplication.shared.delegate as? AppDelegate
+            delegate?.scheduleNotification(at: getImageInfo.reminderDate!, name: getImageInfo.titleinfo ?? "", memedImage: getImageInfo)
+            try? dataController.viewContext.save()
+            self.toolbar.isHidden = true
         }
-        toolbar.isHidden = true
-        guard let memedImage = takeScreenshot() else { return }
-        guard let originalImage = imageView.image else { return }
-        var phone = phoneNumberTextField.text
-        phone = phone?.replacingOccurrences(of: "[ |()-]", with: "", options: [.regularExpression])
-        let borrowInfo = BorrowInfo(topString: self.titleOfItemTextField.text ?? "None", bottomString: phone, titleString: nameOfBorrowerTextField.text ?? "", originalImage: originalImage, borrowImage: memedImage, hasBeenReturned: false, timeHasExpired: false)
-        
-        let getImageInfo = ImageInfo(context: dataController.viewContext)
-        getImageInfo.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)
-        getImageInfo.nameOfPersonBorrowing = self.titleOfItemTextField.text ?? "None"
-        getImageInfo.titleinfo = borrowInfo.titleString
-        getImageInfo.bottomInfo = borrowInfo.bottomString
-        if let selectedCategpry = category {
-            getImageInfo.category = selectedCategpry
-        }
-        getImageInfo.creationDate = Date()
-        getImageInfo.reminderDate = nil
-        getImageInfo.hasBeenReturned = false
-        getImageInfo.timeHasExpired = false
-        try? dataController.viewContext.save()
-        self.toolbar.isHidden = true
-        
         navigationController?.popViewController(animated: true)
     }
     
@@ -464,18 +486,68 @@ extension BorrowEditorViewController: UIPickerViewDelegate, UIPickerViewDataSour
 
     }
 }
+extension UIImage {
+    /// Fix image orientaton to protrait up
+    func fixedOrientation() -> UIImage? {
+        guard imageOrientation != UIImage.Orientation.up else {
+            // This is default orientation, don't need to do anything
+            return self.copy() as? UIImage
+        }
 
-extension BorrowEditorViewController: GADBannerViewDelegate {
-    private func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        print("Recieved ad")
-    }
+        guard let cgImage = self.cgImage else {
+            // CGImage is not available
+            return nil
+        }
 
-    public func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-        print(error)
+        guard let colorSpace = cgImage.colorSpace, let ctx = CGContext(data: nil, width: Int(size.width), height: Int(size.height), bitsPerComponent: cgImage.bitsPerComponent, bytesPerRow: 0, space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else {
+            return nil // Not able to create CGContext
+        }
+
+        var transform: CGAffineTransform = CGAffineTransform.identity
+
+        switch imageOrientation {
+        case .down, .downMirrored:
+            transform = transform.translatedBy(x: size.width, y: size.height)
+            transform = transform.rotated(by: CGFloat.pi)
+        case .left, .leftMirrored:
+            transform = transform.translatedBy(x: size.width, y: 0)
+            transform = transform.rotated(by: CGFloat.pi / 2.0)
+        case .right, .rightMirrored:
+            transform = transform.translatedBy(x: 0, y: size.height)
+            transform = transform.rotated(by: CGFloat.pi / -2.0)
+        case .up, .upMirrored:
+            break
+        @unknown default:
+            fatalError("Missing...")
+            break
+        }
+
+        // Flip image one more time if needed to, this is to prevent flipped image
+        switch imageOrientation {
+        case .upMirrored, .downMirrored:
+            transform = transform.translatedBy(x: size.width, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
+        case .leftMirrored, .rightMirrored:
+            transform = transform.translatedBy(x: size.height, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
+        case .up, .down, .left, .right:
+            break
+        @unknown default:
+            fatalError("Missing...")
+            break
+        }
+
+        ctx.concatenate(transform)
+
+        switch imageOrientation {
+        case .left, .leftMirrored, .right, .rightMirrored:
+            ctx.draw(cgImage, in: CGRect(x: 0, y: 0, width: size.height, height: size.width))
+        default:
+            ctx.draw(cgImage, in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+            break
+        }
+
+        guard let newCGImage = ctx.makeImage() else { return nil }
+        return UIImage.init(cgImage: newCGImage, scale: 1, orientation: .up)
     }
 }
-
-
-
-
-

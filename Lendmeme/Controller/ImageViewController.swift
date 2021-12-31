@@ -10,7 +10,7 @@ import Foundation
 class ImageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UNUserNotificationCenterDelegate  {
     // MARK: - Variables
     var selectedDate = Date()
-    var receivedItem: [ImageInfo] = []
+    var receivedItem: [[ImageInfo]] = [[]]
     // MARK: - Outlets
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var selectedDateLabel: UILabel!
