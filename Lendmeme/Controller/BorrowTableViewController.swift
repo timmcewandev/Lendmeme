@@ -26,7 +26,7 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
         DispatchQueue.main.async {
             self.tableView.reloadData()
             if self.moreThanOne == 1 {
-//                self.refreshAll()
+                //                self.refreshAll()
             }
         }
         
@@ -38,7 +38,7 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var dropdown: UITextField!
     @IBOutlet weak var categoriesButton: UITextField!
-
+    
     
     // MARK: - Properties
     let button = UIButton()
@@ -62,7 +62,7 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
         let nib = UINib(nibName: Constants.Cell.borrowTableViewCell, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: Constants.Cell.borrowTableViewCell)
     }
-
+    
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,57 +76,59 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
             let hasBeenReturned = result.filter ({ return $0.hasBeenReturned })
             let hasNotBeenReturned = result.filter ({ return !$0.hasBeenReturned })
             imageInfo = [hasNotBeenReturned, hasBeenReturned]
-            filteredData = imageInfo
+            //            filteredData = imageInfo
         }
         navigationItem.hidesSearchBarWhenScrolling = false
-//        self.refreshAll()
-//        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-           refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         refreshControl.backgroundColor = .systemBlue
         refreshControl.tintColor = .white
-           tableView.addSubview(refreshControl)
+        tableView.addSubview(refreshControl)
         tableView.reloadData()
     }
     @objc func refresh(_ sender: AnyObject) {
-       // Code to refresh table view
+        // Code to refresh table view
         self.tableView.reloadData()
         refreshControl.endRefreshing()
     }
     @objc func btnShowHideTapped(_ sender: AnyObject) {
-       // Code to refresh table view
+        // Code to refresh table view
         self.performSegue(withIdentifier: Constants.Segue.toStarterViewController, sender: self)
     }
     @objc func trashAll(_ sender: AnyObject) {
-        for (indexer, element) in imageInfo.enumerated() {
-            if indexer == 2 {
-//                let me = imageInfo[indexer][element];)
-            }
+        if self.imageInfo[1].isEmpty { return }
+        let alert = UIAlertController(title: "⚠️ Warning ⚠️", message: "This will delete all items in returned section", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Nervermind", style: .default, handler: { _ in
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Delete all", style: .destructive, handler: { _ in
+            
+        }))
+        
+        present(alert, animated: true) {
+            
         }
-        try? dataController.viewContext.save()
-        self.dataController.viewContext.refreshAllObjects()
-        self.tableView.reloadData()
     }
-//    func refreshAll(interval:TimeInterval = 30) {
-//        guard interval > 0 else { return }
-//        DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
-//            let totalReminderDates = self.imageInfo.contains(where: { image in
-//                if image.reminderDate != nil {
-//                    return true
-//                }else {
-//                    return false
-//                }
-//            })
-//            if totalReminderDates == true {
-//                self.moreThanOne = 1
-//                self.refreshAll(interval: interval)
-//                self.tableView.reloadData()
-//            } else {
-//                self.moreThanOne = 0
-//                self.tableView.reloadData()
-//                return
-//            }
-//        }
-//    }
+    //    func refreshAll(interval:TimeInterval = 30) {
+    //        guard interval > 0 else { return }
+    //        DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
+    //            let totalReminderDates = self.imageInfo.contains(where: { image in
+    //                if image.reminderDate != nil {
+    //                    return true
+    //                }else {
+    //                    return false
+    //                }
+    //            })
+    //            if totalReminderDates == true {
+    //                self.moreThanOne = 1
+    //                self.refreshAll(interval: interval)
+    //                self.tableView.reloadData()
+    //            } else {
+    //                self.moreThanOne = 0
+    //                self.tableView.reloadData()
+    //                return
+    //            }
+    //        }
+    //    }
     // MARK: - Actions
     
     
@@ -155,67 +157,69 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
 
 extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource {
     
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         if section == 0 {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
             return self.imageInfo[0].count
-         } else if section == 1 {
-             return self.imageInfo[1].count
-         } else {
-             return 0
-         }
+        } else if section == 1 {
+            return self.imageInfo[1].count
+        } else {
+            return 0
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-         return headerTitles.count
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return headerTitles.count
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
         let verticalPadding: CGFloat = 2
-
+        
         let maskLayer = CALayer()
         maskLayer.backgroundColor = UIColor.black.cgColor
         maskLayer.frame = CGRect(x: cell.bounds.origin.x, y: cell.bounds.origin.y, width: cell.bounds.width, height: cell.bounds.height).insetBy(dx: 0, dy: verticalPadding/2)
         cell.layer.mask = maskLayer
     }
-
-
+    
+    
     func tableView(_ tableView: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100))
         // code for adding centered title
         let showHideButton: UIButton = UIButton(frame: CGRect(x:headerView.frame.size.width - 100, y:12, width:100, height:25))
         let trashHideButton: UIButton = UIButton(frame: CGRect(x:headerView.frame.size.width - 100, y:12, width:100, height:25))
-           let headerLabel = UILabel(frame: CGRect(x: 12, y: 0, width:
-               tableView.bounds.size.width, height: 50))
+        let headerLabel = UILabel(frame: CGRect(x: 12, y: 0, width:
+                                                    tableView.bounds.size.width, height: 50))
         headerLabel.textColor = .label
         headerView.backgroundColor = .systemBackground
         headerLabel.text = "\(headerTitles[section]): \(self.imageInfo[section].count)"
         headerLabel.textAlignment = .left
-           headerView.addSubview(headerLabel)
+        headerView.addSubview(headerLabel)
         let config = UIImage.SymbolConfiguration(
             pointSize: 25, weight: .thin, scale: .medium)
-           // code for adding button to right corner of section header
+        // code for adding button to right corner of section header
+        
         if headerTitles[section] != "Returned" {
             let image = UIImage(systemName: "plus", withConfiguration: config)
             showHideButton.setImage(image, for: .normal)
             showHideButton.addTarget(self, action: #selector(btnShowHideTapped), for: .touchUpInside)
             headerView.addSubview(showHideButton)
         }else {
+            if self.imageInfo[1].isEmpty { return headerView }
             let image = UIImage(systemName: "trash", withConfiguration: config)
             trashHideButton.setImage(image, for: .normal)
             trashHideButton.addTarget(self, action: #selector(trashAll), for: .touchUpInside)
             headerView.addSubview(trashHideButton)
         }
-           
         
-           return headerView
+        
+        return headerView
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.borrowTableViewCell, for: indexPath) as? BorrowTableViewCell
@@ -231,11 +235,11 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedImage = self.imageInfo[indexPath.section][indexPath.row]
         self.searchBar.resignFirstResponder()
-
+        
         let alert = UIAlertController(title: nil, message: nil , preferredStyle: .actionSheet)
         let markImageAsReturned = selectedImage
-
-
+        
+        
         if markImageAsReturned.hasBeenReturned == false {
             alert.addAction(UIAlertAction(title: Constants.CommandListText.markAsReturned, style: .default, handler: { _ in
                 let markImageAsReturned = selectedImage
@@ -243,13 +247,14 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 markImageAsReturned.hasBeenReturned = true
                 markImageAsReturned.reminderDate = nil
                 try? self.dataController.viewContext.save()
+                self.dataController.viewContext.refreshAllObjects()
                 
                 tableView.cellForRow(at: indexPath)
                 let imageInfoSorted = Array(self.imageInfo.joined())
                 let hasBeenReturned = imageInfoSorted.filter ({ return $0.hasBeenReturned })
                 let hasNotBeenReturned = imageInfoSorted.filter ({ return !$0.hasBeenReturned })
                 self.imageInfo = [hasNotBeenReturned, hasBeenReturned]
-                self.filteredData = [hasNotBeenReturned, hasBeenReturned]
+                //                self.filteredData = [hasNotBeenReturned, hasBeenReturned]
                 self.dataController.viewContext.refreshAllObjects()
                 self.tableView.reloadData()
             }))
@@ -295,7 +300,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                     composeVC.addAttachmentData(image, typeIdentifier: "public.data", filename: "lendmeme.png")
                 }
                 composeVC.recipients = ["\(number)"]
-
+                
                 if MFMessageComposeViewController.canSendText() {
                     self.present(composeVC, animated: true, completion: nil)
                 }
@@ -307,20 +312,20 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 controller.myImages = UIImage(data: imageInfo)
             }
             if let sheet = controller.sheetPresentationController {
-                    sheet.detents = [.large()]
-                    sheet.prefersGrabberVisible = true
-                    sheet.largestUndimmedDetentIdentifier = .large
-                    sheet.prefersScrollingExpandsWhenScrolledToEdge = false
-                    sheet.prefersEdgeAttachedInCompactHeight = true
-                    sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
-                }
+                sheet.detents = [.large()]
+                sheet.prefersGrabberVisible = true
+                sheet.largestUndimmedDetentIdentifier = .large
+                sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+                sheet.prefersEdgeAttachedInCompactHeight = true
+                sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+            }
             self.present(controller, animated: true, completion: nil)
-
+            
         }))
-
+        
         alert.addAction(UIAlertAction(title: Constants.CommandListText.delete, style: .destructive, handler: { _ in
             let selectedImage = self.imageInfo[indexPath.section][indexPath.row]
-
+            
             self.dataController.viewContext.delete(selectedImage)
             try? self.dataController.viewContext.save()
             self.imageInfo.remove(at: indexPath.row)
@@ -335,7 +340,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
             self.dismiss(animated: true, completion: nil)
         }))
-
+        
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -345,19 +350,19 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             self.searchBar.resignFirstResponder()
             let myphoto = self.imageInfo[indexPath.section][indexPath.row]
             let selectedImage = self.imageInfo
-//            for selectedImage in selectedImage  {
-//                if selectedImage == myphoto {
-//                    let selectedImage = selectedImage
-//                    self.dataController.viewContext.delete(selectedImage)
-//                    try? self.dataController.viewContext.save()
-//                    self.imageInfo.remove(at: indexPath.row)
-//                    self.filteredData.remove(at: indexPath.row)
-//                    tableView.deleteRows(at: [indexPath], with: .bottom)
-//                    self.dataController.viewContext.refreshAllObjects()
-//                    id
-//                    tableView.reloadData()
-//                }
-//            }
+            //            for selectedImage in selectedImage  {
+            //                if selectedImage == myphoto {
+            //                    let selectedImage = selectedImage
+            //                    self.dataController.viewContext.delete(selectedImage)
+            //                    try? self.dataController.viewContext.save()
+            //                    self.imageInfo.remove(at: indexPath.row)
+            //                    self.filteredData.remove(at: indexPath.row)
+            //                    tableView.deleteRows(at: [indexPath], with: .bottom)
+            //                    self.dataController.viewContext.refreshAllObjects()
+            //                    id
+            //                    tableView.reloadData()
+            //                }
+            //            }
             
         })
         if #available(iOS 13.0, *) {
@@ -365,8 +370,8 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         } else {
             // Fallback on earlier versions
         }
-
-
+        
+        
         self.searchBar.resignFirstResponder()
         return [deleteItem]
     }
@@ -379,5 +384,5 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         self.dataController.viewContext.refreshAllObjects()
         self.tableView.reloadData()
     }
-
+    
 }
