@@ -101,12 +101,59 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
             
         }))
         alert.addAction(UIAlertAction(title: "Delete all", style: .destructive, handler: { _ in
-            
+            self.deleteAllMemes()
         }))
         
         present(alert, animated: true) {
             
         }
+    }
+    
+    func deleteAllMemes() {
+        let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
+            
+        fetchRequest.shouldRefreshRefetchedObjects = true
+        let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        if let result = try? self.dataController.viewContext.fetch(fetchRequest){
+            var hasBeenReturned = result.filter ({ return $0.hasBeenReturned })
+            let hasNotBeenReturned = result.filter ({ return !$0.hasBeenReturned })
+            for i in hasBeenReturned {
+                self.dataController.viewContext.delete(i)
+            }
+            try? self.dataController.viewContext.save()
+            self.dataController.viewContext.refreshAllObjects()
+            hasBeenReturned = []
+            self.imageInfo = [hasNotBeenReturned, hasBeenReturned]
+            
+            self.tableView.reloadData()
+            //            filteredData = imageInfo
+        }
+        
+    }
+    func deleteSelectedMeme(selectedMeme: ImageInfo, indexPath: IndexPath) {
+        
+        self.dataController.viewContext.delete(selectedMeme)
+        try? self.dataController.viewContext.save()
+        self.dataController.viewContext.refreshAllObjects()
+        let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
+            
+        fetchRequest.shouldRefreshRefetchedObjects = true
+        let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        if let result = try? self.dataController.viewContext.fetch(fetchRequest){
+            var hasBeenReturned = result.filter ({ return $0.hasBeenReturned })
+            let hasNotBeenReturned = result.filter ({ return !$0.hasBeenReturned })
+            hasBeenReturned = []
+            self.imageInfo = [hasNotBeenReturned, hasBeenReturned]
+            
+//        self.imageInfo.remove(at: indexPath.row)
+//        tableView.deleteRows(at: [indexPath], with: .bottom)
+        if self.imageInfo.count == 0 {
+            self.performSegue(withIdentifier: Constants.Segue.toStarterViewController, sender: self)
+        }
+        self.tableView.reloadData()
+    }
     }
     //    func refreshAll(interval:TimeInterval = 30) {
     //        guard interval > 0 else { return }
@@ -196,7 +243,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                                                     tableView.bounds.size.width, height: 50))
         headerLabel.textColor = .label
         headerView.backgroundColor = .systemBackground
-        headerLabel.text = "\(headerTitles[section]): \(self.imageInfo[section].count)"
+        headerLabel.text = "\(headerTitles[section])"
         headerLabel.textAlignment = .left
         headerView.addSubview(headerLabel)
         let config = UIImage.SymbolConfiguration(
@@ -325,17 +372,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         
         alert.addAction(UIAlertAction(title: Constants.CommandListText.delete, style: .destructive, handler: { _ in
             let selectedImage = self.imageInfo[indexPath.section][indexPath.row]
-            
-            self.dataController.viewContext.delete(selectedImage)
-            try? self.dataController.viewContext.save()
-            self.imageInfo.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .bottom)
-            self.filteredData.remove(at: indexPath.row)
-            self.dataController.viewContext.refreshAllObjects()
-            if self.imageInfo.count == 0 {
-                self.performSegue(withIdentifier: Constants.Segue.toStarterViewController, sender: self)
-            }
-            self.tableView.reloadData()
+            self.deleteSelectedMeme(selectedMeme: selectedImage, indexPath: indexPath)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
             self.dismiss(animated: true, completion: nil)
@@ -348,21 +385,8 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         let deleteItem = UITableViewRowAction(style: .destructive, title: Constants.CommandListText.delete, handler: { [weak self] (action, indexPath) in
             guard let self = self else {return}
             self.searchBar.resignFirstResponder()
-            let myphoto = self.imageInfo[indexPath.section][indexPath.row]
-            let selectedImage = self.imageInfo
-            //            for selectedImage in selectedImage  {
-            //                if selectedImage == myphoto {
-            //                    let selectedImage = selectedImage
-            //                    self.dataController.viewContext.delete(selectedImage)
-            //                    try? self.dataController.viewContext.save()
-            //                    self.imageInfo.remove(at: indexPath.row)
-            //                    self.filteredData.remove(at: indexPath.row)
-            //                    tableView.deleteRows(at: [indexPath], with: .bottom)
-            //                    self.dataController.viewContext.refreshAllObjects()
-            //                    id
-            //                    tableView.reloadData()
-            //                }
-            //            }
+            let selectedMeme = self.imageInfo[indexPath.section][indexPath.row]
+            self.deleteSelectedMeme(selectedMeme: selectedMeme, indexPath: indexPath)
             
         })
         if #available(iOS 13.0, *) {
