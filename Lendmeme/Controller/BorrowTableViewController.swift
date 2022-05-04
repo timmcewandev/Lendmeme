@@ -4,7 +4,6 @@
 //
 
 import UIKit
-
 import CoreData
 import MessageUI
 
@@ -108,7 +107,7 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
             
         }
     }
-    
+    // Mark: All fetch and delete memes
     func deleteAllMemes() {
         let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
             

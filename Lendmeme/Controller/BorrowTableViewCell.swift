@@ -25,6 +25,9 @@ class BorrowTableViewCell: UITableViewCell, getDateForReminderDelegate {
     
     @IBOutlet var myImageView: UIImageView!
     @IBOutlet weak var cover1: UIView!
+    @IBOutlet weak var titleText: UILabel!
+    
+   
     
     var delegate: passBackRowAndDateable?
     
@@ -33,6 +36,7 @@ class BorrowTableViewCell: UITableViewCell, getDateForReminderDelegate {
             if let memeImageData = imageCell.imageData {
                 myImageView.image = UIImage(data: memeImageData)
                 myImageView.isOpaque = true
+                titleText.text = imageCell.titleinfo
             }
         }
     }
@@ -66,6 +70,7 @@ extension UIResponder {
     func next<U: UIResponder>(of type: U.Type = U.self) -> U? {
         return self.next.flatMap({ $0 as? U ?? $0.next() })
     }
+    
 }
 extension UITableViewCell {
     var tableView: UITableView? {
