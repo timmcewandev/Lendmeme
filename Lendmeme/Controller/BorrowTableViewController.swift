@@ -9,7 +9,7 @@ import MessageUI
 
 class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMessageComposeViewControllerDelegate, UNUserNotificationCenterDelegate {
     func getRowAndDate(date: Date, row: Int, section: Int) {
-        for (index, imageInfo) in imageInfo.enumerated() {
+        for (_, imageInfo) in imageInfo.enumerated() {
             if imageInfo == self.imageInfo[row] {
                 imageInfo[row].reminderDate = date
                 imageInfo[row].timeHasExpired = false

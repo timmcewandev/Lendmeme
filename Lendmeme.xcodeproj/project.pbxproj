@@ -35,6 +35,13 @@
 			remoteGlobalIDString = 9BDD35CE1FD88B0C005ADBCD;
 			remoteInfo = Lendmeme;
 		};
+		849BA0632866061000350EAB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9BDD35C71FD88B0C005ADBCD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9BDD35CE1FD88B0C005ADBCD;
+			remoteInfo = Lendmeme;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +54,7 @@
 		3C6F0236775630F23B2A7F46 /* Pods_Lendmeme.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lendmeme.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		841E4F7B25F6F3F10014DD58 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		84532720273796F70070ABD8 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		849BA05F2866061000350EAB /* LendmemeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LendmemeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84CD99E626A90886003A3EFA /* Lendmeme.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Lendmeme.entitlements; path = "/Users/timmcewan/Desktop/iOS development/Lendmeme/Lendmeme/Lendmeme.entitlements"; sourceTree = "<absolute>"; };
 		9B088C0A200DB28F00601CA9 /* BorrowInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowInfo.swift; sourceTree = "<group>"; };
 		9B39AA8922F40B3B007EF340 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
@@ -66,6 +74,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		22452C0124CEBE4100899312 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		849BA05C2866061000350EAB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -166,6 +181,7 @@
 			children = (
 				9BDD35CF1FD88B0D005ADBCD /* Lendmeme.app */,
 				22452C0424CEBE4100899312 /* LendmemeUnitTests.xctest */,
+				849BA05F2866061000350EAB /* LendmemeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -206,6 +222,24 @@
 			productReference = 22452C0424CEBE4100899312 /* LendmemeUnitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		849BA05E2866061000350EAB /* LendmemeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 849BA0672866061000350EAB /* Build configuration list for PBXNativeTarget "LendmemeTests" */;
+			buildPhases = (
+				849BA05B2866061000350EAB /* Sources */,
+				849BA05C2866061000350EAB /* Frameworks */,
+				849BA05D2866061000350EAB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				849BA0642866061000350EAB /* PBXTargetDependency */,
+			);
+			name = LendmemeTests;
+			productName = LendmemeTests;
+			productReference = 849BA05F2866061000350EAB /* LendmemeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		9BDD35CE1FD88B0C005ADBCD /* Lendmeme */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BDD35E11FD88B0D005ADBCD /* Build configuration list for PBXNativeTarget "Lendmeme" */;
@@ -232,12 +266,17 @@
 		9BDD35C71FD88B0C005ADBCD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1150;
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = sudo;
 				TargetAttributes = {
 					22452C0324CEBE4100899312 = {
 						CreatedOnToolsVersion = 11.5;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 9BDD35CE1FD88B0C005ADBCD;
+					};
+					849BA05E2866061000350EAB = {
+						CreatedOnToolsVersion = 13.2.1;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 9BDD35CE1FD88B0C005ADBCD;
 					};
@@ -267,12 +306,20 @@
 			targets = (
 				9BDD35CE1FD88B0C005ADBCD /* Lendmeme */,
 				22452C0324CEBE4100899312 /* LendmemeUnitTests */,
+				849BA05E2866061000350EAB /* LendmemeTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		22452C0224CEBE4100899312 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		849BA05D2866061000350EAB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -375,6 +422,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		849BA05B2866061000350EAB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9BDD35CB1FD88B0C005ADBCD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -401,6 +455,11 @@
 			isa = PBXTargetDependency;
 			target = 9BDD35CE1FD88B0C005ADBCD /* Lendmeme */;
 			targetProxy = 22452C0924CEBE4100899312 /* PBXContainerItemProxy */;
+		};
+		849BA0642866061000350EAB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9BDD35CE1FD88B0C005ADBCD /* Lendmeme */;
+			targetProxy = 849BA0632866061000350EAB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -461,6 +520,57 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.themcewantech.www.LendmemeUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lendmeme.app/Lendmeme";
+			};
+			name = Release;
+		};
+		849BA0652866061000350EAB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A9UMG393DW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mcewantech.LendmemeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lendmeme.app/Lendmeme";
+			};
+			name = Debug;
+		};
+		849BA0662866061000350EAB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A9UMG393DW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mcewantech.LendmemeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lendmeme.app/Lendmeme";
@@ -626,6 +736,15 @@
 			buildConfigurations = (
 				22452C0B24CEBE4100899312 /* Debug */,
 				22452C0C24CEBE4100899312 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		849BA0672866061000350EAB /* Build configuration list for PBXNativeTarget "LendmemeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				849BA0652866061000350EAB /* Debug */,
+				849BA0662866061000350EAB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
