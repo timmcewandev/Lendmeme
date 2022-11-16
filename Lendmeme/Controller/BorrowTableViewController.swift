@@ -7,7 +7,8 @@ import UIKit
 import CoreData
 import MessageUI
 
-class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMessageComposeViewControllerDelegate, UNUserNotificationCenterDelegate {
+class BorrowTableViewController: UIViewController, MFMessageComposeViewControllerDelegate, UNUserNotificationCenterDelegate {
+    
     func getRowAndDate(date: Date, row: Int, section: Int) {
         for (_, imageInfo) in imageInfo.enumerated() {
             if imageInfo == self.imageInfo[row] {
@@ -29,7 +30,7 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
                 //                self.refreshAll()
             }
         }
-        
+
     }
     let headerTitles = ["Not Returned", "Returned"]
     let refreshControl = UIRefreshControl()

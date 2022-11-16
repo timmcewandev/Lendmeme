@@ -13,7 +13,6 @@
 		227E2A692510638C005E5074 /* BorrowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 227E2A672510638C005E5074 /* BorrowTableViewCell.xib */; };
 		22F2ED8B249DB64200CBAA6B /* PVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F2ED8A249DB64200CBAA6B /* PVController.swift */; };
 		841E4F7C25F6F3F10014DD58 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E4F7B25F6F3F10014DD58 /* Constants.swift */; };
-		84532721273796F70070ABD8 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84532720273796F70070ABD8 /* DatePickerViewController.swift */; };
 		847E4F7128ED0E8100B93426 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E4F7028ED0E8100B93426 /* Utilities.swift */; };
 		9B088C0B200DB28F00601CA9 /* BorrowInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B088C0A200DB28F00601CA9 /* BorrowInfo.swift */; };
 		9B39AA8A22F40B3B007EF340 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B39AA8922F40B3B007EF340 /* DataController.swift */; };
@@ -54,7 +53,6 @@
 		22F2ED8A249DB64200CBAA6B /* PVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVController.swift; sourceTree = "<group>"; };
 		3C6F0236775630F23B2A7F46 /* Pods_Lendmeme.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lendmeme.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		841E4F7B25F6F3F10014DD58 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		84532720273796F70070ABD8 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		847E4F7028ED0E8100B93426 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		849BA05F2866061000350EAB /* LendmemeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LendmemeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84CD99E626A90886003A3EFA /* Lendmeme.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Lendmeme.entitlements; path = "/Users/timmcewan/Desktop/iOS development/Lendmeme/Lendmeme/Lendmeme.entitlements"; sourceTree = "<absolute>"; };
@@ -124,7 +122,6 @@
 				9B518CA82229CDDC004B1050 /* ImageViewController.swift */,
 				22F2ED8A249DB64200CBAA6B /* PVController.swift */,
 				227E2A662510638C005E5074 /* BorrowTableViewCell.swift */,
-				84532720273796F70070ABD8 /* DatePickerViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -445,7 +442,6 @@
 				220FD9362513023000C63EC3 /* BorrowTableViewExtension.swift in Sources */,
 				9B518CA92229CDDC004B1050 /* ImageViewController.swift in Sources */,
 				9B39AA8A22F40B3B007EF340 /* DataController.swift in Sources */,
-				84532721273796F70070ABD8 /* DatePickerViewController.swift in Sources */,
 				9BDD35D31FD88B0D005ADBCD /* AppDelegate.swift in Sources */,
 				22F2ED8B249DB64200CBAA6B /* PVController.swift in Sources */,
 				841E4F7C25F6F3F10014DD58 /* Constants.swift in Sources */,

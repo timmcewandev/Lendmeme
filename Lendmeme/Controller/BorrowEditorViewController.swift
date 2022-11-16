@@ -271,7 +271,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     func save() {
-        
         if onEdit == true {
             self.insertImageContainer.isHidden = true
             guard let memedImage = takeScreenshot() else { return }
@@ -405,7 +404,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         
     }
     func accessoryView() -> UIView {
-        
         let view = UIView()
         view.backgroundColor = .systemBlue
         
