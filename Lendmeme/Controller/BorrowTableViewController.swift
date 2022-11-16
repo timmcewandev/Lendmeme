@@ -11,15 +11,16 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
     func getRowAndDate(date: Date, row: Int, section: Int) {
         for (_, imageInfo) in imageInfo.enumerated() {
             if imageInfo == self.imageInfo[row] {
-                imageInfo[row].reminderDate = date
-                imageInfo[row].timeHasExpired = false
-                if imageInfo[row].reminderDate != nil {
+                let memeInfo = imageInfo[row]
+                memeInfo.reminderDate = date
+                memeInfo.timeHasExpired = false
+                if memeInfo.reminderDate != nil {
                     self.moreThanOne += 1
                 }
                 try? self.dataController.viewContext.save()
                 self.dataController.viewContext.refreshAllObjects()
                 let delegate = UIApplication.shared.delegate as? AppDelegate
-                delegate?.scheduleNotification(at: date, name: imageInfo[row].titleinfo ?? "", memedImage: imageInfo[row])
+                delegate?.scheduleNotification(at: date, name: memeInfo.titleinfo ?? "", memedImage: memeInfo)
             }
         }
         DispatchQueue.main.async {
@@ -62,8 +63,6 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
         tableView.register(nib, forCellReuseIdentifier: Constants.Cell.borrowTableViewCell)
     }
     
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
@@ -77,7 +76,7 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
             imageInfo = [hasNotBeenReturned, hasBeenReturned]
             //            filteredData = imageInfo
         }
-        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.hidesSearchBarWhenScrolling = true
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         refreshControl.backgroundColor = .systemBlue
         refreshControl.tintColor = .white
@@ -145,36 +144,13 @@ class BorrowTableViewController: UIViewController, passBackRowAndDateable, MFMes
             let hasNotBeenReturned = result.filter ({ return !$0.hasBeenReturned })
             hasBeenReturned = []
             self.imageInfo = [hasNotBeenReturned, hasBeenReturned]
-            
-//        self.imageInfo.remove(at: indexPath.row)
-//        tableView.deleteRows(at: [indexPath], with: .bottom)
+
         if self.imageInfo.count == 0 {
             self.performSegue(withIdentifier: Constants.Segue.toStarterViewController, sender: self)
         }
         self.tableView.reloadData()
     }
     }
-    //    func refreshAll(interval:TimeInterval = 30) {
-    //        guard interval > 0 else { return }
-    //        DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
-    //            let totalReminderDates = self.imageInfo.contains(where: { image in
-    //                if image.reminderDate != nil {
-    //                    return true
-    //                }else {
-    //                    return false
-    //                }
-    //            })
-    //            if totalReminderDates == true {
-    //                self.moreThanOne = 1
-    //                self.refreshAll(interval: interval)
-    //                self.tableView.reloadData()
-    //            } else {
-    //                self.moreThanOne = 0
-    //                self.tableView.reloadData()
-    //                return
-    //            }
-    //        }
-    //    }
     // MARK: - Actions
     
     
@@ -238,6 +214,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         // code for adding centered title
         let showHideButton: UIButton = UIButton(frame: CGRect(x:headerView.frame.size.width - 100, y:12, width:100, height:25))
         let trashHideButton: UIButton = UIButton(frame: CGRect(x:headerView.frame.size.width - 100, y:12, width:100, height:25))
+        trashHideButton.contentMode = .scaleAspectFit
         let headerLabel = UILabel(frame: CGRect(x: 12, y: 0, width:
                                                     tableView.bounds.size.width, height: 50))
         headerLabel.textColor = .label
@@ -267,11 +244,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.borrowTableViewCell, for: indexPath) as? BorrowTableViewCell
-        let memeImages = self.imageInfo[indexPath.section][indexPath.row]
-        cell?.imageCell = memeImages
-        return cell ?? UITableViewCell()
+        return BorrowTableUtilities.getCellForRowIndex(tableView, cellForRowAt: indexPath, self.imageInfo)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -393,8 +366,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         } else {
             // Fallback on earlier versions
         }
-        
-        
+
         self.searchBar.resignFirstResponder()
         return [deleteItem]
     }

@@ -197,7 +197,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-92.753623188405811" y="-109.82142857142857"/>
+            <point key="canvasLocation" x="193" y="-134"/>
         </scene>
         <!--Controller-->
         <scene sceneID="712-oz-40N">
@@ -425,7 +425,7 @@
                         <outlet property="dropdown" destination="Ueu-fh-kAK" id="z3D-Xv-VGw"/>
                         <outlet property="searchBar" destination="C1q-Th-2rs" id="UOF-Tx-XMp"/>
                         <outlet property="tableView" destination="oZc-Dh-cn1" id="78g-ty-FEs"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="starter" animates="NO" id="aK9-Dv-IeC"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="starter" id="aK9-Dv-IeC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="51H-Ux-MkF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -20,11 +20,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     var imageInfo: [[ImageInfo]] = [[]]
     var selectedBorrowedInfo: ImageInfo?
     var onEdit = false
-//    let borrowTextAttributes: [String : Any] = [
-//        NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
-//        NSAttributedStringKey.strokeWidth.rawValue : -2.2,
-//        NSAttributedStringKey.foregroundColor.rawValue: UIColor.white
-//    ]
     var datasource = Constants.Categories.gatherCategories()
     
     // MARK: Outlets
@@ -41,61 +36,18 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var categoryLabel: UIButton!
     @IBOutlet weak var pickerView: UIPickerView!
     
-    
-    
     // MARK: Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.pickerView.dataSource = self
-        self.pickerView.delegate = self
-        configureShareOut(isEnabled: false)
-        prepareTextField(textField: titleOfItemTextField, name: Constants.TextFieldNames.itemTitle)
-        prepareTextField(textField: nameOfBorrowerTextField, name: Constants.TextFieldNames.nameOfPersonBorrowing)
-        prepareTextField(textField: phoneNumberTextField, name: Constants.TextFieldNames.phoneNumberText)
-        self.tabBarController?.tabBar.isHidden = true
-        phoneNumberTextField.inputAccessoryView = accessoryView()
-        phoneNumberTextField.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
-        view.addSubview(phoneNumberTextField)
-
-        if onEdit == true {
-            phoneNumberTextField.text = selectedBorrowedInfo?.bottomInfo
-            nameOfBorrowerTextField.text = selectedBorrowedInfo?.titleinfo
-            titleOfItemTextField.text = selectedBorrowedInfo?.nameOfPersonBorrowing
-           
-            if let memeImageData = selectedBorrowedInfo?.originalImage {
-                self.imageView.image = UIImage(data: memeImageData)
-                self.imageView.image?.fixedOrientation()
-                configureShareOut(isEnabled: true)
-            }else {
-                configureShareOut(isEnabled: false)
-            }
-            
-        }
-//        let returnButtonForPhoneNumber = UIButton(frame:CGRect(x: 0, y: 0, width: view.frame.size.width, height: 60))
-//        returnButtonForPhoneNumber.backgroundColor = #colorLiteral(red: 0.9815835357, green: 0.632611692, blue: 0.1478855908, alpha: 1)
-//        returnButtonForPhoneNumber.setTitle("Return", for: .normal)
-//        returnButtonForPhoneNumber.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-//        returnButtonForPhoneNumber.addTarget(self, action: #selector(BorrowEditorViewController.doneAction), for: .touchUpInside)
-//        phoneNumberTextField.inputAccessoryView = returnButtonForPhoneNumber
+        configure()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
-        let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        if let result = try? dataController.viewContext.fetch(fetchRequest){
-            if result.count == 0 {
-                self.navigationController?.isNavigationBarHidden = true
-                configureCancelOut(isEnabled: false)
-            }
-//            imageInfo = result
-        }
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
-        view.addGestureRecognizer(tapGesture)
-        
-        print("\(selectedBorrowedInfo?.titleinfo!)")
+        fetchImageInfo()
+        configureTapGestureForDismiss()
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
@@ -162,6 +114,51 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
             present(myPickerController, animated: true, completion: nil)
         }
         
+    }
+    
+    func configureTapGestureForDismiss() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    func configure() {
+        self.pickerView.dataSource = self
+        self.pickerView.delegate = self
+        configureShareOut(isEnabled: false)
+        prepareTextField(textField: titleOfItemTextField, name: Constants.TextFieldNames.itemTitle)
+        prepareTextField(textField: nameOfBorrowerTextField, name: Constants.TextFieldNames.nameOfPersonBorrowing)
+        prepareTextField(textField: phoneNumberTextField, name: Constants.TextFieldNames.phoneNumberText)
+        self.tabBarController?.tabBar.isHidden = true
+        phoneNumberTextField.inputAccessoryView = accessoryView()
+        phoneNumberTextField.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
+        view.addSubview(phoneNumberTextField)
+        
+        if onEdit == true {
+            phoneNumberTextField.text = selectedBorrowedInfo?.bottomInfo
+            nameOfBorrowerTextField.text = selectedBorrowedInfo?.titleinfo
+            titleOfItemTextField.text = selectedBorrowedInfo?.nameOfPersonBorrowing
+            
+            if let memeImageData = selectedBorrowedInfo?.originalImage {
+                self.imageView.image = UIImage(data: memeImageData)
+                //                self.imageView.image?.fixedOrientation()
+                configureShareOut(isEnabled: true)
+            }else {
+                configureShareOut(isEnabled: false)
+            }
+            
+        }
+    }
+    
+    func fetchImageInfo() {
+        let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        if let result = try? dataController.viewContext.fetch(fetchRequest){
+            if result.count == 0 {
+                self.navigationController?.isNavigationBarHidden = true
+                configureCancelOut(isEnabled: false)
+            }
+        }
     }
     
     // MARK: UIViewControllerTransitioningDelegate for Bubble
@@ -336,17 +333,20 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
             getImageInfo.reminderDate = nil
             getImageInfo.hasBeenReturned = false
             getImageInfo.timeHasExpired = false
-            var date = Date()
-            date = Calendar.current.date(bySettingHour: 9, minute: 00, second: 00, of: date)!
-            let nextDate = Calendar.current.date(byAdding: .day, value: 7, to: date)
-            getImageInfo.reminderDate = nextDate
-            print("gggggg \(nextDate)")
-            let delegate = UIApplication.shared.delegate as? AppDelegate
-            delegate?.scheduleNotification(at: getImageInfo.reminderDate!, name: getImageInfo.titleinfo ?? "", memedImage: getImageInfo)
+            setDueDateTimeAndDate(getImageInfo: getImageInfo)
             try? dataController.viewContext.save()
             self.toolbar.isHidden = true
         }
         navigationController?.popViewController(animated: true)
+    }
+    
+    func setDueDateTimeAndDate(getImageInfo: ImageInfo) {
+        var date = Date()
+        date = Calendar.current.date(bySettingHour: 11, minute: 30, second: 00, of: date)!
+        let nextDate = Calendar.current.date(byAdding: .day, value: 7, to: date)
+        getImageInfo.reminderDate = nextDate
+        let delegate = UIApplication.shared.delegate as? AppDelegate
+        delegate?.scheduleNotification(at: getImageInfo.reminderDate!, name: getImageInfo.titleinfo ?? "", memedImage: getImageInfo)
     }
     
     func checkCameraPermissions() {

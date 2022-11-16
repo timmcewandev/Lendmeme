@@ -76,6 +76,7 @@ struct Constants {
         }
         static let sendMessage = "Send text message"
         static let noNameOrItem = "Hello 👋, I was wondering if you are done with this item? Is there a time you could return it? Thanks"
+        static let scheduleText = ""
     }
     struct DateText {
         static let dateOnly = "MMM-dd-yyyy"

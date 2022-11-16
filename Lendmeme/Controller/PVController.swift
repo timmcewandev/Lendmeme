@@ -23,7 +23,6 @@ class PVController: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         imageControl.image = myImages
         self.imageControl.contentScaleFactor = 3
     }
