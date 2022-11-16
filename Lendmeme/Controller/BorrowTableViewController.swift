@@ -9,37 +9,11 @@ import MessageUI
 
 class BorrowTableViewController: UIViewController, MFMessageComposeViewControllerDelegate, UNUserNotificationCenterDelegate {
     
-    func getRowAndDate(date: Date, row: Int, section: Int) {
-        for (_, imageInfo) in imageInfo.enumerated() {
-            if imageInfo == self.imageInfo[row] {
-                let memeInfo = imageInfo[row]
-                memeInfo.reminderDate = date
-                memeInfo.timeHasExpired = false
-                if memeInfo.reminderDate != nil {
-                    self.moreThanOne += 1
-                }
-                try? self.dataController.viewContext.save()
-                self.dataController.viewContext.refreshAllObjects()
-                let delegate = UIApplication.shared.delegate as? AppDelegate
-                delegate?.scheduleNotification(at: date, name: memeInfo.titleinfo ?? "", memedImage: memeInfo)
-            }
-        }
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-            if self.moreThanOne == 1 {
-                //                self.refreshAll()
-            }
-        }
-
-    }
-    let headerTitles = ["Not Returned", "Returned"]
-    let refreshControl = UIRefreshControl()
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var dropdown: UITextField!
     @IBOutlet weak var categoriesButton: UITextField!
-    
     
     // MARK: - Properties
     let button = UIButton()
@@ -53,6 +27,10 @@ class BorrowTableViewController: UIViewController, MFMessageComposeViewControlle
     var isRunningLoop: Bool = false
     var moreThanOne = 0
     var selectedBorrowedInfo: ImageInfo?
+    let headerTitles = ["Not Returned", "Returned", "Expired"]
+    let refreshControl = UIRefreshControl()
+    
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +62,7 @@ class BorrowTableViewController: UIViewController, MFMessageComposeViewControlle
         tableView.addSubview(refreshControl)
         tableView.reloadData()
     }
+    
     @objc func refresh(_ sender: AnyObject) {
         // Code to refresh table view
         self.tableView.reloadData()
@@ -191,7 +170,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return headerTitles.count
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

@@ -16,14 +16,10 @@ class ImageViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var selectedDateLabel: UILabel!
     @IBOutlet weak var submit: UIButton!
     
- 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let todaysDate = Date()
         datePicker.minimumDate = todaysDate
-        
-
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,15 +39,6 @@ class ImageViewController: UIViewController, UITableViewDataSource, UITableViewD
             let strDate = dateformatter.string(from: self.datePicker.date)
             let alert = UIAlertController(title: Constants.NameConstants.selectedDate, message: "\(strDate)", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: Constants.CommandListText.cancel, style: .cancel, handler: nil))
-            
-            
-//            alert.addAction(UIAlertAction(title: Constants.CommandListText.remindMe, style: .default, handler: { (UIAlertAction) in
-//                let selectedDate = sender.date
-//                let imageInfo = self.receivedItem[0]
-//                self.delegate?.getDate(date: selectedDate, imageInformation: imageInfo)
-//
-
-//            }))
             self.present(alert, animated: true, completion: nil)
         }
         

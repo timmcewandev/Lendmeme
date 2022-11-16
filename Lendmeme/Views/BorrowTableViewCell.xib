@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="511" height="298"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h5F-xv-e2J">
-                                <rect key="frame" x="8" y="240" width="280" height="43"/>
+                                <rect key="frame" x="115" y="128" width="280" height="43"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PFV-2w-Upi" userLabel="ITitle Text">
                                         <rect key="frame" x="8" y="5" width="264" height="33"/>
@@ -52,9 +52,9 @@
                         <constraints>
                             <constraint firstItem="3aq-MU-Oi6" firstAttribute="top" secondItem="Utz-uk-heF" secondAttribute="top" id="15x-UV-uAw"/>
                             <constraint firstAttribute="trailing" secondItem="3aq-MU-Oi6" secondAttribute="trailing" id="JqU-yd-O3p"/>
-                            <constraint firstItem="h5F-xv-e2J" firstAttribute="leading" secondItem="Utz-uk-heF" secondAttribute="leading" constant="8" id="Lzy-3Y-qmO"/>
+                            <constraint firstItem="h5F-xv-e2J" firstAttribute="leading" secondItem="Utz-uk-heF" secondAttribute="leading" constant="115" id="Lzy-3Y-qmO"/>
                             <constraint firstAttribute="bottom" secondItem="3aq-MU-Oi6" secondAttribute="bottom" id="OBy-sA-acP"/>
-                            <constraint firstAttribute="bottom" secondItem="h5F-xv-e2J" secondAttribute="bottom" constant="15" id="Vex-PE-zIx"/>
+                            <constraint firstAttribute="bottom" secondItem="h5F-xv-e2J" secondAttribute="bottom" constant="127" id="Vex-PE-zIx"/>
                             <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="Utz-uk-heF" secondAttribute="leading" id="w8n-3a-A7O"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
