@@ -17,62 +17,57 @@
                 <rect key="frame" x="0.0" y="0.0" width="511" height="298"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Utz-uk-heF">
-                        <rect key="frame" x="0.0" y="0.0" width="511" height="298"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="3aq-MU-Oi6">
+                        <rect key="frame" x="6" y="0.0" width="499" height="298"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9K-D0-RQD" userLabel="borrower">
+                        <rect key="frame" x="55" y="208" width="140" height="73"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="0.0"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h5F-xv-e2J">
+                        <rect key="frame" x="66" y="208" width="379" height="48"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="3aq-MU-Oi6">
-                                <rect key="frame" x="0.0" y="0.0" width="511" height="298"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h5F-xv-e2J">
-                                <rect key="frame" x="115" y="128" width="280" height="43"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PFV-2w-Upi" userLabel="ITitle Text">
-                                        <rect key="frame" x="8" y="5" width="264" height="33"/>
-                                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="0.0"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
-                                <constraints>
-                                    <constraint firstItem="PFV-2w-Upi" firstAttribute="leading" secondItem="h5F-xv-e2J" secondAttribute="leadingMargin" id="0Hu-Fz-TIL"/>
-                                    <constraint firstItem="PFV-2w-Upi" firstAttribute="centerY" secondItem="h5F-xv-e2J" secondAttribute="centerY" id="6H7-NX-UGL"/>
-                                    <constraint firstAttribute="height" constant="43" id="Sgj-bF-AtR"/>
-                                    <constraint firstAttribute="width" constant="280" id="cqd-rc-P6p"/>
-                                    <constraint firstItem="PFV-2w-Upi" firstAttribute="top" secondItem="h5F-xv-e2J" secondAttribute="top" constant="5" id="i1d-Yp-63L"/>
-                                    <constraint firstItem="PFV-2w-Upi" firstAttribute="trailing" secondItem="h5F-xv-e2J" secondAttribute="trailingMargin" id="jbP-m0-wpW"/>
-                                </constraints>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l0y-fF-Tcu">
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="20"/>
+                                        <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PFV-2w-Upi" userLabel="Due Date">
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="0.0"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
-                            <constraint firstItem="3aq-MU-Oi6" firstAttribute="top" secondItem="Utz-uk-heF" secondAttribute="top" id="15x-UV-uAw"/>
-                            <constraint firstAttribute="trailing" secondItem="3aq-MU-Oi6" secondAttribute="trailing" id="JqU-yd-O3p"/>
-                            <constraint firstItem="h5F-xv-e2J" firstAttribute="leading" secondItem="Utz-uk-heF" secondAttribute="leading" constant="115" id="Lzy-3Y-qmO"/>
-                            <constraint firstAttribute="bottom" secondItem="3aq-MU-Oi6" secondAttribute="bottom" id="OBy-sA-acP"/>
-                            <constraint firstAttribute="bottom" secondItem="h5F-xv-e2J" secondAttribute="bottom" constant="127" id="Vex-PE-zIx"/>
-                            <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="Utz-uk-heF" secondAttribute="leading" id="w8n-3a-A7O"/>
+                            <constraint firstItem="PFV-2w-Upi" firstAttribute="bottom" secondItem="l0y-fF-Tcu" secondAttribute="bottom" id="7qu-Iy-HRB"/>
+                            <constraint firstItem="PFV-2w-Upi" firstAttribute="leading" secondItem="l0y-fF-Tcu" secondAttribute="leading" id="Bpr-Xp-PG1"/>
+                            <constraint firstItem="PFV-2w-Upi" firstAttribute="top" secondItem="l0y-fF-Tcu" secondAttribute="top" id="GP6-cH-gw2"/>
+                            <constraint firstItem="l0y-fF-Tcu" firstAttribute="leading" secondItem="h5F-xv-e2J" secondAttribute="leading" id="IyR-vT-tsT"/>
+                            <constraint firstItem="l0y-fF-Tcu" firstAttribute="top" secondItem="h5F-xv-e2J" secondAttribute="top" id="W2g-Eq-KSM"/>
+                            <constraint firstItem="PFV-2w-Upi" firstAttribute="trailing" secondItem="l0y-fF-Tcu" secondAttribute="trailing" id="bAf-pf-Hqu"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="Layer.borderWidth">
-                                <integer key="value" value="3"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="Layer.borderColor">
-                                <color key="value" systemColor="systemRedColor"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="5"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
-                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                 <constraints>
-                    <constraint firstItem="Utz-uk-heF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="TUI-Kf-MDm"/>
-                    <constraint firstAttribute="trailing" secondItem="Utz-uk-heF" secondAttribute="trailing" id="clR-DM-8xD"/>
-                    <constraint firstItem="Utz-uk-heF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="dWR-4f-gMb"/>
-                    <constraint firstAttribute="bottom" secondItem="Utz-uk-heF" secondAttribute="bottom" id="esP-ki-iVt"/>
+                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="6" id="404-wl-aMj"/>
+                    <constraint firstAttribute="bottom" secondItem="3aq-MU-Oi6" secondAttribute="bottom" id="44b-oN-mVn"/>
+                    <constraint firstItem="h5F-xv-e2J" firstAttribute="centerX" secondItem="3aq-MU-Oi6" secondAttribute="centerX" id="66H-EC-f7h"/>
+                    <constraint firstAttribute="trailing" secondItem="3aq-MU-Oi6" secondAttribute="trailing" constant="6" id="A3o-8p-v0b"/>
+                    <constraint firstAttribute="bottom" secondItem="h5F-xv-e2J" secondAttribute="bottom" constant="42" id="SNq-P6-8DK"/>
+                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="TU2-uf-xf5"/>
+                    <constraint firstItem="h5F-xv-e2J" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="197" id="YeJ-Hr-9Yu"/>
+                    <constraint firstItem="3aq-MU-Oi6" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="fHP-fr-tiT"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="h5F-xv-e2J" secondAttribute="trailing" constant="46" id="kMQ-LB-gIy"/>
                 </constraints>
                 <userDefinedRuntimeAttributes>
                     <userDefinedRuntimeAttribute type="number" keyPath="Layer.cornerRadius">
@@ -82,7 +77,8 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="cover1" destination="Utz-uk-heF" id="egr-EV-TzX"/>
+                <outlet property="borrowName" destination="U9K-D0-RQD" id="qis-b7-BHP"/>
+                <outlet property="dateView" destination="h5F-xv-e2J" id="pR4-NM-utn"/>
                 <outlet property="myImageView" destination="3aq-MU-Oi6" id="Ekc-2R-kzA"/>
                 <outlet property="titleText" destination="PFV-2w-Upi" id="j4x-a2-7xk"/>
             </connections>
@@ -91,17 +87,11 @@
     </objects>
     <resources>
         <image name="placeholder" width="750" height="750"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="tertiarySystemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

@@ -18,15 +18,22 @@ class BorrowTableViewCell: UITableViewCell {
     @IBOutlet var myImageView: UIImageView!
     @IBOutlet weak var cover1: UIView!
     @IBOutlet weak var titleText: UILabel!
+    @IBOutlet weak var borrowName: UILabel!
+    @IBOutlet weak var dateView: UIView!
     
     var imageCell: ImageInfo! {
         didSet {
             if let memeImageData = imageCell.imageData {
                 myImageView.image = UIImage(data: memeImageData)
                 myImageView.isOpaque = true
-                titleText.text = imageCell.titleinfo
+                myImageView.layer.cornerRadius = 10
+                titleText.text = " Reminder date: \(imageCell.selectedDate ?? "")"
+                titleText.font = titleText.font.withSize(16)
+                
+                borrowName.text = imageCell.nameOfPersonBorrowing
             }
         }
+        
     }
     
     override func awakeFromNib() {

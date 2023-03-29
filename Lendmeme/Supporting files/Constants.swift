@@ -74,9 +74,24 @@ struct Constants {
         static func getNameAndItemBorrowed(name: String, item: String) -> String {
             return "Hello \(name) 👋, I was wondering if you are done with my \(item)? Is there a time you could return it? Thanks"
         }
+        
         static let sendMessage = "Send text message"
         static let noNameOrItem = "Hello 👋, I was wondering if you are done with this item? Is there a time you could return it? Thanks"
         static let scheduleText = ""
+    }
+    
+    struct MessageAlerts {
+        static func deleteAllMemedAlert() {
+            let vc = BorrowTableViewController()
+            let alert = UIAlertController(title: "⚠️ Warning ⚠️", message: "This will delete all items in returned section", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Nervermind", style: .default, handler: { _ in
+                
+            }))
+            alert.addAction(UIAlertAction(title: "Delete all", style: .destructive, handler: { _ in
+                vc.deleteAllMemes()
+            }))
+            vc.present(alert, animated: true, completion: nil)
+        }
     }
     struct DateText {
         static let dateOnly = "MMM-dd-yyyy"

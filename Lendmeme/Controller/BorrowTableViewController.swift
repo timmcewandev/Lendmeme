@@ -44,22 +44,9 @@ class BorrowTableViewController: UIViewController, MFMessageComposeViewControlle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-        fetchRequest.shouldRefreshRefetchedObjects = true
-        let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        if let result = try? dataController.viewContext.fetch(fetchRequest){
-            let hasBeenReturned = result.filter ({ return $0.hasBeenReturned })
-            let hasNotBeenReturned = result.filter ({ return !$0.hasBeenReturned })
-            imageInfo = [hasNotBeenReturned, hasBeenReturned]
-            //            filteredData = imageInfo
-        }
+        fetchAllMemedInfo()
         navigationItem.hidesSearchBarWhenScrolling = true
-        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
-        refreshControl.backgroundColor = .systemBlue
-        refreshControl.tintColor = .white
-        tableView.addSubview(refreshControl)
+        addInRefreshPullDownControl()
         tableView.reloadData()
     }
     
@@ -68,10 +55,12 @@ class BorrowTableViewController: UIViewController, MFMessageComposeViewControlle
         self.tableView.reloadData()
         refreshControl.endRefreshing()
     }
+    
     @objc func btnShowHideTapped(_ sender: AnyObject) {
         // Code to refresh table view
         self.performSegue(withIdentifier: Constants.Segue.toStarterViewController, sender: self)
     }
+    
     @objc func trashAll(_ sender: AnyObject) {
         if self.imageInfo[1].isEmpty { return }
         let alert = UIAlertController(title: "⚠️ Warning ⚠️", message: "This will delete all items in returned section", preferredStyle: .alert)
@@ -82,8 +71,36 @@ class BorrowTableViewController: UIViewController, MFMessageComposeViewControlle
             self.deleteAllMemes()
         }))
         
-        present(alert, animated: true) {
-            
+        present(alert, animated: true)
+    }
+    
+    func removeCalendarNotification(_ selectedImage: ImageInfo) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.removeScheduleNotification(at: selectedImage.notificationIdentifier ?? "", at: selectedImage)
+        selectedImage.reminderDate = nil
+        try? self.dataController.viewContext.save()
+        self.dataController.viewContext.refreshAllObjects()
+        self.tableView.reloadData()
+    }
+    
+    func addInRefreshPullDownControl() {
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        refreshControl.backgroundColor = .systemBlue
+        refreshControl.tintColor = .white
+        tableView.addSubview(refreshControl)
+    }
+    
+    func fetchAllMemedInfo() {
+        let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
+        fetchRequest.shouldRefreshRefetchedObjects = true
+        let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        if let result = try? dataController.viewContext.fetch(fetchRequest) {
+        let hasBeenReturned = result.filter ({ return $0.hasBeenReturned })
+        let hasNotBeenReturned = result.filter ({ return !$0.hasBeenReturned })
+        let expiredMeme = result.filter ({ $0.timeHasExpired })
+        imageInfo = [hasNotBeenReturned, hasBeenReturned, expiredMeme]
+        
         }
     }
     // Mark: All fetch and delete memes
@@ -102,10 +119,10 @@ class BorrowTableViewController: UIViewController, MFMessageComposeViewControlle
             try? self.dataController.viewContext.save()
             self.dataController.viewContext.refreshAllObjects()
             hasBeenReturned = []
-            self.imageInfo = [hasNotBeenReturned, hasBeenReturned]
+            let expiredMeme = result.filter ({ $0.timeHasExpired })
+            self.imageInfo = [hasNotBeenReturned, hasBeenReturned, expiredMeme]
             
             self.tableView.reloadData()
-            //            filteredData = imageInfo
         }
         
     }
@@ -132,7 +149,6 @@ class BorrowTableViewController: UIViewController, MFMessageComposeViewControlle
     }
     }
     // MARK: - Actions
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         searchBar.resignFirstResponder()
@@ -206,19 +222,21 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             pointSize: 25, weight: .thin, scale: .medium)
         // code for adding button to right corner of section header
         
-        if headerTitles[section] != "Returned" {
+        switch headerTitles[section] {
+        case "Not Returned":
             let image = UIImage(systemName: "plus", withConfiguration: config)
             showHideButton.setImage(image, for: .normal)
             showHideButton.addTarget(self, action: #selector(btnShowHideTapped), for: .touchUpInside)
             headerView.addSubview(showHideButton)
-        }else {
+        case "Returned":
             if self.imageInfo[1].isEmpty { return headerView }
             let image = UIImage(systemName: "trash", withConfiguration: config)
             trashHideButton.setImage(image, for: .normal)
             trashHideButton.addTarget(self, action: #selector(trashAll), for: .touchUpInside)
             headerView.addSubview(trashHideButton)
+        case "Expired": break
+        default: break
         }
-        
         
         return headerView
     }
@@ -228,7 +246,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        return 40
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -350,14 +368,4 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         self.searchBar.resignFirstResponder()
         return [deleteItem]
     }
-    
-    fileprivate func removeCalendarNotification(_ selectedImage: ImageInfo) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.removeScheduleNotification(at: selectedImage.notificationIdentifier ?? "", at: selectedImage)
-        selectedImage.reminderDate = nil
-        try? self.dataController.viewContext.save()
-        self.dataController.viewContext.refreshAllObjects()
-        self.tableView.reloadData()
-    }
-    
 }
