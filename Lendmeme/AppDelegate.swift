@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = Constants.DateText.dateAndTime
                 memedImage.selectedDate = dateFormatter.string(from: date)
-                let alertController = UIAlertController(title: "Successfully Saved 😀", message: "\(dateFormatter.string(from: date))", preferredStyle: .alert)
+                let alertController = UIAlertController(title: "We will remind on:", message: "\(dateFormatter.string(from: date))", preferredStyle: .alert)
                 var okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
                                     UIAlertAction in
                                     NSLog("OK Pressed")

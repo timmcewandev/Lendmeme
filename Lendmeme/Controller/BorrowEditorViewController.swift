@@ -342,8 +342,8 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     func setDueDateTimeAndDate(getImageInfo: ImageInfo) {
         var date = Date()
         date = Calendar.current.date(bySettingHour: 11, minute: 30, second: 00, of: date)!
-        let nextDate = Calendar.current.date(byAdding: .day, value: 7, to: date)
-        getImageInfo.reminderDate = nextDate
+        let dueDate = Calendar.current.date(byAdding: .day, value: 7, to: date)
+        getImageInfo.reminderDate = dueDate
         let delegate = UIApplication.shared.delegate as? AppDelegate
         delegate?.scheduleNotification(at: getImageInfo.reminderDate!, name: getImageInfo.titleinfo ?? "", memedImage: getImageInfo)
     }

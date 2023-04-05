@@ -44,9 +44,11 @@ class BorrowTableViewController: UIViewController, MFMessageComposeViewControlle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        fetchupdatedExpired()
         fetchAllMemedInfo()
         navigationItem.hidesSearchBarWhenScrolling = true
         addInRefreshPullDownControl()
+        fetchAllMemedInfo()
         tableView.reloadData()
     }
     
@@ -102,6 +104,26 @@ class BorrowTableViewController: UIViewController, MFMessageComposeViewControlle
         imageInfo = [hasNotBeenReturned, hasBeenReturned, expiredMeme]
         
         }
+    }
+    
+    func fetchupdatedExpired() {
+        let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
+        fetchRequest.shouldRefreshRefetchedObjects = true
+        let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        if let result = try? dataController.viewContext.fetch(fetchRequest) {
+            findExpired(result)
+        }
+    }
+    
+    
+    func findExpired(_ info: [ImageInfo] ){
+        for i in info {
+            let cool = i.reminderDate! < Date()
+            i.timeHasExpired = cool
+        }
+        try? dataController.viewContext.save()
+        self.dataController.viewContext.refreshAllObjects()
     }
     // Mark: All fetch and delete memes
     func deleteAllMemes() {
@@ -245,8 +267,12 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         return BorrowTableUtilities.getCellForRowIndex(tableView, cellForRowAt: indexPath, self.imageInfo)
     }
     
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        return 
+    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 45
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
