@@ -43,9 +43,8 @@ class BorrowTableViewController: UIViewController, MFMessageComposeViewControlle
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        fetchupdatedExpired()
-        fetchAllMemedInfo()
+        super.viewWillAppear(animated)
+        
         navigationItem.hidesSearchBarWhenScrolling = true
         addInRefreshPullDownControl()
         fetchAllMemedInfo()
@@ -98,33 +97,13 @@ class BorrowTableViewController: UIViewController, MFMessageComposeViewControlle
         let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let result = try? dataController.viewContext.fetch(fetchRequest) {
-        let hasBeenReturned = result.filter ({ return $0.hasBeenReturned })
-        let hasNotBeenReturned = result.filter ({ return !$0.hasBeenReturned })
-        let expiredMeme = result.filter ({ $0.timeHasExpired })
-        imageInfo = [hasNotBeenReturned, hasBeenReturned, expiredMeme]
-        
+            let expired = result.filter ({ return $0.timeHasExpired })
+            let hasBeenReturned = result.filter ({ return $0.hasBeenReturned })
+            let hasNotBeenReturned = result.filter ({ return !$0.hasBeenReturned })
+            imageInfo = [hasNotBeenReturned, hasBeenReturned, expired]
         }
     }
     
-    func fetchupdatedExpired() {
-        let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
-        fetchRequest.shouldRefreshRefetchedObjects = true
-        let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        if let result = try? dataController.viewContext.fetch(fetchRequest) {
-            findExpired(result)
-        }
-    }
-    
-    
-    func findExpired(_ info: [ImageInfo] ){
-        for i in info {
-            let cool = i.reminderDate! < Date()
-            i.timeHasExpired = cool
-        }
-        try? dataController.viewContext.save()
-        self.dataController.viewContext.refreshAllObjects()
-    }
     // Mark: All fetch and delete memes
     func deleteAllMemes() {
         let fetchRequest: NSFetchRequest<ImageInfo> = ImageInfo.fetchRequest()
@@ -167,6 +146,7 @@ class BorrowTableViewController: UIViewController, MFMessageComposeViewControlle
         if self.imageInfo.count == 0 {
             self.performSegue(withIdentifier: Constants.Segue.toStarterViewController, sender: self)
         }
+        self.fetchAllMemedInfo()
         self.tableView.reloadData()
     }
     }
@@ -202,6 +182,8 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
             return self.imageInfo[0].count
         } else if section == 1 {
             return self.imageInfo[1].count
+        } else if section == 2 {
+            return self.imageInfo[2].count
         } else {
             return 0
         }
@@ -291,14 +273,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 markImageAsReturned.reminderDate = nil
                 try? self.dataController.viewContext.save()
                 self.dataController.viewContext.refreshAllObjects()
-                
-                tableView.cellForRow(at: indexPath)
-                let imageInfoSorted = Array(self.imageInfo.joined())
-                let hasBeenReturned = imageInfoSorted.filter ({ return $0.hasBeenReturned })
-                let hasNotBeenReturned = imageInfoSorted.filter ({ return !$0.hasBeenReturned })
-                self.imageInfo = [hasNotBeenReturned, hasBeenReturned]
-                //                self.filteredData = [hasNotBeenReturned, hasBeenReturned]
-                self.dataController.viewContext.refreshAllObjects()
+                self.fetchAllMemedInfo()
                 self.tableView.reloadData()
             }))
             alert.addAction(UIAlertAction(title: "Edit", style: .default, handler: { _ in
@@ -320,12 +295,7 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
                 try? self.dataController.viewContext.save()
                 tableView.cellForRow(at: indexPath)
                 self.dataController.viewContext.refreshAllObjects()
-                let cool = Array(self.imageInfo.joined())
-                let hasBeenReturned = cool.filter ({ return $0.hasBeenReturned })
-                let hasNotBeenReturned = cool.filter ({ return !$0.hasBeenReturned })
-                self.imageInfo = [hasNotBeenReturned, hasBeenReturned]
-                self.filteredData = [hasNotBeenReturned, hasBeenReturned]
-                self.dataController.viewContext.refreshAllObjects()
+                self.fetchAllMemedInfo()
                 self.tableView.reloadData()
             }))
         }

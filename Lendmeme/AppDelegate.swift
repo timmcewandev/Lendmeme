@@ -32,18 +32,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 print("Notifications access denied")
             }
         }
-//        let action = UNNotificationAction(identifier: "myCategory", title: "Remind me later", options: [])
-//        let category = UNNotificationCategory(identifier: "myCategory", actions: [action], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: "", options: [])
-//        UNUserNotificationCenter.current().setNotificationCategories([category])
-        
-        
         return true
     }
     
     func scheduleNotification(at date: Date, name: String, memedImage: ImageInfo) {
         if memedImage.notificationIdentifier != nil {
             guard let notificationIdentifier = memedImage.notificationIdentifier else { return }
-//            memedImage.reminderDate = date
+            memedImage.reminderDate = date
             try? self.dataController.viewContext.save()
             removeScheduleNotification(at: notificationIdentifier, at: memedImage)
         }
@@ -57,7 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         content.title = "🙌 Just a reminder"
         content.body = "Your \(name) has been out there for a while. Remind them that you want it back."
         content.sound = UNNotificationSound.default()
-        
+        memedImage.timeHasExpired = true
+        try? self.dataController.viewContext.save()
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         memedImage.notificationIdentifier = request.identifier
         try? dataController.viewContext.save()
@@ -74,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                     UIAlertAction in
                                     NSLog("OK Pressed")
                                 }
-                var cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.cancel) {
+                _ = UIAlertAction(title: "No", style: UIAlertActionStyle.cancel) {
                                     UIAlertAction in
                                     NSLog("Cancel Pressed")
                                 }
