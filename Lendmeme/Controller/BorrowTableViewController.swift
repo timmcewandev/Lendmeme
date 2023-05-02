@@ -97,7 +97,7 @@ class BorrowTableViewController: UIViewController, MFMessageComposeViewControlle
         let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let result = try? dataController.viewContext.fetch(fetchRequest) {
-            let expired = result.filter ({ return $0.timeHasExpired })
+            let expired = result.filter ({ return !$0.timeHasExpired })
             let hasBeenReturned = result.filter ({ return $0.hasBeenReturned })
             let hasNotBeenReturned = result.filter ({ return !$0.hasBeenReturned })
             imageInfo = [hasNotBeenReturned, hasBeenReturned, expired]
@@ -119,10 +119,7 @@ class BorrowTableViewController: UIViewController, MFMessageComposeViewControlle
             }
             try? self.dataController.viewContext.save()
             self.dataController.viewContext.refreshAllObjects()
-            hasBeenReturned = []
-            let expiredMeme = result.filter ({ $0.timeHasExpired })
-            self.imageInfo = [hasNotBeenReturned, hasBeenReturned, expiredMeme]
-            
+            self.fetchAllMemedInfo()
             self.tableView.reloadData()
         }
         
