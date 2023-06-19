@@ -34,8 +34,8 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var insertImageContainer: UIStackView!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var categoryLabel: UIButton!
-    @IBOutlet weak var pickerView: UIPickerView!
     
+    @IBOutlet weak var toobarView: UIToolbar!
     // MARK: Lifecycle
     
     override func viewDidLoad() {
@@ -48,6 +48,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
         subscribeToKeyboardNotifications()
         fetchImageInfo()
         configureTapGestureForDismiss()
+        toolbar.layer.cornerRadius = 30
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
@@ -80,12 +81,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     
     @IBAction func share(sender: AnyObject) {
         self.save()
-    }
-    
-    @IBAction func addCategoryAction(_ sender: UIButton) {
-        phoneNumberTextField.isHidden = true
-        pickerView.isHidden = false
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -122,8 +117,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     func configure() {
-        self.pickerView.dataSource = self
-        self.pickerView.delegate = self
         configureShareOut(isEnabled: false)
         prepareTextField(textField: titleOfItemTextField, name: Constants.TextFieldNames.itemTitle)
         prepareTextField(textField: nameOfBorrowerTextField, name: Constants.TextFieldNames.nameOfPersonBorrowing)
@@ -455,35 +448,7 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
     }
 }
 
-extension BorrowEditorViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return datasource.count
-    }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return datasource[row]
-    }
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            let title = self.datasource[row]
-            self.categoryLabel.setTitle("Category: \(title)", for: .normal)
-            self.category = title
-            self.phoneNumberTextField.isHidden = true
-            if #available(iOS 13.0, *) {
-                self.categoryLabel.tintColor = UIColor.label
-            }
-            self.pickerView.isHidden = true
-            self.categoryLabel.backgroundColor = UIColor.white
-            self.phoneNumberTextField.isHidden = false
-        }
 
-
-    }
-}
 extension UIImage {
     /// Fix image orientaton to protrait up
     func fixedOrientation() -> UIImage? {

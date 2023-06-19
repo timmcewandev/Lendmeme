@@ -34,26 +34,6 @@
                                     <action selector="addCategoryAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2QC-ZC-7l3"/>
                                 </connections>
                             </button>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lua-XB-jXr">
-                                <rect key="frame" x="0.0" y="808" width="414" height="44"/>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="eGV-wh-qg0"/>
-                                    <barButtonItem systemItem="cancel" id="IYC-5o-RPP">
-                                        <color key="tintColor" systemColor="systemBlueColor"/>
-                                        <connections>
-                                            <action selector="cancelBTN:" destination="BYZ-38-t0r" id="BS0-e8-8dp"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="glI-lX-kRB"/>
-                                    <barButtonItem systemItem="save" id="mST-PZ-z3s">
-                                        <color key="tintColor" systemColor="systemBlueColor"/>
-                                        <connections>
-                                            <action selector="shareWithSender:" destination="BYZ-38-t0r" id="oBC-0o-sCC"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="XqM-zr-Ydw"/>
-                                </items>
-                            </toolbar>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone#" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="PMx-xr-uw1">
                                 <rect key="frame" x="142.5" y="712.5" width="129.5" height="45.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
@@ -136,26 +116,35 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="alphabet" returnKeyType="next"/>
                             </textField>
-                            <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wvm-wN-iT7">
-                                <rect key="frame" x="0.0" y="680" width="414" height="216"/>
-                                <color key="backgroundColor" systemColor="systemTealColor"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="12"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </pickerView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lua-XB-jXr">
+                                <rect key="frame" x="32" y="803" width="350" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="eGV-wh-qg0"/>
+                                    <barButtonItem systemItem="cancel" id="IYC-5o-RPP">
+                                        <color key="tintColor" systemColor="systemBlueColor"/>
+                                        <connections>
+                                            <action selector="cancelBTN:" destination="BYZ-38-t0r" id="BS0-e8-8dp"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="glI-lX-kRB"/>
+                                    <barButtonItem systemItem="save" id="mST-PZ-z3s">
+                                        <color key="tintColor" systemColor="systemBlueColor"/>
+                                        <connections>
+                                            <action selector="shareWithSender:" destination="BYZ-38-t0r" id="oBC-0o-sCC"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="XqM-zr-Ydw"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
                             <constraint firstItem="wRM-Rx-5QT" firstAttribute="centerX" secondItem="cEL-3L-VHw" secondAttribute="centerX" id="0Vv-ec-DHP"/>
-                            <constraint firstAttribute="bottom" secondItem="wvm-wN-iT7" secondAttribute="bottom" id="0zb-Tr-pic"/>
                             <constraint firstItem="cho-jd-ylO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="14d-YV-70Y"/>
-                            <constraint firstItem="wfM-K2-jvl" firstAttribute="leading" secondItem="Lua-XB-jXr" secondAttribute="leading" id="4ba-L2-gjf"/>
+                            <constraint firstItem="wfM-K2-jvl" firstAttribute="leading" secondItem="Lua-XB-jXr" secondAttribute="leading" constant="-32" id="4ba-L2-gjf"/>
                             <constraint firstItem="cho-jd-ylO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="519-iN-xTW"/>
-                            <constraint firstItem="Lua-XB-jXr" firstAttribute="top" secondItem="PMx-xr-uw1" secondAttribute="bottom" constant="50" id="5G3-Wt-7Q8">
+                            <constraint firstItem="Lua-XB-jXr" firstAttribute="top" secondItem="PMx-xr-uw1" secondAttribute="bottom" constant="45" id="5G3-Wt-7Q8">
                                 <variation key="heightClass=regular-widthClass=regular" constant="100"/>
                             </constraint>
                             <constraint firstItem="9Rx-Oj-YT6" firstAttribute="centerX" secondItem="wfM-K2-jvl" secondAttribute="centerX" id="AZ9-JI-kt3"/>
@@ -163,16 +152,14 @@
                             <constraint firstItem="9Rx-Oj-YT6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="ORh-ZV-Tyw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9Rx-Oj-YT6" secondAttribute="trailing" constant="5" id="SGn-m9-upu"/>
                             <constraint firstItem="9Rx-Oj-YT6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="UuR-js-rFw"/>
-                            <constraint firstItem="Lua-XB-jXr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WO5-ah-nN0"/>
+                            <constraint firstItem="Lua-XB-jXr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="WO5-ah-nN0"/>
                             <constraint firstItem="cEL-3L-VHw" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="XS7-na-XW1"/>
                             <constraint firstItem="wRM-Rx-5QT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="XdB-cm-fHO"/>
-                            <constraint firstItem="wvm-wN-iT7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ZX2-Ml-lBN"/>
                             <constraint firstItem="PMx-xr-uw1" firstAttribute="centerX" secondItem="Lua-XB-jXr" secondAttribute="centerX" id="aHo-7P-h3d"/>
-                            <constraint firstItem="Lua-XB-jXr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-10" id="ajW-tp-hEg"/>
+                            <constraint firstItem="Lua-XB-jXr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-15" id="ajW-tp-hEg"/>
                             <constraint firstItem="cEL-3L-VHw" firstAttribute="centerX" secondItem="PMx-xr-uw1" secondAttribute="centerX" id="fuQ-qm-TeJ"/>
-                            <constraint firstItem="wfM-K2-jvl" firstAttribute="trailing" secondItem="Lua-XB-jXr" secondAttribute="trailing" id="gCf-2F-Phe"/>
+                            <constraint firstItem="wfM-K2-jvl" firstAttribute="trailing" secondItem="Lua-XB-jXr" secondAttribute="trailing" constant="32" id="gCf-2F-Phe"/>
                             <constraint firstAttribute="bottomMargin" secondItem="wfM-K2-jvl" secondAttribute="bottom" constant="-55" id="qFL-YG-b4e"/>
-                            <constraint firstItem="wvm-wN-iT7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="sLm-HQ-O7D"/>
                             <constraint firstItem="cho-jd-ylO" firstAttribute="top" secondItem="9Rx-Oj-YT6" secondAttribute="bottom" constant="8" id="w0g-Dd-dmF"/>
                             <constraint firstItem="wRM-Rx-5QT" firstAttribute="top" secondItem="cho-jd-ylO" secondAttribute="bottom" constant="10" id="wbo-zq-HMp"/>
                             <constraint firstItem="wfM-K2-jvl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-49" id="xVU-D2-z70"/>
@@ -189,15 +176,15 @@
                         <outlet property="insertImageContainer" destination="cEL-3L-VHw" id="pQD-Y3-Lu8"/>
                         <outlet property="nameOfBorrowerTextField" destination="cho-jd-ylO" id="Mef-KU-zgg"/>
                         <outlet property="phoneNumberTextField" destination="PMx-xr-uw1" id="za2-Do-dxn"/>
-                        <outlet property="pickerView" destination="wvm-wN-iT7" id="Atd-zR-nQw"/>
                         <outlet property="shareOUT" destination="mST-PZ-z3s" id="DVi-X2-6YO"/>
                         <outlet property="titleOfItemTextField" destination="wRM-Rx-5QT" id="oQw-WX-yQx"/>
+                        <outlet property="toobarView" destination="Lua-XB-jXr" id="Cpb-S8-MnN"/>
                         <outlet property="toolbar" destination="Lua-XB-jXr" id="ffk-ar-eHe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="193" y="-134"/>
+            <point key="canvasLocation" x="192.75362318840581" y="-134.59821428571428"/>
         </scene>
         <!--Controller-->
         <scene sceneID="712-oz-40N">
@@ -1496,9 +1483,6 @@ AAAAAAAAAGgAAAAAAAAAAAAAAAAAAQDcA
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="3aq-MU-Oi6">
-                        <rect key="frame" x="6" y="0.0" width="499" height="281"/>
+                        <rect key="frame" x="6" y="0.0" width="499" height="288"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9K-D0-RQD" userLabel="borrower">
                         <rect key="frame" x="55" y="208" width="140" height="73"/>
@@ -60,7 +60,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="3aq-MU-Oi6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="6" id="404-wl-aMj"/>
-                    <constraint firstAttribute="bottom" secondItem="3aq-MU-Oi6" secondAttribute="bottom" constant="17" id="44b-oN-mVn"/>
+                    <constraint firstAttribute="bottom" secondItem="3aq-MU-Oi6" secondAttribute="bottom" constant="10" id="44b-oN-mVn"/>
                     <constraint firstItem="h5F-xv-e2J" firstAttribute="centerX" secondItem="3aq-MU-Oi6" secondAttribute="centerX" id="66H-EC-f7h"/>
                     <constraint firstAttribute="trailing" secondItem="3aq-MU-Oi6" secondAttribute="trailing" constant="6" id="A3o-8p-v0b"/>
                     <constraint firstAttribute="bottom" secondItem="h5F-xv-e2J" secondAttribute="bottom" constant="42" id="SNq-P6-8DK"/>
