@@ -22,14 +22,13 @@
 #import "FirebaseRemoteConfig/Sources/RCNDevice.h"
 #import "FirebaseRemoteConfig/Sources/RCNUserDefaultsManager.h"
 
-#import <FirebaseCore/FIRApp.h>
-#import <FirebaseCore/FIRLogger.h>
-#import <FirebaseCore/FIROptions.h>
 #import <GoogleUtilities/GULAppEnvironmentUtil.h>
+#import "FirebaseCore/Extension/FirebaseCoreInternal.h"
 
 static NSString *const kRCNGroupPrefix = @"frc.group.";
 static NSString *const kRCNUserDefaultsKeyNamelastETag = @"lastETag";
 static NSString *const kRCNUserDefaultsKeyNameLastSuccessfulFetchTime = @"lastSuccessfulFetchTime";
+static NSString *const kRCNAnalyticsFirstOpenTimePropertyName = @"_fot";
 static const int kRCNExponentialBackoffMinimumInterval = 60 * 2;       // 2 mins.
 static const int kRCNExponentialBackoffMaximumInterval = 60 * 60 * 4;  // 4 hours.
 
@@ -111,6 +110,11 @@ static const int kRCNExponentialBackoffMaximumInterval = 60 * 60 * 4;  // 4 hour
     }
 
     _isFetchInProgress = NO;
+    _lastTemplateVersion = [_userDefaultsManager lastTemplateVersion];
+    _realtimeExponentialBackoffRetryInterval =
+        [_userDefaultsManager currentRealtimeThrottlingRetryIntervalSeconds];
+    _realtimeExponentialBackoffThrottleEndTime = [_userDefaultsManager realtimeThrottleEndTime];
+    _realtimeRetryCount = [_userDefaultsManager realtimeRetryCount];
   }
   return self;
 }
@@ -144,7 +148,8 @@ static const int kRCNExponentialBackoffMaximumInterval = 60 * 60 * 4;  // 4 hour
 
 #pragma mark - load from DB
 - (NSDictionary *)loadConfigFromMetadataTable {
-  NSDictionary *metadata = [[_DBManager loadMetadataWithBundleIdentifier:_bundleIdentifier] copy];
+  NSDictionary *metadata = [[_DBManager loadMetadataWithBundleIdentifier:_bundleIdentifier
+                                                               namespace:_FIRNamespace] copy];
   if (metadata) {
     // TODO: Remove (all metadata in general) once ready to
     // migrate to user defaults completely.
@@ -182,7 +187,9 @@ static const int kRCNExponentialBackoffMaximumInterval = 60 * 60 * 4;  // 4 hour
 // Update internal metadata content to cache and DB.
 - (void)updateInternalContentWithResponse:(NSDictionary *)response {
   // Remove all the keys with current pakcage name.
-  [_DBManager deleteRecordWithBundleIdentifier:_bundleIdentifier isInternalDB:YES];
+  [_DBManager deleteRecordWithBundleIdentifier:_bundleIdentifier
+                                     namespace:_FIRNamespace
+                                  isInternalDB:YES];
 
   for (NSString *key in _internalMetadata.allKeys) {
     if ([key hasPrefix:_bundleIdentifier]) {
@@ -231,12 +238,52 @@ static const int kRCNExponentialBackoffMaximumInterval = 60 * 60 * 4;  // 4 hour
       [[NSDate date] timeIntervalSince1970] + randomizedRetryInterval;
 }
 
-- (void)updateMetadataWithFetchSuccessStatus:(BOOL)fetchSuccess {
-  FIRLogDebug(kFIRLoggerRemoteConfig, @"I-RCN000056", @"Updating metadata with fetch result.");
-  if (!fetchSuccess) {
-    [self updateExponentialBackoffTime];
+/// If the last Realtime stream attempt was not successful, update the (exponential backoff) period
+/// that we wait until trying again. Any subsequent Realtime requests will be checked and allowed
+/// only if past this throttle end time.
+- (void)updateRealtimeExponentialBackoffTime {
+  // If there was only one stream attempt before, reset the retry interval.
+  if (_realtimeRetryCount == 0) {
+    FIRLogDebug(kFIRLoggerRemoteConfig, @"I-RCN000058",
+                @"Throttling: Entering exponential Realtime backoff mode.");
+    _realtimeExponentialBackoffRetryInterval = kRCNExponentialBackoffMinimumInterval;
+  } else {
+    FIRLogDebug(kFIRLoggerRemoteConfig, @"I-RCN000058",
+                @"Throttling: Updating Realtime throttling interval.");
+    // Double the retry interval until we hit the truncated exponential backoff. More info here:
+    // https://cloud.google.com/storage/docs/exponential-backoff
+    _realtimeExponentialBackoffRetryInterval =
+        ((_realtimeExponentialBackoffRetryInterval * 2) < kRCNExponentialBackoffMaximumInterval)
+            ? _realtimeExponentialBackoffRetryInterval * 2
+            : _realtimeExponentialBackoffRetryInterval;
   }
 
+  // Randomize the next retry interval.
+  int randomPlusMinusInterval = ((arc4random() % 2) == 0) ? -1 : 1;
+  NSTimeInterval randomizedRetryInterval =
+      _realtimeExponentialBackoffRetryInterval +
+      (0.5 * _realtimeExponentialBackoffRetryInterval * randomPlusMinusInterval);
+  _realtimeExponentialBackoffThrottleEndTime =
+      [[NSDate date] timeIntervalSince1970] + randomizedRetryInterval;
+
+  [_userDefaultsManager setRealtimeThrottleEndTime:_realtimeExponentialBackoffThrottleEndTime];
+  [_userDefaultsManager
+      setCurrentRealtimeThrottlingRetryIntervalSeconds:_realtimeExponentialBackoffRetryInterval];
+}
+
+- (void)setRealtimeRetryCount:(int)realtimeRetryCount {
+  _realtimeRetryCount = realtimeRetryCount;
+  [_userDefaultsManager setRealtimeRetryCount:_realtimeRetryCount];
+}
+
+- (NSTimeInterval)getRealtimeBackoffInterval {
+  NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
+  return _realtimeExponentialBackoffThrottleEndTime - now;
+}
+
+- (void)updateMetadataWithFetchSuccessStatus:(BOOL)fetchSuccess
+                             templateVersion:(NSString *)templateVersion {
+  FIRLogDebug(kFIRLoggerRemoteConfig, @"I-RCN000056", @"Updating metadata with fetch result.");
   [self updateFetchTimeWithSuccessFetch:fetchSuccess];
   _lastFetchStatus =
       fetchSuccess ? FIRRemoteConfigFetchStatusSuccess : FIRRemoteConfigFetchStatusFailure;
@@ -245,6 +292,7 @@ static const int kRCNExponentialBackoffMaximumInterval = 60 * 60 * 4;  // 4 hour
     [self updateLastFetchTimeInterval:[[NSDate date] timeIntervalSince1970]];
     // Note: We expect the googleAppID to always be available.
     _deviceContext = FIRRemoteConfigDeviceContextWithProjectIdentifier(_googleAppID);
+    [_userDefaultsManager setLastTemplateVersion:templateVersion];
   }
 
   [self updateMetadataTable];
@@ -260,7 +308,9 @@ static const int kRCNExponentialBackoffMaximumInterval = 60 * 60 * 4;  // 4 hour
 }
 
 - (void)updateMetadataTable {
-  [_DBManager deleteRecordWithBundleIdentifier:_bundleIdentifier isInternalDB:NO];
+  [_DBManager deleteRecordWithBundleIdentifier:_bundleIdentifier
+                                     namespace:_FIRNamespace
+                                  isInternalDB:NO];
   NSError *error;
   // Objects to be serialized cannot be invalid.
   if (!_bundleIdentifier) {
@@ -311,6 +361,7 @@ static const int kRCNExponentialBackoffMaximumInterval = 60 * 60 * 4;  // 4 hour
 
   NSDictionary *columnNameToValue = @{
     RCNKeyBundleIdentifier : _bundleIdentifier,
+    RCNKeyNamespace : _FIRNamespace,
     RCNKeyFetchTime : @(self.lastFetchTimeInterval),
     RCNKeyDigestPerNamespace : serializedDigestPerNamespace,
     RCNKeyDeviceContext : serializedDeviceContext,
@@ -334,9 +385,9 @@ static const int kRCNExponentialBackoffMaximumInterval = 60 * 60 * 4;  // 4 hour
   // Note: We only set user properties as mentioned in the new REST API Design doc
   NSString *ret = [NSString stringWithFormat:@"{"];
   ret = [ret stringByAppendingString:[NSString stringWithFormat:@"app_instance_id:'%@'",
-                                                                _configInstanceID]];
+                                                                _configInstallationsIdentifier]];
   ret = [ret stringByAppendingString:[NSString stringWithFormat:@", app_instance_id_token:'%@'",
-                                                                _configInstanceIDToken]];
+                                                                _configInstallationsToken]];
   ret = [ret stringByAppendingString:[NSString stringWithFormat:@", app_id:'%@'", _googleAppID]];
 
   ret = [ret stringByAppendingString:[NSString stringWithFormat:@", country_code:'%@'",
@@ -352,21 +403,38 @@ static const int kRCNExponentialBackoffMaximumInterval = 60 * 60 * 4;  // 4 hour
                                                                 _bundleIdentifier]];
   ret = [ret stringByAppendingString:[NSString stringWithFormat:@", app_version:'%@'",
                                                                 FIRRemoteConfigAppVersion()]];
-  ret = [ret stringByAppendingString:[NSString stringWithFormat:@", sdk_version:'%d'",
-                                                                FIRRemoteConfigSDKVersion()]];
+  ret = [ret stringByAppendingString:[NSString stringWithFormat:@", app_build:'%@'",
+                                                                FIRRemoteConfigAppBuildVersion()]];
+  ret = [ret stringByAppendingString:[NSString stringWithFormat:@", sdk_version:'%@'",
+                                                                FIRRemoteConfigPodVersion()]];
 
   if (userProperties && userProperties.count > 0) {
     NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userProperties
-                                                       options:0
-                                                         error:&error];
-    if (!error) {
-      ret = [ret
-          stringByAppendingString:[NSString
-                                      stringWithFormat:@", analytics_user_properties:%@",
-                                                       [[NSString alloc]
-                                                           initWithData:jsonData
-                                                               encoding:NSUTF8StringEncoding]]];
+
+    // Extract first open time from user properties and send as a separate field
+    NSNumber *firstOpenTime = userProperties[kRCNAnalyticsFirstOpenTimePropertyName];
+    NSMutableDictionary *remainingUserProperties = [userProperties mutableCopy];
+    if (firstOpenTime != nil) {
+      NSDate *date = [NSDate dateWithTimeIntervalSince1970:([firstOpenTime longValue] / 1000)];
+      NSISO8601DateFormatter *formatter = [[NSISO8601DateFormatter alloc] init];
+      NSString *firstOpenTimeISOString = [formatter stringFromDate:date];
+      ret = [ret stringByAppendingString:[NSString stringWithFormat:@", first_open_time:'%@'",
+                                                                    firstOpenTimeISOString]];
+
+      [remainingUserProperties removeObjectForKey:kRCNAnalyticsFirstOpenTimePropertyName];
+    }
+    if (remainingUserProperties.count > 0) {
+      NSData *jsonData = [NSJSONSerialization dataWithJSONObject:remainingUserProperties
+                                                         options:0
+                                                           error:&error];
+      if (!error) {
+        ret = [ret
+            stringByAppendingString:[NSString
+                                        stringWithFormat:@", analytics_user_properties:%@",
+                                                         [[NSString alloc]
+                                                             initWithData:jsonData
+                                                                 encoding:NSUTF8StringEncoding]]];
+      }
     }
   }
   ret = [ret stringByAppendingString:@"}"];
@@ -379,6 +447,7 @@ static const int kRCNExponentialBackoffMaximumInterval = 60 * 60 * 4;  // 4 hour
   if (_lastFetchError != lastFetchError) {
     _lastFetchError = lastFetchError;
     [_DBManager updateMetadataWithOption:RCNUpdateOptionFetchStatus
+                               namespace:_FIRNamespace
                                   values:@[ @(_lastFetchStatus), @(_lastFetchError) ]
                        completionHandler:nil];
   }
@@ -428,6 +497,7 @@ static const int kRCNExponentialBackoffMaximumInterval = 60 * 60 * 4;  // 4 hour
 - (void)setLastApplyTimeInterval:(NSTimeInterval)lastApplyTimestamp {
   _lastApplyTimeInterval = lastApplyTimestamp;
   [_DBManager updateMetadataWithOption:RCNUpdateOptionApplyTime
+                             namespace:_FIRNamespace
                                 values:@[ @(lastApplyTimestamp) ]
                      completionHandler:nil];
 }
@@ -435,6 +505,7 @@ static const int kRCNExponentialBackoffMaximumInterval = 60 * 60 * 4;  // 4 hour
 - (void)setLastSetDefaultsTimeInterval:(NSTimeInterval)lastSetDefaultsTimestamp {
   _lastSetDefaultsTimeInterval = lastSetDefaultsTimestamp;
   [_DBManager updateMetadataWithOption:RCNUpdateOptionDefaultTime
+                             namespace:_FIRNamespace
                                 values:@[ @(lastSetDefaultsTimestamp) ]
                      completionHandler:nil];
 }

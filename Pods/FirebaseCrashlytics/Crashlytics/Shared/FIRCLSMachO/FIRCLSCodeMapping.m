@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import "FIRCLSCodeMapping.h"
+#import "Crashlytics/Shared/FIRCLSMachO/FIRCLSCodeMapping.h"
 
 @interface FIRCLSCodeMapping () {
   FIRCLSCodeMappingSource _source;
@@ -22,11 +22,11 @@
 
 @implementation FIRCLSCodeMapping
 
-+ (instancetype)mappingWithURL:(NSURL*)URL {
++ (instancetype)mappingWithURL:(NSURL *)URL {
   return [[self alloc] initWithURL:URL];
 }
 
-- (instancetype)initWithURL:(NSURL*)URL {
+- (instancetype)initWithURL:(NSURL *)URL {
   self = [super init];
   if (!self) {
     return nil;

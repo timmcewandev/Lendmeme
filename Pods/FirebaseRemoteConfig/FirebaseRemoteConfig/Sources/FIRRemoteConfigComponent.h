@@ -16,7 +16,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <FirebaseCore/FIRLibrary.h>
+#import "FirebaseCore/Extension/FirebaseCoreInternal.h"
 
 @class FIRApp;
 @class FIRRemoteConfig;

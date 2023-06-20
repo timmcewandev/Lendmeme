@@ -14,34 +14,30 @@
 
 #import <Foundation/Foundation.h>
 
-#include "FIRCLSProfiling.h"
-#include "FIRCrashlytics.h"
+#import "Crashlytics/Crashlytics/Public/FirebaseCrashlytics/FIRCrashlytics.h"
+
+#import "Crashlytics/Crashlytics/Helpers/FIRCLSProfiling.h"
 
 @class FBLPromise<T>;
+@class FIRCLSExistingReportManager;
+@class FIRCLSAnalyticsManager;
+@class FIRCLSManagerData;
+@class FIRCLSContextManager;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class FIRCLSDataCollectionArbiter;
-@class FIRCLSFileManager;
-@class FIRCLSInternalReport;
-@class FIRCLSSettings;
-@class FIRInstallations;
-@protocol FIRAnalyticsInterop;
-
 @interface FIRCLSReportManager : NSObject
 
-- (instancetype)initWithFileManager:(FIRCLSFileManager *)fileManager
-                      installations:(FIRInstallations *)installations
-                          analytics:(nullable id<FIRAnalyticsInterop>)analytics
-                        googleAppID:(NSString *)googleAppID
-                        dataArbiter:(FIRCLSDataCollectionArbiter *)dataArbiter
+- (instancetype)initWithManagerData:(FIRCLSManagerData *)managerData
+              existingReportManager:(FIRCLSExistingReportManager *)existingReportManager
+                   analyticsManager:(FIRCLSAnalyticsManager *)analyticsManager
     NS_DESIGNATED_INITIALIZER;
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
 - (FBLPromise<NSNumber *> *)startWithProfilingMark:(FIRCLSProfileMark)mark;
 
-- (FBLPromise<NSNumber *> *)checkForUnsentReports;
+- (FBLPromise<FIRCrashlyticsReport *> *)checkForUnsentReports;
 - (FBLPromise *)sendUnsentReports;
 - (FBLPromise *)deleteUnsentReports;
 

@@ -11,7 +11,10 @@
 #endif
 
 #import "FIRCrashlytics.h"
+#import "FIRCrashlyticsReport.h"
 #import "FirebaseCrashlytics.h"
+#import "FIRExceptionModel.h"
+#import "FIRStackFrame.h"
 
 FOUNDATION_EXPORT double FirebaseCrashlyticsVersionNumber;
 FOUNDATION_EXPORT const unsigned char FirebaseCrashlyticsVersionString[];

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "FIRCLSMachO.h"
+#include "Crashlytics/Shared/FIRCLSMachO/FIRCLSMachO.h"
 
 #include <Foundation/Foundation.h>
 
@@ -219,6 +219,25 @@ static bool FIRCLSMachOSliceIsValid(FIRCLSMachOSliceRef slice) {
   return true;
 }
 
+void FIRCLSMachOSliceEnumerateLoadCommands_f(FIRCLSMachOSliceRef slice,
+                                             void* context,
+                                             FIRCLSMachOLoadCommandIteratorFunc function) {
+  const struct load_command* cmd;
+  uint32_t cmdCount;
+
+  if (!FIRCLSMachOSliceIsValid(slice)) {
+    return;
+  }
+
+  FIRCLSMachOHeaderValues(slice, &cmd, &cmdCount);
+
+  for (uint32_t i = 0; cmd != NULL && i < cmdCount; ++i) {
+    function(cmd->cmd, cmd->cmdsize, cmd, context);
+
+    cmd = (struct load_command*)((uintptr_t)cmd + cmd->cmdsize);
+  }
+}
+
 void FIRCLSMachOSliceEnumerateLoadCommands(FIRCLSMachOSliceRef slice,
                                            FIRCLSMachOLoadCommandIterator block) {
   const struct load_command* cmd;
@@ -255,6 +274,9 @@ struct FIRCLSMachOSlice FIRCLSMachOSliceGetCurrent(void) {
 
   slice.startAddress = NULL;
 
+  // This call can fail when Exported Symbols File in Build Settings is missing the symbol value
+  // defined as _MH_EXECUTE_SYM (if you look in the header the underscored MH_EXECUTE_SYM define is
+  // there)
   executableSymbol = dlsym(RTLD_MAIN_ONLY, MH_EXECUTE_SYM);
 
   // get the address of the main function

@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "FIRCLSCrashedMarkerFile.h"
-#include "FIRCLSFile.h"
-#include "FIRCLSUtility.h"
+#include "Crashlytics/Crashlytics/Components/FIRCLSCrashedMarkerFile.h"
+#include "Crashlytics/Crashlytics/Helpers/FIRCLSFile.h"
+#include "Crashlytics/Crashlytics/Helpers/FIRCLSUtility.h"
 
 const char *FIRCLSCrashedMarkerFileName = "previously-crashed";
 
-void FIRCLSCreateCrashedMarkerFile() {
+void FIRCLSCreateCrashedMarkerFile(void) {
   FIRCLSFile file;
 
   if (!FIRCLSFileInitWithPath(&file, _firclsContext.readonly->previouslyCrashedFileFullPath, false)) {

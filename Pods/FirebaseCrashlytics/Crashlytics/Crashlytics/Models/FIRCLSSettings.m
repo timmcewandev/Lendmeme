@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import "FIRCLSSettings.h"
+#import "Crashlytics/Crashlytics/Models/FIRCLSSettings.h"
 
 #if __has_include(<FBLPromises/FBLPromises.h>)
 #import <FBLPromises/FBLPromises.h>
@@ -20,15 +20,16 @@
 #import "FBLPromises.h"
 #endif
 
-#import "FIRCLSApplicationIdentifierModel.h"
-#import "FIRCLSConstants.h"
-#import "FIRCLSFileManager.h"
-#import "FIRCLSLogger.h"
-#import "FIRCLSURLBuilder.h"
+#import "Crashlytics/Crashlytics/Helpers/FIRCLSLogger.h"
+#import "Crashlytics/Crashlytics/Models/FIRCLSFileManager.h"
+#import "Crashlytics/Crashlytics/Settings/Models/FIRCLSApplicationIdentifierModel.h"
+#import "Crashlytics/Shared/FIRCLSConstants.h"
+#import "Crashlytics/Shared/FIRCLSNetworking/FIRCLSURLBuilder.h"
 
 NSString *const CreatedAtKey = @"created_at";
 NSString *const GoogleAppIDKey = @"google_app_id";
 NSString *const BuildInstanceID = @"build_instance_id";
+NSString *const AppVersion = @"app_version";
 
 @interface FIRCLSSettings ()
 
@@ -65,7 +66,8 @@ NSString *const BuildInstanceID = @"build_instance_id";
                       currentTimestamp:(NSTimeInterval)currentTimestamp {
   NSString *settingsFilePath = self.fileManager.settingsFilePath;
 
-  NSData *data = [NSData dataWithContentsOfFile:settingsFilePath];
+  NSData *data = [self.fileManager dataWithContentsOfFile:settingsFilePath];
+
   if (!data) {
     FIRCLSDebugLog(@"[Crashlytics:Settings] No settings were cached");
 
@@ -120,6 +122,15 @@ NSString *const BuildInstanceID = @"build_instance_id";
       self.isCacheKeyExpired = YES;
     }
   }
+
+  NSString *cacheAppVersion = cacheKey[AppVersion];
+  if (![cacheAppVersion isEqualToString:self.appIDModel.synthesizedVersion]) {
+    FIRCLSDebugLog(@"[Crashlytics:Settings] Settings expired because app version changed");
+
+    @synchronized(self) {
+      self.isCacheKeyExpired = YES;
+    }
+  }
 }
 
 - (void)cacheSettingsWithGoogleAppID:(NSString *)googleAppID
@@ -129,6 +140,7 @@ NSString *const BuildInstanceID = @"build_instance_id";
     CreatedAtKey : createdAtTimestamp,
     GoogleAppIDKey : googleAppID,
     BuildInstanceID : self.appIDModel.buildInstanceID,
+    AppVersion : self.appIDModel.synthesizedVersion,
   };
 
   NSError *error = nil;
@@ -162,7 +174,8 @@ NSString *const BuildInstanceID = @"build_instance_id";
 #pragma mark - Convenience Methods
 
 - (NSDictionary *)loadCacheKey {
-  NSData *cacheKeyData = [NSData dataWithContentsOfFile:self.fileManager.settingsCacheKeyPath];
+  NSData *cacheKeyData =
+      [self.fileManager dataWithContentsOfFile:self.fileManager.settingsCacheKeyPath];
 
   if (!cacheKeyData) {
     return nil;
@@ -238,30 +251,6 @@ NSString *const BuildInstanceID = @"build_instance_id";
   return 60 * 60;
 }
 
-#pragma mark - Identifiers
-
-- (nullable NSString *)orgID {
-  return self.fabricSettings[@"org_id"];
-}
-
-- (nullable NSString *)fetchedBundleID {
-  return self.fabricSettings[@"bundle_id"];
-}
-
-#pragma mark - Onboarding / Update
-
-- (NSString *)appStatus {
-  return self.appSettings[@"status"];
-}
-
-- (BOOL)appNeedsOnboarding {
-  return [self.appStatus isEqualToString:@"new"];
-}
-
-- (BOOL)appUpdateRequired {
-  return [[self.appSettings objectForKey:@"update_required"] boolValue];
-}
-
 #pragma mark - On / Off Switches
 
 - (BOOL)errorReportingEnabled {
@@ -280,7 +269,7 @@ NSString *const BuildInstanceID = @"build_instance_id";
   return [self errorReportingEnabled];
 }
 
-- (BOOL)crashReportingEnabled {
+- (BOOL)collectReportsEnabled {
   NSNumber *value = [self featuresSettings][@"collect_reports"];
 
   if (value != nil) {
@@ -288,6 +277,16 @@ NSString *const BuildInstanceID = @"build_instance_id";
   }
 
   return YES;
+}
+
+- (BOOL)metricKitCollectionEnabled {
+  NSNumber *value = [self featuresSettings][@"collect_metric_kit"];
+
+  if (value != nil) {
+    return value.boolValue;
+  }
+
+  return NO;
 }
 
 #pragma mark - Optional Limit Overrides
@@ -324,6 +323,38 @@ NSString *const BuildInstanceID = @"build_instance_id";
   }
 
   return 64;
+}
+
+#pragma mark - On Demand Reporting Parameters
+
+- (double)onDemandUploadRate {
+  NSNumber *value = self.settingsDictionary[@"on_demand_upload_rate_per_minute"];
+
+  if (value != nil) {
+    return value.doubleValue;
+  }
+
+  return 10;  // on-demand uploads allowed per minute
+}
+
+- (double)onDemandBackoffBase {
+  NSNumber *value = self.settingsDictionary[@"on_demand_backoff_base"];
+
+  if (value != nil) {
+    return [value doubleValue];
+  }
+
+  return 1.5;  // base of exponent for exponential backoff
+}
+
+- (uint32_t)onDemandBackoffStepDuration {
+  NSNumber *value = self.settingsDictionary[@"on_demand_backoff_step_duration_seconds"];
+
+  if (value != nil) {
+    return value.unsignedIntValue;
+  }
+
+  return 6;  // step duration for exponential backoff
 }
 
 @end

@@ -12,18 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import "FIRCLSFileManager.h"
+#import "Crashlytics/Crashlytics/Models/FIRCLSFileManager.h"
 
-#import "FIRCLSApplication.h"
-#import "FIRCLSInternalReport.h"
-#import "FIRCLSLogger.h"
+#import "Crashlytics/Crashlytics/Components/FIRCLSApplication.h"
+#import "Crashlytics/Crashlytics/Components/FIRCLSCrashedMarkerFile.h"
+#import "Crashlytics/Crashlytics/Helpers/FIRCLSLogger.h"
+#import "Crashlytics/Crashlytics/Models/FIRCLSInternalReport.h"
 
 NSString *const FIRCLSCacheDirectoryName = @"com.crashlytics.data";
-NSString *const FIRCLSCacheVersion = @"v4";
+NSString *const FIRCLSCacheVersion = @"v5";
+NSString *const FIRCLSMetricKitDiagnosticPath = @"/MetricKit/Diagnostics/";
 
 @interface FIRCLSFileManager () {
   NSString *_rootPath;
+  NSString *_cachesPath;
 }
+@property(nonatomic) BOOL crashFileMarkerExists;
 
 @end
 
@@ -39,10 +43,12 @@ NSString *const FIRCLSCacheVersion = @"v4";
 
   NSString *path =
       [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+  _cachesPath = [path copy];
   path = [path stringByAppendingPathComponent:FIRCLSCacheDirectoryName];
   path = [path stringByAppendingPathComponent:[self pathNamespace]];
   _rootPath = [path copy];
 
+  _crashFileMarkerExists = NO;
   return self;
 }
 
@@ -124,6 +130,29 @@ NSString *const FIRCLSCacheVersion = @"v4";
   return YES;
 }
 
+- (BOOL)didCrashOnPreviousExecution {
+  static dispatch_once_t checkCrashFileMarketExistsOnceToken;
+  dispatch_once(&checkCrashFileMarketExistsOnceToken, ^{
+    NSString *crashedMarkerFileName = [NSString stringWithUTF8String:FIRCLSCrashedMarkerFileName];
+    NSString *crashedMarkerFileFullPath =
+        [[self rootPath] stringByAppendingPathComponent:crashedMarkerFileName];
+    self.crashFileMarkerExists = [self fileExistsAtPath:crashedMarkerFileFullPath];
+  });
+  return self.crashFileMarkerExists;
+}
+
+- (BOOL)metricKitDiagnosticFileExists {
+  NSArray *contentsOfMetricKitDirectory = [self
+      contentsOfDirectory:[_cachesPath stringByAppendingString:FIRCLSMetricKitDiagnosticPath]];
+  return ([contentsOfMetricKitDirectory count] > 0);
+}
+
+- (void)createEmptyMetricKitFile:(NSString *)reportPath {
+  NSString *metricKitFile =
+      [reportPath stringByAppendingPathComponent:FIRCLSMetricKitFatalReportFile];
+  [self createFileAtPath:metricKitFile contents:nil attributes:nil];
+}
+
 - (void)enumerateFilesInDirectory:(NSString *)directory
                        usingBlock:(void (^)(NSString *filePath, NSString *extension))block {
   for (NSString *path in [[self underlyingFileManager] contentsOfDirectoryAtPath:directory
@@ -144,17 +173,6 @@ NSString *const FIRCLSCacheVersion = @"v4";
       block(fullPath, extension);
     }
   }
-}
-
-- (BOOL)moveItemsFromDirectory:(NSString *)srcDir toDirectory:(NSString *)destDir {
-  __block BOOL success = YES;
-
-  [self enumerateFilesInDirectory:srcDir
-                       usingBlock:^(NSString *filePath, NSString *extension) {
-                         success = success && [self moveItemAtPath:filePath toDirectory:destDir];
-                       }];
-
-  return success;
 }
 
 - (NSNumber *)fileSizeAtPath:(NSString *)path {
@@ -266,54 +284,13 @@ NSString *const FIRCLSCacheVersion = @"v4";
   return path;
 }
 
-- (void)enumerateReportsInProcessingDirectoryUsingBlock:(void (^)(FIRCLSInternalReport *report,
-                                                                  NSString *path))block {
-  [self enumerateFilesInDirectory:[self processingPath]
-                       usingBlock:^(NSString *filePath, NSString *extension) {
-                         FIRCLSInternalReport *report =
-                             [FIRCLSInternalReport reportWithPath:filePath];
-                         if (block) {
-                           block(report, filePath);
-                         }
-                       }];
+- (BOOL)moveItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath error:(NSError **)error {
+  return [self.underlyingFileManager moveItemAtPath:srcPath toPath:dstPath error:error];
 }
 
-- (void)enumerateFilesInActiveDirectoryUsingBlock:(void (^)(NSString *path,
-                                                            NSString *extension))block {
-  [self enumerateFilesInDirectory:[self activePath] usingBlock:block];
-}
-
-- (void)enumerateFilesInPreparedDirectoryUsingBlock:(void (^)(NSString *path,
-                                                              NSString *extension))block {
-  [self enumerateFilesInDirectory:[self preparedPath] usingBlock:block];
-}
-
-- (BOOL)moveProcessingContentsToPrepared {
-  return [self moveItemsFromDirectory:[self processingPath] toDirectory:[self preparedPath]];
-}
-
-- (BOOL)movePendingToProcessing {
-  return [self moveItemsFromDirectory:[self pendingPath] toDirectory:[self processingPath]];
-}
-
-- (BOOL)removeContentsOfProcessingPath {
-  return [self removeContentsOfDirectoryAtPath:[self processingPath]];
-}
-
-- (BOOL)removeContentsOfPendingPath {
-  return [self removeContentsOfDirectoryAtPath:[self pendingPath]];
-}
-
-- (BOOL)removeContentsOfAllPaths {
-  BOOL contentsOfProcessingPathRemoved = [self removeContentsOfProcessingPath];
-  BOOL contentsOfPendingPathRemoved = [self removeContentsOfPendingPath];
-  BOOL contentsOfDirectoryAtPreparedPathRemoved =
-      [self removeContentsOfDirectoryAtPath:self.preparedPath];
-  BOOL contentsOfDirectoryAtActivePathRemoved =
-      [self removeContentsOfDirectoryAtPath:self.activePath];
-  BOOL success = contentsOfProcessingPathRemoved && contentsOfPendingPathRemoved &&
-                 contentsOfDirectoryAtPreparedPathRemoved && contentsOfDirectoryAtActivePathRemoved;
-  return success;
+// Wrapper over NSData so the method can be mocked for unit tests
+- (NSData *)dataWithContentsOfFile:(NSString *)path {
+  return [NSData dataWithContentsOfFile:path];
 }
 
 @end

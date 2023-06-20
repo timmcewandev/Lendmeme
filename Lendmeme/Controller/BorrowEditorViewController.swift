@@ -7,15 +7,12 @@ import Foundation
 import CoreData
 import Contacts
 import AVFoundation
-import BubbleTransition
-import FittedSheets
 
 class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIViewControllerTransitioningDelegate {
     
     // MARK: - Variables
     var dataController: DataController!
     var nameOfBorrower: String?
-    let transition = BubbleTransition()
     var category: String?
     var imageInfo: [[ImageInfo]] = [[]]
     var selectedBorrowedInfo: ImageInfo?
@@ -153,24 +150,6 @@ class BorrowEditorViewController: UIViewController, UIImagePickerControllerDeleg
             }
         }
     }
-    
-    // MARK: UIViewControllerTransitioningDelegate for Bubble
-    
-    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transition.transitionMode = .present
-        transition.startingPoint = cameraButton.center
-        transition.bubbleColor = UIColor.black
-        return transition
-    }
-    
-    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transition.transitionMode = .dismiss
-        transition.startingPoint = cameraButton.center
-        transition.bubbleColor = UIColor.black
-        return transition
-    }
-    
-    // MARK: - End of Bubble Animation
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {

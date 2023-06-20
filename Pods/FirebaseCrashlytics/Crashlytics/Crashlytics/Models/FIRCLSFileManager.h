@@ -38,6 +38,7 @@
 @property(nonatomic, readonly) NSString *settingsCacheKeyPath;
 
 @property(nonatomic, readonly) NSString *rootPath;
+@property(nonatomic, readonly) NSString *cachesPath;
 @property(nonatomic, readonly) NSString *structurePath;
 @property(nonatomic, readonly) NSString *activePath;
 @property(nonatomic, readonly) NSString *processingPath;
@@ -55,9 +56,11 @@
 - (BOOL)removeItemAtPath:(NSString *)path;
 - (BOOL)removeContentsOfDirectoryAtPath:(NSString *)path;
 - (BOOL)moveItemAtPath:(NSString *)path toDirectory:(NSString *)destDir;
+- (BOOL)didCrashOnPreviousExecution;
+- (BOOL)metricKitDiagnosticFileExists;
+- (void)createEmptyMetricKitFile:(NSString *)reportPath;
 - (void)enumerateFilesInDirectory:(NSString *)directory
                        usingBlock:(void (^)(NSString *filePath, NSString *extension))block;
-- (BOOL)moveItemsFromDirectory:(NSString *)srcDir toDirectory:(NSString *)destDir;
 - (NSNumber *)fileSizeAtPath:(NSString *)path;
 - (NSArray *)contentsOfDirectory:(NSString *)path;
 
@@ -65,18 +68,8 @@
 - (BOOL)createReportDirectories;
 - (NSString *)setupNewPathForExecutionIdentifier:(NSString *)identifier;
 
-- (void)enumerateFilesInActiveDirectoryUsingBlock:(void (^)(NSString *path,
-                                                            NSString *extension))block;
-- (void)enumerateReportsInProcessingDirectoryUsingBlock:(void (^)(FIRCLSInternalReport *report,
-                                                                  NSString *path))block;
-- (void)enumerateFilesInPreparedDirectoryUsingBlock:(void (^)(NSString *path,
-                                                              NSString *extension))block;
+- (BOOL)moveItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath error:(NSError **)error;
 
-- (BOOL)moveProcessingContentsToPrepared;
-- (BOOL)movePendingToProcessing;
-
-- (BOOL)removeContentsOfProcessingPath;
-- (BOOL)removeContentsOfPendingPath;
-- (BOOL)removeContentsOfAllPaths;
+- (NSData *)dataWithContentsOfFile:(NSString *)path;
 
 @end

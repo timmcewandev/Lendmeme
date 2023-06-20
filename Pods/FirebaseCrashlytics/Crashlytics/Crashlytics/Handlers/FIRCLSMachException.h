@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "FIRCLSFeatures.h"
+#include "Crashlytics/Crashlytics/Helpers/FIRCLSFeatures.h"
 
 #pragma once
 
@@ -66,11 +66,14 @@ typedef struct {
 } FIRCLSMachExceptionReadContext;
 
 #pragma mark - API
-void FIRCLSMachExceptionInit(FIRCLSMachExceptionReadContext* context, exception_mask_t ignoreMask);
-exception_mask_t FIRCLSMachExceptionMaskForSignal(int signal);
+void FIRCLSMachExceptionInit(FIRCLSMachExceptionReadContext* context);
 
 void FIRCLSMachExceptionCheckHandlers(void);
 
+void FIRCLSMachExceptionNameLookup(exception_type_t number,
+                                   mach_exception_data_type_t code,
+                                   const char** name,
+                                   const char** codeName);
 #else
 
 #define CLS_MACH_EXCEPTION_HANDLER_STACK_SIZE 0

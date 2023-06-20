@@ -14,10 +14,10 @@
 
 #pragma once
 
-#include "FIRCLSFile.h"
-
 #include <mach/vm_types.h>
 #include <sys/cdefs.h>
+
+#include "Crashlytics/Crashlytics/Helpers/FIRCLSFile.h"
 
 typedef struct {
   const char* documentDirectoryPath;
@@ -33,5 +33,7 @@ vm_size_t FIRCLSHostGetPageSize(void);
 bool FIRCLSHostRecord(FIRCLSFile* file);
 
 void FIRCLSHostWriteDiskUsage(FIRCLSFile* file);
+
+bool FIRCLSHostIsRosettaTranslated(void);
 
 __END_DECLS

@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "FIRCLSDwarfUnwind.h"
-#include "FIRCLSDataParsing.h"
-#include "FIRCLSDefines.h"
-#include "FIRCLSDwarfExpressionMachine.h"
-#include "FIRCLSFeatures.h"
-#include "FIRCLSUnwind_arch.h"
-#include "FIRCLSUtility.h"
-#include "dwarf.h"
+#include "Crashlytics/Crashlytics/Unwind/Dwarf/FIRCLSDwarfUnwind.h"
+#include "Crashlytics/Crashlytics/Unwind/Dwarf/FIRCLSDataParsing.h"
+#include "Crashlytics/Crashlytics/Helpers/FIRCLSDefines.h"
+#include "Crashlytics/Crashlytics/Unwind/Dwarf/FIRCLSDwarfExpressionMachine.h"
+#include "Crashlytics/Crashlytics/Helpers/FIRCLSFeatures.h"
+#include "Crashlytics/Crashlytics/Unwind/FIRCLSUnwind_arch.h"
+#include "Crashlytics/Crashlytics/Helpers/FIRCLSUtility.h"
+#include "Crashlytics/third_party/libunwind/dwarf.h"
 
 #include <string.h>
 
@@ -915,7 +915,7 @@ void FIRCLSDwarfPointerEncodingShow(const char* leadString, uint8_t encoding) {
   if (encoding == DW_EH_PE_omit) {
     FIRCLSSDKLog("%s: 0x%02x (omit)\n", leadString, encoding);
   } else {
-    const char* peValue = "";
+    const char* peValue = "unknown";
     const char* peOffset = "";
 
     switch (encoding & DW_EH_PE_VALUE_MASK) {
@@ -950,7 +950,6 @@ void FIRCLSDwarfPointerEncodingShow(const char* leadString, uint8_t encoding) {
         peValue = "DW_EH_PE_sdata8";
         break;
       default:
-        peValue = "unknown";
         break;
     }
 
