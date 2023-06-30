@@ -12,6 +12,7 @@
 		227E2A682510638C005E5074 /* BorrowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E2A662510638C005E5074 /* BorrowTableViewCell.swift */; };
 		227E2A692510638C005E5074 /* BorrowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 227E2A672510638C005E5074 /* BorrowTableViewCell.xib */; };
 		22F2ED8B249DB64200CBAA6B /* PVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F2ED8A249DB64200CBAA6B /* PVController.swift */; };
+		4EBCD9823E9BCFD7E0C616D4 /* Pods_Lendmeme.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47FDC6B6B2E22F86E91FB34F /* Pods_Lendmeme.framework */; };
 		841E4F7C25F6F3F10014DD58 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E4F7B25F6F3F10014DD58 /* Constants.swift */; };
 		847E4F7128ED0E8100B93426 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E4F7028ED0E8100B93426 /* Utilities.swift */; };
 		9B088C0B200DB28F00601CA9 /* BorrowInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B088C0A200DB28F00601CA9 /* BorrowInfo.swift */; };
@@ -24,7 +25,6 @@
 		9BDD35DA1FD88B0D005ADBCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BDD35D91FD88B0D005ADBCD /* Assets.xcassets */; };
 		9BDD35DD1FD88B0D005ADBCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BDD35DB1FD88B0D005ADBCD /* LaunchScreen.storyboard */; };
 		9BEF0BC22005356D0065B5A8 /* BorrowTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF0BC12005356D0065B5A8 /* BorrowTableViewController.swift */; };
-		C8F5F62B9D44CE17C2999686 /* Pods_Lendmeme.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F0236775630F23B2A7F46 /* Pods_Lendmeme.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +51,9 @@
 		227E2A662510638C005E5074 /* BorrowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowTableViewCell.swift; sourceTree = "<group>"; };
 		227E2A672510638C005E5074 /* BorrowTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BorrowTableViewCell.xib; sourceTree = "<group>"; };
 		22F2ED8A249DB64200CBAA6B /* PVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVController.swift; sourceTree = "<group>"; };
-		3C6F0236775630F23B2A7F46 /* Pods_Lendmeme.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lendmeme.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		47FDC6B6B2E22F86E91FB34F /* Pods_Lendmeme.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lendmeme.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		52C0EECF3782C26BA3C56B63 /* Pods-Lendmeme.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lendmeme.debug.xcconfig"; path = "Target Support Files/Pods-Lendmeme/Pods-Lendmeme.debug.xcconfig"; sourceTree = "<group>"; };
+		7CADE09473AA0A22C57189ED /* Pods-Lendmeme.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lendmeme.release.xcconfig"; path = "Target Support Files/Pods-Lendmeme/Pods-Lendmeme.release.xcconfig"; sourceTree = "<group>"; };
 		841E4F7B25F6F3F10014DD58 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		847E4F7028ED0E8100B93426 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		849BA05F2866061000350EAB /* LendmemeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LendmemeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,8 +70,6 @@
 		9BDD35DC1FD88B0D005ADBCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9BDD35DE1FD88B0D005ADBCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = "Lendmeme/Supporting files/Info.plist"; sourceTree = SOURCE_ROOT; };
 		9BEF0BC12005356D0065B5A8 /* BorrowTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowTableViewController.swift; sourceTree = "<group>"; };
-		9D33F91AA2C1C2325172BA80 /* Pods-Lendmeme.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lendmeme.debug.xcconfig"; path = "Target Support Files/Pods-Lendmeme/Pods-Lendmeme.debug.xcconfig"; sourceTree = "<group>"; };
-		E84CDC346605520D4E63C6DF /* Pods-Lendmeme.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lendmeme.release.xcconfig"; path = "Target Support Files/Pods-Lendmeme/Pods-Lendmeme.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8F5F62B9D44CE17C2999686 /* Pods_Lendmeme.framework in Frameworks */,
+				4EBCD9823E9BCFD7E0C616D4 /* Pods_Lendmeme.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,21 +148,21 @@
 			path = "Supporting files";
 			sourceTree = "<group>";
 		};
-		31E1D8A8E753D50D21E47D98 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3C6F0236775630F23B2A7F46 /* Pods_Lendmeme.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		320D02C71229A07307D764D2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				9D33F91AA2C1C2325172BA80 /* Pods-Lendmeme.debug.xcconfig */,
-				E84CDC346605520D4E63C6DF /* Pods-Lendmeme.release.xcconfig */,
+				52C0EECF3782C26BA3C56B63 /* Pods-Lendmeme.debug.xcconfig */,
+				7CADE09473AA0A22C57189ED /* Pods-Lendmeme.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		8002FE799A0052C67BF466F6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				47FDC6B6B2E22F86E91FB34F /* Pods_Lendmeme.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		9BDD35C61FD88B0C005ADBCD = {
@@ -172,7 +172,7 @@
 				9BDD35D11FD88B0D005ADBCD /* Lendmeme */,
 				9BDD35D01FD88B0D005ADBCD /* Products */,
 				320D02C71229A07307D764D2 /* Pods */,
-				31E1D8A8E753D50D21E47D98 /* Frameworks */,
+				8002FE799A0052C67BF466F6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -244,12 +244,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BDD35E11FD88B0D005ADBCD /* Build configuration list for PBXNativeTarget "Lendmeme" */;
 			buildPhases = (
-				0BF9DD5C020431DA3D589FE5 /* [CP] Check Pods Manifest.lock */,
+				809974E10F786BC5491ECF68 /* [CP] Check Pods Manifest.lock */,
 				9BDD35CB1FD88B0C005ADBCD /* Sources */,
 				9BDD35CC1FD88B0C005ADBCD /* Frameworks */,
 				9BDD35CD1FD88B0C005ADBCD /* Resources */,
 				225CFA9324230C240068CB4E /* ShellScript */,
-				8017CC732B9C74C5F16E0EC8 /* [CP] Embed Pods Frameworks */,
+				C6ECBC79BED01EF204F35A3B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -341,7 +341,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0BF9DD5C020431DA3D589FE5 /* [CP] Check Pods Manifest.lock */ = {
+		225CFA9324230C240068CB4E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		809974E10F786BC5491ECF68 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -363,24 +380,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		225CFA9324230C240068CB4E /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
-		};
-		8017CC732B9C74C5F16E0EC8 /* [CP] Embed Pods Frameworks */ = {
+		C6ECBC79BED01EF204F35A3B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -698,7 +698,7 @@
 		};
 		9BDD35E21FD88B0D005ADBCD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9D33F91AA2C1C2325172BA80 /* Pods-Lendmeme.debug.xcconfig */;
+			baseConfigurationReference = 52C0EECF3782C26BA3C56B63 /* Pods-Lendmeme.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Lendmeme/Lendmeme.entitlements;
@@ -720,7 +720,7 @@
 		};
 		9BDD35E31FD88B0D005ADBCD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E84CDC346605520D4E63C6DF /* Pods-Lendmeme.release.xcconfig */;
+			baseConfigurationReference = 7CADE09473AA0A22C57189ED /* Pods-Lendmeme.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Lendmeme/Lendmeme.entitlements;
