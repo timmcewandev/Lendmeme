@@ -73,8 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                     NSLog("Cancel Pressed")
                                 }
                 alertController.addAction(okAction)
-                self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
-
             }
         }
     }
