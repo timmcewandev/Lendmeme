@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import UserNotifications
-import FirebaseCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -18,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   
     let dataController = DataController(modelName: "BorrowTime")
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        FirebaseApp.configure()
         // Override point for customization after application launch.
         dataController.load()
         
