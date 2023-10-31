@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PVController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+final class PVController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var imageControl: UIImageView!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

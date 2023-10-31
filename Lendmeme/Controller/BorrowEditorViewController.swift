@@ -8,7 +8,7 @@ import CoreData
 import Contacts
 import AVFoundation
 
-class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIViewControllerTransitioningDelegate {
+final class BorrowEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIViewControllerTransitioningDelegate {
     
     // MARK: - Variables
     var dataController: DataController!

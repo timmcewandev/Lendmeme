@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BorrowTableViewCell: UITableViewCell {
+final class BorrowTableViewCell: UITableViewCell {
     func getDate(date: Date) {
         let dateformater = DateFormatter()
         dateformater.locale = Locale(identifier: "en_US_POSIX")

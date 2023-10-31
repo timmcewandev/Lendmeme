@@ -7,7 +7,7 @@ import UIKit
 import CoreData
 import MessageUI
 
-class BorrowTableViewController: UIViewController, MFMessageComposeViewControllerDelegate, UNUserNotificationCenterDelegate {
+final class BorrowTableViewController: UIViewController, MFMessageComposeViewControllerDelegate, UNUserNotificationCenterDelegate {
     
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -112,8 +112,8 @@ class BorrowTableViewController: UIViewController, MFMessageComposeViewControlle
         let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let result = try? self.dataController.viewContext.fetch(fetchRequest){
-            var hasBeenReturned = result.filter ({ return $0.hasBeenReturned })
-            let hasNotBeenReturned = result.filter ({ return !$0.hasBeenReturned })
+            let hasBeenReturned = result.filter ({ return $0.hasBeenReturned })
+            _ = result.filter ({ return !$0.hasBeenReturned })
             for i in hasBeenReturned {
                 self.dataController.viewContext.delete(i)
             }
@@ -344,21 +344,21 @@ extension BorrowTableViewController: UITableViewDelegate, UITableViewDataSource 
         self.present(alert, animated: true, completion: nil)
     }
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteItem = UITableViewRowAction(style: .destructive, title: Constants.CommandListText.delete, handler: { [weak self] (action, indexPath) in
-            guard let self = self else {return}
-            self.searchBar.resignFirstResponder()
-            let selectedMeme = self.imageInfo[indexPath.section][indexPath.row]
-            self.deleteSelectedMeme(selectedMeme: selectedMeme, indexPath: indexPath)
-            
-        })
-        if #available(iOS 13.0, *) {
-            deleteItem.backgroundColor = UIColor.systemPink
-        } else {
-            // Fallback on earlier versions
-        }
-
-        self.searchBar.resignFirstResponder()
-        return [deleteItem]
-    }
+//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//        let deleteItem = UITableViewRowAction(style: .destructive, title: Constants.CommandListText.delete, handler: { [weak self] (action, indexPath) in
+//            guard let self = self else {return}
+//            self.searchBar.resignFirstResponder()
+//            let selectedMeme = self.imageInfo[indexPath.section][indexPath.row]
+//            self.deleteSelectedMeme(selectedMeme: selectedMeme, indexPath: indexPath)
+//            
+//        })
+//        if #available(iOS 13.0, *) {
+//            deleteItem.backgroundColor = UIColor.systemPink
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//
+//        self.searchBar.resignFirstResponder()
+//        return [deleteItem]
+//    }
 }
