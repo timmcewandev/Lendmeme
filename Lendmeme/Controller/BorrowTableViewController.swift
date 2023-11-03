@@ -140,7 +140,7 @@ final class BorrowTableViewController: UIViewController, MFMessageComposeViewCon
             hasBeenReturned = []
             self.imageInfo = [hasNotBeenReturned, hasBeenReturned]
 
-        if self.imageInfo.count == 0 {
+        if self.imageInfo.isEmpty {
             self.performSegue(withIdentifier: Constants.Segue.toStarterViewController, sender: self)
         }
         self.fetchAllMemedInfo()

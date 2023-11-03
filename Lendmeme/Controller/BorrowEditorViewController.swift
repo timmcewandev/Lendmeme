@@ -144,7 +144,7 @@ final class BorrowEditorViewController: UIViewController, UIImagePickerControlle
         let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let result = try? dataController.viewContext.fetch(fetchRequest){
-            if result.count == 0 {
+            if result.isEmpty {
                 self.navigationController?.isNavigationBarHidden = true
                 configureCancelOut(isEnabled: false)
             }
