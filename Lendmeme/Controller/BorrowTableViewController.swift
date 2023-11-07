@@ -97,9 +97,10 @@ final class BorrowTableViewController: UIViewController, MFMessageComposeViewCon
         let sortDescriptor = NSSortDescriptor(key: Constants.CoreData.creationDate, ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         if let result = try? dataController.viewContext.fetch(fetchRequest) {
-            let expired = result.filter ({ return !$0.timeHasExpired })
             let hasBeenReturned = result.filter ({ return $0.hasBeenReturned })
             let hasNotBeenReturned = result.filter ({ return !$0.hasBeenReturned })
+            let expired = result.filter ({ return $0.reminderDate! <= Date() })
+
             imageInfo = [hasNotBeenReturned, hasBeenReturned, expired]
         }
     }
