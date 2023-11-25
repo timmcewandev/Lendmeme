@@ -99,7 +99,7 @@ final class BorrowTableViewController: UIViewController, MFMessageComposeViewCon
         if let result = try? dataController.viewContext.fetch(fetchRequest) {
             let hasBeenReturned = result.filter ({ return $0.hasBeenReturned })
             let hasNotBeenReturned = result.filter ({ return !$0.hasBeenReturned })
-            let expired = result.filter ({ return $0.reminderDate! <= Date() })
+            let expired = result.filter ({ return $0.reminderDate ?? Date() <= Date() })
 
             imageInfo = [hasNotBeenReturned, hasBeenReturned, expired]
         }

@@ -288,7 +288,7 @@ final class BorrowEditorViewController: UIViewController, UIImagePickerControlle
             guard let originalImage = imageView.image else { return }
             var phone = phoneNumberTextField.text
             phone = phone?.replacingOccurrences(of: "[ |()-]", with: "", options: [.regularExpression])
-            let borrowInfo = BorrowInfo(topString: self.titleOfItemTextField.text ?? "None", bottomString: phone, titleString: nameOfBorrowerTextField.text ?? "", originalImage: originalImage, borrowImage: memedImage, hasBeenReturned: false, timeHasExpired: false)
+            let borrowInfo = BorrowInfo(topString: self.titleOfItemTextField.text ?? "None", bottomString: phone, titleString: nameOfBorrowerTextField.text ?? "", originalImage: originalImage, borrowImage: memedImage, hasBeenReturned: false, reminderDate: Date(), timeHasExpired: false)
             
             let getImageInfo = ImageInfo(context: dataController.viewContext)
             getImageInfo.imageData = UIImagePNGRepresentation(borrowInfo.borrowImage)
